@@ -22,170 +22,96 @@
 
 <body ng-app="AngularApp">
 
-    <h1>Very well</h1>
+    <div ng-controller="AppCtrl" class="md-padding" id="popupContainer" ng-cloak>
 
-    <md-content>
 
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-            <md-button>{{title1}}</md-button>
-            <md-button md-no-ink class="md-primary">Primary (md-noink)</md-button>
-            <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
-            <md-button class="md-warn">{{title4}}</md-button>
-            <div class="label">Flat</div>
-        </section>
-
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-            <md-button class="md-raised">Button</md-button>
-            <md-button class="md-raised md-primary">Primary</md-button>
-            <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
-            <md-button class="md-raised md-warn">Warn</md-button>
-            <div class="label">Raised</div>
-        </section>
-
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-            <md-button class="md-fab" aria-label="Eat cake">
-                <md-icon md-svg-src="img/icons/cake.svg"></md-icon>
-            </md-button>
-
-            <md-button class="md-fab md-primary" aria-label="Use Android">
-                <md-icon md-svg-src="img/icons/android.svg"></md-icon>
-            </md-button>
-
-            <md-button class="md-fab" ng-disabled="true" aria-label="Comment">
-                <md-icon md-svg-src="img/icons/ic_comment_24px.svg"></md-icon>
-            </md-button>
-
-            <md-button class="md-fab md-primary md-hue-2" aria-label="Profile">
-                <md-icon md-svg-src="img/icons/ic_people_24px.svg"></md-icon>
-            </md-button>
-
-            <md-button class="md-fab md-mini" aria-label="Eat cake">
-                <md-icon md-svg-src="img/icons/cake.svg"></md-icon>
-            </md-button>
-
-            <md-button class="md-fab md-mini md-primary" aria-label="Use Android">
-                <md-icon md-svg-src="img/icons/android.svg" style="color: greenyellow;"></md-icon>
-            </md-button>
-            <div class="label">FAB</div>
-        </section>
-
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-            <md-button ng-href="{{googleUrl}}" target="_blank">Default Link</md-button>
-            <md-button class="md-primary" ng-href="{{googleUrl}}" target="_blank">Primary Link</md-button>
-
-            <md-button>Default Button</md-button>
-            <div class="label">Link vs. Button</div>
-        </section>
-
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-            <md-button class="md-primary md-hue-1">Primary Hue 1</md-button>
-            <md-button class="md-warn md-raised md-hue-2">Warn Hue 2</md-button>
-            <md-button class="md-accent">Accent</md-button>
-            <md-button class="md-accent md-raised md-hue-1">Accent Hue 1</md-button>
-            <div class="label">Themed</div>
-        </section>
-
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-            <md-button class="md-icon-button md-primary" aria-label="Settings">
-                <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button md-accent" aria-label="Favorite">
-                <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="More">
-                <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
-            </md-button>
-            <md-button href="http://google.com" title="Launch Google.com in new window" target="_blank" ng-disabled="true" aria-label="Google.com" class="md-icon-button launch">
-                <md-icon md-svg-icon="img/icons/launch.svg"></md-icon>
-            </md-button>
-            <div class="label">Icon Button</div>
-        </section>
-    </md-content>
+        <h1 section layout="row" layout-sm="column" layout-align="center center" layout-wrap>Very well</h1>
 
 
 
-    <md-content class="md-padding" layout-xs="column" layout="row">
-        <div flex-xs flex-gt-xs="50" layout="column">
-            <md-card>
-                <img class="md-card-image" alt="Washed Out">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Icon action buttons</span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content>
-                    <p>
-                        The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-                    </p>
-                </md-card-content>
-                <md-card-actions layout="row" layout-align="end center">
-                    <md-button class="md-icon-button" aria-label="Favorite">
-                        <i class="material-icons">favorite_border</i>
-                    </md-button>
-                    <md-button class="md-icon-button" aria-label="Settings">
-                        <i class="material-icons">settings</i>
-                    </md-button>
-                    <md-button class="md-icon-button" aria-label="Share">
-                        <i class="material-icons">share</i>
-                    </md-button>
-                </md-card-actions>
-            </md-card>
+
+
+        <md-content class="md-padding" layout-xs="column" layout="row" layout-align="center center">
+            <div flex-xs flex-gt-xs="40" layout="column">
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text layout-align="center center">
+                            <span class="md-headline">The best site in the world is ready</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-c </md-card>
+            </div>
+        </md-content>
+        <md-content>
+
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <md-button class="md-raised" ng-click="showConfirm($event)">Нажми</md-button>
+                {{status}}
+            </section>
+
+        </md-content>
+        <div ng-controller="AppCtrl" layout="column" style="height: 500px;" ng-cloak>
+
+            <section layout="row" flex>
+
+                <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+
+                    <md-toolbar class="md-theme-indigo">
+                        <h1 class="md-toolbar-tools">Тут ничего нет, хули смотришь</h1>
+                    </md-toolbar>
+
+                    <md-content layout-margin>
+                        <p>
+                            This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
+                        </p>
+                        <md-button ng-click="toggleLeft()" class="md-accent">
+                            Close this Sidenav
+                        </md-button>
+                    </md-content>
+
+                </md-sidenav>
+                
+<!--
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <b layout="row" layout-align="center center" class="md-padding">
+                      {{status}}
+                    </b>
+            </section>
+-->
+                
+                <md-content flex layout-padding>
+
+                    <div layout="column" layout-align="top center">
+                        <p>
+                            Developers can also disable the backdrop of the sidenav.
+                            <br/> This will disable the functionality to click outside to close the sidenav.
+                        </p>
+
+                        <div>
+                            <md-button ng-click="toggleLeft()" class="md-raised">
+                                Toggle Sidenav
+                            </md-button>
+                        </div>
+
+                    </div>
+
+                </md-content>
+
+            </section>
+
         </div>
-    </md-content>
-    <div ng-controller="AppCtrl" layout="column" style="height: 500px;" ng-cloak>
-
-  <section layout="row" flex>
-
-    <md-sidenav class="md-sidenav-left" md-component-id="left"
-                md-disable-backdrop md-whiteframe="4">
-
-      <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
-      </md-toolbar>
-
-      <md-content layout-margin>
-        <p>
-          This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
-        </p>
-        <md-button ng-click="toggleLeft()" class="md-accent">
-          Close this Sidenav
-        </md-button>
-      </md-content>
-
-    </md-sidenav>
-
-    <md-content flex layout-padding>
-
-      <div layout="column" layout-align="top center">
-        <p>
-          Developers can also disable the backdrop of the sidenav.<br/>
-          This will disable the functionality to click outside to close the sidenav.
-        </p>
-
-        <div>
-          <md-button ng-click="toggleLeft()" class="md-raised">
-            Toggle Sidenav
-          </md-button>
+    </div>
+    <div ng-controller="demoSwipeCtrl" ng-cloak layout="row">
+        <div flex>
+            <div class="demo-swipe" md-swipe-left="onSwipeLeft()">
+                <span class="no-select">Swipe me to the left</span>
+                <md-icon md-font-icon="android" aria-label="android"></md-icon>
+            </div>
+            <md-divider></md-divider>
+            <div class="demo-swipe" md-swipe-right="onSwipeRight()">
+                <span class="no-select">Swipe me to the right</span>
+            </div>
         </div>
-
-      </div>
-
-    </md-content>
-
-  </section>
-
-</div>
- <div ng-controller="demoSwipeCtrl" ng-cloak layout="row">
-  <div flex>
-    <div class="demo-swipe" md-swipe-left="onSwipeLeft()">
-      <span class="no-select">Swipe me to the left</span>
-      <md-icon md-font-icon="android" aria-label="android"></md-icon>
-    </div>
-    <md-divider></md-divider>
-    <div class="demo-swipe" md-swipe-right="onSwipeRight()">
-      <span class="no-select">Swipe me to the right</span>
-    </div>
-  </div>
     </div>
     <!--    <button type="button" class="btn btn-success" id="test">Success</button>-->
     <!--
@@ -215,25 +141,54 @@
          * You must include the dependency on 'ngMaterial' 
          */
         angular.module('AngularApp', ['ngMaterial'])
-            .controller('AppCtrl', function($scope, $timeout, $mdSidenav) {
+            .controller('AppCtrl', function($scope, $timeout, $mdSidenav, $mdDialog) {
                 $scope.toggleLeft = buildToggler('left');
                 $scope.toggleRight = buildToggler('right');
                 $scope.onSwipeLeft = function(ev) {
-                        alert('You swiped left!!');
-                    };
+                    alert('You swiped left!!');
+                };
 
                 function buildToggler(componentId) {
                     return function() {
                         $mdSidenav(componentId).toggle();
                     };
                 }
-            });
-//        angular.module('AngularApp', ['ngMaterial'])
-//            .controller('AppCtrl', function($scope) {
-//                    $scope.onSwipeLeft = function(ev) {
-//                        alert('You swiped left!!');
-//                    };
+                $scope.showConfirm = function(ev) {
+                    // Appending dialog to document.body to cover sidenav in docs app
+                    var confirm = $mdDialog.confirm()
+                        .title('Гоу катать?')
+                        .ariaLabel('Lucky day')
+                        .targetEvent(ev)
+                        .ok('Гоу')
+                        .cancel('Нет?');
 
+                    $mdDialog.show(confirm).then(function() {
+                        $scope.status = 'Поехали';
+                    }, function() {
+                        $scope.status = 'Всмысле нет?';
+                    });
+                };
+
+                function DialogController($scope, $mdDialog) {
+                    $scope.hide = function() {
+                        $mdDialog.hide();
+                    };
+
+                    $scope.cancel = function() {
+                        $mdDialog.cancel();
+                    };
+
+                    $scope.answer = function(answer) {
+                        $mdDialog.hide(answer);
+                    };
+                }
+            });
+
+        //        angular.module('AngularApp', ['ngMaterial'])
+        //            .controller('AppCtrl', function($scope) {
+        //                    $scope.onSwipeLeft = function(ev) {
+        //                        alert('You swiped left!!');
+        //                    };
     </script>
 
 
