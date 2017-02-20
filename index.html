@@ -11,7 +11,6 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 -->
 
-
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="angular/angular-material.min.css">
@@ -20,177 +19,57 @@
     <title>Hello World</title>
 </head>
 
-<body ng-app="AngularApp">
-
-    <div ng-controller="AppCtrl" class="md-padding" id="popupContainer" ng-cloak>
-
-
-        <h1 section layout="row" layout-sm="column" layout-align="center center" layout-wrap>Very well</h1>
-
-
-
-
-
-        <md-content class="md-padding" layout-xs="column" layout="row" layout-align="center center">
-            <div flex-xs flex-gt-xs="40" layout="column">
-                <md-card>
-                    <md-card-title>
-                        <md-card-title-text layout-align="center center">
-                            <span class="md-headline">The best site in the world is ready</span>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-c </md-card>
-            </div>
-        </md-content>
-        <md-content>
-
-            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <md-button class="md-raised" ng-click="showConfirm($event)">Нажми</md-button>
-                {{status}}
-            </section>
-
-        </md-content>
-        <div ng-controller="AppCtrl" layout="column" style="height: 500px;" ng-cloak>
-
-            <section layout="row" flex>
-
-                <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
-
-                    <md-toolbar class="md-theme-indigo">
-                        <h1 class="md-toolbar-tools">Тут ничего нет, хули смотришь</h1>
-                    </md-toolbar>
-
-                    <md-content layout-margin>
-                        <p>
-                            This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
-                        </p>
-                        <md-button ng-click="toggleLeft()" class="md-accent">
-                            Close this Sidenav
-                        </md-button>
-                    </md-content>
-
-                </md-sidenav>
-                
-<!--
-            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <b layout="row" layout-align="center center" class="md-padding">
-                      {{status}}
-                    </b>
-            </section>
--->
-                
-                <md-content flex layout-padding>
-
-                    <div layout="column" layout-align="top center">
-                        <p>
-                            Developers can also disable the backdrop of the sidenav.
-                            <br/> This will disable the functionality to click outside to close the sidenav.
-                        </p>
-
-                        <div>
-                            <md-button ng-click="toggleLeft()" class="md-raised">
-                                Toggle Sidenav
-                            </md-button>
-                        </div>
-
-                    </div>
-
-                </md-content>
-
-            </section>
-
-        </div>
+<body>
+    <div id="vue">
+        {{ message }}
     </div>
-    <div ng-controller="demoSwipeCtrl" ng-cloak layout="row">
-        <div flex>
-            <div class="demo-swipe" md-swipe-left="onSwipeLeft()">
-                <span class="no-select">Swipe me to the left</span>
-                <md-icon md-font-icon="android" aria-label="android"></md-icon>
-            </div>
-            <md-divider></md-divider>
-            <div class="demo-swipe" md-swipe-right="onSwipeRight()">
-                <span class="no-select">Swipe me to the right</span>
-            </div>
-        </div>
-    </div>
-    <!--    <button type="button" class="btn btn-success" id="test">Success</button>-->
-    <!--
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
--->
 
+    <div id="vue2">
+        <span v-bind:title="hint">
+            Наведи и чет будет круто
+        </span>
+        <br>
+        <p>{{info}}</p>
+    </div>
+
+    <div id="vue3">
+        <p v-if="state">Блок видимости</p>
+    </div>
+
+    <button onclick="change()">Кнопка</button>
+
+    <div id="vue4">
+        <ul>
+            <li v-for="item in list">
+                {{item.text}}
+            </li>
+        </ul>
+    </div>
+
+    <div id="app-6">
+        <input v-model="message">
+    </div>
+
+    
+    <button onclick="addToList()">Добавить</button>     
+   
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="vue/vue.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
+
+
+
+    <!--
     <script type="text/javascript" src="angular/angular.min.js"></script>
     <script type="text/javascript" src="angular/angular-animate.min.js"></script>
     <script type="text/javascript" src="angular/angular-aria.min.js"></script>
     <script type="text/javascript" src="angular/angular-messages.min.js"></script>
 
     <script type="text/javascript" src="angular/angular-material.min.js"></script>
-
-    <script type="text/javascript">
-        /**
-         * You must include the dependency on 'ngMaterial' 
-         */
-        angular.module('AngularApp', ['ngMaterial'])
-            .controller('AppCtrl', function($scope, $timeout, $mdSidenav, $mdDialog) {
-                $scope.toggleLeft = buildToggler('left');
-                $scope.toggleRight = buildToggler('right');
-                $scope.onSwipeLeft = function(ev) {
-                    alert('You swiped left!!');
-                };
-
-                function buildToggler(componentId) {
-                    return function() {
-                        $mdSidenav(componentId).toggle();
-                    };
-                }
-                $scope.showConfirm = function(ev) {
-                    // Appending dialog to document.body to cover sidenav in docs app
-                    var confirm = $mdDialog.confirm()
-                        .title('Гоу катать?')
-                        .ariaLabel('Lucky day')
-                        .targetEvent(ev)
-                        .ok('Гоу')
-                        .cancel('Нет?');
-
-                    $mdDialog.show(confirm).then(function() {
-                        $scope.status = 'Поехали';
-                    }, function() {
-                        $scope.status = 'Всмысле нет?';
-                    });
-                };
-
-                function DialogController($scope, $mdDialog) {
-                    $scope.hide = function() {
-                        $mdDialog.hide();
-                    };
-
-                    $scope.cancel = function() {
-                        $mdDialog.cancel();
-                    };
-
-                    $scope.answer = function(answer) {
-                        $mdDialog.hide(answer);
-                    };
-                }
-            });
-
-        //        angular.module('AngularApp', ['ngMaterial'])
-        //            .controller('AppCtrl', function($scope) {
-        //                    $scope.onSwipeLeft = function(ev) {
-        //                        alert('You swiped left!!');
-        //                    };
-    </script>
-
+-->
 
 </body>
 
