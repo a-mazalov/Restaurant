@@ -6,18 +6,20 @@
 
     <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
 
+<!--
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+-->
 
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--    <link href="css/material-icons.css" media="all" rel="stylesheet" type="text/css" >-->
-    <link rel="stylesheet" href="/vue-material/vue-material.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" href="vue-material/vue-material.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
-    <title>Hello World</title>
+    <title>Restaurant</title>
 </head>
 
 <body>
@@ -34,12 +36,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav nav-link-custom">
-                        <li><a href="#">Пункт 1</a></li>
-                        <li class=""><a href="#">Пункт 2</a></li>
+                        <li><a href="#">Новости</a></li>
+                        <li ><a href="#">Галлерея</a></li>
                         <li class="logo-head"></li>
-                        <li><a href="#">Пункт 3</a></li>
-                        <li><a href="#">Пункт 4</a></li>
-
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Контакты</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -51,22 +52,16 @@
             <div class="banner-title">
                 <h1 class="">MAKING DELICIOUS <br>PREMIUM FOOD</h1>
             </div>
-                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 ">
+            <div>
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <md-button class="md-raised md-accent btn-cutom-menu">Меню</md-button>
                 </div>                
-                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 ">
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     <md-button class="md-raised btn-custom-order">Заказ столика</md-button>
                 </div>
             </div>
+        </div>
     </div>
-
-
-
-
-
-        <md-layout md-hide-small-and-up class="block">
-            <p>asdasdsa</p>
-        </md-layout>
 
         <div>
             <md-button class="md-raised md-accent" v-on:click.native="toggleLeftSidenav">Первое меню</md-button>
@@ -75,47 +70,37 @@
         </div>
 
 
-        <md-sidenav class="md-left" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')">
+        <md-sidenav  class="md-left md-fixed" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')">
             <md-toolbar class="md-account-header">
-                <md-list class="md-transparent">
-                    <md-list-item class="md-avatar-list">
-                        <md-avatar class="md-large">
-                            <img src="https://placeimg.com/64/64/people/8" alt="People">
-                        </md-avatar>
-
-                        <span style="flex: 1"></span>
-
-                    </md-list-item>
-
-                    <md-list-item>
-                        <div class="md-list-text-container">
-                            <span>Djoni Torpeda</span>
-                            <span>Bybyby@gmail.com</span>
-                        </div>
-
-                        <md-button class="md-icon-button md-list-action">
-                            <md-icon>arrow_drop_down</md-icon>
-                        </md-button>
-                    </md-list-item>
-                </md-list>
+                <img src="../img/logo-head-white.png" alt="">
             </md-toolbar>
             <md-list>
                 <md-list-item v-on:click.native="$refs.sidenav.toggle()" class="md-primary">
-                    <md-icon>insert_drive_file</md-icon>
-                    <span>Мой аккаунт</span>
+                    <md-icon><i class="material-icons">assignment</i></md-icon>
+                    <span>Меню</span>
+                </md-list-item>
+
+
+                <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                    <md-icon>access_time</md-icon> 
+                    <span>Заказ</span>
+                </md-list-item>                
+                <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                    <md-icon>info</md-icon> 
+                    <span>Новости</span>
                 </md-list-item>
 
                 <md-list-item v-on:click.native="$refs.sidenav.toggle()">
-                    <md-icon>people</md-icon>
-                    <span>Что-то</span>
-                </md-list-item>
-
+                    <md-icon>collections</md-icon> 
+                    <span>Галлерея</span>
+                </md-list-item>                
                 <md-list-item v-on:click.native="$refs.sidenav.toggle()">
-                    <md-icon>access_time</md-icon> <span>Заказ</span>
-                </md-list-item>
-
+                    <md-icon>room</md-icon> 
+                    <span>Контакты</span>
+                </md-list-item>                
                 <md-list-item v-on:click.native="$refs.sidenav.toggle()">
-                    <md-icon>start</md-icon> <span>Любимое</span>
+                    <md-icon>start</md-icon> 
+                    <span>О нас</span>
                 </md-list-item>
             </md-list>
         </md-sidenav>
@@ -132,44 +117,44 @@
         </md-sidenav>
 -->
 
+    
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     </div>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
     <!--    </div>-->
 
 
@@ -223,21 +208,21 @@
     </div>
     <!----------------------------------------------------->
 
-
+    
 
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
 
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+<!--    <script type="text/javascript" src="js/bootstrap.js"></script>-->
 
     <script type="text/javascript" src="vue/vue.js"></script>
-    <script type="text/javascript" src="vue-material/vue-material.js"></script>
+    <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
 
     <script type="text/javascript" src="js/index.js"></script>
 
 
-
+    
 
     <!--
     <script type="text/javascript" src="angular/angular.min.js"></script>

@@ -28,6 +28,16 @@ methods: {
 }
 });
 //----------------//----//------------------//
+$(document).ready(function () {
+    
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 1) {
+            $('.nav-custom').addClass("sticky");
+        } else {
+            $('.nav-custom').removeClass("sticky");
+        }
+    });
+});
 
 //----------------//----//------------------//
 //var app = {
