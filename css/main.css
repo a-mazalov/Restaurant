@@ -77,7 +77,10 @@
     background: url(../img/logo-head-black.png) no-repeat 50% 50%;
     background-size: 100%;
 }
-
+.md-toolbar.md-account-header {
+    background: url(../img/logo-head-white.png) no-repeat 50% 50%;
+    background-size: 100%;
+}
 /**********************MEDIA*************************/
 @media (max-width: 768px) {
     .btn-custom-order {
