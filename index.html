@@ -5,25 +5,181 @@
 <head>
 
     <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
-    <!--
+
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
--->
 
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="angular/angular-material.min.css">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--    <link href="css/material-icons.css" media="all" rel="stylesheet" type="text/css" >-->
+    <link rel="stylesheet" href="vue-material/vue-material.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 
     <title>Hello World</title>
 </head>
 
 <body>
+    <div id="header">
+        <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <md-button class="navbar-toggle" v-on:click.native="toggleLeftSidenav">
+                        <md-icon>menu</md-icon>
+                    </md-button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav nav-link-custom">
+                        <li><a href="#">Пункт 1</a></li>
+                        <li class=""><a href="#">Пункт 2</a></li>
+                        <li class="logo-head"></li>
+                        <li><a href="#">Пункт 3</a></li>
+                        <li><a href="#">Пункт 4</a></li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    <div class="container-fluid banner vertical-align text-center">
+        <div class="row">
+            <div class="banner-title">
+                <h1 class="">MAKING DELICIOUS <br>PREMIUM FOOD</h1>
+            </div>
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 ">
+                    <md-button class="md-raised md-accent btn-cutom-menu">Меню</md-button>
+                </div>                
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 ">
+                    <md-button class="md-raised btn-custom-order">Заказ столика</md-button>
+                </div>
+            </div>
+    </div>
+
+
+
+
+
+        <md-layout md-hide-small-and-up class="block">
+            <p>asdasdsa</p>
+        </md-layout>
+
+        <div>
+            <md-button class="md-raised md-accent" v-on:click.native="toggleLeftSidenav">Первое меню</md-button>
+            <md-button class="md-raised md-accent" v-on:click.native="toggleRightSidenav">Второе меню</md-button>
+            <p>Open console to see the events</p>
+        </div>
+
+
+        <md-sidenav class="md-left" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')">
+            <md-toolbar class="md-account-header">
+                <md-list class="md-transparent">
+                    <md-list-item class="md-avatar-list">
+                        <md-avatar class="md-large">
+                            <img src="https://placeimg.com/64/64/people/8" alt="People">
+                        </md-avatar>
+
+                        <span style="flex: 1"></span>
+
+                    </md-list-item>
+
+                    <md-list-item>
+                        <div class="md-list-text-container">
+                            <span>Djoni Torpeda</span>
+                            <span>Bybyby@gmail.com</span>
+                        </div>
+
+                        <md-button class="md-icon-button md-list-action">
+                            <md-icon>arrow_drop_down</md-icon>
+                        </md-button>
+                    </md-list-item>
+                </md-list>
+            </md-toolbar>
+            <md-list>
+                <md-list-item v-on:click.native="$refs.sidenav.toggle()" class="md-primary">
+                    <md-icon>insert_drive_file</md-icon>
+                    <span>Мой аккаунт</span>
+                </md-list-item>
+
+                <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                    <md-icon>people</md-icon>
+                    <span>Что-то</span>
+                </md-list-item>
+
+                <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                    <md-icon>access_time</md-icon> <span>Заказ</span>
+                </md-list-item>
+
+                <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                    <md-icon>start</md-icon> <span>Любимое</span>
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+
+<!--
+        <md-sidenav class="md-right" ref="rightSidenav" v-on:click.native="open('Right')" v-on:click.native="close('Right')">
+            <md-toolbar>
+                <div class="md-toolbar-container">
+                    <h3 class="md-title">Sidenav content</h3>
+                </div>
+            </md-toolbar>
+
+            <md-button class="md-raised md-accent" v-on:click.native="closeRightSidenav">Close</md-button>
+        </md-sidenav>
+-->
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!--    </div>-->
+
+
+
+
+    <!----------------------------------------------------->
     <div id="vue">
         {{ message }}
     </div>
-
+    <!----------------------------------------------------->
     <div id="vue2">
         <span v-bind:title="hint">
             Наведи и чет будет круто
@@ -31,13 +187,13 @@
         <br>
         <p>{{info}}</p>
     </div>
-
+    <!----------------------------------------------------->
     <div id="vue3">
         <p v-if="state">Блок видимости</p>
     </div>
 
     <button onclick="change()">Кнопка</button>
-
+    <!----------------------------------------------------->
     <div id="vue4">
         <ul>
             <li v-for="item in list">
@@ -46,17 +202,38 @@
         </ul>
     </div>
 
-    <div id="app-6">
+    <!--
+    <div id="vue5">
         <input v-model="message">
     </div>
+    <br>
+    <button onclick="addToList()">Добавить</button>    
+-->
 
-    
-    <button onclick="addToList()">Добавить</button>     
-   
+    <div id="vue5">
+        <input v-model="message">
+        <br>
+        <button v-on:click="addNote">Добавить</button>
+    </div>
+    <!----------------------------------------------------->
+    <br>
+    <div id="vue6">
+        <p>{{testVue6}}</p>
+        <button v-on:click="event">Выполнить функцию</button>
+    </div>
+    <!----------------------------------------------------->
+
+
+
+
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
+
     <script type="text/javascript" src="js/bootstrap.js"></script>
+
     <script type="text/javascript" src="vue/vue.js"></script>
+    <script type="text/javascript" src="vue-material/vue-material.js"></script>
+
     <script type="text/javascript" src="js/index.js"></script>
 
 

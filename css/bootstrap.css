@@ -4167,11 +4167,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   position: relative;
   min-height: 50px;
   margin-bottom: 20px;
-  border: 1px solid transparent;
+  border: 0px solid transparent;
 }
 @media (min-width: 768px) {
   .navbar {
-    border-radius: 4px;
+    border-radius: 0px;
   }
 }
 @media (min-width: 768px) {
@@ -4254,7 +4254,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   position: fixed;
   right: 0;
   left: 0;
-  z-index: 1030;
+/*  z-index: 0;*/
 }
 @media (min-width: 768px) {
   .navbar-fixed-top,
@@ -4293,14 +4293,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-toggle {
   position: relative;
-  float: right;
-  padding: 9px 10px;
-  margin-top: 8px;
+  float: left;
+/*  padding: 9px 10px;*/
+  margin-top: 14px;
   margin-right: 15px;
   margin-bottom: 8px;
   background-color: transparent;
   background-image: none;
-  border: 1px solid transparent;
+/*  border: 1px solid transparent;*/
   border-radius: 4px;
 }
 .navbar-toggle:focus {
@@ -6240,7 +6240,9 @@ button.close {
 .carousel-inner {
   position: relative;
   width: 100%;
-  overflow: hidden;
+/*  height: 500px;*/
+  overflow:  hidden;
+  vertical-align: middle
 }
 .carousel-inner > .item {
   position: relative;
@@ -6418,12 +6420,13 @@ button.close {
 }
 .carousel-caption {
   position: absolute;
-  right: 15%;
-  bottom: 20px;
-  left: 15%;
+/*  display: inline-block;*/
+/*  right: 15%;*/
+  top: 30%;
+/*  left: 15%;*/
   z-index: 10;
-  padding-top: 20px;
-  padding-bottom: 20px;
+/*  padding-top: 20px;*/
+/*  padding-bottom: 20px;*/
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
@@ -6754,4 +6757,7 @@ button.close {
     display: none !important;
   }
 }
+
+
+
 /*# sourceMappingURL=bootstrap.css.map */
