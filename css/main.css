@@ -1,4 +1,4 @@
-body {
+html {
     overflow-x: hidden;
 }
 .collapse{
@@ -48,7 +48,7 @@ body {
     height: 670px;
     background: url(../img/Banner-2-min.jpg) no-repeat 50% 50%;
     background-size: cover;
-    -webkit-clip-path: polygon(0 100%,100% 90%,100% 0,0 0);
+    -webkit-clip-path: polygon(0 100%,100% calc(100% - 5vw),100% 0,0 0);
 /*    background: url(../img/39830-green-grass-1920x1080-photography-wallpaper.jpg) 50% 50%;*/
 }
 .banner-title {
@@ -84,18 +84,21 @@ body {
     background: url(../img/logo-head-black.png) no-repeat 50% 50%;
     background-size: 100%;
 }
-.md-toolbar .md-account-header {
-    background: url(../img/logo-head-white.png) no-repeat 50% 50%;
+.slidenav-img{
+/*    background-color: aqua;*/
+/*    background: url(../img/logo-head-white.png) no-repeat 50% 50%;*/
+    background: url(../img/menu-hamburger.jpg) no-repeat 50% 50%;
     background-size: 100%;
 }
+/*.md-theme-default.md-toolbar*/
 /**********************BANNER-NEWS********************/
 .banner-news {
 /*    margin: -5px 0;*/
     padding: 100px 0;
-    height: 670px;
+/*    height: 670px;*/
     background: url(../img/Banner-new.jpg) no-repeat 50% 50%;
     background-size: cover;
-    -webkit-clip-path: polygon(0 10%,0 100%,100% 100%,100% 0);
+    -webkit-clip-path: polygon(0 5vw,0 100%,100% 100%,100% 0);
 }
 
 .block-news {
@@ -173,7 +176,9 @@ body {
     .btn-custom-order {
         margin-left: 0;
     }
-
+    body {
+    overflow-x: hidden;
+    }
 }
 
 /**************************************************/

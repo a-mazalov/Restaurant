@@ -9,8 +9,8 @@
 <!--
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -85,12 +85,12 @@
 <!--------------------------------------------------------------------->   
     <div class="container-fluid banner-news" id="News">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 block-news">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1  block-news">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <md-card>
                         <md-card-header>
                             <md-avatar class="md-large">
-                                <img src="../img/img-hood.jpg" alt="Hood">
+                                <img src="img/img-hood.jpg" alt="Hood">
                             </md-avatar>
                             <md-card-header-text>
                                 <div class="md-title">Title goes here</div>
@@ -101,7 +101,7 @@
                     <md-card>
                         <md-card-header>
                             <md-avatar class="md-large">
-                                <img src="../img/img-hood.jpg" alt="Hood">
+                                <img src="img/img-hood.jpg" alt="Hood">
                             </md-avatar>
                             <md-card-header-text>
                                 <div class="md-title">Title goes here</div>
@@ -112,7 +112,7 @@
                     <md-card>
                         <md-card-header>
                             <md-avatar class="md-large">
-                                <img src="../img/img-hood.jpg" alt="Hood">
+                                <img src="img/img-hood.jpg" alt="Hood">
                             </md-avatar>
                             <md-card-header-text>
                                 <div class="md-title">Title goes here</div>
@@ -125,7 +125,7 @@
                     <md-card>
                         <md-card-header>
                             <md-avatar class="md-large">
-                                <img src="../img/img-hood.jpg" alt="Hood">
+                                <img src="img/img-hood.jpg" alt="Hood">
                             </md-avatar>
                             <md-card-header-text>
                                 <div class="md-title">Title goes here</div>
@@ -136,7 +136,7 @@
                     <md-card>
                         <md-card-header>
                             <md-avatar class="md-large">
-                                <img src="../img/img-hood.jpg" alt="Hood">
+                                <img src="img/img-hood.jpg" alt="Hood">
                             </md-avatar>
                             <md-card-header-text>
                                 <div class="md-title">Title goes here</div>
@@ -147,7 +147,7 @@
                     <md-card>
                         <md-card-header>
                             <md-avatar class="md-large">
-                                <img src="../img/img-hood.jpg" alt="Hood">
+                                <img src="img/img-hood.jpg" alt="Hood">
                             </md-avatar>
                             <md-card-header-text>
                                 <div class="md-title">Title goes here</div>
@@ -156,10 +156,10 @@
                         </md-card-header>
                     </md-card>
                 </div>
-                <div class="col-md-12 between-block row-decoration">
-                        <div class="col-md-5 col-sm-5 col-xs-5 hr-left "><hr></div>
-                        <div class="col-md-2 col-sm-2 col-xs-2 news-icon "></div>
-                        <div class="col-md-5 col-sm-5 col-xs-5 hr-right "><hr></div>
+                <div class="col-md-12 col-sm-12 col-xs-12 between-block row-decoration">
+                        <div class="col-md-5 col-sm-5 col-xs-4 hr-left "><hr></div>
+                        <div class="col-md-2 col-sm-2 col-xs-4 news-icon "></div>
+                        <div class="col-md-5 col-sm-5 col-xs-4 hr-right "><hr></div>
                 </div>
             </div>
         </div>
@@ -172,10 +172,20 @@
 
 
         <md-sidenav  class="md-left md-fixed" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')">
-            <md-toolbar class="md-account-header">
-                    
+            <md-toolbar class="md-account-header slidenav-img">
 <!--                <img src="../img/logo-head-white.png" alt="">-->
             </md-toolbar>
+            <div class="container-fluid">
+                <div class="row">
+                        <div class="col-md-12 between-block row-decoration">
+                            <div class="col-md-5 col-sm-5 col-xs-5 hr-left "><hr></div>
+                            <div class="col-md-2 col-sm-2 col-xs-1 news-icon "></div>
+                            <div class="col-md-5 col-sm-5 col-xs-5 hr-right ">
+                                <hr>
+                            </div>
+                        </div>
+                </div>
+            </div>
             <md-list>
                 <md-list-item v-on:click.native="$refs.sidenav.toggle()" class="md-primary">
                     <md-icon><i class="material-icons">assignment</i></md-icon>
@@ -207,133 +217,14 @@
             </md-list>
         </md-sidenav>
 
-<!--
-        <md-sidenav class="md-right" ref="rightSidenav" v-on:click.native="open('Right')" v-on:click.native="close('Right')">
-            <md-toolbar>
-                <div class="md-toolbar-container">
-                    <h3 class="md-title">Sidenav content</h3>
-                </div>
-            </md-toolbar>
-
-            <md-button class="md-raised md-accent" v-on:click.native="closeRightSidenav">Close</md-button>
-        </md-sidenav>
--->
-
-    
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    </div>
-    <!--    </div>-->
-
-
-
-
-    <!----------------------------------------------------->
-    <div id="vue">
-        {{ message }}
-    </div>
-    <!----------------------------------------------------->
-    <div id="vue2">
-        <span v-bind:title="hint">
-            Наведи и чет будет круто
-        </span>
-        <br>
-        <p>{{info}}</p>
-    </div>
-    <!----------------------------------------------------->
-    <div id="vue3">
-        <p v-if="state">Блок видимости</p>
-    </div>
-
-    <button onclick="change()">Кнопка</button>
-    <!----------------------------------------------------->
-    <div id="vue4">
-        <ul>
-            <li v-for="item in list">
-                {{item.text}}
-            </li>
-        </ul>
-    </div>
-
-    <!--
-    <div id="vue5">
-        <input v-model="message">
-    </div>
-    <br>
-    <button onclick="addToList()">Добавить</button>    
--->
-
-    <div id="vue5">
-        <input v-model="message">
-        <br>
-        <button v-on:click="addNote">Добавить</button>
-    </div>
-    <!----------------------------------------------------->
-    <br>
-    <div id="vue6">
-        <p>{{testVue6}}</p>
-        <button v-on:click="event">Выполнить функцию</button>
-    </div>
-    <!----------------------------------------------------->
-
-    
-
-
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-
 <!--    <script type="text/javascript" src="js/bootstrap.js"></script>-->
-
     <script type="text/javascript" src="vue/vue.js"></script>
     <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
 
     <script type="text/javascript" src="js/index.js"></script>
 
-
-    
-
-    <!--
-    <script type="text/javascript" src="angular/angular.min.js"></script>
-    <script type="text/javascript" src="angular/angular-animate.min.js"></script>
-    <script type="text/javascript" src="angular/angular-aria.min.js"></script>
-    <script type="text/javascript" src="angular/angular-messages.min.js"></script>
-
-    <script type="text/javascript" src="angular/angular-material.min.js"></script>
--->
 
 </body>
 
