@@ -43,7 +43,9 @@
 
 .banner {
     height: 500px;
-    background: url(../img/39830-green-grass-1920x1080-photography-wallpaper.jpg) 50% 50%;
+    background: url(../img/Banner-2.jpg) no-repeat 50% 50%;
+    background-size: 100%;
+/*    background: url(../img/39830-green-grass-1920x1080-photography-wallpaper.jpg) 50% 50%;*/
 }
 .banner-title {
     padding: 5px;
@@ -77,7 +79,7 @@
     background: url(../img/logo-head-black.png) no-repeat 50% 50%;
     background-size: 100%;
 }
-.md-toolbar.md-account-header {
+.md-toolbar .md-account-header {
     background: url(../img/logo-head-white.png) no-repeat 50% 50%;
     background-size: 100%;
 }
