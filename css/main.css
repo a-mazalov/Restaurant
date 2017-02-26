@@ -1,3 +1,6 @@
+body {
+    overflow-x: hidden;
+}
 .collapse{
     display: none;
 }
@@ -42,9 +45,10 @@
 }
 
 .banner {
-    height: 500px;
+    height: 670px;
     background: url(../img/Banner-2-min.jpg) no-repeat 50% 50%;
     background-size: cover;
+    -webkit-clip-path: polygon(0 100%,100% 90%,100% 0,0 0);
 /*    background: url(../img/39830-green-grass-1920x1080-photography-wallpaper.jpg) 50% 50%;*/
 }
 .banner-title {
@@ -86,20 +90,19 @@
 }
 /**********************BANNER-NEWS********************/
 .banner-news {
-/*    margin: 100px 0;*/
-    height: 500px;
+/*    margin: -5px 0;*/
+    padding: 100px 0;
+    height: 670px;
     background: url(../img/Banner-new.jpg) no-repeat 50% 50%;
     background-size: cover;
+    -webkit-clip-path: polygon(0 10%,0 100%,100% 100%,100% 0);
 }
 
 .block-news {
-    position: relative;
-/*    height: 100%;*/
-    margin-top: -35px;
-    padding: 15px 20px;
-/*    margin-bottom: 200px;*/
-/*    margin-top: 250px;*/
-    background-color: #e8e8e8;
+/*    margin-top: 80px;*/
+    padding: 35px 20px;
+    background-color: rgba(232, 232, 232, 0);
+    border: 10px solid white;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 .block-news::after {
@@ -111,9 +114,11 @@
     bottom: 0;
     margin: 15px;
     padding: 10px;
-    border: 2px solid #e67e22;
+    border: 2px solid #ff7800;
 }
-.block-news h3{
+
+/**************************************************/
+.between-block h3{
     font-weight: 400;
     font-style: normal;
     font-family: 'Lato', sans-serif;
@@ -123,24 +128,32 @@
     letter-spacing: 3px;
 
 }
-.block-news .row-decoration{
+.between-block .row-decoration{
     margin-top: -15px;
     margin-bottom: 10px;
 }
-.block-news hr{
+.between-block hr{
     width: 70%;
     border: 1px solid rgba(136, 136, 136, 0.44);
+/*    border: 1px solid rgba(136, 136, 136, 0.44);*/
 }
-.block-news .hr-left hr{
+.block-news .row-decoration hr{
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+.between-block .hr-left hr{
     margin-left: 30%;
 }
-.block-news .hr-right hr{
+.between-block .hr-right hr{
     margin-right: 30%;
 }
-.block-news .news-icon {
+.between-block .news-icon {
    padding: 21px;
    background: url(../img/banner-news-icon-knife.png) no-repeat 50% 50%; 
 }
+
+/**************************************************/
+
+
 .block-news .md-card{
     margin-bottom: 40px;
 }
@@ -149,8 +162,12 @@
 }
 
 .block-news .md-card span{
-    color: #fe562e;
+    color: rgb(255, 51, 0);
 }
+.block-news .md-card .md-subhead{
+    opacity: 1;
+}
+
 /**********************MEDIA*************************/
 @media (max-width: 768px) {
     .btn-custom-order {
