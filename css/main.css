@@ -1,6 +1,21 @@
+/*
+* {
+text-shadow: none !important;
+-webkit-box-shadow: none !important;
+-webkit-border-radius:0 !important;
+-webkit-border-top-left-radius:0 !important;
+-webkit-border-bottom-left-radius:0 !important;
+-webkit-border-bottom-right-radius:0 !important;
+-webkit-border-top-right-radius:0 !important;
+}
+*/
 html {
     overflow-x: hidden;
 }
+
+
+/**********************HEADER********************/
+
 .collapse{
     display: none;
 }
@@ -90,16 +105,20 @@ html {
     background: url(../img/menu-hamburger.jpg) no-repeat 50% 50%;
     background-size: 100%;
 }
-/*.md-theme-default.md-toolbar*/
+
+
 /**********************BANNER-NEWS********************/
+
 .banner-news {
 /*    margin: -5px 0;*/
     padding: 100px 0;
 /*    height: 670px;*/
     background: url(../img/Banner-new.jpg) no-repeat 50% 50%;
     background-size: cover;
-    -webkit-clip-path: polygon(0 5vw,0 100%,100% 100%,100% 0);
+    -webkit-clip-path: polygon(0 5vw, 100% 0, 100% calc(100% - 5vw), 0% 100%); 
 }
+
+/****************************************************/
 
 .block-news {
 /*    margin-top: 80px;*/
@@ -119,8 +138,113 @@ html {
     padding: 10px;
     border: 2px solid #ff7800;
 }
+.block-news .md-card{
+    margin-bottom: 40px;
+}
+.block-news .md-card .md-card-header{
+    margin-bottom: 0;
+}
 
-/**************************************************/
+.block-news .md-card span{
+    color: rgb(255, 51, 0);
+}
+.block-news .md-card .md-subhead{
+    opacity: 1;
+}
+.block-news .row-decoration hr{
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+.between-block .icon-knife {
+   padding: 21px;
+   background: url(../img/banner-news-icon-knife.png) no-repeat 50% 50%; 
+}
+/****************************************************/
+
+.banner-gallery {
+/*    margin: -5px 0;*/
+    padding: 100px 0;
+/*    height: 670px;*/
+/*    background: url(../img/Banner-new.jpg) no-repeat 50% 50%;*/
+    background: #363636;
+    background-size: cover;
+    -webkit-clip-path: polygon(0 5vw, 100% 0, 100% calc(100% - 5vw), 0% 100%); 
+}
+.banner-gallery .md-whiteframe{
+    
+    
+/*    height: 200px;*/
+/*    width: 300px;*/
+/*
+    background: url(/img/gallery/376447.jpg) no-repeat 50% 50%;
+    background-size: cover;
+*/
+    margin: 10px;
+}
+.banner-gallery .md-whiteframe img{
+/*    width: 100%;*/
+/*    height: 100%;*/
+    transition: 1s;
+}
+.banner-gallery .md-whiteframe img:hover{
+    transition: 1s;
+    transform: scale(1.1);
+}
+.between-block .icon-gallery {
+   padding: 21px;
+   background: url(../img/icon-gallery.png) no-repeat 50% 50%; 
+}
+
+/****************************************************/
+.banner-about{
+    padding: 200px 0;
+    background: #363636;
+    background: url(../img/slide-image-05.jpg);
+    background-size: cover;
+    -webkit-clip-path: polygon(0 5vw, 100% 0, 100% calc(100% - 5vw), 0% 100%); 
+}
+.banner-about p {
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+.between-block .icon-info {
+   padding: 21px;
+   background: url(../img/icon-quill.png) no-repeat 50% 50%; 
+}
+/****************************************************/
+.banner-contacts{
+    padding-top: 70px;
+    background: #363636;
+/*    background: url(/img/39830-green-grass-1920x1080-photography-wallpaper.jpg) no-repeat 50% 50%;*/
+    background-size: cover;
+    -webkit-clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0% 100%); 
+    
+}
+.banner-contacts .list-contact .md-list{
+/*    background: grey;*/
+}
+.banner-contacts .maps {
+    padding: 15px;
+    height: 400px;
+    
+}
+
+.banner-contacts .maps iframe{
+    height: 100%;
+    width: 100%;
+}
+
+
+.between-block .icon-contacts {
+   padding: 21px;
+   background: url(../img/icon-maps.png) no-repeat 50% 50%; 
+}
+/****************************************************/
+
 .between-block h3{
     font-weight: 400;
     font-style: normal;
@@ -140,36 +264,18 @@ html {
     border: 1px solid rgba(136, 136, 136, 0.44);
 /*    border: 1px solid rgba(136, 136, 136, 0.44);*/
 }
-.block-news .row-decoration hr{
-    border: 1px solid rgba(255, 255, 255, 0.9);
-}
+
 .between-block .hr-left hr{
     margin-left: 30%;
 }
 .between-block .hr-right hr{
     margin-right: 30%;
 }
-.between-block .news-icon {
-   padding: 21px;
-   background: url(../img/banner-news-icon-knife.png) no-repeat 50% 50%; 
-}
+
 
 /**************************************************/
 
 
-.block-news .md-card{
-    margin-bottom: 40px;
-}
-.block-news .md-card .md-card-header{
-    margin-bottom: 0;
-}
-
-.block-news .md-card span{
-    color: rgb(255, 51, 0);
-}
-.block-news .md-card .md-subhead{
-    opacity: 1;
-}
 
 /**********************MEDIA*************************/
 @media (max-width: 768px) {
@@ -179,12 +285,18 @@ html {
     body {
     overflow-x: hidden;
     }
+
+}
+@media (min-width: 768px) {
+    .banner-contacts .list-contact .md-list{
+        margin-top: 25%;
+    }
 }
 
 /**************************************************/
 .vertical-align {
     display: flex;
-    flex-direction: column;
+/*    flex-direction: column;*/
     align-items: center;
     justify-content: center;
 }

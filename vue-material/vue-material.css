@@ -80,7 +80,7 @@ video {
 audio:not(.md-image),
 canvas:not(.md-image),
 embed:not(.md-image),
-iframe:not(.md-image),
+/*iframe:not(.md-image),*/
 img:not(.md-image),
 object:not(.md-image),
 svg:not(.md-image),
@@ -5304,7 +5304,7 @@ img.md-icon {
     transform: translateY(50%)
 }
 .md-whiteframe {
-    position: relative;
+/*    position: relative;*/
     z-index: 1
 }
 .md-whiteframe-1dp {

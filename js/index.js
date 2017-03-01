@@ -28,17 +28,77 @@ methods: {
 }
 });
 //----------------//----//------------------//
-$(document).ready(function () {
-    
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 1) {
-            $('.nav-custom').addClass("sticky");
-        } else {
-            $('.nav-custom').removeClass("sticky");
-        }
-    });
-});
+    $(document).ready(function () {
 
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 1) {
+                $('.nav-custom').addClass("sticky");
+            } else {
+                $('.nav-custom').removeClass("sticky");
+            }
+        });
+    });
+    
+    var obj = {
+        "One":"First-Item",
+        "Two": [7,5,2,10]
+    }
+
+    function AddToLocal() {
+        localStorage.setItem("card", JSON.stringify(obj));
+        console.log("Добавлено");
+    }
+    var LocalCard = function (){  
+        var objCards = {};
+        objCards.Card = JSON.parse(localStorage.getItem("card"));
+        objCards.CountCards = Object.keys(objCards.Card).length;
+//        console.log(localStorage.getItem("card"));
+//        return objCards;
+        
+    }
+    function clearLocal(){
+        localStorage.clear();
+        console.log("Local storage clean");
+    }
+//    function CountOrder(){
+//        console.log("Шт: " + objCards.CountCards);
+//    }
+//    console.log("CountCard:" + LocalCard().CountCards);
+
+    class Cardz {
+        constructor(){
+//            this.objC = {};
+            this.value = Array();
+        }
+        get GetCard(){
+            return this.value;
+        }
+        set setCard(item){
+            this.value = item;
+//            console.log(value);
+        }
+        count(){
+            console.log("asd");
+        }
+    };
+//    var cl = new Cardz();
+//    cl.setCard = obj;
+
+
+    $( document ).ready(function() {
+        
+        $('#order').on('click',function(){
+//            alert("Работает");
+            console.log(LocalCard().Card);
+        });
+    });
+
+//    console.log(cl.GetCard);
+
+
+
+
+//    (function(){ console.log("function") } ) ();
 //----------------//----//------------------//
 //var app = {
 //// Application Constructor
