@@ -29,9 +29,13 @@ methods: {
 });
 //----------------//----//------------------//
     $(document).ready(function () {
-
+        
+        if ( $(this).scrollTop() != 0 )  {
+            $('.nav-custom').addClass("sticky");
+        }
+        
         $(window).scroll(function () {
-            if ($(this).scrollTop() > 1) {
+            if ($(this).scrollTop() > 100) {
                 $('.nav-custom').addClass("sticky");
             } else {
                 $('.nav-custom').removeClass("sticky");

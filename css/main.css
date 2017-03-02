@@ -174,12 +174,12 @@ html {
 }
 .banner-gallery .md-whiteframe img{
     -webkit-filter: grayscale(0.5);
-   -webkit-transition: all .1s ease-out;
+   -webkit-transition: all .8s ease-out;
 }
 .banner-gallery .md-whiteframe img:hover{
     -webkit-filter: grayscale(0);
     transition: .6s;
-    transform: scale(1.1);
+    transform: scale(1.04);
 }
 .between-block .icon-gallery {
    padding: 21px;
@@ -211,7 +211,7 @@ html {
 .banner-contacts{
     padding-top: 70px;
     background: #363636;
-/*    background: url(/img/39830-green-grass-1920x1080-photography-wallpaper.jpg) no-repeat 50% 50%;*/
+/*    background: url(/img/376447.jpg) no-repeat 50% 50%;*/
     background-size: cover;
     -webkit-clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0% 100%); 
     
