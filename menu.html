@@ -1,11 +1,273 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Order</title>
+
+    <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+
+<!--
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+-->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+
+<!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!--    <link href="css/material-icons.css" media="all" rel="stylesheet" type="text/css" >-->
+    <link rel="stylesheet" href="vue-material/vue-material.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="shortcut icon" href="img/icon/banner-news-icon-knife.png" type="image/x-icon">
+    <title>Restaurant</title>
 </head>
+
 <body>
-    <h1 id="order2">asdasd</h1>
+    <div id="header">
+    
+    <md-sidenav class="md-right md-fixed" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')">
+        <md-toolbar class="md-account-header slidenav-img">
+    <!--                <img src="../img/logo-head-white.png" alt="">-->
+        </md-toolbar>
+        <div class="container-fluid " data-row-decoration>
+            <div class="row">
+                    <div class="col-md-12 between-block row-decoration">
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-left "><hr></div>
+                        <div class="col-md-2 col-sm-2 col-xs-1 icon-knife "></div>
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-right ">
+                            <hr>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <md-list>
+            <md-list-item v-on:click.native="$refs.sidenav.toggle()" class="md-primary">
+                <md-icon><i class="material-icons">assignment</i></md-icon>
+                <span>Меню</span>
+            </md-list-item>
+
+
+            <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                <md-icon>access_time</md-icon> 
+                <span>Заказ</span>
+            </md-list-item>                
+            <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                <md-icon>info</md-icon> 
+                <span>Новости</span>
+            </md-list-item>
+
+            <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                <md-icon>collections</md-icon> 
+                <span>Галерея</span>
+            </md-list-item>                
+            <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                <md-icon>room</md-icon> 
+                <span>Контакты</span>
+            </md-list-item>                
+            <md-list-item v-on:click.native="$refs.sidenav.toggle()">
+                <md-icon>start</md-icon> 
+                <span>О нас</span>
+            </md-list-item>                
+            <md-list-item>
+                <md-icon>start</md-icon> 
+                <a href="/orders.html">test</a>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+<!--------------------------------------------------------------------->
+       
+    <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <md-button class="navbar-toggle" v-on:click.native="toggleLeftSidenav">
+                        <md-icon>menu</md-icon>
+                    </md-button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav nav-link-custom">
+                        <li><a href="#News">Новости</a></li>
+                        <li ><a href="#">Галерея</a></li>
+                        <li class="logo-head"></li>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    <div class="container-fluid banner vertical-align text-center">
+        <div class="row">
+            <div class="banner-title">
+                <h1 class="">MAKING DELICIOUS <br>PREMIUM FOOD</h1>
+            </div>
+            <div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <md-button class="md-raised md-accent btn-cutom-menu" onclick="location.href='/menu.html' ">Главная</md-button>
+                </div>                
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <md-button class="md-raised btn-custom-order" onclick="location.href='/reservation.html' ">Заказ столика</md-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!--------------------------------------------------------------------->
+   
+    <div class="container-fluid " data-row-decoration>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 between-block">
+                <div class="col-md-12 text-center">
+                    <h3>Меню</h3>
+                </div>
+                <div class="col-md-12 row-decoration">
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-left "><hr></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 icon-knife "></div>
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-right "><hr></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!--------------------------------------------------------------------->  
+   
+    </div>
+   
+    <div id="vue-menu">
+        
+        <div class="container-fluid banner-news" id="News">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1  block-news">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+<!--                        <item-menu></item-menu>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+       
+       
+    <div class="container">
+        <div class="row">
+            <ul id="Repeat-Object" class="demo">
+              <li v-for="value in object">
+                {{ value }}
+              </li>
+            </ul>
+
+            <div id="ex2">
+                <input type="text" id="RangeValue" v-model="pRange">
+                {{pRange}}
+                <input type="button" v-on:click ="range()">
+                    <span v-for="n in 10">{{ n }}</span>
+            </div>
+            
+            <hr>
+            
+            <div id="ex3">
+                <p>Тестируем</p>
+                <my-component></my-component>
+                <my-component></my-component>
+                
+                
+            <input v-model="msg">
+            <br>
+            <my-component></my-component>
+            </div>
+            
+            
+            <div id="ex4">
+                <async-example></async-example>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="container" id="JsonApp">
+        <div class="row">
+<!--            <browser>-->
+<!--                <div class="post" v-for="post in posts">-->
+            <div class="post" v-for="post in posts">
+            <md-card>
+                <md-card-header>
+                    <md-avatar class="md-large">
+                        <img src="img/img-hood.jpg">
+                    </md-avatar>
+                    <md-card-header-text>
+                        <div class="md-title">{{ post.title }}</div>
+                        <div class="md-subhead">{{ post.body }}<span><b>{{post.id}}</b></span></div>
+                    </md-card-header-text>
+                </md-card-header>
+            </md-card>
+            </div>
+<!--            </browser>-->
+<!--       <item-menu></item-menu>-->
+        </div>
+        
+        
+           <md-button class="md-raised" onclick="queryNode()">Query</md-button>
+    </div>
+
+
+    <br><br><br>
+    
+    
+    
+<!--
+<div id="appJ">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="header display-5">
+        Codepen Job Board in 
+        <span class="main">Vue Js</span>
+        </h1>
+        <br/>
+        <div class="job_loop">
+           <a class="job" href="{{ job.url }}" v-for="job in jobs" target="_blank" :class="{ 'featured' : job.featured }">
+            <h5 class="title">{{ job.company_name }} - {{ job.title }}</h5>
+            <p class="featured_text" v-if="job.featured_text">{{ job.featured_text }}</p>
+            <div class="job__footer">
+              <div class="footer__item" :class="{ 'breaker' : job.address.state_prov || job.address.city }">
+              <span v-if="job.address.city">{{ job.address.city }}</span>
+              <span v-if="job.address.state_prov">, {{ job.address.state_prov }}</span></div>
+              <div class="footer_item">{{ job.term }}</div>
+            </div></a>
+          <div class="no-more">
+            <h6>No more Jobs :/</h6>
+            <p>New Jobs added daily!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 text-xs-center m-t-2">
+      <p class="text-muted">I did not write this Jobs JSON API, Codepen did.</p>
+    </div>
+  </div>
+</div>
+-->
+    
+    
+<!--------------------------------------------------------------------->
+
+<!--
+    <md-button class="md-raised" onclick = "AddToLocal()">Записать в корзину</md-button>
+    <md-button class="md-raised" onclick = "">Получить заказы</md-button>
+    <md-button class="md-raised" onclick = "clearLocal()">Отчистить</md-button>    
+    <md-button class="md-raised" onclick = "CountOrder()">Количество</md-button>    
+    <md-button class="md-raised" id="order">Открыть</md-button>
+-->
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="js/bootstrap.js"></script>-->
+    <script type="text/javascript" src="vue/vue.js"></script>
+    <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.2.1/vue-resource.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+
+    
 </body>
+
 </html>

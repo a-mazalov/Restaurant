@@ -13,12 +13,12 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
     <!--    <link href="css/material-icons.css" media="all" rel="stylesheet" type="text/css" >-->
     <link rel="stylesheet" href="vue-material/vue-material.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="shortcut icon" href="img/icon/icon-invalid.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/icon/banner-news-icon-knife.png" type="image/x-icon">
     <title>Restaurant</title>
 </head>
 
@@ -74,8 +74,9 @@
             </md-list-item>
         </md-list>
     </md-sidenav>
+    
 <!--------------------------------------------------------------------->
-       
+    
     <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -99,14 +100,19 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-    <div class="container-fluid banner vertical-align text-center">
+    </div>
+    
+    <!--Инициализация vue-material-->
+    <div id="app"> 
+    
+       <div class="container-fluid banner vertical-align text-center">
         <div class="row">
             <div class="banner-title">
                 <h1 class="">MAKING DELICIOUS <br>PREMIUM FOOD</h1>
             </div>
             <div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <md-button class="md-raised md-accent btn-cutom-menu" onclick="location.href='/menu.html' ">Меню</md-button>
+                    <md-button class="md-raised md-accent btn-cutom-menu" onclick="location.href='menu.html' ">Меню</md-button>
                 </div>                
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <md-button class="md-raised btn-custom-order" onclick="location.href='/reservation.html' ">Заказ столика</md-button>
@@ -254,7 +260,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 ">
                     <md-whiteframe>
-                       <img src="img/gallery/gallery3-min.jpg" alt="">
+                       <img src="img/gallery/gallery2-min.jpg" alt="">
                         
                     </md-whiteframe>
                 </div>
@@ -290,7 +296,8 @@
         </div>
     </div>
     
-<!--------------------------------------------------------------------->           
+<!---------------------------------------------------------------------> 
+             
     <div class="container-fluid banner-about" id="About">
         <div class="row">
            <div class="col-md-6 col-md-offset-3">
@@ -354,7 +361,12 @@
                 </div>
         </div>
     </div>
+    
+    <!--Закрытие #app -->
+    </div>
+    
 
+    
 <!--------------------------------------------------------------------->          
                 
                   

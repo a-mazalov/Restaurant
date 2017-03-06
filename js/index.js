@@ -2,9 +2,6 @@
 
 Vue.use(VueMaterial);
 
-//var initMaterial = new Vue({
-//    el: '#material'
-//});
 
 //----------------//----//------------------//
 var App = new Vue({
@@ -27,6 +24,9 @@ methods: {
         }
 }
 });
+new Vue({
+  el: "#app"  
+});
 //----------------//----//------------------//
     $(document).ready(function () {
         
@@ -41,7 +41,183 @@ methods: {
                 $('.nav-custom').removeClass("sticky");
             }
         });
-    });
+
+//
+//    var obj = {
+//        first: "Name1",
+//        Last: "Last1",
+//        num: 1
+//    }
+//    console.log(obj);
+
+    var nVueS = new Vue({
+            el: "#Repeat-Object",
+            data: {
+                object: {
+                    firstName: 'Иван',
+                    lastName: 'Петров',
+                    age: 30
+                }
+            }
+        });
+
+    new Vue({
+        el: "#ex2",
+        data: {
+            pRange: 13
+        },
+        methods: {
+            range : function(){
+//                pRange = document.getElementById("RangeValue").value;
+                alert(this.pRange);
+            }
+        }
+    })
+
+    
+    var number = {
+        counter : 0
+    }
+
+    Vue.component('my-component', {
+        props: {
+            msg: {
+                type: String,
+                default: "Default Hello Props"
+            }
+        },
+        template: '<div v-on:click="counter +=1"> {{msg}} <p> Компонент-{{counter}} </p>  <hr></div>',
+        data: function () {
+            return {
+                counter : 0
+            }
+        }
+    })
+    
+    new Vue({
+        el: "#ex3"
+    })
+    
+
+});
+
+    Vue.component('async-example', function (resolve, reject) {
+      setTimeout(function () {
+        // Передаем шаблон компонента в коллбэк resolve
+        resolve({
+          template: '<div>Я — асинхронный!</div>'
+        })
+      }, 1000)
+    })
+
+    new Vue({
+        el: "#ex4"
+    })
+    
+    
+    Vue.component('item-menu',{
+        template: '\
+        <md-card>\
+            <md-card-header>\
+                <md-avatar class="md-large">\
+                    <img src="img/img-hood.jpg">\
+                </md-avatar>\
+                <md-card-header-text>\
+                    <div class="md-title">{{title}}</div>\
+                    <div class="md-subhead">{{info}}<span><b>{{price}}</b></span></div>\
+                </md-card-header-text>\
+            </md-card-header>\
+        </md-card>',
+        
+        data: function(){
+            return {
+                title: 'Заголовок-1 ',
+                info: 'Описание-1 ',
+                price: 69
+            }
+        }
+    })
+    
+    var vueMenu = new Vue({
+        el: '#vue-menu'
+    })
+
+    
+    var JsonApp = new Vue({
+        el: '#JsonApp',
+//        components : {
+//            Browser : ""
+//        }
+        data : {
+//            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
+            queryPoint : 'http://workproject/www/php/menu-query.php',
+            posts: {},
+            post: {}
+        
+        },
+        methods: {
+
+            getPosts: function () {
+//                Параметры запроса
+                var options = {
+                    params: {
+                        _start: 0,
+                        _limit: 1
+                    },
+                    headers: {
+//                        'Content-Type': 'application/json'
+                    }
+                }
+                    this.$http.get(this.queryPoint,options).then( function(response){
+                    
+                    this.posts = JSON.parse(response.data);
+                       
+//                    alert(this.posts);
+                    console.log( this.posts);
+                    
+                }, function(error){
+                    console.log("Ошибка запроса: "+ error.data);
+                } );
+            }
+        },
+        created: function(){
+//            this.getSinglePost()
+            this.getPosts()
+        }
+    })
+    
+    
+    
+//                getSinglePost: function() {
+//                var resource = this.$resource('https://jsonplaceholder.typicode.com/posts{/id}')
+//                
+//                resource.get({ id:1 }).then(function(response){
+//                    this.post = response.data
+//                })
+//            },
+    
+    
+//    new Vue({
+//        el: '#appJ',
+//        data: {
+//            jobs: []
+//        },
+//        methods: {
+//            getJobs: function getJobs() {
+//                var _this = this;
+//
+//                var route = 'https://codepen.io/jobs.json';
+//                this.$http.get(route).then(function (response) {
+//                    _this.jobs = response.data.jobs;
+//                });
+//            }
+//        },
+//        ready: function ready() {
+//            this.getJobs();
+//        }
+//    });
+    
+    
 //    
 //    var obj = {
 //        "One":"First-Item",
