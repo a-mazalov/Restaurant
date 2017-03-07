@@ -2,7 +2,7 @@
     header('Access-Control-Allow-Origin: *');
     require('connectDB.php');
 
-    $query = "SELECT `title` FROM `Menu_table`";
+    $query = "SELECT * FROM `Menu_table`";
 
     $result = $DB->query($query); 
 

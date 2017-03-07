@@ -3,7 +3,7 @@
 <html>
 
 <head>
-
+    <meta charset="utf-8">
     <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
 
 <!--
@@ -97,14 +97,14 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-    <div class="container-fluid banner vertical-align text-center">
+    <div class="container-fluid menu-banner vertical-align text-center">
         <div class="row">
             <div class="banner-title">
                 <h1 class="">MAKING DELICIOUS <br>PREMIUM FOOD</h1>
             </div>
             <div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <md-button class="md-raised md-accent btn-cutom-menu" onclick="location.href='/menu.html' ">Главная</md-button>
+                    <md-button class="md-raised md-accent btn-cutom-menu" onclick="location.href='index.html' ">Главная</md-button>
                 </div>                
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <md-button class="md-raised btn-custom-order" onclick="location.href='/reservation.html' ">Заказ столика</md-button>
@@ -189,35 +189,51 @@
     </div>
 <!--   <div class="container-fluid" >-->
    
-    <md-tabs md-centered md-dynamic-height id="JsonApp" class="menu-cards">
-  <md-tab md-label="Movies" md-icon="ondemand_video">
-        <div class="row">
-            <div class="col-md-3 col-sm-4 col-xs-12 border" v-for="post in posts">
-            <md-card class="border">
-                <md-card-header>
-                    <md-avatar class="md-large">
-                        <img src="img/img-hood.jpg">
-                    </md-avatar>
-                    <md-card-header-text>
-                        <div class="md-title">{{ post.title }}</div>
-                        <div class="md-subhead">{{ post.body }}<span><b>{{post.id}}</b></span></div>
-                    </md-card-header-text>
-                </md-card-header>
-            </md-card>
+    <md-tabs md-centered id="JsonApp" class="menu-cards" :md-dynamic-height="false">
+      <md-tab md-label="Дич1" md-icon="ondemand_video">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 " v-for="post in posts">
+                <md-card class="">
+                    <md-card-header>
+                        <md-avatar class="md-big">
+                            <img src="img/376447.jpg">
+                        </md-avatar>
+                        <md-card-header-text>
+                            <div class="md-title">{{ post.title }}</div>
+                            <div class="md-subhead">{{ post.caption }}</div>
+<!--                            <div class="md-subhead">{{ post.id }}</div>-->
+<!--                            <div class="md-title">{{ post.title }}</div>-->
+                        </md-card-header-text>
+                        <div class="border price">
+                            <span>32,6р</span>
+                        </div>
+<!--
+                        <md-card-header-text>
+                            <div class="md-subhead">{{ post.id }}</div>
+                        </md-card-header-text>
+-->
+                    </md-card-header>
+<!--
+                    <md-card-actions>
+                        <md-button>Action</md-button>
+                        <md-button>Action</md-button>
+                    </md-card-actions>
+-->
+                </md-card>
+                </div>
             </div>
-        </div>
-  </md-tab>
+      </md-tab>
 
-  <md-tab md-label="Music" md-icon="music_note">
+  <md-tab md-label="Дич2" md-icon="music_note">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
   </md-tab>
 
-  <md-tab md-label="Books" md-icon="books">
+  <md-tab md-label="Дич3" md-icon="books">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
   </md-tab>
 
-  <md-tab md-label="Pictures" md-icon="photo">
+  <md-tab md-label="Дич4" md-icon="photo">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
   </md-tab>
 </md-tabs>

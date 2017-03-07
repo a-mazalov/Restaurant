@@ -35,7 +35,7 @@ new Vue({
         }
         
         $(window).scroll(function () {
-            if ($(this).scrollTop() > 100) {
+            if ($(this).scrollTop() > 50) {
                 $('.nav-custom').addClass("sticky");
             } else {
                 $('.nav-custom').removeClass("sticky");
