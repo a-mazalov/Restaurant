@@ -152,3 +152,6 @@ a:hover, a:focus {
 .main {
   color: #41B883;
 }
+.menu-cards .md-card{
+    margin: 10px;
+}

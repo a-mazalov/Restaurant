@@ -282,6 +282,7 @@ html {
 }
 
 /**************************************************/
+
 .vertical-align {
     display: flex;
 /*    flex-direction: column;*/
