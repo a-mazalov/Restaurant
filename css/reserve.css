@@ -1,0 +1,12 @@
+.between-block .icon-reserve {
+   padding: 21px;
+   background: url(../img/icon/icon-reserve.png) no-repeat 50% 50%;
+
+}
+
+.reserve-card .md-card-media{
+    height: 250px;
+    background: url(../img/menu-hamburger.jpg) no-repeat 50% 45%;
+    background-size: cover;
+
+}

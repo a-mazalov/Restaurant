@@ -14,6 +14,14 @@
     background-color: #fe562e !important;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6); 
 }
+
+.md-tabs .md-tabs-navigation span{
+    text-transform: capitalize ;
+/*    background: url(../img/icon/hot-dish.png) no-repeat 50% 50%;*/
+}
+.md-tabs .md-tabs-navigation button{
+/*    background: black;*/
+}
 .menu-cards {
     background: url(../img/brickwall.png);
 /*    background-size: 50%;*/
@@ -22,16 +30,22 @@
 }
 .menu-cards .md-card{
 /*    height: 200px;*/
+    cursor: pointer;
     background: rgba(255, 255, 255, 0.4) !important;
     margin: 10px;
 }
-.menu-cards .md-card .md-card-header-text{
+
+.menu-cards .md-card .md-card-header-text .md-title,
+.menu-cards .md-card .md-card-header-text .md-subhead{
+    line-height: normal;
     text-transform: lowercase;
 }
 .menu-cards .md-card .md-card-header-text .md-title:first-letter,
 .menu-cards .md-card .md-card-header-text .md-subhead:first-letter{
     text-transform: uppercase;
+    
 }
+
 .menu-cards .md-avatar {
     width: 40px;
     min-width: 40px;
@@ -64,6 +78,7 @@
     flex: 1
 }
 .menu-cards .md-card .md-card-header .md-card-header-text{
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -90,6 +105,11 @@
         font-size: 72px;
         line-height: 72px
     }
+    .md-card .md-card-header .md-card-header-text {
+        display: flex;
+        flex-direction: column ;
+        justify-content: flex-start;
+    }
 }
 @media (min-width: 768px){
     .menu-cards .md-avatar.md-big{
@@ -100,6 +120,7 @@
         font-size: 72px;
         line-height: 72px
     }
+
 }
 @media (min-width: 992px)  {
     .menu-cards .md-card .md-card-header{

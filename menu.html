@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
 
 <!--
@@ -26,7 +27,7 @@
 <body>
     <div id="header">
     
-    <md-sidenav  class="md-fixed md-left" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')" md-swipeable :md-swipe-distance="30" :md-swipe-threshold="30">
+    <md-sidenav  class="md-fixed md-left" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')" md-swipeable :md-swipe-distance="30" :md-swipe-threshold="30" v-cloak>
         <md-toolbar class="md-account-header slidenav-img">
     <!--                <img src="../img/logo-head-white.png" alt="">-->
         </md-toolbar>
@@ -42,37 +43,37 @@
             </div>
         </div>
         <md-list>
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" class="md-primary">
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" class="md-primary" onclick="location.href='menu.html#MenuList'">
                 <md-icon><i class="material-icons">assignment</i></md-icon>
                 <span>Меню</span>
             </md-list-item>
 
 
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()">
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" onclick="location.href='index.html#Head'">
                 <md-icon>access_time</md-icon> 
                 <span>Заказ</span>
             </md-list-item>                
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()">
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" 
+               onclick="location.href='index.html#News'">
                 <md-icon>info</md-icon> 
                 <span>Новости</span>
             </md-list-item>
 
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()">
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" 
+               onclick="location.href='index.html#Gallery'">
                 <md-icon>collections</md-icon> 
                 <span>Галерея</span>
             </md-list-item>                
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()">
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
+               onclick="location.href='index.html#Contacts'">
                 <md-icon>room</md-icon> 
                 <span>Контакты</span>
             </md-list-item>                
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()">
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
+               onclick="location.href='index.html#About'">
                 <md-icon>start</md-icon> 
                 <span>О нас</span>
             </md-list-item>                
-            <md-list-item>
-                <md-icon>start</md-icon> 
-                <a href="/orders.html">test</a>
-            </md-list-item>
         </md-list>
     </md-sidenav>
 <!--------------------------------------------------------------------->
@@ -86,11 +87,11 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav nav-link-custom">
-                        <li><a href="#News">Новости</a></li>
-                        <li ><a href="#">Галерея</a></li>
-                        <li class="logo-head"></li>
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li><a href="index.html#News">Новости</a></li>
+                        <li ><a href="index.html#Gallery">Галерея</a></li>
+                        <li class="logo-head" onclick="location.href='index.html#Head'"></li>
+                        <li><a href="index.html#About">О нас</a></li>
+                        <li><a href="index.html#Contacts">Контакты</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -189,23 +190,26 @@
     </div>
 <!--   <div class="container-fluid" >-->
    
-    <md-tabs md-centered id="JsonApp" class="menu-cards" :md-dynamic-height="false">
-      <md-tab md-label="Дич1" md-icon="ondemand_video">
+    <md-tabs id="MenuList" class="menu-cards md-warn" md-centered :md-dynamic-height="false" v-cloak>
+      <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12 " v-for="post in posts">
-                <md-card class="">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts">
+                
+                <md-card>
                     <md-card-header>
                         <md-avatar class="md-big">
+                           
                             <img src="img/376447.jpg">
                         </md-avatar>
                         <md-card-header-text>
-                            <div class="md-title">{{ post.title }}</div>
-                            <div class="md-subhead">{{ post.caption }}</div>
+                    <div class="md-title ">{{ post.Title_dish }}</div>
+                    <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
 <!--                            <div class="md-subhead">{{ post.id }}</div>-->
 <!--                            <div class="md-title">{{ post.title }}</div>-->
+
                         </md-card-header-text>
-                        <div class="border price">
-                            <span>32,6р</span>
+                        <div class=" price">
+                            <span>{{ post.Price_dish }}р</span>
                         </div>
 <!--
                         <md-card-header-text>
@@ -219,21 +223,23 @@
                         <md-button>Action</md-button>
                     </md-card-actions>
 -->
+              <md-ink-ripple />
                 </md-card>
+                 
                 </div>
             </div>
       </md-tab>
 
-  <md-tab md-label="Дич2" md-icon="music_note">
+  <md-tab md-label="Гарнир" md-icon="receipt">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
   </md-tab>
 
-  <md-tab md-label="Дич3" md-icon="books">
+  <md-tab md-label="Десерты" md-icon="receipt">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
   </md-tab>
 
-  <md-tab md-label="Дич4" md-icon="photo">
+  <md-tab md-label="Дич4" md-icon="receipt">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
   </md-tab>
 </md-tabs>

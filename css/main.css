@@ -57,6 +57,7 @@ html {
 /*    border: 1px solid black;*/
     background: url(../img/logo-head-white.png) no-repeat 50% 50%;
     background-size: 100%;
+    cursor: pointer;
 }
 
 .banner {
@@ -282,7 +283,9 @@ html {
 }
 
 /**************************************************/
-
+[v-cloak] {
+  display: none;
+}
 .vertical-align {
     display: flex;
 /*    flex-direction: column;*/
