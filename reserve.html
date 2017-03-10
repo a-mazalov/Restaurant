@@ -18,6 +18,7 @@
     <!--    <link href="css/material-icons.css" media="all" rel="stylesheet" type="text/css" >-->
     <link rel="stylesheet" href="vue-material/vue-material.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="datapicker/flatpickr.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/menu.css">
     <link rel="stylesheet" type="text/css" href="css/reserve.css">
@@ -139,36 +140,70 @@
     <div id="Reserve">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 col-md-offset-4">
-                        <md-card class="reserve-card">
-                            <md-card-area md-inset>
-                                <md-card-media></md-card-media>
+                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                    <md-card class="reserve-card">
+                        <md-card-area md-inset>
+                            <md-card-media></md-card-media>
+
+                            <h3 class="text-center">Время и дата визита</h3>
                                 <md-card-header>
-                                    <h3>Время и дата визита</h3>
-                                    <input class="inp" type="text" placeholder="Select Date..">
+                                    <div class="col-md-6 col-sm-6 text-center">
+                                        <md-icon class="col-sm-pull-1">date_range</md-icon>
+                                        <input class="reserve-inp inp-date" type="date" placeholder="Выберите дату">
+                                    </div>
+                                    <br class="visible-xs">
+                                    <div class="col-md-6 col-sm-6 text-center">
+                                        <md-icon>access_time</md-icon>
+                                        <input class="reserve-inp inp-time" type="datetime" placeholder="Время">
+                                    </div>
                                 </md-card-header>
+                            <br>
+                            <br>
+                        </md-card-area>
 
-                                <md-card-content>
-                                    Illy Coffee served with a complimentary Leonidas Belgian Chocolate with all beverages.
-                                </md-card-content>
-                            </md-card-area>
+                            <h3 class="text-center">Количество гостей</h3>
+                        <md-card-area class="text-center guest">
+<!--                           <div class="icon-guest" >-->
+                            <md-icon v-for="n in numguest">accessible</md-icon>
 
-                            <md-card-content>
-                                <h3 class="md-subheading">Today's availability</h3>
-                                <div class="card-reservation">
-                                    <md-icon>access_time</md-icon>
-                                    <md-button-toggle md-single class="md-button-group">
-                                        <md-button>5:30PM</md-button>
-                                        <md-button>7:30PM</md-button>
-                                        <md-button>9:00PM</md-button>
-                                    </md-button-toggle>
+<!--                           </div>-->
+
+                            <br><br>
+                            
+<!--
+                               <div class="row">
+                                <button class="reserve-inp">
+                                    <md-icon>remove</md-icon>
+                                </button>
+
+                                <md-card>{{NumGuest}}</md-card>
+
+                                <button class="reserve-inp">
+                                    <md-icon>add</md-icon>
+                                </button>
                                 </div>
-                            </md-card-content>
+-->
+                        <button class="md-button md-raised" v-on:click="if (numguest != 1) numguest -= 1">
+                            <md-icon>remove</md-icon>
+                        </button>
+                        <md-button class="md-raised">{{numguest}}</md-button>
+                        <button class="md-button md-raised" v-on:click="if (numguest != 8) numguest += 1">
+                            <md-icon>add</md-icon>
+                        </button>
+                            
+                            <br><br>
+                        </md-card-area>
 
-                            <md-card-actions>
-                                <md-button class="md-primary">Reserve</md-button>
-                            </md-card-actions>
-                        </md-card>
+
+                        <md-card-content>
+                        </md-card-content>
+
+
+
+                        <md-card-actions>
+                            <md-button class="md-primary">Reserve</md-button>
+                        </md-card-actions>
+                    </md-card>
                 </div>
             </div>
         </div>
@@ -182,12 +217,10 @@
     <script type="text/javascript" src="vue/vue.js"></script>
     <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
 <!--    <script src="https://cdn.jsdelivr.net/vue.resource/1.2.1/vue-resource.min.js"></script>-->
-    
-    <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-<script src="https://unpkg.com/flatpickr"></script>
-    
-    <script type="text/javascript" src="js/reserve.js"></script>
+
+    <script type="text/javascript" src="datapicker/flatpickr.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/reserve.js"></script>
 
    
     
