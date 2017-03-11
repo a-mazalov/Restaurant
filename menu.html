@@ -4,14 +4,16 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
-
-<!--
+    <meta http-equiv="Cache-Control" content="public">
+    <meta http-equiv="content-language" content="ru">
+    
+    
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
--->
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="format-detection" content="address=no">
+    
+    <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
 
 
 <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
@@ -135,62 +137,10 @@
    
     </div>
    
-    <div id="vue-menu">
-<!--
-        
-        <div class="container-fluid banner-news" id="News">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1  block-news">
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <item-menu></item-menu>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-       
-       
-    <div class="container">
-        <div class="row">
-            <ul id="Repeat-Object" class="demo">
-              <li v-for="value in object">
-                {{ value }}
-              </li>
-            </ul>
+    <div id="MenuList">
 
-            <div id="ex2">
-                <input type="text" id="RangeValue" v-model="pRange">
-                {{pRange}}
-                <input type="button" v-on:click ="range()">
-                    <span v-for="n in 10">{{ n }}</span>
-            </div>
-            
-            <hr>
-            
-            <div id="ex3">
-                <p>Тестируем</p>
-                <my-component></my-component>
-                <my-component></my-component>
-                
-                
-            <input v-model="msg">
-            <br>
-            <my-component></my-component>
-            </div>
-            
-            
-            <div id="ex4">
-                <async-example></async-example>
-            </div>
-            
-        </div>
-    </div>
--->
-    </div>
-<!--   <div class="container-fluid" >-->
    
-    <md-tabs id="MenuList" class="menu-cards md-warn" md-centered :md-dynamic-height="false" v-cloak>
+    <md-tabs class="menu-cards md-warn" md-centered :md-dynamic-height="false" v-cloak>
       <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts">
@@ -231,87 +181,24 @@
             </div>
       </md-tab>
 
-  <md-tab md-label="Гарнир" md-icon="receipt">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-  </md-tab>
+        <md-tab md-label="Гарнир" md-icon="receipt">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
+        </md-tab>
 
-  <md-tab md-label="Десерты" md-icon="receipt">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-  </md-tab>
+        <md-tab md-label="Десерты" md-icon="receipt">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+        </md-tab>
 
-  <md-tab md-label="Дич4" md-icon="receipt">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-  </md-tab>
-</md-tabs>
-   
-<!--    </div>-->
+        <md-tab md-label="Дич4" md-icon="receipt">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+        </md-tab>
+        </md-tabs>
+        <br>
+        <br>
+        <br>
     
-    <br><br><br>
-<!--
-    <div class="container" id="JsonApp">
-        <div class="row">
-
-            <div class="post" v-for="post in posts">
-            <md-card>
-                <md-card-header>
-                    <md-avatar class="md-large">
-                        <img src="img/img-hood.jpg">
-                    </md-avatar>
-                    <md-card-header-text>
-                        <div class="md-title">{{ post.title }}</div>
-                        <div class="md-subhead">{{ post.body }}<span><b>{{post.id}}</b></span></div>
-                    </md-card-header-text>
-                </md-card-header>
-            </md-card>
-            </div>
-        </div>
-        
-        
-           <md-button class="md-raised" onclick="queryNode()">Query</md-button>
     </div>
--->
-
-
-    
-    
-    
-    
-<!--
-<div id="appJ">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <h1 class="header display-5">
-        Codepen Job Board in 
-        <span class="main">Vue Js</span>
-        </h1>
-        <br/>
-        <div class="job_loop">
-           <a class="job" href="{{ job.url }}" v-for="job in jobs" target="_blank" :class="{ 'featured' : job.featured }">
-            <h5 class="title">{{ job.company_name }} - {{ job.title }}</h5>
-            <p class="featured_text" v-if="job.featured_text">{{ job.featured_text }}</p>
-            <div class="job__footer">
-              <div class="footer__item" :class="{ 'breaker' : job.address.state_prov || job.address.city }">
-              <span v-if="job.address.city">{{ job.address.city }}</span>
-              <span v-if="job.address.state_prov">, {{ job.address.state_prov }}</span></div>
-              <div class="footer_item">{{ job.term }}</div>
-            </div></a>
-          <div class="no-more">
-            <h6>No more Jobs :/</h6>
-            <p>New Jobs added daily!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 text-xs-center m-t-2">
-      <p class="text-muted">I did not write this Jobs JSON API, Codepen did.</p>
-    </div>
-  </div>
-</div>
--->
-    
-    
 <!--------------------------------------------------------------------->
 
 <!--
@@ -324,11 +211,11 @@
     
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-<!--    <script type="text/javascript" src="js/bootstrap.js"></script>-->
     <script type="text/javascript" src="vue/vue.js"></script>
     <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
     <script src="https://cdn.jsdelivr.net/vue.resource/1.2.1/vue-resource.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
 
     
 </body>

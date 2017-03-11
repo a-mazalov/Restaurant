@@ -4,18 +4,17 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
-
-<!--
+    <meta http-equiv="Cache-Control" content="public">
+    <meta http-equiv="content-language" content="ru">
+    
+    
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
--->
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="format-detection" content="address=no">
+    
+    <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
 
-
-<!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-    <!--    <link href="css/material-icons.css" media="all" rel="stylesheet" type="text/css" >-->
     <link rel="stylesheet" href="vue-material/vue-material.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="datapicker/flatpickr.css">
@@ -23,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="css/menu.css">
     <link rel="stylesheet" type="text/css" href="css/reserve.css">
     <link rel="shortcut icon" href="img/icon/banner-news-icon-knife.png" type="image/x-icon">
+    
     <title>Restaurant</title>
 </head>
 
@@ -137,73 +137,96 @@
 <!--Close #Header-->
     </div>
    
-    <div id="Reserve">
+    <div id="Reserve" class="banner-reserve" v-cloak>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+<!--                   FORM                  -->
+                    <form novalidate @submit.stop.prevent="submit">
+                    
                     <md-card class="reserve-card">
                         <md-card-area md-inset>
                             <md-card-media></md-card-media>
-
-                            <h3 class="text-center">Время и дата визита</h3>
-                                <md-card-header>
-                                    <div class="col-md-6 col-sm-6 text-center">
-                                        <md-icon class="col-sm-pull-1">date_range</md-icon>
-                                        <input class="reserve-inp inp-date" type="date" placeholder="Выберите дату">
-                                    </div>
-                                    <br class="visible-xs">
-                                    <div class="col-md-6 col-sm-6 text-center">
-                                        <md-icon>access_time</md-icon>
-                                        <input class="reserve-inp inp-time" type="datetime" placeholder="Время">
-                                    </div>
-                                </md-card-header>
                             <br>
-                            <br>
-                        </md-card-area>
-
-                            <h3 class="text-center">Количество гостей</h3>
-                        <md-card-area class="text-center guest">
-<!--                           <div class="icon-guest" >-->
-                            <md-icon v-for="n in numguest">accessible</md-icon>
-
-<!--                           </div>-->
-
-                            <br><br>
+                            <h4 class="text-center">Время и дата визита</h4>
                             
-<!--
-                               <div class="row">
-                                <button class="reserve-inp">
-                                    <md-icon>remove</md-icon>
-                                </button>
-
-                                <md-card>{{NumGuest}}</md-card>
-
-                                <button class="reserve-inp">
-                                    <md-icon>add</md-icon>
-                                </button>
+                            <md-card-header>
+                                <div class="col-md-6 col-sm-6 text-center">
+                                    <md-icon class="col-sm-pull-1">date_range</md-icon>
+                                    <input class="reserve-inp inp-date" type="date" placeholder="Выберите дату" required>
                                 </div>
--->
-                        <button class="md-button md-raised" v-on:click="if (numguest != 1) numguest -= 1">
-                            <md-icon>remove</md-icon>
-                        </button>
-                        <md-button class="md-raised">{{numguest}}</md-button>
-                        <button class="md-button md-raised" v-on:click="if (numguest != 8) numguest += 1">
-                            <md-icon>add</md-icon>
-                        </button>
-                            
-                            <br><br>
+                                <br class="visible-xs">
+                                <div class="col-md-6 col-sm-6 text-center">
+                                    <md-icon>access_time</md-icon>
+                                    <input class="reserve-inp inp-time" type="datetime" placeholder="Время" required>
+                                </div>
+                            </md-card-header>
+                            <br>
+                            <br>
                         </md-card-area>
 
+                        <h4 class="text-center">Количество гостей</h4>
+                        <md-card-area class="text-center guest">
+                            <md-icon v-for="n in numguest">accessible</md-icon>
+                            <br>
+                            <br>
+                            <button class="md-button md-raised" v-on:click="if (numguest != 1) numguest -= 1">
+                                <md-icon>remove</md-icon>
+                            </button>
+                            <md-button class="md-raised">{{numguest}}</md-button>
+                            <button class="md-button md-raised" v-on:click="if (numguest != 8) numguest += 1">
+                                <md-icon>add</md-icon>
+                            </button>
 
+                            <br>
+                            <br>
+                        </md-card-area>
+
+                        
                         <md-card-content>
+                           <div class="row">
+                            <div class="col-lg-6 col-md-6 ">
+                                    <md-input-container>
+                                        <md-icon>account_circle</md-icon>
+                                        <label>Имя</label>
+                                        <md-input type="text" placeholder="Имя" required></md-input>
+                                    </md-input-container> 
+                            </div>
+                            <div class="col-lg-6 col-md-6 ">
+                                    <md-input-container>
+                                        <md-icon>account_circle</md-icon>
+                                        <label>Фамилия</label>
+                                        <md-input type="text" placeholder="Фамилия" required></md-input>
+                                    </md-input-container> 
+                            </div>                           
+                            
+                            <div class="col-md-12">
+                                <md-input-container>
+                                    <md-icon>phone</md-icon>
+                                    <label>Phone</label>
+                                    <md-input type="text" placeholder="Введите свой номер телефона" required></md-input>
+                                </md-input-container>
+                                
+                            <md-input-container>
+                                <md-icon>speaker_notes</md-icon>
+                                <label>Пожелания</label>
+                                <md-textarea placeholder="Пожелания (не обязательно)" maxlength="60"></md-textarea>
+                            </md-input-container>
+                            </div>
+                            
+                            </div>
+                            
+                            
+                            
                         </md-card-content>
 
 
 
                         <md-card-actions>
-                            <md-button class="md-primary">Reserve</md-button>
+                            <md-button class="md-raised md-primary">Забронировать</md-button>
                         </md-card-actions>
                     </md-card>
+                    </form>
                 </div>
             </div>
         </div>

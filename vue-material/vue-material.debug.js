@@ -3026,7 +3026,7 @@ function install(Vue) {
   Vue.use(_mdTheme2.default);
     
 //    Изменено
-//  Vue.use(_mdInkRipple2.default);
+  Vue.use(_mdInkRipple2.default);
   Vue.material.styles.push(_core2.default);
 }
 
@@ -3662,7 +3662,9 @@ function install(Vue) {
       return {
         styles: [],
         currentTheme: null,
-        inkRipple: true
+          
+//        Изменено "true" 
+        inkRipple: false
       };
     },
     methods: {

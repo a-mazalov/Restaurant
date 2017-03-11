@@ -3,6 +3,10 @@
 * Made with love by Marcos Moura
 * Released under the MIT License.
 */
+[v-cloak] {
+  display: none;
+}
+
 
 .md-ink-ripple {
     pointer-events: none;

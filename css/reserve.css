@@ -3,14 +3,27 @@
    background: url(../img/icon/icon-reserve.png) no-repeat 50% 50%;
 
 }
-
+.banner-reserve {
+/*    margin: -5px 0;*/
+    padding: 100px 0;
+/*    height: 670px;*/
+/*    background-color: #363636;*/
+    background: url(../img/brickwall.png) ;
+/*    background: #363636;*/
+/*    background-size: cover;*/
+/*    -webkit-clip-path: polygon(0 5vw, 100% 0, 100% calc(100% - 5vw), 0% 100%); */
+}
+.reserve-card {
+    overflow: inherit;
+}
 .reserve-card .md-card-media{
     height: 250px;
     background: url(../img/menu-hamburger.jpg) no-repeat 50% 45%;
     background-size: cover;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6); 
 
 }
-.md-card .md-card-media+.md-card-header{
+.reserve-card .md-card .md-card-media+.md-card-header{
     padding-top: 0;
 }
 
@@ -28,15 +41,6 @@
     width: 35px;
 }
 
-.guest {
-/*    font-weight: 800;*/
-/*    font-size: 16px;*/
-}
-
 .flatpickr-calendar.hasTime.noCalendar.showTimeInput.arrowTop.open{
     width: 200px;
 }
-.reserve-margin-h {
-    
-}
-

@@ -1,15 +1,22 @@
-Vue.use(VueMaterial);
+
 
 var ReserveCard = new Vue({
     el: "#Reserve",
     data: {
+        date: '',
+        time: '',
+        name: '',
+        lastName: '',
+        telefone: '',
         numguest: 1,
+        notes: '',
+        
         message: 'Hello Vue!'
   }
 })
 
 
-var DataPicker = $(".inp-date").flatpickr({
+$(".inp-date").flatpickr({
     enableTime: false
 });
 
@@ -19,17 +26,10 @@ $(".inp-time").flatpickr({
     time_24hr: true,
 });
 
-//var NumGuests = new Vue({
-//    el:"#NumGuest",
-//    data: {
-//        numguest: 1
-//    }
-//});
-
-
 var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Vue!'
   }
 })
+
