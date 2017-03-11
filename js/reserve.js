@@ -3,16 +3,26 @@
 var ReserveCard = new Vue({
     el: "#Reserve",
     data: {
-        date: '',
-        time: '',
-        name: '',
-        lastName: '',
-        telefone: '',
-        numguest: 1,
-        notes: '',
+        reserveObj: {
+            date: '',
+            time: '',
+            name: '',
+            lastName: '',
+            telefone: '',
+            numguest: 1,
+            notes: ''
+        },
         
         message: 'Hello Vue!'
-  }
+  },
+    methods: {
+        ReserveInfo: function(){
+            console.log(this.reserveObj);
+        },
+        submit: function(){
+        
+        }
+    }
 })
 
 
