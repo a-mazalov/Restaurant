@@ -1,4 +1,4 @@
-
+var getdata = {a:1111};
 
 var ReserveCard = new Vue({
     el: "#Reserve",
@@ -8,22 +8,49 @@ var ReserveCard = new Vue({
             time: '',
             name: '',
             lastName: '',
-            telefone: '',
+            telephone: '',
             numguest: 1,
             notes: ''
         },
+        queryPoint: 'http://workproject/www/php/Reserve.php',
+        test: 'Menu_table',
         
-        message: 'Hello Vue!'
   },
     methods: {
         ReserveInfo: function(){
             console.log(this.reserveObj);
+this.$http.get(this.queryPoint,  { params: this.reserveObj } ).then(function(response){
+            
+            console.log(response.data);
+                
+            });
         },
         submit: function(){
         
         }
     }
 })
+
+
+//function Send(){
+//    
+//        $.ajax({
+//            url: "http://workproject/www/php/Reserve.php",
+//            type: "get",
+//            data: ({
+//                Test: "menu_table"
+//            }),
+//            dataType: "html",
+//            success: function (data) {
+//                //            console.log(data);
+////                alert("ok");
+//                console.log(data);
+//            }
+//        });
+//    
+//}
+
+
 
 
 $(".inp-date").flatpickr({

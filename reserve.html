@@ -197,7 +197,7 @@
                                     <md-input-container>
                                         <md-icon>account_circle</md-icon>
                                         <label>Фамилия</label>
-                                        <md-input type="text" placeholder="Фамилия" v-model="reserveObj.lastname" required></md-input>
+                                        <md-input type="text" placeholder="Фамилия" v-model="reserveObj.lastName" required></md-input>
                                     </md-input-container> 
                             </div>                           
                             
@@ -205,7 +205,7 @@
                                 <md-input-container>
                                     <md-icon>phone</md-icon>
                                     <label>Phone</label>
-                                    <md-input type="text" placeholder="Введите свой номер телефона" v-model="reserveObj.telefone" required></md-input>
+                                    <md-input type="text" placeholder="Введите свой номер телефона" v-model="reserveObj.telephone" required></md-input>
                                 </md-input-container>
                                 
                             <md-input-container>
@@ -220,8 +220,6 @@
                             
                             
                         </md-card-content>
-
-
 
                         <md-card-actions>
                             <md-button class="md-raised md-primary" v-on:click.native="ReserveInfo">Забронировать</md-button>
@@ -240,8 +238,7 @@
 <!--    <script type="text/javascript" src="js/bootstrap.js"></script>-->
     <script type="text/javascript" src="vue/vue.js"></script>
     <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
-    <script src="https://cdn.jsdelivr.net/vue.resource/1.2.1/vue-resource.min.js"></script>
-
+    <script type="text/javascript" src="vue/vue-resource.js"></script>
     <script type="text/javascript" src="datapicker/flatpickr.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/reserve.js"></script>

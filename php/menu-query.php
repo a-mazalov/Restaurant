@@ -19,7 +19,7 @@
     foreach ($result as $row){
         $data[] = $row;
     }
-
+//    var_dump($_POST);
     echo json_encode($data);
 //    echo $result;
 
