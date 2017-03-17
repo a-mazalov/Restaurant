@@ -5,8 +5,8 @@ var MenuList = new Vue({
             //            queryPoint : '//d0008482.atservers.net/Felix/menu-query.php',
             queryPoint: 'http://workproject/www/php/menu-query.php',
             posts: {},
-            post: {}
-
+            post: {},
+            error: false
         },
         methods: {
 
@@ -23,12 +23,12 @@ var MenuList = new Vue({
                 }
                 this.$http.get(this.queryPoint, options).then(function (response) {
 
-//                    if()
                     this.posts = JSON.parse(response.data);
                     //alert(this.posts);
                     console.log(this.posts);
 
                 }, function (error) {
+                    this.error = true;
                     console.log("Ошибка запроса: " + error.data);
                 });
             }

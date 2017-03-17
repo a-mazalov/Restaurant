@@ -140,10 +140,17 @@
     <div id="MenuList">
 
    
-    <md-tabs class="menu-cards md-warn" md-centered :md-dynamic-height="false" v-cloak>
-      <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
+    <md-tabs class="menu-cards md-warn" md-centered md-fixed v-cloak>
+
+        <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts">
+                <div class="col-lg-6 col-lg-offset-3 request-null text-center" v-if="error">
+                    <md-card>
+                        <h4>Что-то пошло не так</h4>
+                    </md-card>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Hot_dishes">
                 
                 <md-card>
                     <md-card-header>
@@ -175,25 +182,104 @@
 -->
               <md-ink-ripple />
                 </md-card>
-                 <div class="clearfix visible-sm"></div>
+                 <div class="clearfix"></div>
                 </div>
                 
             </div>
       </md-tab>
-
-        <md-tab md-label="Гарнир" md-icon="receipt">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-        </md-tab>
-
         <md-tab md-label="Десерты" md-icon="receipt">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 request-null text-center" v-if="error">
+                    <md-card>
+                        <h4>Что-то пошло не так</h4>
+                    </md-card>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Dessert">
+                
+                <md-card>
+                    <md-card-header>
+                        <md-avatar class="md-big">
+                           
+                            <img src="img/376447.jpg">
+                        </md-avatar>
+                        <md-card-header-text>
+                    <div class="md-title ">{{ post.Title_dish }}</div>
+                    <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
+<!--                            <div class="md-subhead">{{ post.id }}</div>-->
+<!--                            <div class="md-title">{{ post.title }}</div>-->
+
+                        </md-card-header-text>
+                        <div class=" price">
+                            <span>{{ post.Price_dish }}р</span>
+                        </div>
+<!--
+                        <md-card-header-text>
+                            <div class="md-subhead">{{ post.id }}</div>
+                        </md-card-header-text>
+-->
+                    </md-card-header>
+<!--
+                    <md-card-actions>
+                        <md-button>Action</md-button>
+                        <md-button>Action</md-button>
+                    </md-card-actions>
+-->
+              <md-ink-ripple />
+                </md-card>
+                 <div class="clearfix"></div>
+                </div>
+                
+            </div>
+        </md-tab>
+        <md-tab md-label="Суп" md-icon="receipt">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 request-null text-center" v-if="error">
+                    <md-card>
+                        <h4>Что-то пошло не так</h4>
+                    </md-card>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Soup">
+                
+                <md-card>
+                    <md-card-header>
+                        <md-avatar class="md-big">
+                           
+                            <img src="img/376447.jpg">
+                        </md-avatar>
+                        <md-card-header-text>
+                    <div class="md-title ">{{ post.Title_dish }}</div>
+                    <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
+<!--                            <div class="md-subhead">{{ post.id }}</div>-->
+<!--                            <div class="md-title">{{ post.title }}</div>-->
+
+                        </md-card-header-text>
+                        <div class=" price">
+                            <span>{{ post.Price_dish }}р</span>
+                        </div>
+<!--
+                        <md-card-header-text>
+                            <div class="md-subhead">{{ post.id }}</div>
+                        </md-card-header-text>
+-->
+                    </md-card-header>
+<!--
+                    <md-card-actions>
+                        <md-button>Action</md-button>
+                        <md-button>Action</md-button>
+                    </md-card-actions>
+-->
+              <md-ink-ripple />
+                </md-card>
+                 <div class="clearfix"></div>
+                </div>
+                
+            </div>
         </md-tab>
 
-        <md-tab md-label="Дич4" md-icon="receipt">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-        </md-tab>
-        </md-tabs>
+
+    </md-tabs>
 
     
     </div>

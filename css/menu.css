@@ -7,6 +7,16 @@
     
 /*    background: url(../img/39830-green-grass-1920x1080-photography-wallpaper.jpg) 50% 50%;*/
 }
+
+.request-null {
+    padding: 150px;
+}
+.request-null h4{
+    
+    padding: 50px;
+}
+
+
 .md-tabs .md-tabs-navigation {
 /*    background: 100% 1%;*/
 /*    background: url(/img/3571613594_1196531645.jpg) no-repeat 50% 10%;*/
@@ -134,3 +144,4 @@
         border-radius: 128px
     }
 }
+

@@ -1,29 +1,27 @@
 <?php
     header('Access-Control-Allow-Origin: *');
     require('connectDB.php');
-
-    $query = "SELECT * FROM `Menu_table`";
-
-    $result = $DB->query($query); 
-
-//    for($i = 0; $i<20; $i++){
-//            $query = "INSERT INTO `Restaurant`.`Menu_table` (`id`, `title`, `caption`) VALUES (NULL, 'title_{$i}', 'Caption_{$i}')";
-//            $result = $DB->query($query);
-//        echo "Цикл:"+$i;
-//    }
-
-
+        $query = "SELECT * FROM `Menu_table`";
+        $result = $DB->query($query); 
 
     $data = array();
-    
+    $i = 0;
     foreach ($result as $row){
-        $data[] = $row;
+//        if($row["Category_dish"] == "Десерт"){
+//            $data["Dessert"][++$i] = $row;
+//            
+//        }
+//        if($row["Category_dish"] == "Суп"){
+//            $data["Sup"][++$i] = $row;
+//            
+//        }  
+//        Запись в массив по категориям
+        $category = $row["Category_dish"];
+        $data[$category][++$i] = $row;
+  
     }
-//    var_dump($_POST);
-    echo json_encode($data);
-//    echo $result;
+        echo json_encode($data);
 
-//    echo "TEST!!!";
 
 ?>     
 
