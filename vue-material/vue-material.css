@@ -371,6 +371,7 @@ button:focus {
 .md-bottom-bar-item .md-icon {
     transition: all .4s cubic-bezier(.25, .8, .25, 1), color .15s linear
 }
+
 .md-button {
     min-width: 88px;
     min-height: 36px;

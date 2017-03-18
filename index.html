@@ -71,6 +71,11 @@
                onclick="location.href='index.html#About'">
                 <md-icon>start</md-icon> 
                 <span>О нас</span>
+            </md-list-item>             
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
+               onclick="location.href='account.html'">
+                <md-icon>start</md-icon> 
+                <span>Аккаунт</span>
             </md-list-item>                
         </md-list>
     </md-sidenav>
@@ -110,14 +115,12 @@
             <div class="banner-title">
                 <h1 class="">MAKING DELICIOUS <br>PREMIUM FOOD</h1>
             </div>
-            <div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-lg-offset-3 col-xs-12">
                     <md-button class="md-raised md-accent btn-cutom-menu" onclick="location.href='menu.html' ">Меню</md-button>
-                </div>                
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <br class="visible-xs"> 
                     <md-button class="md-raised btn-custom-order" onclick="location.href='reserve.html' ">Заказ столика</md-button>
-                </div>
-            </div>
+                </div>                
+
         </div>
     </div>
     

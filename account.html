@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="public">
+    <meta http-equiv="content-language" content="ru">
+
+
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="address=no">
+
+    <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" href="vue-material/vue-material.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+    <link rel="shortcut icon" href="img/icon/banner-news-icon-knife.png" type="image/x-icon">
+
+    <title>Restaurant</title>
+</head>
+
+<body class="vertical-align brick-wall">
+    <!--    <div id="header">-->
+
+    <!--------------------------------------------------------------------->
+
+    <div id="Account" class="Account" v-cloak>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                    <form novalidate @submit.stop.prevent="submit">
+                       
+                        <div class="welcom-block vertical-align" v-if="welcom">
+                            <md-card md-with-hover>
+                                <md-card-header>
+                                    <div class="md-title text-center">Добро пожаловать!
+                                        <br>
+                                        <md-icon>restaurant_menu</md-icon>
+                                    </div>
+                                    <div class="md-subhead text-trans-none text-center">Сохраняйте любимые блюда, бронируйте столик и накапливайте бонусы, при помощи своего аккаунта!</div>
+                                </md-card-header>
+
+                                <md-card-content class="vertical-align">
+
+                                    <md-button class="md-raised md-primary text-trans-none" v-on:click.native="welcom=false; register=true;">Создать аккаунт</md-button>
+
+                                    <md-card-actions class="vertical-align">
+                                        <div class="md-subhead text-trans-none text-center">Или войдите в уже существующий аккаунт</div>
+                                        <br>
+                                        <md-button class="md-raised text-trans-none">Войти</md-button>
+                                    </md-card-actions>
+
+                                </md-card-content>
+
+                            </md-card>
+                        </div>
+                        
+                        <div class="register-block vertical-align " v-if="register">
+                            <md-card md-with-hover>
+                                <md-card-header>
+                                    <md-button class="back-page" v-on:click.native="register=false; welcom=true"><md-icon>keyboard_arrow_left</md-icon></md-button>
+                                    <div class="md-title text-center">Регистрация</div>
+                                    <br>
+                                    <div class="md-subhead text-trans-none text-center">Сохраняйте любимые блюда, бронируйте столик и накапливайте бонусы, при помощи своего аккаунта!</div>
+                                </md-card-header>
+
+                                <md-card-content>
+                                    <md-input-container>
+                                        <md-icon>account_circle</md-icon>
+                                        <label>Имя</label>
+                                        <md-input type="text" placeholder="Имя"></md-input>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <md-icon>account_circle</md-icon>
+                                        <label>Фамилия</label>
+                                        <md-input type="text" placeholder="Фамилия"></md-input>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <md-icon>phone</md-icon>
+                                        <label>Телефон</label>
+                                        <md-input type="tel" placeholder="Введите свой номер телефона"></md-input>
+                                    </md-input-container>
+                                    <md-input-container md-has-password>
+                                        <md-icon>lock</md-icon>
+                                        <label>Пароль</label>
+                                        <md-input type="password" placeholder="Придумайте пароль"></md-input>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <md-icon>lock</md-icon>
+                                        <label>Пароль</label>
+                                        <md-input type="password" placeholder="Подтвердите пароль"></md-input>
+                                    </md-input-container>
+                                </md-card-content>
+
+                                <md-card-actions class="vertical-align">
+                                    <md-button class="md-raised md-primary text-trans-none">Создать аккаунт</md-button>
+                                    <!--                                    <md-button class="md-raised text-trans-none">Войти</md-button>-->
+                                    <br>
+                                </md-card-actions>
+                            </md-card>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--------------------------------------------------------------------->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="vue/vue.js"></script>
+    <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
+    <script type="text/javascript" src="vue/vue-resource.js"></script>
+
+
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+
+
+
+</body>
+
+</html>

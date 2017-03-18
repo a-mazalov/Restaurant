@@ -1,0 +1,42 @@
+
+
+
+.Account {
+    
+}
+.register-block,
+.welcom-block{
+    height: 600px;
+    margin: 10px;
+}
+.welcom-block{
+    animation: scaling 1s;
+}
+.register-block{
+    animation: scaling 1s;
+}
+
+.brick-wall {
+    background: url(../img/brickwall.png) ;
+}
+.btn-custom-login {
+/*    margin-left: -50px;*/
+    background-color: rgba(255, 255, 255, 0) !important;
+    border: 0px solid #3f51b5 !important;
+    color: #3f51b5 !important;
+}
+
+.md-button.back-page{
+/*    position: absolute;*/
+    width: 64px;
+    min-width: 64px; */
+    min-height: 36px; 
+    margin: 0px 0px; 
+    padding: 0 16px; 
+}
+
+@keyframes scaling {
+  0%   { transform: scale(0); }
+/*  50%   { transform: scale(0.5); }*/
+  100% { transform: scale(1); }
+}

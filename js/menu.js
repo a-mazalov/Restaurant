@@ -3,7 +3,7 @@ var MenuList = new Vue({
         data: {
             //            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
             //            queryPoint : '//d0008482.atservers.net/Felix/menu-query.php',
-            queryPoint: 'http://workproject/www/php/menu-query.ph',
+            queryPoint: 'http://workproject/www/php/menu-query.php',
             posts: {},
             post: {},
             error: false
