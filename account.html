@@ -36,7 +36,7 @@
                     <form novalidate @submit.stop.prevent="submit">
                        
                         <div class="welcom-block vertical-align" v-if="welcom">
-                            <md-card md-with-hover>
+                            <md-card>
                                 <md-card-header>
                                     <div class="md-title text-center">Добро пожаловать!
                                         <br>
@@ -47,12 +47,12 @@
 
                                 <md-card-content class="vertical-align">
 
-                                    <md-button class="md-raised md-primary text-trans-none" v-on:click.native="welcom=false; register=true;">Создать аккаунт</md-button>
+                                    <md-button class="md-raised md-primary text-trans-none" v-on:click.native="welcom=false; register=true; login=false">Создать аккаунт</md-button>
 
                                     <md-card-actions class="vertical-align">
                                         <div class="md-subhead text-trans-none text-center">Или войдите в уже существующий аккаунт</div>
                                         <br>
-                                        <md-button class="md-raised text-trans-none">Войти</md-button>
+                                        <md-button class="md-raised text-trans-none" v-on:click.native="welcom=false; register=false; login=true ">Войти</md-button>
                                     </md-card-actions>
 
                                 </md-card-content>
@@ -60,8 +60,39 @@
                             </md-card>
                         </div>
                         
+                        <div class="login-block vertical-align" v-if="login">
+                            <md-card>
+                                <md-card-header>
+                                 <md-button class="back-page" v-on:click.native="login=false; register=false; welcom=true"><md-icon>keyboard_arrow_left</md-icon></md-button>
+                                    <div class="md-title text-center">Войти
+                                        <br>
+                                        <md-icon>restaurant_menu</md-icon>
+                                    </div>
+                                </md-card-header>
+
+                                <md-card-content class="vertical-align">
+
+                                    <md-input-container>
+                                        <md-icon>phone</md-icon>
+                                        <label>Телефон</label>
+                                        <md-input type="tel" placeholder="Введите свой номер телефона"></md-input>
+                                    </md-input-container>
+                                    <md-input-container md-has-password>
+                                        <md-icon>lock</md-icon>
+                                        <label>Пароль</label>
+                                        <md-input type="password" placeholder="Введите пароль"></md-input>
+                                    </md-input-container>
+                                </md-card-content>
+                                <md-card-actions class="vertical-align">
+                                    <md-button class="md-raised md-primary text-trans-none">Войти</md-button>
+                                    <!--                                    <md-button class="md-raised text-trans-none">Войти</md-button>-->
+                                    <br>
+                                </md-card-actions>
+                            </md-card>
+                        </div>
+                        
                         <div class="register-block vertical-align " v-if="register">
-                            <md-card md-with-hover>
+                            <md-card >
                                 <md-card-header>
                                     <md-button class="back-page" v-on:click.native="register=false; welcom=true"><md-icon>keyboard_arrow_left</md-icon></md-button>
                                     <div class="md-title text-center">Регистрация</div>

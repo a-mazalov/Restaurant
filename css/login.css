@@ -10,14 +10,19 @@
     margin: 10px;
 }
 .welcom-block{
-    animation: scaling 1s;
+    animation: translates 1s;
+/*    animation: scaling 1s;*/
 }
 .register-block{
-    animation: scaling 1s;
+    animation: translates 1s;
+/*    animation: scaling 1s;*/
 }
-
+.login-block{
+    animation: translates 1s;
+}
 .brick-wall {
     background: url(../img/brickwall.png) ;
+    overflow: hidden;
 }
 .btn-custom-login {
 /*    margin-left: -50px;*/
@@ -39,4 +44,9 @@
   0%   { transform: scale(0); }
 /*  50%   { transform: scale(0.5); }*/
   100% { transform: scale(1); }
+}
+
+@keyframes translates {
+    0% { transform: translate(0, 100%) }
+    100% { transform: translate(0, 0%) }
 }
