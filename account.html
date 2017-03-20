@@ -35,7 +35,7 @@
                 <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
                     <form novalidate @submit.stop.prevent="submit">
                        
-                        <div class="welcom-block vertical-align" v-if="welcom">
+                        <div class="welcom-block vertical-align" v-if="window.welcom">
                             <md-card>
                                 <md-card-header>
                                     <div class="md-title text-center">Добро пожаловать!
@@ -47,12 +47,12 @@
 
                                 <md-card-content class="vertical-align">
 
-                                    <md-button class="md-raised md-primary text-trans-none" v-on:click.native="welcom=false; register=true; login=false">Создать аккаунт</md-button>
+                                    <md-button class="md-raised md-primary text-trans-none" v-on:click.native="window.welcom=false; window.register=true; window.login=false">Создать аккаунт</md-button>
 
                                     <md-card-actions class="vertical-align">
                                         <div class="md-subhead text-trans-none text-center">Или войдите в уже существующий аккаунт</div>
                                         <br>
-                                        <md-button class="md-raised text-trans-none" v-on:click.native="welcom=false; register=false; login=true ">Войти</md-button>
+                                        <md-button class="md-raised text-trans-none" v-on:click.native="window.welcom=false; window.register=false; window.login=true ">Войти</md-button>
                                     </md-card-actions>
 
                                 </md-card-content>
@@ -60,10 +60,10 @@
                             </md-card>
                         </div>
                         
-                        <div class="login-block vertical-align" v-if="login">
+                        <div class="login-block vertical-align" v-if="window.login">
                             <md-card>
                                 <md-card-header>
-                                 <md-button class="back-page" v-on:click.native="login=false; register=false; welcom=true"><md-icon>keyboard_arrow_left</md-icon></md-button>
+                                 <md-button class="back-page" v-on:click.native="window.login=false; window.register=false; window.welcom=true"><md-icon>keyboard_arrow_left</md-icon></md-button>
                                     <div class="md-title text-center">Войти
                                         <br>
                                         <md-icon>restaurant_menu</md-icon>
@@ -75,26 +75,26 @@
                                     <md-input-container>
                                         <md-icon>phone</md-icon>
                                         <label>Телефон</label>
-                                        <md-input type="tel" placeholder="Введите свой номер телефона"></md-input>
+                                        <md-input type="tel" placeholder="Введите свой номер телефона" v-model="dataLogin.telephone" required></md-input>
                                     </md-input-container>
                                     <md-input-container md-has-password>
                                         <md-icon>lock</md-icon>
                                         <label>Пароль</label>
-                                        <md-input type="password" placeholder="Введите пароль"></md-input>
+                                        <md-input type="password" placeholder="Введите пароль" v-model="dataLogin.password" required></md-input>
                                     </md-input-container>
                                 </md-card-content>
                                 <md-card-actions class="vertical-align">
-                                    <md-button class="md-raised md-primary text-trans-none">Войти</md-button>
+                                    <md-button class="md-raised md-primary text-trans-none" v-on:click.native="log()">Войти</md-button>
                                     <!--                                    <md-button class="md-raised text-trans-none">Войти</md-button>-->
                                     <br>
                                 </md-card-actions>
                             </md-card>
                         </div>
                         
-                        <div class="register-block vertical-align " v-if="register">
+                        <div class="register-block vertical-align " v-if="window.register">
                             <md-card >
                                 <md-card-header>
-                                    <md-button class="back-page" v-on:click.native="register=false; welcom=true"><md-icon>keyboard_arrow_left</md-icon></md-button>
+                                    <md-button class="back-page" v-on:click.native="window.register=false; window.welcom=true"><md-icon>keyboard_arrow_left</md-icon></md-button>
                                     <div class="md-title text-center">Регистрация</div>
                                     <br>
                                     <div class="md-subhead text-trans-none text-center">Сохраняйте любимые блюда, бронируйте столик и накапливайте бонусы, при помощи своего аккаунта!</div>
@@ -104,32 +104,32 @@
                                     <md-input-container>
                                         <md-icon>account_circle</md-icon>
                                         <label>Имя</label>
-                                        <md-input type="text" placeholder="Имя"></md-input>
+                                        <md-input type="text" placeholder="Имя" v-model="dataRegister.name" required></md-input>
                                     </md-input-container>
                                     <md-input-container>
                                         <md-icon>account_circle</md-icon>
                                         <label>Фамилия</label>
-                                        <md-input type="text" placeholder="Фамилия"></md-input>
+                                        <md-input type="text" placeholder="Фамилия" v-model="dataRegister.lastname" required></md-input>
                                     </md-input-container>
                                     <md-input-container>
                                         <md-icon>phone</md-icon>
                                         <label>Телефон</label>
-                                        <md-input type="tel" placeholder="Введите свой номер телефона"></md-input>
+                                        <md-input type="tel" placeholder="Введите свой номер телефона" v-model="dataRegister.telephone" required></md-input>
                                     </md-input-container>
                                     <md-input-container md-has-password>
                                         <md-icon>lock</md-icon>
                                         <label>Пароль</label>
-                                        <md-input type="password" placeholder="Придумайте пароль"></md-input>
+                                        <md-input type="password" placeholder="Придумайте пароль" ></md-input>
                                     </md-input-container>
                                     <md-input-container>
                                         <md-icon>lock</md-icon>
                                         <label>Пароль</label>
-                                        <md-input type="password" placeholder="Подтвердите пароль"></md-input>
+                                        <md-input type="password" placeholder="Подтвердите пароль" v-model="dataRegister.password" required></md-input>
                                     </md-input-container>
                                 </md-card-content>
 
                                 <md-card-actions class="vertical-align">
-                                    <md-button class="md-raised md-primary text-trans-none">Создать аккаунт</md-button>
+                                    <md-button class="md-raised md-primary text-trans-none" v-on:click.native="log()">Создать аккаунт</md-button>
                                     <!--                                    <md-button class="md-raised text-trans-none">Войти</md-button>-->
                                     <br>
                                 </md-card-actions>
