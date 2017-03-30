@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="public">
+    <meta http-equiv="content-language" content="ru">
+    
+    
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="address=no">
+
+    <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    
+    <link rel="stylesheet" href="vue-material/vue-material.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="shortcut icon" href="img/icon/banner-news-icon-knife.png" type="image/x-icon">
+    <title>Restaurant</title>
+</head>
+
+<body>
+    <div id="header" >
+    
+    <md-sidenav  class="md-fixed md-left" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')" md-swipeable :md-swipe-distance="30" :md-swipe-threshold="30" v-cloak>
+        <md-toolbar class="md-account-header slidenav-img">
+    <!--                <img src="../img/logo-head-white.png" alt="">-->
+        </md-toolbar>
+        <div class="container-fluid " data-row-decoration>
+            <div class="row">
+                    <div class="col-md-12 between-block row-decoration">
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-left "><hr></div>
+                        <div class="col-md-2 col-sm-2 col-xs-1 icon-knife "></div>
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-right ">
+                            <hr>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <md-list>
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" class="md-primary" onclick="location.href='menu.html#MenuList'">
+                <md-icon><i class="material-icons">assignment</i></md-icon>
+                <span>Меню</span>
+            </md-list-item>
+
+
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" onclick="location.href='index.html#Head'">
+                <md-icon>access_time</md-icon> 
+                <span>Заказ</span>
+            </md-list-item>                
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" 
+               onclick="location.href='index.html#News'">
+                <md-icon>info</md-icon> 
+                <span>Новости</span>
+            </md-list-item>
+
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" 
+               onclick="location.href='index.html#Gallery'">
+                <md-icon>collections</md-icon> 
+                <span>Галерея</span>
+            </md-list-item>                
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
+               onclick="location.href='index.html#Contacts'">
+                <md-icon>room</md-icon> 
+                <span>Контакты</span>
+            </md-list-item>                
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
+               onclick="location.href='index.html#About'">
+                <md-icon>start</md-icon> 
+                <span>О нас</span>
+            </md-list-item>             
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
+               onclick="location.href='account.html'">
+                <md-icon>start</md-icon> 
+                <span>Аккаунт</span>
+            </md-list-item>                
+        </md-list>
+    </md-sidenav>
+    
+<!--------------------------------------------------------------------->
+    
+    <nav class="navbar navbar-default navbar-fixed-top nav-custom" role="navigation" >
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <md-button class="navbar-toggle" v-on:click.native="toggleLeftSidenav">
+                        <md-icon>menu</md-icon>
+                    </md-button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav nav-link-custom">
+                        <li><a href="index.html#News">Новости</a></li>
+                        <li ><a href="index.html#Gallery">Галерея</a></li>
+                        <li class="logo-head" onclick="location.href='index.html#Head'"></li>
+                        <li><a href="index.html#About">О нас</a></li>
+                        <li><a href="index.html#Contacts">Контакты</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </div>
+    
+    <!--Инициализация vue-material-->
+    <div id="Main-app"> 
+    
+       <div class="container-fluid banner vertical-align text-center" id="Head">
+        <div class="row">
+            <div class="banner-title">
+                <h1 class="">MAKING DELICIOUS <br>PREMIUM FOOD</h1>
+            </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-lg-offset-3 col-xs-12">
+                    <md-button class="md-raised md-accent btn-cutom-menu" onclick="location.href='menu.html' ">Меню</md-button>
+                        <br class="visible-xs"> 
+                    <md-button class="md-raised btn-custom-order" onclick="location.href='reserve.html' ">Заказ столика</md-button>
+                </div>                
+
+        </div>
+    </div>
+    
+<!--------------------------------------------------------------------->
+   
+    <div class="container-fluid " data-row-decoration>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 between-block">
+                <div class="col-md-12 text-center">
+                    <h3>Блюда недели</h3>
+                </div>
+                <div class="col-md-12 row-decoration">
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-left "><hr></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 icon-knife "></div>
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-right "><hr></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!--------------------------------------------------------------------->   
+   
+    <div class="container-fluid banner-news" id="News" v-cloak>
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1  block-news">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <md-card>
+                        <md-card-header>
+                            <md-avatar class="md-large">
+                                <img src="img/img-hood.jpg"class="img-responsive" alt="Hood">
+                            </md-avatar>
+                            <md-card-header-text>
+                                <div class="md-title">Title goes here</div>
+                                <div class="md-subhead">На этой неделе <span><b>50</b></span> тургриков</div>
+                            </md-card-header-text>
+
+                        </md-card-header>
+                    </md-card>
+                    <md-card>
+                        <md-card-header>
+                            <md-avatar class="md-large">
+                                <img src="img/img-hood.jpg" alt="Hood">
+                            </md-avatar>
+                            <md-card-header-text>
+                                <div class="md-title">Title goes here</div>
+                                <div class="md-subhead">На этой неделе <span><b>50</b></span> тургриков</div>
+                            </md-card-header-text>
+                        </md-card-header>
+                    </md-card>
+                    <md-card>
+                        <md-card-header>
+                            <md-avatar class="md-large">
+                                <img src="img/img-hood.jpg" alt="Hood">
+                            </md-avatar>
+                            <md-card-header-text>
+                                <div class="md-title">Title goes here</div>
+                                <div class="md-subhead">На этой неделе <span><b>50</b></span> тургриков</div>
+                            </md-card-header-text>
+                        </md-card-header>
+                    </md-card>
+                </div>                
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <md-card>
+                        <md-card-header>
+                            <md-avatar class="md-large">
+                                <img src="img/img-hood.jpg" alt="Hood">
+                            </md-avatar>
+                            <md-card-header-text>
+                                <div class="md-title">Title goes here</div>
+                                <div class="md-subhead">На этой неделе <span><b>50</b></span> тургриков</div>
+                            </md-card-header-text>
+                        </md-card-header>
+                    </md-card>
+                    <md-card>
+                        <md-card-header>
+                            <md-avatar class="md-large">
+                                <img src="img/img-hood.jpg" alt="Hood">
+                            </md-avatar>
+                            <md-card-header-text>
+                                <div class="md-title">Title goes here</div>
+                                <div class="md-subhead">На этой неделе <span><b>50</b></span> тургриков</div>
+                            </md-card-header-text>
+                        </md-card-header>
+                    </md-card>
+                    <md-card>
+                        <md-card-header>
+                            <md-avatar class="md-large">
+                                <img src="img/img-hood.jpg" alt="Hood">
+                            </md-avatar>
+                            <md-card-header-text>
+                                <div class="md-title">Title goes here</div>
+                                <div class="md-subhead">На этой неделе <span><b>50</b></span> тургриков</div>
+                            </md-card-header-text>
+                        </md-card-header>
+                    </md-card>
+                </div>
+                
+                <div class="col-md-12 col-sm-12 col-xs-12 between-block row-decoration">
+                        <div class="col-md-5 col-sm-5 col-xs-4 hr-left "><hr></div>
+                        <div class="col-md-2 col-sm-2 col-xs-4 icon-knife "></div>
+                        <div class="col-md-5 col-sm-5 col-xs-4 hr-right "><hr></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--------------------------------------------------------------------->
+   
+    <div class="container-fluid  " data-row-decoration >
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 between-block">
+                <div class="col-md-12 text-center">
+                    <h3>Галерея</h3>
+                </div>
+                <div class="col-md-12 row-decoration">
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-left "><hr></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 icon-gallery "></div>
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-right "><hr></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!--------------------------------------------------------------------->    
+    <div class="container-fluid banner-gallery" id="Gallery">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="col-lg-4 col-md-6 col-sm-6 ">
+                    <md-whiteframe class="">
+                    <img src="img/gallery/gallery3-min.jpg" class=""  alt="" >
+                    </md-whiteframe>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 ">
+                    <md-whiteframe>
+                        <img src="img/gallery/gallery4-min.jpg" class="" alt="">
+                    </md-whiteframe>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 ">
+                    <md-whiteframe>
+                        <img src="img/gallery/gallery7-min.jpg" alt="">
+                    </md-whiteframe>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 ">
+                    <md-whiteframe>
+                       <img src="img/gallery/gallery2-min.jpg" alt="">
+                        
+                    </md-whiteframe>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 ">
+                    <md-whiteframe>
+                        <img src="img/gallery/gallery5-min.jpg" alt="">
+                    </md-whiteframe>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 ">
+                    <md-whiteframe>
+                        <img src="img/gallery/gallery6-min.jpg" alt="">
+                    </md-whiteframe>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+<!--------------------------------------------------------------------->   
+   
+    <div class="container-fluid  " data-row-decoration >
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 between-block">
+                <div class="col-md-12 text-center">
+                    <h3>О ресторане</h3>
+                </div>
+                <div class="col-md-12 row-decoration">
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-left "><hr></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 icon-info"></div>
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-right "><hr></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!---------------------------------------------------------------------> 
+             
+    <div class="container-fluid banner-about" id="About">
+        <div class="row">
+           <div class="col-md-6 col-md-offset-3">
+                <p>
+                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem alias ea error doloremque soluta laudantium sint aliquid, unde inventore sunt distinctio mollitia accusantium assumenda, aperiam vero eos repudiandae iste aut?
+                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus neque molestiae, atque distinctio fuga animi natus, dolore sed excepturi nemo. Aspernatur perspiciatis quisquam eligendi odio excepturi quia, nostrum nulla quos.
+                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore mollitia saepe maiores et alias, laudantium ea quis quam cupiditate dignissimos omnis. Maxime ratione quasi mollitia, atque iusto odit debitis modi?
+                </p>
+           </div>
+        </div>
+    </div>
+
+<!--------------------------------------------------------------------->
+   
+    <div class="container-fluid  " data-row-decoration >
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 between-block">
+                <div class="col-md-12 text-center">
+                    <h3>Контакты</h3>
+                </div>
+                <div class="col-md-12 row-decoration">
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-left "><hr></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 icon-contacts"></div>
+                        <div class="col-md-5 col-sm-5 col-xs-5 hr-right "><hr></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!---------------------------------------------------------------------> 
+    
+    <div class="container-fluid banner-contacts" id="Contacts">
+        <div class="row">
+<!--            <div class="col-md-12 col-md-offset-0 border">-->
+                <div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 list-contact">
+                    <md-list class="md-dense">
+                        <md-list-item >
+                            <md-icon>date_range</md-icon> 
+                            <p>Пн. - Чт., Вс. - c 12:00 до 24:00</p>
+
+                        </md-list-item>
+
+                        <md-list-item>
+                            <md-icon>date_range</md-icon>
+                            <p>Пт. - Сб. - c 12:00 до 02:00</p>
+                        </md-list-item>
+
+                        <md-list-item>
+                            <md-icon>phone</md-icon> 
+                            <span>+375294425301</span>
+                        </md-list-item>
+
+                        <md-list-item>
+                            <md-icon>email</md-icon> 
+                            <span>restaurant@gmail.com</span>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <div class="col-md-8 col-sm-12 col-xs-12 maps">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2412.5948181430613!2d27.538188917149654!3d52.793614042662874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46d830434c5a6eaf%3A0xe2f3c6eb375d5266!2z0YPQuy4g0JPRg9C70Y_QtdCy0LAgMiwg0KHQvtC70LjQs9C-0YDRgdC6IDIyMzcxMA!5e0!3m2!1sru!2sby!4v1488378497321" frameborder="0" style="border:1"></iframe>
+                </div>
+        </div>
+    </div>
+    
+    <!--Закрытие #app -->
+    </div>
+    
+
+    
+<!--------------------------------------------------------------------->          
+                
+                  
+  
+       <!--
+        <div>
+            <md-button class="md-raised md-accent" v-on:click.native="toggleLeftSidenav">Первое меню</md-button>
+            <md-button class="md-raised md-accent" v-on:click.native="toggleRightSidenav">Второе меню</md-button>
+            <p>Open console to see the events</p>
+        </div>
+-->
+    <md-button class="md-raised" onclick = "AddToLocal()">Записать в корзину</md-button>
+    <md-button class="md-raised" onclick = "">Получить заказы</md-button>
+    <md-button class="md-raised" onclick = "clearLocal()">Отчистить</md-button>    
+    <md-button class="md-raised" onclick = "CountOrder()">Количество</md-button>    
+    <md-button class="md-raised" id="order">Открыть</md-button>
+    
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="js/bootstrap.js"></script>-->
+    <script type="text/javascript" src="vue/vue.js"></script>
+    <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
+
+    <script type="text/javascript" src="js/index.js"></script>
+
+
+</body>
+
+</html>
