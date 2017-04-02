@@ -32,19 +32,19 @@ var App = new Vue({
     });
 
 //----------------//----//------------------//
-$(document).ready(function () {
-
-    if ($(this).scrollTop() != 0) {
-        $('.nav-custom').addClass("sticky");
-    }
-
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 50) {
-            $('.nav-custom').addClass("sticky");
-        } else {
-            $('.nav-custom').removeClass("sticky");
-        }
-    });
-
-    //close document-ready
-});
+//$(document).ready(function () {
+//
+//    if ($(this).scrollTop() != 0) {
+//        $('.nav-custom').addClass("sticky");
+//    }
+//
+//    $(window).scroll(function () {
+//        if ($(this).scrollTop() > 50) {
+//            $('.nav-custom').addClass("sticky");
+//        } else {
+//            $('.nav-custom').removeClass("sticky");
+//        }
+//    });
+//
+//    //close document-ready
+//});

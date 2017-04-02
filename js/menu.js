@@ -6,7 +6,21 @@ var MenuList = new Vue({
             queryPoint: 'http://workproject/www/php/menu-query.php',
             posts: {},
             post: {},
-            error: false
+            error: false,
+            
+            listFavorite: { 
+                
+                5: {
+                    dish: 2,
+                    checked: true,
+                },                
+                10: {
+                    dish: 5,
+                    checked: true,
+                }
+            
+            }
+            
         },
         methods: {
 
@@ -31,10 +45,56 @@ var MenuList = new Vue({
                     this.error = true;
                     console.log("Ошибка запроса: " + error.data);
                 });
+            },
+            favorite: function(params){
+                
+                
+                if ( !this.listFavorite[params] ) {
+                    
+                    this.listFavorite.push({
+                        params:{ checked: true }
+                        
+                    });
+                } else {
+                    var index = this.listFavorite.indexOf(Number(params));
+                    this.listFavorite.splice(index, 1);
+                }
+                
+                console.log(this.listFavorite);
             }
         },
         created: function () {
-            //this.getSinglePost()
-            this.getPosts()
+                //this.getSinglePost()
+                this.getPosts()
         }
     })
+
+
+Vue.component('favorite', {
+    template: '#template-favorite',
+    data: function() {
+        return { };
+    },
+    props: {
+        'name': {
+            type: String,
+            default: 'favorite'
+        },
+        'value': {
+            type: Boolean,
+            default: false
+        },
+        'disabled': {
+            type: Boolean,
+            default: false
+        }
+    },
+    methods: {
+        favorite: function() {
+            if (this.disabled==true) {
+                return;
+            }
+            this.value = !this.value;
+        }
+    }
+});

@@ -30,12 +30,14 @@ html {
 .nav-custom{
     height: 65px;
     margin: 0;
-    background: rgba(255, 255, 255, 0);
+    
+    background: rgba(255, 255, 255, 255);
     border: none;
     transition: all 0.4s ease;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
     z-index: 5;
 }
+
 .nav-link-custom li a{
     width: 100px;
     line-height: 35px;
@@ -288,6 +290,19 @@ html {
 [v-cloak] {
   display: none;
 }
+
+#loader {
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    padding-top: 50%;
+    text-align: center;
+}
+
 .vertical-align {
     display: flex;
     flex-direction: column;
@@ -322,7 +337,9 @@ html {
 .margin-100 {
     margin: 100px 0;
 }
-
+.margin-top {
+    margin-top: 65px;
+}
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;

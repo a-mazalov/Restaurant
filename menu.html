@@ -87,19 +87,11 @@
                         <md-icon>menu</md-icon>
                     </md-button>
                 </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav nav-link-custom">
-                        <li><a href="index.html#News">Новости</a></li>
-                        <li ><a href="index.html#Gallery">Галерея</a></li>
-                        <li class="logo-head" onclick="location.href='index.html#Head'"></li>
-                        <li><a href="index.html#About">О нас</a></li>
-                        <li><a href="index.html#Contacts">Контакты</a></li>
-                    </ul>
-                </div>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
-        </nav>
+    </nav>
+<!--
     <div class="container-fluid banner vertical-align text-center" id="Head">
         <div class="row">
             <div class="banner-title">
@@ -113,10 +105,11 @@
 
         </div>
     </div>
+-->
     
 <!--------------------------------------------------------------------->
    
-    <div class="container-fluid " data-row-decoration>
+    <div class="container-fluid  margin-top" data-row-decoration>
         <div class="row">
             <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 between-block">
                 <div class="col-md-12 text-center">
@@ -130,13 +123,14 @@
             </div>
         </div>
     </div>
-    
 <!--------------------------------------------------------------------->  
-   
+
     </div>
    
     <div id="MenuList">
 
+   <favorite name="favorite"></favorite>
+   
    
     <md-tabs class="menu-cards md-warn" md-centered md-fixed v-cloak>
         <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
@@ -146,42 +140,59 @@
                         <h4>Что-то пошло не так..</h4>
                     </md-card>
                 </div>
-                
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Hot_dishes">
-                
-                <md-card>
-                    <md-card-header>
-                        <md-avatar class="md-big">
-                           
-                            <img src="img/376447.jpg">
-                        </md-avatar>
-                        <md-card-header-text>
-                    <div class="md-title ">{{ post.Title_dish }}</div>
-                    <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
-<!--                            <div class="md-subhead">{{ post.id }}</div>-->
-<!--                            <div class="md-title">{{ post.title }}</div>-->
 
-                        </md-card-header-text>
-                        <div class=" price">
-                            <span>{{ post.Price_dish }}р</span>
-                        </div>
-<!--
-                        <md-card-header-text>
-                            <div class="md-subhead">{{ post.id }}</div>
-                        </md-card-header-text>
--->
-                    </md-card-header>
-<!--
-                    <md-card-actions>
-                        <md-button>Action</md-button>
-                        <md-button>Action</md-button>
-                    </md-card-actions>
--->
-              <md-ink-ripple />
-                </md-card>
-                 <div class="clearfix"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Hot_dishes">
+
+                    <md-card>
+                        <md-card-header>
+                            <md-avatar class="md-big">
+
+                                <img src="img/376447.jpg">
+                            </md-avatar>
+                            <md-card-header-text>
+                                <div class="md-title ">{{ post.Title_dish }} {{post.ID_dish}}</div>
+<!--                                <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>-->
+                                <!--                            <div class="md-subhead">{{ post.id }}</div>-->
+                                <!--                            <div class="md-title">{{ post.title }}</div>-->
+
+                            </md-card-header-text>
+                            <div class=" price">
+                                <span>{{ post.Price_dish }}р</span>
+                            </div>
+                            <!--
+                                    <md-card-header-text>
+                                        <div class="md-subhead">{{ post.id }}</div>
+                                    </md-card-header-text>
+            -->
+                        </md-card-header>
+
+                        <md-card-expand>
+
+                            <md-card-actions>
+                                <md-button-toggle class="">
+                                    <md-button class="md-icon-button" v-on:click.native="favorite(post.ID_dish)">
+<!--                                       v-bind:class="md-toggle"-->
+                                        <md-icon>star</md-icon>
+                                    </md-button>
+                                </md-button-toggle>
+
+                                <md-button>Action</md-button>
+                                <span style="flex: 1"></span>
+                                <md-button class="md-icon-button" md-expand-trigger>
+                                    <md-icon>keyboard_arrow_down</md-icon>
+                                </md-button>
+                            </md-card-actions>
+
+                            <md-card-content>
+                               
+                                <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
+                            </md-card-content>
+
+                        </md-card-expand>
+                        <!--              <md-ink-ripple />-->
+                    </md-card>
                 </div>
-                
+
             </div>
       </md-tab>
         <md-tab md-label="Десерты" md-icon="receipt">
@@ -205,9 +216,8 @@
                     <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
 <!--                            <div class="md-subhead">{{ post.id }}</div>-->
 <!--                            <div class="md-title">{{ post.title }}</div>-->
-
                         </md-card-header-text>
-                        <div class=" price">
+                        <div class="price">
                             <span>{{ post.Price_dish }}р</span>
                         </div>
 <!--
@@ -216,15 +226,13 @@
                         </md-card-header-text>
 -->
                     </md-card-header>
-<!--
                     <md-card-actions>
                         <md-button>Action</md-button>
                         <md-button>Action</md-button>
                     </md-card-actions>
--->
-              <md-ink-ripple />
+                    
+<!--              <md-ink-ripple />-->
                 </md-card>
-                 <div class="clearfix"></div>
                 </div>
                 
             </div>
@@ -289,7 +297,13 @@
     <md-button class="md-raised" onclick = "CountOrder()">Количество</md-button>    
     <md-button class="md-raised" id="order">Открыть</md-button>
 -->
-    
+    <script type="text/x-template" id="template-favorite">
+        <div class="favoriting">
+            <label class="favorite__heart" v-bind:class="{'favorite__heart__selected': value, 'is-disabled': disabled}" v-on:click="favorite">
+                <input class="favorite__checkbox" type="checkbox" v-bind:name="name" v-bind:value="value" v-bind:required="required" v-bind:disabled="disabled" v-model="value"> ❤
+            </label>
+        </div>
+    </script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="vue/vue.js"></script>
