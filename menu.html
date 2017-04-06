@@ -170,9 +170,10 @@
 
                             <md-card-actions>
                                 <md-button-toggle class="">
-                                    <md-button class="md-icon-button" v-on:click.native="favorite(post.ID_dish)">
+                                    <md-button class="md-icon-button" v-on:click.native="favorite(post)">
 <!--                                       v-bind:class="md-toggle"-->
-                                        <md-icon>star</md-icon>
+                                        <md-icon v-if="fav()">star</md-icon>
+                                        <md-icon v-else>star_border</md-icon>
                                     </md-button>
                                 </md-button-toggle>
 

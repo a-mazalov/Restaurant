@@ -1,3 +1,81 @@
+
+
+----------------------------------------------------------------------------
+//                this.listFavorite.push(post);
+//
+//                    elIndex = this.listFavorite.filter(function (item) {
+//                        if (item.ID_dish === "5")
+//                            return 1;
+//                    });
+//
+//                    if (elIndex != 1) {
+//                        this.listFavorite.push(post);
+//                        console.log(true);
+//                    } else {
+//                        delete this.listFavorite[elIndex];
+//                    }
+//                }                 
+           
+//                    this.listFavorite.push(post);
+//                var elIndex = -1;
+//                if( (elIndex = this.listFavorite.findIndex(el => el.ID_dish === "3")) > -1 ){
+//                    elIndex = -1;
+//                    console.log(elIndex);
+//                    console.log(true);
+////                console.log(this.listFavorite);
+//               console.log(post);   
+//                --------------
+//                if (this.listFavorite.length != 0) {
+//   
+//                    for (var i = 0; i < this.listFavorite.length; i++) {
+//                        
+//                        if (this.listFavorite[i].ID_dish == post.ID_dish) {                        
+////                            this.listFavorite.pop();
+////                            var index = this.listFavorite.indexOf(post);
+////                            console.log(index);
+//                            this.listFavorite.splice(i, 0);
+//                            i--;
+//                            break;
+//                        }else {
+//                        this.listFavorite.push(post);
+////                        console.log("IF_else");
+//                            break;
+//                        }
+//                    }
+//                } else {
+//                    this.listFavorite.push(post);
+////                    console.log("IF_else");
+//                }     
+//                ------------------
+
+
+
+
+this.data.map(item =>{
+                    if(item.dish == Number(params)){
+                        delete item.dish;
+                    }
+                })
+                        this.data.push({
+                            dish: Number(params),
+                            checked: true,
+                        });
+//                        item.dish = Number(params);
+                                
+                             
+                console.log(this.data);
+            }
+                
+//                if ( 1 ) {
+//                    this.listFavorite.push({
+//                        dish: Number(params),
+//                        checked: true    
+//                    });
+//                } else {
+//                    var index = this.listFavorite.indexOf(Number(params));
+//                    this.listFavorite.splice(index, 1);
+//                }
+
 $(document).ready(function () {
         
         if ( $(this).scrollTop() != 0 )  {

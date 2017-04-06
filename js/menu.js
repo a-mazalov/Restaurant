@@ -8,20 +8,9 @@ var MenuList = new Vue({
             post: {},
             error: false,
             
-            listFavorite: { 
-                
-                5: {
-                    dish: 2,
-                    checked: true,
-                },                
-                10: {
-                    dish: 5,
-                    checked: true,
-                }
+            listFavorite: []
             
-            }
-            
-        },
+        },  
         methods: {
 
             getPosts: function () {
@@ -46,28 +35,37 @@ var MenuList = new Vue({
                     console.log("Ошибка запроса: " + error.data);
                 });
             },
-            favorite: function(params){
-                
-                
-                if ( !this.listFavorite[params] ) {
-                    
-                    this.listFavorite.push({
-                        params:{ checked: true }
-                        
-                    });
+            fav: function(post){
+                var index = this.listFavorite.indexOf(post);
+                    if(index >= 0){
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+            },
+            favorite: function(post){
+                //Функция добавления/удаления в список избранного
+                if (this.listFavorite.length != 0) {
+                    var index = this.listFavorite.indexOf(post);
+                    if(index >= 0){
+                        this.listFavorite.splice(index, 1);
+                        return false;
+                    }
+                    else {
+                        this.listFavorite.push(post);
+                        return true;
+                    }
                 } else {
-                    var index = this.listFavorite.indexOf(Number(params));
-                    this.listFavorite.splice(index, 1);
+                    this.listFavorite.push(post);
+                    return true;
                 }
-                
-                console.log(this.listFavorite);
-            }
-        },
+        }},
         created: function () {
                 //this.getSinglePost()
                 this.getPosts()
         }
-    })
+    });
 
 
 Vue.component('favorite', {
