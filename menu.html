@@ -128,8 +128,9 @@
     </div>
    
     <div id="MenuList">
-
-   <favorite name="favorite"></favorite>
+    
+    <button onclick="clearLocal()">Кнопка </button>
+<!--   <favorite name="favorite"></favorite>-->
    
    
     <md-tabs class="menu-cards md-warn" md-centered md-fixed v-cloak>
@@ -156,7 +157,7 @@
                                 <!--                            <div class="md-title">{{ post.title }}</div>-->
 
                             </md-card-header-text>
-                            <div class=" price">
+                            <div class="price">
                                 <span>{{ post.Price_dish }}р</span>
                             </div>
                             <!--
@@ -169,14 +170,10 @@
                         <md-card-expand>
 
                             <md-card-actions>
-                                <md-button-toggle class="">
                                     <md-button class="md-icon-button" v-on:click.native="favorite(post)">
-<!--                                       v-bind:class="md-toggle"-->
-                                        <md-icon v-if="fav()">star</md-icon>
+                                        <md-icon v-if="checkFav(post)">star</md-icon>
                                         <md-icon v-else>star_border</md-icon>
                                     </md-button>
-                                </md-button-toggle>
-
                                 <md-button>Action</md-button>
                                 <span style="flex: 1"></span>
                                 <md-button class="md-icon-button" md-expand-trigger>

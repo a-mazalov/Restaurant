@@ -19,7 +19,7 @@ var ReserveCard = new Vue({
     methods: {
         ReserveInfo: function(){
             console.log(this.reserveObj);
-this.$http.get(this.queryPoint,  { params: this.reserveObj } ).then(function(response){
+                this.$http.get(this.queryPoint,  { params: this.reserveObj } ).then(function(response){
             
             console.log(response.data);
                 
