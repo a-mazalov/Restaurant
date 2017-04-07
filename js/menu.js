@@ -7,7 +7,6 @@ var MenuList = new Vue({
             posts: {},
             post: {},
             error: false,
-            i: 0,
             listFavorite: []
         },  
         methods: {
@@ -24,10 +23,9 @@ var MenuList = new Vue({
                     }
                 }
                 this.$http.get(this.queryPoint, options).then(function (response) {
-
+                    // Запрос на сервер, получение всех блюд
                     this.posts = JSON.parse(response.data);
-                    //alert(this.posts);
-                    console.log(this.posts);
+//                    console.log(this.posts);
 
                 }, function (error) {
                     this.error = true;
@@ -36,114 +34,62 @@ var MenuList = new Vue({
             },
             favorite: function(post){
                 //Функция добавления/удаления в список избранного
+                
+                let IsSearch; //Переменная флаг, найдено/не найдено 
                 if (this.listFavorite.length != 0) {
-                    var index = this.listFavorite.indexOf(post);
-                    if(index >= 0){
-                        this.listFavorite.splice(index, 1);
-                        AddToLocal(this.listFavorite)
+                // Цикл для поиска в массиве избранного, если не найдено помечает переменной IsSearch = true,
+                // после чего добавляет в массив
+                    for (var i = 0; i < this.listFavorite.length; i++) {
+                        if (this.listFavorite[i].ID_dish == post.ID_dish){
+                            this.listFavorite.splice(i, 1);
+                            this.AddLocalFavorite(this.listFavorite);
+                            IsSearch = false;
+                            break;
+                        }else{
+                            IsSearch = true;
+                        }
                     }
-                    else {
-                        this.listFavorite.push(post);
-                        AddToLocal(this.listFavorite);
+                    // Добавление в массив если значений небыло найдено
+                    if(IsSearch){
+                            this.listFavorite.push(post);
+                            this.AddLocalFavorite(this.listFavorite);
                     }
-                } else {
+                }else {
+                    // Если в массиве избранных нет записей, то добавить.
                     this.listFavorite.push(post);
-                    AddToLocal(this.listFavorite);
+                    this.AddLocalFavorite(this.listFavorite);
                 }
             },
-            localCard: function(){  
+            localFavorite: function(){  
                 //Если localStorage не пустой, считать данные в лист избранного
                 if (null != localStorage.getItem("Favorite") ){
                     this.listFavorite = JSON.parse(localStorage.getItem("Favorite"));
-                    console.log(JSON.parse(localStorage.getItem("Favorite")));
                 }
                 else {
                     return
                 }
             },
+            AddLocalFavorite: function(listFav){
+                // Добавляет массив избранного в localStorage
+                localStorage.setItem("Favorite", JSON.stringify(listFav));
+            },
             checkFav: function(postFav){
-                //Функция проверки записи в списке избранного, изменяет состояние иконки
-              var i;
+                // Функция проверки записи в списке избранного, изменяет состояние иконки
+              let i;
               for (i = 0; i < this.listFavorite.length; i++) {
                 if (this.listFavorite[i].ID_dish == postFav.ID_dish) {
                     return true;
                 }
               }               
-            
-//                console.log(postFav in this.listFavorite);    
-                
-//                let indexFav;
-////                try {
-//                    var i;
-//                    for (i = 0; i < this.listFavorite.length; i++) {
-//                        if (this.listFavorite[i].ID_dish == postFav.ID_dish) {
-//                            return true;
-////                            indexFav = this.listFavorite.indexOf(postFav);
-////                            break;
-//                        }else{
-//                            return false;
-//                        }
-//                    } 
-//                }
-//                catch (error){
-//                    indexFav = -1;
-//                }
-//                    if(indexFav < 0){
-//                        return false;
-//                    }
-//                    else {
-//                        return true;
-//                    }
             }
         },
         created: function () {
-                this.localCard();
-                this.getPosts()
+            this.localFavorite(); // Считывает массив избранного из localStorage
+            this.getPosts() // Получить все блюда
                 //this.getSinglePost()
         }
     });
-function AddToLocal(listFav) {
-    localStorage.setItem("Favorite", JSON.stringify(listFav));
-    console.log("Добавлено");
-}
-//function localCard(){  
-//    listFavorite = JSON.parse(localStorage.getItem("Favorite"));
-////    objCards.CountCards = Object.keys(objCards.Card).length;
-//        console.log(JSON.parse(localStorage.getItem("Favorite")));
-//        console.log(localStorage.getItem("Favorite"));
-////        return objCards;
-//
-//}
 function clearLocal(){
     localStorage.clear();
     console.log("Local storage clean");
 }
-
-//Vue.component('favorite', {
-//    template: '#template-favorite',
-//    data: function() {
-//        return { };
-//    },
-//    props: {
-//        'name': {
-//            type: String,
-//            default: 'favorite'
-//        },
-//        'value': {
-//            type: Boolean,
-//            default: false
-//        },
-//        'disabled': {
-//            type: Boolean,
-//            default: false
-//        }
-//    },
-//    methods: {
-//        favorite: function() {
-//            if (this.disabled==true) {
-//                return;
-//            }
-//            this.value = !this.value;
-//        }
-//    }
-//});

@@ -1,5 +1,28 @@
 
-
+//                console.log(postFav in this.listFavorite);    
+                
+//                let indexFav;
+////                try {
+//                    var i;
+//                    for (i = 0; i < this.listFavorite.length; i++) {
+//                        if (this.listFavorite[i].ID_dish == postFav.ID_dish) {
+//                            return true;
+////                            indexFav = this.listFavorite.indexOf(postFav);
+////                            break;
+//                        }else{
+//                            return false;
+//                        }
+//                    } 
+//                }
+//                catch (error){
+//                    indexFav = -1;
+//                }
+//                    if(indexFav < 0){
+//                        return false;
+//                    }
+//                    else {
+//                        return true;
+//                    }
 ----------------------------------------------------------------------------
 //                this.listFavorite.push(post);
 //
