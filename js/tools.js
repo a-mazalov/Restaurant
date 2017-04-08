@@ -1,5 +1,5 @@
-Vue.use(VueMaterial);
-new Vue({
-    el: "#loader"
-
-});
+//Vue.use(VueMaterial);
+//new Vue({
+//    el: "#loader"
+//
+//});

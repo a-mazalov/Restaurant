@@ -12,7 +12,7 @@ var ReserveCard = new Vue({
             numguest: 1,
             notes: ''
         },
-        queryPoint: 'http://workproject/www/php/Reserve.php',
+        queryPoint: 'http://workproject/www/php/reserve.php',
         test: 'Menu_table',
         
   },
@@ -30,29 +30,6 @@ var ReserveCard = new Vue({
         }
     }
 })
-
-
-//function Send(){
-//    
-//        $.ajax({
-//            url: "http://workproject/www/php/Reserve.php",
-//            type: "get",
-//            data: ({
-//                Test: "menu_table"
-//            }),
-//            dataType: "html",
-//            success: function (data) {
-//                //            console.log(data);
-////                alert("ok");
-//                console.log(data);
-//            }
-//        });
-//    
-//}
-
-
-
-
 $(".inp-date").flatpickr({
     enableTime: false
 });

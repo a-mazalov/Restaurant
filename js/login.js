@@ -7,6 +7,7 @@ var Account = new Vue({
             register: false,
             logim: false
         },
+        queryPointLogin: 'http://workprojectmobile/www/php/loginIn.php',
         dataLogin: {
             telephone: '',
             password: ''
@@ -19,10 +20,17 @@ var Account = new Vue({
         }
     },
     methods: {
+        loginIn: function(){
+            this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
+            
+                console.log(response.data);
+                
+            });
+        },
         log: function (){
             console.log(this.dataLogin);
             console.log(this.dataRegister);
-        }                  
+        }            
     }
 
 });

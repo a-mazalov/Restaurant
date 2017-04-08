@@ -2,8 +2,8 @@ var MenuList = new Vue({
         el: '#MenuList',
         data: {
             //            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
-            //            queryPoint : '//d0008482.atservers.net/Felix/menu-query.php',
-            queryPoint: 'http://workproject/www/php/menu-query.php',
+//            queryPoint: 'http://workprojectmobile/www/php/menu-query.php',
+            queryPoint: 'http://d0008482.atservers.net/Felix/menu-query.php',
             posts: {},
             post: {},
             error: false,
@@ -25,10 +25,11 @@ var MenuList = new Vue({
                 this.$http.get(this.queryPoint, options).then(function (response) {
                     // Запрос на сервер, получение всех блюд
                     this.posts = JSON.parse(response.data);
-//                    console.log(this.posts);
+                    console.log(this.posts);
 
                 }, function (error) {
                     this.error = true;
+                    alert(error.date);
                     console.log("Ошибка запроса: " + error.data);
                 });
             },
@@ -75,8 +76,7 @@ var MenuList = new Vue({
             },
             checkFav: function(postFav){
                 // Функция проверки записи в списке избранного, изменяет состояние иконки
-              let i;
-              for (i = 0; i < this.listFavorite.length; i++) {
+              for (let i = 0; i < this.listFavorite.length; i++) {
                 if (this.listFavorite[i].ID_dish == postFav.ID_dish) {
                     return true;
                 }
@@ -84,8 +84,8 @@ var MenuList = new Vue({
             }
         },
         created: function () {
-            this.localFavorite(); // Считывает массив избранного из localStorage
             this.getPosts() // Получить все блюда
+            this.localFavorite(); // Считывает массив избранного из localStorage
                 //this.getSinglePost()
         }
     });
