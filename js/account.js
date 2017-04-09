@@ -12,9 +12,10 @@ var Account = new Vue({
             telephone: '',
             password: ''
         },
+        queryPointRegistr: 'http://workprojectmobile/www/php/registrations.php',
         dataRegister: {
             name: '',
-            lastname: '',
+            lastName: '',
             telephone: '',
             password: ''
         }
@@ -22,6 +23,13 @@ var Account = new Vue({
     methods: {
         loginIn: function(){
             this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
+            
+                console.log(response.data);
+                
+            });
+        },        
+        registr: function(){
+            this.$http.get(this.queryPointRegistr,  { params: this.dataRegister } ).then(function(response){
             
                 console.log(response.data);
                 
