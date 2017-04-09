@@ -7,17 +7,21 @@
 //    echo "PHP";
 //    $test = password_hash($loginIn["password"],PASSWORD_DEFAULT);
     
-
-
-
-    $query = "SELECT * FROM `Accounts_table` WHERE `Telephone` LIKE '{$loginIn["telephone"]}'' OR '_{$loginIn["telephone"]}' OR '______{$loginIn["telephone"]}' LIMIT 1";
-
-    $result = $DB->query($query); 
-//    echo $result["num_rows"];
-    foreach ($result as $row){
-        $data[] = $row;
-    }
-    echo json_encode($data);
+//    $sql = ';
+    $telephone = $loginIn["telephone"];
+    $query = $pdo->prepare("SELECT * FROM `Accounts_table` WHERE `Telephone` LIKE :telefone");
+    $query->execute(array('telefone' => $loginIn["telephone"]));
+    $account = $query->fetchAll();
+    
+    echo json_encode($account);
+//    $query = "SELECT * FROM `Accounts_table` WHERE `Telephone` LIKE '{$loginIn["telephone"]}'' OR '_{$loginIn["telephone"]}' OR '______{$loginIn["telephone"]}' LIMIT 1";
+//
+//    $result = $DB->query($query); 
+////    echo $result["num_rows"];
+//    foreach ($query as $row){
+//        $data[] = $row;
+//    }
+//    echo json_encode($data);
 
 
 //    if(password_verify())

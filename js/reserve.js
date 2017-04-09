@@ -12,7 +12,7 @@ var ReserveCard = new Vue({
             numguest: 1,
             notes: ''
         },
-        queryPoint: 'http://workproject/www/php/reserve.php',
+        queryPoint: 'http://workprojectmobile/www/php/reserve.php',
         test: 'Menu_table',
         
   },
