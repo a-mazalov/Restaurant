@@ -1,26 +1,38 @@
 //----------------//----//------------------//
 
 Vue.use(VueMaterial);
-
+//(function () {
+//    /** анонимная ф-ция с вашим js-java connector */
+//    var localVar = window.storage.dataAccount;
+//    alert(localVar);
+//})();
 //----------------SlideNav------------------//
 var App = new Vue({
     el: '#header',
+    data: {
+        dataAccount: {},
+        snackMessage: ""
+    },
     methods: {
         toggleLeftSidenav() {
-                this.$refs.leftSidenav.toggle();
-            },
-            toggleRightSidenav() {
-                this.$refs.rightSidenav.toggle();
-            },
-            closeRightSidenav() {
-                this.$refs.rightSidenav.close();
-            },
-            open(ref) {
-                console.log('Opened: ' + ref);
-            },
-            close(ref) {
-                console.log('Closed: ' + ref);
-            }
+            this.$refs.leftSidenav.toggle();
+        },
+        toggleRightSidenav() {
+            this.$refs.rightSidenav.toggle();
+        },
+        closeRightSidenav() {
+            this.$refs.rightSidenav.close();
+        },
+        open(ref) {
+            console.log('Opened: ' + ref);
+        },
+        close(ref) {
+            console.log('Closed: ' + ref);
+        }
+        
+    },
+    created: function () {
+        this.dataAccount = JSON.parse(localStorage.getItem("Account"));
     }
 });
 

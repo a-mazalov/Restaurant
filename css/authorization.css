@@ -22,7 +22,7 @@
 }
 .brick-wall {
     background: url(../img/brickwall.png) ;
-    overflow: hidden;
+/*    overflow: hidden;*/
 }
 .btn-custom-login {
 /*    margin-left: -50px;*/

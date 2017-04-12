@@ -18,27 +18,44 @@ var Account = new Vue({
             lastName: '',
             telephone: '',
             password: ''
-        }
+        },    
+        dataAccount: {},
+        snackMessage: ""
     },
     methods: {
         loginIn: function(){
             this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
             
-                console.log(response.data);
+            if(response.data != " " ){
+                this.dataAccount = JSON.parse(response.data);
+                this.showSnackBar("Вход успешен");
+                window.localStorage.setItem("Account", JSON.stringify(this.dataAccount));
+                window.location = "index.html";
+            }else{
+                this.showSnackBar("Неверный телефон или пароль!");
+            }    
                 
+//                console.log(response.data);
+//                console.log(this.dataAccount);
+//                console.log(this.dataAccount.Telephone);
+                
+            }, function (error) {
+                console.log("Ошибка запроса: ");
             });
         },        
         registr: function(){
             this.$http.get(this.queryPointRegistr,  { params: this.dataRegister } ).then(function(response){
             
-                console.log(response.data);
-                
             });
         },
         log: function (){
             console.log(this.dataLogin);
             console.log(this.dataRegister);
-        }            
+        },
+        showSnackBar(Message) {
+          this.snackMessage = Message;    
+          this.$refs.snackbar.open();
+        }
     }
 
 });

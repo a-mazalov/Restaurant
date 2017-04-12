@@ -1,4 +1,5 @@
 <?php
+
     require('connectDB.php');
     require('tools.php');
     header('Access-Control-Allow-Origin: *');
@@ -17,15 +18,4 @@
         echo 'false';
     }    
 
-    
-//SELECT * FROM `Reserve_table`
-//    $query = "SELECT * FROM `{$test}` ";
-////
-////    echo $query;
-//    
-//
-//    $data = array();
-//    
-//    echo json_encode($data);
-
-    ?> 
+?> 

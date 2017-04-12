@@ -21,7 +21,8 @@
         //Пароли совпадают, возврат данных о аккаунте.
         echo json_encode( $infoOutput );
     }else{
-        echo "pass non-check";
+        $out = 0;
+        echo $infoOutput;
     }
 
     ?> 
