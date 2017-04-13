@@ -63,11 +63,11 @@ var MenuList = new Vue({
             },
             localFavorite: function(){  
                 //Если localStorage не пустой, считать данные в лист избранного
-                if (null != localStorage.getItem("Favorite") ){
+                if ('null' != localStorage.Favorite ){
                     this.listFavorite = JSON.parse(localStorage.getItem("Favorite"));
                 }
                 else {
-                    return
+                    this.listFavorite = [];
                 }
             },
             AddLocalFavorite: function(listFav){

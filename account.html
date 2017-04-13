@@ -65,20 +65,36 @@
                                 <p class="md-primary account-info text-center" v-show="true">Создайте свое меню из списка избранного!</p>
 
                             </md-card-content>
+                            
                         </md-card>          
 <!--------------------------------------------------------------------------------------------------->                                                 
 <md-card>
-        <md-card-header>
-            <div class="md-title-18 text-center">Избранное
-                <br>
-                <md-icon>restaurant_menu</md-icon>
-            </div>
-            <br>
-        </md-card-header>
-        <div class="md-divider"></div>
-        <transition-group name="list" tag="p">
+<md-card-header class="padding-bottom-0">
+    <div class="md-title-18 text-center">Избранное
+        <br>
+        <md-icon>restaurant_menu</md-icon>
+    </div>
+    <div class="vertical-align-right" v-if="accListFavorite.length">
+        <md-button class="md-icon-button" v-on:click.native="deleteFav()">
+            <md-icon class="md-primary">clear</md-icon>
+        </md-button> 
+    </div>
+        <div v-else class="md-subhead text-trans-none text-center"><br>Вы еще не добавили любимые блюда!<br><br></div>
+</md-card-header>
+    <div class="md-divider" v-show="accListFavorite.length"></div>  
+
+<!--<md-card-header class="vertical-align-right">-->
+
+<!--</md-card-header>-->
+
+
+
+
+<transition-group name="list" tag="p">
+   
     <div v-for="(item,index) in accListFavorite" v-bind:key="item">
-        <md-card-header  class="list-item">
+       
+        <md-card-header class="list-item">
             <md-avatar class="md-big">
                 <img src="img/376447.jpg" class="md-title-18">
             </md-avatar>
@@ -87,26 +103,26 @@
                 <div class="md-title-18">{{item.Title_dish}}{{index}}</div>
             </md-card-header-text>
             <div class="price">
-<!--                <span>12р</span>-->
+                <!--                <span>12р</span>-->
             </div>
             <md-menu md-direction="bottom left" md-size="4">
-  <md-button class="md-icon-button" md-menu-trigger>
-    <md-icon>create_new_folder</md-icon>
-  </md-button>
+                <md-button class="md-icon-button" md-menu-trigger>
+                    <md-icon>create_new_folder</md-icon>
+                </md-button>
 
-  <md-menu-content>
-    <md-menu-item >
-      <span>List_1</span>
-      <md-icon>folder</md-icon>
-    </md-menu-item>
+                <md-menu-content>
+                    <md-menu-item>
+                        <span>List_1</span>
+                        <md-icon>folder</md-icon>
+                    </md-menu-item>
 
-    <md-menu-item>
-      <span>List_2</span>
-      <md-icon>folder</md-icon>
-    </md-menu-item>
-  </md-menu-content>
-</md-menu>
-<!--
+                    <md-menu-item>
+                        <span>List_2</span>
+                        <md-icon>folder</md-icon>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <!--
             <md-button class="md-icon-button md-list-action">
                 <md-icon class="md-primary">control_point</md-icon>
             </md-button>
@@ -114,7 +130,7 @@
             <md-button class="md-icon-button md-list-action" v-on:click.native="removeFav(item)">
                 <md-icon class="md-primary">clear</md-icon>
             </md-button>
-            
+
         </md-card-header>
         <div class="md-divider"></div>
     </div>
@@ -140,7 +156,7 @@
         </div>
           <md-snackbar ref="snackbar">
             <span>{{snackMessage}}</span>
-            <md-button class="md-accent" md-theme="light-blue" v-on:click.native="returnRemoveFav()">Закрыть</md-button>
+            <md-button class="md-accent" md-theme="light-blue" v-on:click.native="returnRemoveFav()">Вернуть</md-button>
           </md-snackbar>
     </div>
 

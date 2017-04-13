@@ -8,12 +8,12 @@ var Account = new Vue({
         snackMessage: ""
     },
     methods: {        
-        showSnackBar(Message) {
+        showSnackBar(Message,btn) {
           this.snackMessage = Message;    
           this.$refs.snackbar.open();
         },
         accFavorite(){
-            if (null != localStorage.getItem("Favorite") ){
+            if (null != window.localStorage.getItem("Favorite") ){
                 this.accListFavorite = JSON.parse(localStorage.getItem("Favorite"));
             }
             else {
@@ -22,16 +22,24 @@ var Account = new Vue({
         },   
         removeFav: function (item) {
         this.indexLastItem = this.accListFavorite.indexOf(item);
-                console.log(this.indexLastItem);
-                this.removedItem = item;
-                this.accListFavorite.splice(this.indexLastItem, 1);
-                localStorage.setItem("Favorite", JSON.stringify(this.accListFavorite));
-                this.showSnackBar("Запись удалена");
+//            console.log(this.indexLastItem);
+            this.removedItem = item; //Копия удаляемого элемента 
+            
+            this.accListFavorite.splice(this.indexLastItem, 1); //Удаление элемента
+            
+            window.localStorage.setItem("Favorite", JSON.stringify(this.accListFavorite)); //Перезапись списка избранного
+            
+            this.showSnackBar("Запись удалена"); //Оповещение
         },
-        returnRemoveFav: function(){
+        returnRemoveFav: function(){ //Возвращает последний удаленный элемент
+            
             this.accListFavorite.splice(this.indexLastItem,-1,this.removedItem);
-            localStorage.setItem("Favorite", JSON.stringify(this.accListFavorite));
+            window.localStorage.setItem("Favorite", JSON.stringify(this.accListFavorite));
             this.$refs.snackbar.close();
+        },
+        deleteFav: function(){
+            this.accListFavorite = [];
+            window.localStorage.setItem("Favorite", null);
         }
     },
     created: function(){

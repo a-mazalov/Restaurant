@@ -308,7 +308,15 @@ html {
 /*    align-items: center;*/
     justify-content: center;
 }
-
+.vertical-align-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+/*    justify-content: flex-end;*/
+}
+.padding-bottom-0{
+    padding-bottom: 0 !important;
+}
 .shadow {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
