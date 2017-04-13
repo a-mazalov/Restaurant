@@ -7,6 +7,7 @@
     box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);
 }
 .Account .md-card{
+    overflow: hidden;
     margin-bottom: 10px;
 }
 .Account .md-card:first-child{
@@ -20,4 +21,21 @@
     font-size: 18px !important;
     letter-spacing: 0;
     line-height: 16px;
+    text-transform: lowercase;
+}
+.Account .md-title-18:first-letter{
+    text-transform: uppercase;
+}
+.list-item {
+/*
+  display: inline-block;
+  margin-right: 10px;
+*/
+}
+.list-enter-active, .list-leave-active {
+  transition: all 0.3s;
+}
+.list-enter, .list-leave-to /* .list-leave-active для <2.1.8 */ {
+  opacity: 0;
+  transform: translateX(30px);
 }
