@@ -2,8 +2,8 @@ var MenuList = new Vue({
         el: '#MenuList',
         data: {
             //            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
-            queryPoint: 'http://workprojectmobile/www/php/menu-query.php',
-//            queryPoint: 'http://d0008482.atservers.net/Felix/menu-query.php',
+//            queryPoint: 'http://workprojectmobile/www/php/menu-query.php',
+            queryPoint: 'http://d0008482.atservers.net/Felix/menu-query.php',
             posts: {},
             post: {},
             error: false,
@@ -63,8 +63,9 @@ var MenuList = new Vue({
             },
             localFavorite: function(){  
                 //Если localStorage не пустой, считать данные в лист избранного
-                if ('null' != localStorage.Favorite ){
+                if (('null' != localStorage.Favorite) && (undefined != localStorage.Favorite) ){
                     this.listFavorite = JSON.parse(localStorage.getItem("Favorite"));
+                    
                 }
                 else {
                     this.listFavorite = [];

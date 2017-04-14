@@ -13,8 +13,8 @@ var Account = new Vue({
           this.$refs.snackbar.open();
         },
         accFavorite(){
-            if (null != window.localStorage.getItem("Favorite") ){
-                this.accListFavorite = JSON.parse(localStorage.getItem("Favorite"));
+            if (Local.Check("Favorite")){
+                this.accListFavorite = Local.Get("Favorite");
             }
             else {
                 return
@@ -27,22 +27,33 @@ var Account = new Vue({
             
             this.accListFavorite.splice(this.indexLastItem, 1); //Удаление элемента
             
-            window.localStorage.setItem("Favorite", JSON.stringify(this.accListFavorite)); //Перезапись списка избранного
+            //Перезапись списка избранного
+            Local.Set("Favorite",this.accListFavorite);
+            
+//            window.localStorage.setItem("Favorite", JSON.stringify(this.accListFavorite)); 
             
             this.showSnackBar("Запись удалена"); //Оповещение
         },
         returnRemoveFav: function(){ //Возвращает последний удаленный элемент
             
             this.accListFavorite.splice(this.indexLastItem,-1,this.removedItem);
-            window.localStorage.setItem("Favorite", JSON.stringify(this.accListFavorite));
+            Local.Set("Favorite",this.accListFavorite);
+//            window.localStorage.setItem("Favorite", JSON.stringify(this.accListFavorite));
             this.$refs.snackbar.close();
         },
         deleteFav: function(){
             this.accListFavorite = [];
-            window.localStorage.setItem("Favorite", null);
+            Local.Set("Favorite", null);
+//            window.localStorage.setItem("Favorite", null);
+        },
+        LoginOut: function(){
+            Local.Set("Account", null);    
+//            window.localStorage.setItem("Account", null);
+            window.location = "authorization.html";
         }
     },
     created: function(){
+//        let Local = new LocalStore();
         this.accFavorite();
     }
 

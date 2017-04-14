@@ -29,7 +29,12 @@ var Account = new Vue({
             if(response.data != " " ){
                 this.dataAccount = JSON.parse(response.data);
                 this.showSnackBar("Вход успешен");
-                window.localStorage.setItem("Account", JSON.stringify(this.dataAccount));
+                
+//                let Local = new LocalStore();
+                
+                Local.Set("Account",this.dataAccount);
+                
+//                window.localStorage.setItem("Account", JSON.stringify(this.dataAccount));
                 window.location = "index.html";
             }else{
                 this.showSnackBar("Неверный телефон или пароль!");

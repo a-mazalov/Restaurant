@@ -29,10 +29,12 @@ var App = new Vue({
         close(ref) {
             console.log('Closed: ' + ref);
         }
-        
     },
     created: function () {
-        this.dataAccount = JSON.parse(localStorage.getItem("Account"));
+//        let Local = new LocalStore();
+//        if ( Local.Check("Account") ){
+//           this.dataAccount = Local.Get("Account");
+//        }
     }
 });
 
