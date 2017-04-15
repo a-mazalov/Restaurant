@@ -13,11 +13,11 @@ var Account = new Vue({
           this.$refs.snackbar.open();
         },
         accFavorite(){
-            if (Local.Check("Favorite")){
+            if (window.localStorage.Favorite){
                 this.accListFavorite = Local.Get("Favorite");
             }
             else {
-                return
+                return 
             }
         },   
         removeFav: function (item) {
@@ -43,13 +43,14 @@ var Account = new Vue({
         },
         deleteFav: function(){
             this.accListFavorite = [];
-            Local.Set("Favorite", null);
+            Local.Remove("Favorite");
 //            window.localStorage.setItem("Favorite", null);
         },
         LoginOut: function(){
-            Local.Set("Account", null);    
+            Local.Remove("Account");    
 //            window.localStorage.setItem("Account", null);
-            window.location = "authorization.html";
+//            window.location = "authorization.html";
+            window.location = "index.html";
         }
     },
     created: function(){

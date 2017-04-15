@@ -340,7 +340,7 @@ html {
     text-transform: none !important; 
 }
 .text-trans-none.md-button{
-    letter-spacing: 1.2px !important;
+    letter-spacing: 0.5px !important;
     text-transform: none !important;    
 }
 

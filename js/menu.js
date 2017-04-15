@@ -1,9 +1,11 @@
+
 var MenuList = new Vue({
         el: '#MenuList',
         data: {
             //            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
-//            queryPoint: 'http://workprojectmobile/www/php/menu-query.php',
-            queryPoint: 'http://d0008482.atservers.net/Felix/menu-query.php',
+            queryPoint: 'http://workprojectmobile/www/php/menu-query.php',
+//            queryPoint: '/php/menu-query.php',
+//            queryPoint: 'http://d0008482.atservers.net/Felix/menu-query.php',
             posts: {},
             post: {},
             error: false,
@@ -29,9 +31,11 @@ var MenuList = new Vue({
 
                 }, function (error) {
                     this.error = true;
-                    alert(error.date);
+//                    alert(error.date);
                     console.log("Ошибка запроса: " + error.data);
                 });
+                
+                
             },
             favorite: function(post){
                 //Функция добавления/удаления в список избранного
@@ -82,12 +86,20 @@ var MenuList = new Vue({
                     return true;
                 }
               }               
+            },
+            AddOrder: function(item){
+                Order.Add(item);
+//                alert(Order.ListOrders.length);
+            },
+            Test: function(){
+                Order.Clear();
             }
         },
         created: function () {
             this.getPosts() // Получить все блюда
             this.localFavorite(); // Считывает массив избранного из localStorage
                 //this.getSinglePost()
+            
         }
     });
 function clearLocal(){

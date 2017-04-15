@@ -144,7 +144,7 @@
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
 <!--                   FORM                  -->
-                    <form novalidate @submit.stop.prevent="submit">
+<!--                    <form novalidate @submit.stop.prevent="submit">-->
                     
                     <md-card class="reserve-card">
                         <md-card-area md-inset>
@@ -227,7 +227,31 @@
                             <md-button class="md-raised md-primary" v-on:click.native="ReserveInfo">Забронировать</md-button>
                         </md-card-actions>
                     </md-card>
-                    </form>
+<md-card>
+    <md-card-header>
+        <div class="md-title-18 text-center">Прикрепить меню к заказу
+            <br>
+            <md-icon>restaurant_menu</md-icon>
+        </div>
+    </md-card-header>
+    <md-card-content class="text-center">
+        <!--            <p class="md-primary account-info text-center" >Создайте свое меню из списка избранного!</p>-->
+
+<!--<md-card-expand>-->
+    <md-card-actions>
+        <md-checkbox id="my-test2" name="my-test2" v-model="checkbox" class="md-primary" v-on:click.native="showBlock = (showBlock != true) ? true : false">Приготовить блюда за ранее</md-checkbox>
+    </md-card-actions>
+
+    <md-card-content v-show="showBlock">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
+    </md-card-content>
+<!--</md-card-expand>-->
+        <div class="md-divider"></div>
+        <br>
+        <md-button class="md-raised md-primary text-trans-none">Перейти к заказу столика</md-button>
+    </md-card-content>
+</md-card>
+<!--                    </form>-->
                 </div>
             </div>
         </div>

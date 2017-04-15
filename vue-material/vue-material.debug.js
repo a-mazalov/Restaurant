@@ -3664,7 +3664,7 @@ function install(Vue) {
         currentTheme: null,
           
 //        Изменено "true" 
-        inkRipple: false
+        inkRipple: true
       };
     },
     methods: {

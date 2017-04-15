@@ -13,7 +13,9 @@ var ReserveCard = new Vue({
             notes: ''
         },
         queryPoint: 'http://workprojectmobile/www/php/reserve.php',
+//        queryPoint: 'http://d0008482.atservers.net/Felix/reserve.php',
         test: 'Menu_table',
+        showBlock: false
         
   },
     methods: {
@@ -24,6 +26,9 @@ var ReserveCard = new Vue({
             console.log(response.data);
                 
             });
+        },
+        expandBlock: function(){
+//            this.$refs.dishes.$children[0].toggleExpandList();
         },
         submit: function(){
         

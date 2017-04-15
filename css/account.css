@@ -39,3 +39,14 @@
   opacity: 0;
   transform: translateX(30px);
 }
+.md-card-header .md-icon{
+    margin-top: 10px;
+}
+.totals{
+    position: absolute;
+    right: 0;
+/*    float: right;*/
+/*    padding-left: -45px;*/
+    padding-right: 45px;
+    font-size: 16px;
+}

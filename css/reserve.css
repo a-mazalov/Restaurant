@@ -3,6 +3,13 @@
    background: url(../img/icon/icon-reserve.png) no-repeat 50% 50%;
 
 }
+#Reserve .md-card{
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.md-card-header .md-icon{
+    margin-top: 10px;
+}
 .banner-reserve {
 /*    margin: -5px 0;*/
     padding: 100px 0;

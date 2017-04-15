@@ -7,12 +7,14 @@ var Account = new Vue({
             register: false,
             logim: false
         },
-        queryPointLogin: 'http://workprojectmobile/www/php/loginIn.php',
+        queryPointLogin: 'php/loginIn.php',
+//        queryPointLogin: 'http://d0008482.atservers.net/Felix/loginIn.php',
         dataLogin: {
             telephone: '',
             password: ''
         },
         queryPointRegistr: 'http://workprojectmobile/www/php/registrations.php',
+//        queryPointRegistr: 'http://d0008482.atservers.net/Felix/registrations.php',
         dataRegister: {
             name: '',
             lastName: '',
@@ -26,8 +28,10 @@ var Account = new Vue({
         loginIn: function(){
             this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
             
+            console.log(response.data);
             if(response.data != " " ){
                 this.dataAccount = JSON.parse(response.data);
+                alert("asd");
                 this.showSnackBar("Вход успешен");
                 
 //                let Local = new LocalStore();
@@ -40,11 +44,8 @@ var Account = new Vue({
                 this.showSnackBar("Неверный телефон или пароль!");
             }    
                 
-//                console.log(response.data);
-//                console.log(this.dataAccount);
-//                console.log(this.dataAccount.Telephone);
-                
             }, function (error) {
+                this.showSnackBar("Нет соединения");
                 console.log("Ошибка запроса: ");
             });
         },        

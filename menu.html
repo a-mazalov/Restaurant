@@ -54,7 +54,11 @@
             <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" onclick="location.href='index.html#Head'">
                 <md-icon>access_time</md-icon> 
                 <span>Заказ</span>
-            </md-list-item>                
+            </md-list-item> 
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" onclick="location.href='orders.html'">
+                <md-icon>access_time</md-icon> 
+                <span>Корзина</span>
+            </md-list-item>               
             <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" 
                onclick="location.href='index.html#News'">
                 <md-icon>new_releases</md-icon> 
@@ -189,9 +193,10 @@
                                         <md-icon v-if="checkFav(post)">favorite</md-icon>
                                         <md-icon v-else>favorite_border</md-icon>
                                     </md-button>
-                                <md-button class="md-icon-button">
+                                <md-button class="md-icon-button" v-on:click.native="AddOrder(post)">
                                     <md-icon>shopping_basket</md-icon>
                                 </md-button>
+                                <button v-on:click="Test()">test</button>
                                 <span style="flex: 1"></span>
                                 <md-button class="md-icon-button" md-expand-trigger>
                                     <md-icon>keyboard_arrow_down</md-icon>
@@ -273,7 +278,7 @@
                     <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
 <!--                            <div class="md-subhead">{{ post.id }}</div>-->
 <!--                            <div class="md-title">{{ post.title }}</div>-->
-
+                        
                         </md-card-header-text>
                         <div class=" price">
                             <span>{{ post.Price_dish }}р</span>
@@ -312,21 +317,15 @@
     <md-button class="md-raised" onclick = "CountOrder()">Количество</md-button>    
     <md-button class="md-raised" id="order">Открыть</md-button>
 -->
-    <script type="text/x-template" id="template-favorite">
-        <div class="favoriting">
-            <label class="favorite__heart" v-bind:class="{'favorite__heart__selected': value, 'is-disabled': disabled}" v-on:click="favorite">
-                <input class="favorite__checkbox" type="checkbox" v-bind:name="name" v-bind:value="value" v-bind:required="required" v-bind:disabled="disabled" v-model="value"> ❤
-            </label>
-        </div>
-    </script>
+
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="vue/vue.js"></script>
     <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
     <script type="text/javascript" src="vue/vue-resource.js"></script>
+    <script type="text/javascript" src="js/tools.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
-    <script type="text/javascript" src="js/tools.js"></script>
 
     
 </body>
