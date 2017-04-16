@@ -98,7 +98,8 @@ var MenuList = new Vue({
         created: function () {
             this.getPosts() // Получить все блюда
             this.localFavorite(); // Считывает массив избранного из localStorage
-                //this.getSinglePost()
+            //this.getSinglePost()  
+//            var Order = new Orders();
             
         }
     });

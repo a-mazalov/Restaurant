@@ -14,12 +14,14 @@ var OrdersList = new Vue({
           this.$refs.snackbar.open();
         },
         LocalOrders(){
-            if (window.localStorage.Orders){
-                this.ListOrders = Local.Get("Orders");
-            }
-            else {
-                return 
-            }
+            this.ListOrders = Order.ListOrders;
+//            if (window.localStorage.Orders){
+//                
+////                this.ListOrders = Local.Get("Orders");
+//            }
+//            else {
+//                return 
+//            }
         }, 
         totalPrice: function(){
             this.totalprice = 0;

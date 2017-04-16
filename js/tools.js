@@ -14,8 +14,13 @@ class LocalStore{
         this.storage.setItem(section, JSON.stringify(data));
     } 
     Get(section){
-        let data = this.storage.getItem(section);
-        return JSON.parse(data);
+        
+        if(this.Check(section)){
+            let data = this.storage.getItem(section);
+            return JSON.parse(data);
+        }else{
+            return [];   
+        }
     }  
     Remove(section){
         this.storage.removeItem(section);
@@ -24,7 +29,7 @@ class LocalStore{
         this.storage.clear();
     }
     Check(section){
-        if ( (null != this.storage.section) || (undefined != this.storage.section) ){
+        if ( (undefined == this.storage[section]) ){
             return false;
         }
         else{
@@ -36,7 +41,7 @@ var Local = new LocalStore();
 
 class Orders {
     constructor(){
-        this.ListOrders = [];
+        this.ListOrders = Local.Get('Orders');
     }
     Add(item){
         this.ListOrders.push(item); 
@@ -54,7 +59,7 @@ class Orders {
     }
     
 }
-var Order = new Orders();
+const Order = new Orders();
 //Order.orders.length;
 
 
