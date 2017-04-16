@@ -150,7 +150,7 @@
 -->
 <!--   <favorite name="favorite"></favorite>-->
    
-   
+   <button v-on:click="Test()">asd</button>
     <md-tabs class="menu-cards md-warn" md-centered md-fixed v-cloak>
         <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
             <div class="row">
@@ -169,7 +169,7 @@
                                 <img src="img/376447.jpg">
                             </md-avatar>
                             <md-card-header-text>
-                                <div class="md-title ">{{ post.Title_dish }}</div>
+                                <div class="md-title">{{ post.Title_dish }}</div>
 <!--                                {{post.ID_dish}}-->
 <!--                                <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>-->
                                 <!--                            <div class="md-subhead">{{ post.id }}</div>-->
@@ -196,9 +196,9 @@
                                 <md-button class="md-icon-button" v-on:click.native="AddOrder(post)">
                                     <md-icon>shopping_basket</md-icon>
                                 </md-button>
-                                <button v-on:click="Test()">test</button>
                                 <span style="flex: 1"></span>
                                 <md-button class="md-icon-button" md-expand-trigger>
+                                   
                                     <md-icon>keyboard_arrow_down</md-icon>
                                 </md-button>
                             </md-card-actions>

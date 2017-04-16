@@ -4,8 +4,6 @@
 //
 //});
 
-
-
 class LocalStore{
     constructor(){
       this.storage = window.localStorage;
@@ -62,6 +60,22 @@ class Orders {
 const Order = new Orders();
 //Order.orders.length;
 
+function Sync() {
+    let queryPoint = 'http://workprojectmobile/www/php/Sync.php';
+    let dataSync = Local.Get("Favorite");
+    Vue.http.get(queryPoint, {params: dataSync}).then(function (response) {
+        console.log(response.data);
+//        if (response.data != " ") {
+//            
+//        } else {
+////            this.showSnackBar("Неверный телефон или пароль!");
+//        }
+    }, function (error) {
+//        this.showSnackBar("Нет соединения");
+        console.log("Ошибка запроса: ");
+    });
+
+}
 
 
 class Snack{

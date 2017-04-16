@@ -15,13 +15,6 @@ var OrdersList = new Vue({
         },
         LocalOrders(){
             this.ListOrders = Order.ListOrders;
-//            if (window.localStorage.Orders){
-//                
-////                this.ListOrders = Local.Get("Orders");
-//            }
-//            else {
-//                return 
-//            }
         }, 
         totalPrice: function(){
             this.totalprice = 0;
@@ -30,7 +23,6 @@ var OrdersList = new Vue({
                 console.log(this.ListOrders[i].Price_dish);
                 price += parseInt(this.ListOrders[i].Price_dish * 100)/100;
             }
-            
             this.totalprice = price.toFixed(2);
         },
         removeOrd: function (item) {
@@ -49,7 +41,6 @@ var OrdersList = new Vue({
             this.$refs.snackbar.close();
             this.totalPrice();
         },
-        
         deleteOrd: function(){
             this.ListOrders = [];
             Local.Remove("Orders");
@@ -60,5 +51,4 @@ var OrdersList = new Vue({
         this.LocalOrders();
         this.totalPrice();
     }
-
 });
