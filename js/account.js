@@ -46,11 +46,20 @@ var Account = new Vue({
             Local.Remove("Favorite");
 //            window.localStorage.setItem("Favorite", null);
         },
+        SyncFavRead: function(){
+            Sync("Favorite"); 
+            let dataDBs = queryCallback(result); 
+//            console.log("asdasd");
+            console.log(dataDBs);
+//            console.log(dataDB);
+//            this.accListFavorite = dataDB;
+             
+        },
         LoginOut: function(){
             Local.Remove("Account");    
 //            window.localStorage.setItem("Account", null);
 //            window.location = "authorization.html";
-            window.location = "index.html";
+            window.location = "authorization.html";
         }
     },
     created: function(){

@@ -84,7 +84,7 @@ methods: {
         Order.Add(item);
     },
     Test: function(){
-        Sync();
+        Sync("Favorite");
     }
 },
 created: function () {

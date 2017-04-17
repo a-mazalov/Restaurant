@@ -17,7 +17,7 @@
 
     if( password_verify($DataInput["password"],$account[0]["Password"]) ){
 
-        $infoOutput = array_splice($infoOutput,0,4);
+        $infoOutput = array_splice($infoOutput,0,5);
         //Пароли совпадают, возврат данных о аккаунте.
         echo json_encode( $infoOutput );
     }else{

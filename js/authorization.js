@@ -29,8 +29,8 @@ var Account = new Vue({
             this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
             if(response.data != " " ){
                 this.dataAccount = JSON.parse(response.data);
-                this.showSnackBar("Вход успешен");
                 Local.Set("Account",this.dataAccount);
+                this.showSnackBar("Вход успешен");
                 window.location = "index.html";
             }else{
                 this.showSnackBar("Неверный телефон или пароль!");

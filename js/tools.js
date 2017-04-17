@@ -60,23 +60,44 @@ class Orders {
 const Order = new Orders();
 //Order.orders.length;
 
-function Sync() {
+function Sync(section) {
     let queryPoint = 'http://workprojectmobile/www/php/Sync.php';
-    let dataSync = Local.Get("Favorite");
-    Vue.http.get(queryPoint, {params: dataSync}).then(function (response) {
-        console.log(response.data);
-//        if (response.data != " ") {
-//            
-//        } else {
-////            this.showSnackBar("Неверный телефон или пароль!");
-//        }
+    
+    let id_Account = Local.Get("Account");
+    let dataSync = Local.Get(section);
+    
+    let listDish = [];
+    for(let i=0; i<dataSync.length; i++){
+        listDish[i] = dataSync[i].ID_dish;
+    }
+
+    let SectionData = [{"Section":section},{"id_Account":id_Account.ID_user}, listDish];
+//    Vue.dataDB;
+//    console.log(SectionData);
+    console.log(id_Account.ID_user);
+
+    
+    Vue.http.get(queryPoint, {params: SectionData }).then(function (response) {
+//        console.log(response.data);
+
+       queryCallback(JSON.parse(response.data));
+//        console.log(this.dataBD);
+//        Local.Set("Favorite",JSON.parse(response.data));
     }, function (error) {
 //        this.showSnackBar("Нет соединения");
         console.log("Ошибка запроса: ");
+        
+    }).finally(function () {
+//        DBu = this.dataDB;
     });
 
 }
 
+
+function queryCallback(result){
+    var dataDB = result;
+    return dataDB;
+}
 
 class Snack{
     constructor(){
