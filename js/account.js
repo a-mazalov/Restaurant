@@ -47,13 +47,17 @@ var Account = new Vue({
 //            window.localStorage.setItem("Favorite", null);
         },
         SyncFavRead: function(){
-            Sync("Favorite"); 
-            let dataDBs = queryCallback(result); 
+            Sync("Favorite","Read"); 
+//            let dataDBs = queryCallback(fgdfg); 
 //            console.log("asdasd");
-            console.log(dataDBs);
+//            console.log(dataDBs);
 //            console.log(dataDB);
 //            this.accListFavorite = dataDB;
              
+        },        
+        SyncFavWrite: function(){
+            Sync("Favorite","Write"); 
+
         },
         LoginOut: function(){
             Local.Remove("Account");    

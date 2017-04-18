@@ -60,28 +60,39 @@ class Orders {
 const Order = new Orders();
 //Order.orders.length;
 
-function Sync(section) {
+function Sync(section, mode) {
     let queryPoint = 'http://workprojectmobile/www/php/Sync.php';
     
     let id_Account = Local.Get("Account");
     let dataSync = Local.Get(section);
+    let Mode = mode;
     
     let listDish = [];
     for(let i=0; i<dataSync.length; i++){
         listDish[i] = dataSync[i].ID_dish;
     }
 
-    let SectionData = [{"Section":section},{"id_Account":id_Account.ID_user}, listDish];
+    let SectionData = [{"Section":section, "Mode": mode},{"id_Account":id_Account.ID_user}, listDish];
 //    Vue.dataDB;
 //    console.log(SectionData);
     console.log(id_Account.ID_user);
 
     
     Vue.http.get(queryPoint, {params: SectionData }).then(function (response) {
-//        console.log(response.data);
+        console.log(response.data);
 
-       queryCallback(JSON.parse(response.data));
-//        console.log(this.dataBD);
+//        queryCallback(JSON.parse(response.data));
+        switch(response.data[0]){
+            case "Read": Local.Set("Favorite", response.data[1]);  console.log("Switch Read"); break;
+            case "Write": console.log("Switch Write"); break;
+        }
+        
+
+        
+//        console.log(JSON.parse(response.data));
+        
+//        console.log(response.data);
+        
 //        Local.Set("Favorite",JSON.parse(response.data));
     }, function (error) {
 //        this.showSnackBar("Нет соединения");
@@ -95,7 +106,7 @@ function Sync(section) {
 
 
 function queryCallback(result){
-    var dataDB = result;
+    const dataDB = result;
     return dataDB;
 }
 
