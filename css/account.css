@@ -27,14 +27,20 @@
     text-transform: uppercase;
 }
 .list-item {
-/*
-  display: inline-block;
-  margin-right: 10px;
-*/
 }
+.list-item .md-menu{
+
+}
+
+
 .list-enter-active, .list-leave-active {
-  transition: all 0.3s;
+    transition: all 30.3s;
 }
+.list-enter-active, .list-leave-active .md-menu{
+    overflow: hidden;
+    display: none;
+}
+
 .list-enter, .list-leave-to /* .list-leave-active для <2.1.8 */ {
   opacity: 0;
   transform: translateX(30px);
@@ -49,4 +55,48 @@
 /*    padding-left: -45px;*/
     padding-right: 45px;
     font-size: 16px;
+}
+.md-dialog {
+    min-width: none !important; 
+    max-width: none !important; 
+/*    height: 290px;*/
+/*    width: 430px;*/
+/*    padding: 0px 20px 20px 20px;*/
+/*    #3f51b5*/
+}
+.sync-info {
+/*    height: 500px;*/
+    margin-bottom: 20px;
+    padding: 0;
+}
+.sync-info .col-xs-6{
+    padding-left: 0px; 
+    padding-right: 0px; 
+}
+.sync-info .md-button{
+    margin-top: 10px;
+/*    padding: 2px;  */
+    padding: 0px 4px;
+}
+.border-sync{
+/*    margin: 1px;*/
+/*    border: 1px solid #3f51b5;*/
+}
+.btn-dialog {
+    width: 100px;
+}
+.col-fav{
+
+/*    border: 3px solid #3f51b5;*/
+    border-bottom: 3px solid #3f51b5;
+
+    
+    margin: auto;
+    display: block;
+    line-height: 26px;
+    width: 32px; /* задаете свои размеры */
+    width: 60px;  
+    height: 32px;
+/*    border-radius: 50%;*/
+/*    box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);*/
 }

@@ -5,7 +5,13 @@ var Account = new Vue({
         accListFavorite: [],
         indexLastItem: "",
         removedItem: {},
-        snackMessage: ""
+        snackMessage: "",
+        confirm: {
+            title: 'Use Google\'s location service?',
+            contentHtml: 'Let Google help apps determine location. <br> This means sending <strong>anonymous</strong> location data to Google, even when no apps are running.',
+            ok: 'Agree',
+            cancel: 'Disagree'
+        }
     },
     methods: {        
         showSnackBar(Message,btn) {
@@ -58,6 +64,18 @@ var Account = new Vue({
         SyncFavWrite: function(){
             Sync("Favorite","Write"); 
 
+        },
+        openDialog(ref) {
+            this.$refs[ref].open();
+        },
+        closeDialog(ref) {
+            this.$refs[ref].close();
+        },
+        onOpen() {
+            console.log('Opened');
+        },
+        onClose(type) {
+            console.log('Closed', type);
         },
         LoginOut: function(){
             Local.Remove("Account");    

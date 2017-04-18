@@ -121,20 +121,15 @@
                         <md-icon>folder</md-icon>
                     </md-menu-item>
                 </md-menu-content>
+                <md-button class="md-icon-button md-list-action" v-on:click.native="removeFav(item)">
+                    <md-icon class="md-primary">clear</md-icon>
+                </md-button>
             </md-menu>
-            <!--
-            <md-button class="md-icon-button md-list-action">
-                <md-icon class="md-primary">control_point</md-icon>
-            </md-button>
--->
-            <md-button class="md-icon-button md-list-action" v-on:click.native="removeFav(item)">
-                <md-icon class="md-primary">clear</md-icon>
-            </md-button>
 
         </md-card-header>
         <div class="md-divider"></div>
     </div>
-        </transition-group>
+</transition-group>
         
 
 </md-card>
@@ -147,8 +142,41 @@
                                 <span class="text-center">
                                 <md-button class="md-raised text-trans-none" v-on:click.native="SyncFavRead()">Загрузить из БД</md-button>
                                 <md-button class="md-raised text-trans-none" v-on:click.native="SyncFavWrite()">Загрузить в БД</md-button>
-                                </span>                          
-                            </md-card-content>
+                                </span>  
+                                
+<md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog5" class="text-center">
+    <md-dialog-title>Синхронизация записей</md-dialog-title>
+
+    <div class="row sync-info">
+        <div class="col-xs-12">
+            <div class="col-xs-6 border-sync ">
+                <md-icon class="md-primary">cloud_off</md-icon>
+                <p>
+                    Количество локальных записей
+                    <br> 
+                    <span class="vertical-align col-fav">5</span>
+                </p>
+                <md-button class="md-primary md-raised text-trans-none" @click.native="closeDialog('dialog5')">Загрузить на сервер</md-button>
+            </div>
+            <div class="col-xs-6 border-sync">
+                <md-icon class="md-primary">cloud_done</md-icon>
+                <p>
+                    Количество записей на сервере
+                    <br> 
+                    <span class="vertical-align col-fav">23</span>
+                </p>
+                <md-button class="md-primary md-raised text-trans-none" @click.native="closeDialog('dialog5')">Выгрузить с сервера</md-button>
+            </div>
+        </div>
+    </div>
+    <md-dialog-actions>
+        <md-button class="md-raised text-trans-none btn-dialog" @click.native="closeDialog('dialog5')">Закрыть</md-button>
+    </md-dialog-actions>
+    <div class="clearfix"></div>
+</md-dialog>
+                  
+<md-button class="md-primary md-raised" @click.native="openDialog('dialog5')">Confirm</md-button>                                                                       
+    </md-card-content>
                             <div class="md-divider"></div>
                             <br>
                             <div class="md-subhead text-trans-none text-center">Выйти из аккаунта</div>

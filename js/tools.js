@@ -81,25 +81,19 @@ function Sync(section, mode) {
     Vue.http.get(queryPoint, {params: SectionData }).then(function (response) {
         console.log(response.data);
 
-//        queryCallback(JSON.parse(response.data));
         switch(response.data[0]){
-            case "Read": Local.Set("Favorite", response.data[1]);  console.log("Switch Read"); break;
+            case "Read": 
+                console.log(response.data[1].length); 
+                Local.Set("Favorite", response.data[1]);  
+                console.log("Switch Read"); 
+                break;
             case "Write": console.log("Switch Write"); break;
         }
-        
-
-        
 //        console.log(JSON.parse(response.data));
-        
 //        console.log(response.data);
-        
 //        Local.Set("Favorite",JSON.parse(response.data));
     }, function (error) {
-//        this.showSnackBar("Нет соединения");
         console.log("Ошибка запроса: ");
-        
-    }).finally(function () {
-//        DBu = this.dataDB;
     });
 
 }
