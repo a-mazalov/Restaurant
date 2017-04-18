@@ -138,12 +138,8 @@
                             <md-card-content class="vertical-align">
                                 <p class="md-primary account-info">Александр Максимович</p>
                                 <p class="md-primary account-info">+375296947131</p>
-                                <p class="md-primary account-info text-center">Синхронизация</p>
-                                <span class="text-center">
-                                <md-button class="md-raised text-trans-none" v-on:click.native="SyncFavRead()">Загрузить из БД</md-button>
-                                <md-button class="md-raised text-trans-none" v-on:click.native="SyncFavWrite()">Загрузить в БД</md-button>
-                                </span>  
-                                
+<!--                                <p class="md-primary account-info text-center">Синхронизация</p>-->
+                      
 <md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog5" class="text-center">
     <md-dialog-title>Синхронизация записей</md-dialog-title>
 
@@ -152,20 +148,20 @@
             <div class="col-xs-6 border-sync ">
                 <md-icon class="md-primary">cloud_off</md-icon>
                 <p>
-                    Количество локальных записей
+                    Количество локальных <br> записей
                     <br> 
                     <span class="vertical-align col-fav">5</span>
                 </p>
-                <md-button class="md-primary md-raised text-trans-none" @click.native="closeDialog('dialog5')">Загрузить на сервер</md-button>
+                <md-button class="md-primary md-raised text-trans-none" @click.native="SyncFavWrite()">Загрузить на сервер</md-button>
             </div>
             <div class="col-xs-6 border-sync">
                 <md-icon class="md-primary">cloud_done</md-icon>
                 <p>
-                    Количество записей на сервере
+                    Количество записей <br> на сервере
                     <br> 
-                    <span class="vertical-align col-fav">23</span>
+                    <span class="vertical-align col-fav">{{countServerFav}}</span>
                 </p>
-                <md-button class="md-primary md-raised text-trans-none" @click.native="closeDialog('dialog5')">Выгрузить с сервера</md-button>
+                <md-button class="md-primary md-raised text-trans-none" @click.native="SyncFavRead()">Выгрузить с сервера</md-button>
             </div>
         </div>
     </div>
@@ -175,8 +171,11 @@
     <div class="clearfix"></div>
 </md-dialog>
                   
-<md-button class="md-primary md-raised" @click.native="openDialog('dialog5')">Confirm</md-button>                                                                       
-    </md-card-content>
+<md-button class="md-warn md-raised text-trans-none" @click.native="openDialog('dialog5'); SyncFavRead()">
+   Синхронизация
+   <md-icon class="">cloud</md-icon>
+   </md-button>                                                                       
+</md-card-content>
                             <div class="md-divider"></div>
                             <br>
                             <div class="md-subhead text-trans-none text-center">Выйти из аккаунта</div>

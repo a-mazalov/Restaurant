@@ -6,12 +6,8 @@ var Account = new Vue({
         indexLastItem: "",
         removedItem: {},
         snackMessage: "",
-        confirm: {
-            title: 'Use Google\'s location service?',
-            contentHtml: 'Let Google help apps determine location. <br> This means sending <strong>anonymous</strong> location data to Google, even when no apps are running.',
-            ok: 'Agree',
-            cancel: 'Disagree'
-        }
+        serverFav: [],
+        countServerFav: 0
     },
     methods: {        
         showSnackBar(Message,btn) {
@@ -52,14 +48,12 @@ var Account = new Vue({
             Local.Remove("Favorite");
 //            window.localStorage.setItem("Favorite", null);
         },
+        CheckFavServ: function(count){
+            this.countServerFav = count;
+        },
         SyncFavRead: function(){
-            Sync("Favorite","Read"); 
-//            let dataDBs = queryCallback(fgdfg); 
-//            console.log("asdasd");
-//            console.log(dataDBs);
-//            console.log(dataDB);
-//            this.accListFavorite = dataDB;
-             
+            Sync("Favorite","Read");
+            console.log(this.serverFav);
         },        
         SyncFavWrite: function(){
             Sync("Favorite","Write"); 
