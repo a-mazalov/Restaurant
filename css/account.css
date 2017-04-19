@@ -26,39 +26,43 @@
 .Account .md-title-18:first-letter{
     text-transform: uppercase;
 }
+
 .list-item {
+    height: 70px;
 }
 .list-item .md-menu{
 
 }
-
-
 .list-enter-active, .list-leave-active {
-    transition: all 30.3s;
+    transition: all .3s;
 }
 .list-enter-active, .list-leave-active .md-menu{
-    overflow: hidden;
+/*    overflow: hidden;*/
+/*
+    height: 0px;
+    width: 0px;
     display: none;
+*/
 }
 
 .list-enter, .list-leave-to /* .list-leave-active для <2.1.8 */ {
   opacity: 0;
   transform: translateX(30px);
 }
+
 .md-card-header .md-icon{
     margin-top: 10px;
 }
 .totals{
     position: absolute;
     right: 0;
-/*    float: right;*/
-/*    padding-left: -45px;*/
     padding-right: 45px;
     font-size: 16px;
 }
 .md-dialog {
     min-width: none !important; 
     max-width: none !important; 
+    padding: 10px;
 /*    height: 290px;*/
 /*    width: 430px;*/
 /*    padding: 0px 20px 20px 20px;*/
@@ -75,22 +79,15 @@
 }
 .sync-info .md-button{
     margin-top: 10px;
-/*    padding: 2px;  */
     padding: 0px 4px;
 }
-.border-sync{
-/*    margin: 1px;*/
-/*    border: 1px solid #3f51b5;*/
-}
+
 .btn-dialog {
     width: 100px;
 }
 .col-fav{
-
 /*    border: 3px solid #3f51b5;*/
     border-bottom: 3px solid #3f51b5;
-
-    
     margin: auto;
     display: block;
     line-height: 26px;

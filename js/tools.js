@@ -75,50 +75,39 @@ function Sync(section, mode) {
     let SectionData = [{"Section":section, "Mode": mode},{"id_Account":id_Account.ID_user}, listDish];
 //    console.log(SectionData);
    
-//    let dataDB = 
-    getData(SectionData).then(function (response) {
-//        console.log("Всё гуд!", response.data[1]);
-        Account.$data.serverFav = response[1];
-        Account.$data.countServerFav = response[1].length;
-//        console.log(dataDB);
-    }, function (error) {
-        alert('Хьюстон! У нас проблемы!: ' + error.statusText);
-    });
-//        console.log(dataDB);
-//    console.log(Account.$data.countServerFav = dataDB.length);
-  
-}
+    console.log(id_Account.ID_user);
 
-function getData(Pdata){
-    let queryPoint = 'http://workprojectmobile/www/php/Sync.php';
     
-    return new Promise(function (resolve, reject){
+    Vue.http.get(queryPoint, {params: SectionData }).then(function (response) {
+        
 
-    Vue.http.get(queryPoint, {params: Pdata }).then(function (response) {
-
-        resolve(response.data);
-//            switch(response.data[0]){
-//                case "Read": 
-//                    console.log(response.data[1].length); 
-//                    Local.Set("Favorite", response.data[1]);  
-//                    console.log("Switch Read"); 
-//                    break;
-//                case "Write": console.log("Switch Write"); break;
-//            }
+        switch(response.data[0]){
+            case "Count": 
+                console.log("Count" + response.data[1] + "Local" + dataSync.length); 
+                Account.$data.countLocalFav = dataSync.length;
+                Account.$data.countServerFav = response.data[1];
+                break;
+            case "Read": 
+                Account.$data.accListFavorite = response.data[1];
+                Local.Set(section,response.data[1])
+                console.log(response.data[1]);
+//                Local.Set("Favorite", response.data[1]);  
+                console.log("Switch Read"); 
+                break;
+            case "Write": 
+                console.log("Switch Write"); break;
+        }
 //        console.log(JSON.parse(response.data));
 //        console.log(response.data);
 //        Local.Set("Favorite",JSON.parse(response.data));
-        }, function (error) {
-            reject
-        });
-});    
-
-} 
-
-function queryCallback(result){
-    const dataDB = result;
-    return dataDB;
+    }, function (error) {
+        console.log("Ошибка запроса: ");
+    });
+//    console.log(Account.$data.countServerFav = dataDB.length);
 }
+
+
+
 
 class Snack{
     constructor(){

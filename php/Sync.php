@@ -22,6 +22,15 @@
 //        var_dump($ArrayDish);
         
 //        $FavDishServer = $pdo->prepare('SELECT ID_dish FROM Favorite_table WHERE ID_user = :id');
+        
+        if($Mode == "Count"){
+            $FavDishServer = $pdo->prepare('SELECT * FROM Menu_table WHERE ID_dish IN (SELECT Favorite_table.ID_dish FROM Favorite_table WHERE Favorite_table.ID_user = :id)');
+            $FavDishServer->execute(array('id' => $ID_user));
+            $FavDishServer = $FavDishServer->fetchAll();
+
+            echo json_encode([$Mode,count($FavDishServer)]);
+        }
+        
        
         if($Mode == "Read"){
             

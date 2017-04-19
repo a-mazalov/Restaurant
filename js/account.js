@@ -2,17 +2,24 @@ Vue.use(VueMaterial);
 var Account = new Vue({
     el: "#Account",
     data: {
+        infoAccount: [],
         accListFavorite: [],
         indexLastItem: "",
         removedItem: {},
         snackMessage: "",
+        loadServer: false,
         serverFav: [],
-        countServerFav: 0
+        countServerFav: 0,
+        countLocalFav: 0
     },
     methods: {        
         showSnackBar(Message,btn) {
           this.snackMessage = Message;    
           this.$refs.snackbar.open();
+        },
+        getInfAccount: function(){
+            this.infoAccount = Local.Get("Account"); 
+            console.log(this.infoAccount);
         },
         accFavorite(){
             if (window.localStorage.Favorite){
@@ -37,8 +44,7 @@ var Account = new Vue({
             this.showSnackBar("Запись удалена"); //Оповещение
         },
         returnRemoveFav: function(){ //Возвращает последний удаленный элемент
-            
-            this.accListFavorite.splice(this.indexLastItem,-1,this.removedItem);
+        this.accListFavorite.splice(this.indexLastItem,-1,this.removedItem);
             Local.Set("Favorite",this.accListFavorite);
 //            window.localStorage.setItem("Favorite", JSON.stringify(this.accListFavorite));
             this.$refs.snackbar.close();
@@ -48,15 +54,29 @@ var Account = new Vue({
             Local.Remove("Favorite");
 //            window.localStorage.setItem("Favorite", null);
         },
-        CheckFavServ: function(count){
-            this.countServerFav = count;
+        CheckFavServ: function(){ //выгрузка данных о локальном и серверном хранилище
+            Sync("Favorite","Count");
+//            this.countLocalFav = Local.Get("Favorite").length;
+//            console.log(Local.Get("Favorite").length);
+        },
+        Btn: function(){
+            setTimeout(function(){
+                if (this.countServerFav == 0) {
+                    this.loadServer = true;
+                } else {
+                    this.loadServer = false;
+                }
+            }, 2000);    
+            return this.loadServer;
         },
         SyncFavRead: function(){
             Sync("Favorite","Read");
-            console.log(this.serverFav);
+            Local.Set("Favorite",this.serverFav);
+//            console.log(this.serverFav);
         },        
         SyncFavWrite: function(){
             Sync("Favorite","Write"); 
+            alert("asd");
 
         },
         openDialog(ref) {
@@ -81,6 +101,7 @@ var Account = new Vue({
     created: function(){
 //        let Local = new LocalStore();
         this.accFavorite();
+        this.getInfAccount();
     }
 
 });

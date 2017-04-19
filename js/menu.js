@@ -26,16 +26,28 @@ methods: {
         this.$http.get(this.queryPoint, options).then(function (response) {
             // Запрос на сервер, получение всех блюд
             this.posts = JSON.parse(response.data);
+            Local.Set("Menu",this.posts);
             console.log(this.posts);
 
         }, function (error) {
-            this.error = true;
+            this.error = this.OfflineMenu();;
+            
             //                    alert(error.date);
             console.log("Ошибка запроса: " + error.data);
         });
 
 
     },
+    OfflineMenu: function(){
+        let status;
+        let localMenu = Local.Get("Menu");
+        if(localMenu > 0 ){
+            this.posts = localMenu;
+        }else{
+            status = true;
+        }
+        return status;
+    },   
     favorite: function (post) {
         //Функция добавления/удаления в список избранного
         let IsSearch; //Переменная флаг, найдено/не найдено 

@@ -288,7 +288,8 @@ html {
 
 
 [v-cloak] {
-  display: none;
+/*    background-color: black;*/
+    display: none;
 }
 
 #loader {
