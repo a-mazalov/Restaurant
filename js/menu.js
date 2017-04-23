@@ -3,9 +3,9 @@ var MenuList = new Vue({
 el: '#MenuList',
 data: {
     //            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
-    queryPoint: 'http://workprojectmobile/www/php/menu-query.php',
+//    queryPoint: 'http://workprojectmobile/www/php/menu-query.php',
     //            queryPoint: '/php/menu-query.php',
-    //            queryPoint: 'http://d0008482.atservers.net/Felix/menu-query.php',
+                queryPoint: 'http://d0008482.atservers.net/Felix/menu-query.php',
     posts: {},
     post: {},
     error: false,
@@ -30,8 +30,8 @@ methods: {
             console.log(this.posts);
 
         }, function (error) {
-            this.error = this.OfflineMenu();;
-            
+            this.error = false;
+            this.OfflineMenu();
             //                    alert(error.date);
             console.log("Ошибка запроса: " + error.data);
         });
@@ -41,12 +41,16 @@ methods: {
     OfflineMenu: function(){
         let status;
         let localMenu = Local.Get("Menu");
-        if(localMenu > 0 ){
-            this.posts = localMenu;
-        }else{
-            status = true;
-        }
-        return status;
+        this.posts = localMenu;
+
+//        let status;
+//        let localMenu = Local.Get("Menu");
+//        if(localMenu > 0 ){
+//            this.posts = localMenu;
+//        }else{
+//            status = true;
+//        }
+//        return status;
     },   
     favorite: function (post) {
         //Функция добавления/удаления в список избранного

@@ -107,6 +107,29 @@ function Sync(section, mode) {
 }
 
 
+var networkStatus = false;
+document.addEventListener("online", onOnline, false);
+
+function onOnline() {
+    networkStatus = true;
+    Account.networkCheck(true);
+}
+
+document.addEventListener("offline", onOffline, false);
+
+function onOffline() {
+    networkStatus = false;
+    Account.networkCheck(false);
+}
+
+function checkConnection() {
+    var networkState = navigator.connection.type;
+}
+
+function testNet(){
+    alert("tools");
+}
+
 
 
 class Snack{

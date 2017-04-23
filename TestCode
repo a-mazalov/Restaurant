@@ -1,3 +1,14 @@
+function soundQR() {
+        var audio = new Audio(); // Создаём новый элемент Audio
+        audio.src = 'audio/qr.mp3'; // Указываем путь к звуку "клика"
+        audio.autoplay = true; // Автоматически запускаем
+    }
+
+
+// чек интернета
+//            this.windowBlock.network = networkStatus;
+//            console.log(this.windowBlock.network + "tools: "+networkStatus);
+
 
 //                console.log(postFav in this.listFavorite);    
                 

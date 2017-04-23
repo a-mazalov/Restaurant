@@ -2,7 +2,8 @@ Vue.use(VueMaterial);
 var Account = new Vue({
     el: "#Account",
     data: {
-        window: {
+        windowBlock: {
+            network: false,
             welcom: true,
             register: false,
             logim: false
@@ -48,6 +49,25 @@ var Account = new Vue({
         showSnackBar(Message) {
           this.snackMessage = Message;    
           this.$refs.snackbar.open();
+        },
+        networkCheck: function(networkStatus){
+            //если подключение есть тогда показать приветствие
+            this.windowBlock.network = networkStatus;
+            if(this.windowBlock.network){
+                this.windowBlock.welcom = true;
+            }else{
+                this.windowBlock.welcom = false;
+            }
+
+//            this.windowBlock.network = networkStatus;
+//            console.log(this.windowBlock.network + "tools: "+networkStatus);
         }
+    },
+    created: function () {
+//       if(this.network = checkConnection() ){
+//           this.welcom = true;
+//       }else{
+//           this.welcom = false;
+//       }
     }
 });

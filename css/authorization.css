@@ -4,19 +4,38 @@
 .Account {
     
 }
+
+body{
+    overflow: hidden;
+}
+.network-block{
+    
+    justify-content: space-between;
+}
+.network-block .md-card .md-card-header:last-child{
+    margin: 0;
+}
+.network-block .md-theme-default.md-card{
+    border: 1px solid rgba(255, 0, 0, 0.5) !important;
+}
+.network-title{
+    font-size: 18px;
+    
+}
+.network-title-sub{
+    font-size: 18px;
+}
+
+.network-block,
 .register-block,
-.welcom-block{
-    height: 600px;
+.welcom-block,
+.login-block{
+/*    height: 600px;*/
     margin: 10px;
 }
-.welcom-block{
-    animation: translates 1s;
-/*    animation: scaling 1s;*/
-}
-.register-block{
-    animation: translates 1s;
-/*    animation: scaling 1s;*/
-}
+
+.welcom-block,
+.register-block,
 .login-block{
     animation: translates 1s;
 }
