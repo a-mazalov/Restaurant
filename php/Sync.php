@@ -28,7 +28,7 @@
             $FavDishServer->execute(array('id' => $ID_user));
             $FavDishServer = $FavDishServer->fetchAll();
 
-            echo json_encode([$Mode,count($FavDishServer)]);
+            echo json_encode( [$Mode,count($FavDishServer)] );
         }
         
        

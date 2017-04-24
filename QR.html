@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="vue-material/vue-material.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/qr.css">
-<!--    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
     <link rel="shortcut icon" href="img/icon/banner-news-icon-knife.png" type="image/x-icon">
 
@@ -37,36 +37,48 @@
 <!--   v-bind:class="{ brick-wall: true }"-->
     <!--<button onclick="qrScanJ()">Сканировать</button>&ndash;&gt;-->
 <!--    <div v-else class="check">-->
-    <div v-if="scaning" class="qr-mark"></div>
-    <div v-else class="check vertical-align text-center ">
-        <md-card class="">
-            <md-card-header>
-            <div class="md-title-18 text-center">
-                Проверка кода
-                <br>
-                <md-icon>swap_vertical_circle</md-icon>
-            </div>
-            </md-card-header>
+<div class="container-fluid vertical-align">
+    <div class="row">
+<!--        <div class="col-xs-12 col-sm-12 col-md-12">-->
+            <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3">
 
-            <md-card-content>
+            <div v-if="scaning" class="qr-mark"></div>
 
-            
-            <div class="spinner" v-show="completeCheck"></div>
-            
-<!--            <md-spinner md-indeterminate v-show="completeCheck"></md-spinner>-->
+            <div v-else class="check-code vertical-align text-center ">
+                <md-card class="">
+                    <md-card-header>
+                        <div class="md-title text-center" v-bind:class="{ 'anim-view': successCode || errorCode}">
+                            {{title}}
+                            <br>
+                            <md-icon class="qr-icon"></md-icon>
+                        </div>
+                    </md-card-header>
 
-            <p class="md-primary account-info text-center" v-show="true">Создайте свое меню из списка избранного!</p>
-            </md-card-content>
-
-        </md-card>     
+                    <md-card-content>
+    <div 
+        v-bind:class="{ 'spinner': true, 'code-success': successCode, 'code-error': errorCode, 'code-warning': warningCode}">
+                    <md-button class="retry md-primary text-trans-none btn-dialog" onclick="retryScan()" v-show="requestСomplete">Повторить</md-button>
     </div>
+                    </md-card-content>
+                    
+                    <br><br>
+                    <md-dialog-actions>
+                        <md-button class="md-raised text-trans-none btn-dialog" onclick="history.back()">Назад</md-button>
+                    </md-dialog-actions>
+                </md-card>
+            </div>
 
+            </div>
+<!--        </div>-->
+    </div>
 </div>
 
 
-
-
-
+</div>
+<!--            <br>-->
+<!--            <button v-on:click ="successCode = !successCode">success</button>-->
+<!--            <button v-on:click ="errorCode = !errorCode">error</button>-->
+<!--            <button onclick="history.back()">2312</button>-->
 
     <!--<md-dialog-confirm-->
             <!--:md-title="confirm.title"-->
@@ -137,11 +149,11 @@
     <!--------------------------------------------------------------------->
     <style>
         html,body {
-        box-sizing: border-box !important;
+/*        box-sizing: border-box !important;*/
         background-color: rgba(0, 0, 0, 0) !important;
-        font-size: 0;
-        font-size: 14px;
-        letter-spacing: 0;
+/*        font-size: 0;*/
+/*        font-size: 14px;*/
+/*        letter-spacing: 0;*/
 
         height:100%;
         margin: 0;

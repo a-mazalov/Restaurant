@@ -4,9 +4,16 @@ var QrCode = new Vue({
     data: {
         queryPointQR: 'http://workprojectmobile/php/qrCode.php',
 //        queryPointQR: 'http://workprojectmobile/www/php/qrCode.php',
-        acceptCode: null,
         scaning: true,
-        completeCheck: true,
+//        scaning: false,
+        
+        requestСomplete: false,
+//        requestСomplete: true,
+        title: "Проверка кода",
+        successCode: false,
+        errorCode: false,
+        warningCode: false,
+        
         snackMessage: ""
     },
     methods: {
@@ -28,8 +35,45 @@ var QrCode = new Vue({
         },
         queryCode(code){
 //            alert(code);
-            this.$http.get(this.queryPointQR, {params: [{"ValueCode": code}] }).then(function (response) {
+            let Account = Local.Get("Account");
+//            console.log(Account);
+//            console.log(Account["ID_user"]);
+            let SendData = [ {"ValueCode": code, "ID_account": Account["ID_user"] }];
+            
+            this.$http.get(this.queryPointQR, {params: SendData }).then(function (response) {
                 console.log(response.data);
+                let dataResponse = JSON.parse(response.data);
+                console.log(dataResponse.status);
+                console.log(dataResponse.data);
+                console.log(dataResponse.message);
+                
+                setTimeout(function(){
+                    QrCode.requestСomplete = true;
+                    if(dataResponse.status){
+                        QrCode.successCode = true;
+                        QrCode.title = dataResponse.message;
+                    }else{
+                        
+                        if(dataResponse.data){
+                            QrCode.warningCode = true;
+                            QrCode.title = dataResponse.message;
+                        }else{
+                            QrCode.errorCode = true;
+                            QrCode.title = dataResponse.message;    
+                        }
+                        
+
+                    }
+                    
+                },2000);
+                
+            
+//                console.log(JSON.parse(response.data["success"]));
+//                console.log(response.data[1]);
+//                console.log(response[0]);
+//                console.log(response.data[0]);
+//                console.log(JSON.parse(response.data[1]));
+                
             }, function (error) {
                 console.log("Ошибка запроса QR: ");
             });
@@ -45,14 +89,18 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 
-    QrCode.queryCode("code12");
+//    QrCode.queryCode("code12");
     
     
     var audio = new Audio(); // Создаём новый элемент Audio
 //   audio.src = 'audio/Elara.mp3'; // Указываем путь к звуку "клика"
     audio.src = 'audio/qr.mp3';
 
-    function qrScanJ(){
+//    var QRScanLocal = QRScanner;
+    
+    qrScanJ(audio);
+}   
+    function qrScanJ(audio){
         QRScanner.prepare(onDone); // show the prompt
 
         function onDone(err, status){
@@ -110,10 +158,18 @@ function onDeviceReady() {
           }
         }
     }
+    
+    function retryScan(){
+        QrCode.requestСomplete = false;
+        QrCode.scaning = true;
+        QRScanner.show();
+//        QRScanner.scan(displayContents);
+    }
+    
 
-//    qrScanJ();
+    
 
-}
+
 
 
 

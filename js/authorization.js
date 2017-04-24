@@ -4,11 +4,13 @@ var Account = new Vue({
     data: {
         windowBlock: {
             network: false,
+            welcom: false,
             welcom: true,
             register: false,
             logim: false
         },
-        queryPointLogin: 'http://workprojectmobile/www/php/loginIn.php',
+//        queryPointLogin: 'http://workprojectmobile/www/php/loginIn.php',
+        queryPointLogin: 'http://workprojectmobile/php/loginIn.php',
 //        queryPointLogin: 'http://d0008482.atservers.net/Felix/loginIn.php',
         dataLogin: {
             telephone: '',
