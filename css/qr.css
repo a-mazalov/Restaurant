@@ -1,10 +1,13 @@
 
 body{
-    border: 1px solid black;
+/*    border: 1px solid black;*/
     
 /*    overflow: hidden;s*/
 }
-
+.brick-wall {
+    background: url(../img/brickwall.png) ;
+/*    overflow: hidden;*/
+}
 .qr-code{
     height: inherit;
     display: flex;
@@ -23,3 +26,14 @@ body{
     background: url(../img/target.svg) 50% 50%;
 }
 
+
+.check {
+    margin: auto;
+}
+
+.spinner {
+    height: 60px;
+/*    border: 1px solid black;*/
+    background: url(../img/puff.svg) no-repeat 50% 50%;
+    background-size: 20%;
+}

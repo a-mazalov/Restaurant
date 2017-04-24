@@ -2,7 +2,11 @@ Vue.use(VueMaterial);
 var QrCode = new Vue({
     el: "#qr-code",
     data: {
+        queryPointQR: 'http://workprojectmobile/php/qrCode.php',
+//        queryPointQR: 'http://workprojectmobile/www/php/qrCode.php',
         acceptCode: null,
+        scaning: true,
+        completeCheck: true,
         snackMessage: ""
     },
     methods: {
@@ -19,8 +23,16 @@ var QrCode = new Vue({
         onClose(type) {
             console.log('Closed', type);
         },
-        returnCode(){
+        test(){
             return this.acceptCode;
+        },
+        queryCode(code){
+//            alert(code);
+            this.$http.get(this.queryPointQR, {params: [{"ValueCode": code}] }).then(function (response) {
+                console.log(response.data);
+            }, function (error) {
+                console.log("Ошибка запроса QR: ");
+            });
         }
     },
     created: function () {
@@ -33,13 +45,14 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 
-   var audio = new Audio(); // Создаём новый элемент Audio
-   audio.src = 'audio/qr.mp3'; // Указываем путь к звуку "клика"
+    QrCode.queryCode("code12");
+    
+    
+    var audio = new Audio(); // Создаём новый элемент Audio
+//   audio.src = 'audio/Elara.mp3'; // Указываем путь к звуку "клика"
+    audio.src = 'audio/qr.mp3';
 
     function qrScanJ(){
-        // For the best user experience, make sure the user is ready to give your app
-        // camera access before you show the prompt. On iOS, you only get one chance.
-
         QRScanner.prepare(onDone); // show the prompt
 
         function onDone(err, status){
@@ -50,9 +63,6 @@ function onDeviceReady() {
           }
           if (status.authorized)
           {
-              // alert("authorized");
-              // W00t, you have camera access and the scanner is initialized.
-              // QRscanner.show() should feel very fast.
               QRScanner.show();
               QRScanner.scan(displayContents);
 
@@ -62,30 +72,23 @@ function onDeviceReady() {
                       alert("error scan");
                       // an error occurred, or the scan was canceled (error code `6`)
                   } else {
-        //                                      alert(code);
-//                      soundQR();
-
                       audio.play(); // Автоматически запускаем
-
 
                       var dialgAnswer = confirm("Использовать код?");
 //                        var test = confirm("asdsad");
-
-//                        var answer = QrCode.openDialog('qr-accept');
+                      audio.pause();
 
                         if(dialgAnswer){
-                            alert("Код успешно принят");
-                        //                                QrCode.acceptCode = null;
+                            QRScanner.hide();
+                            QrCode.scaning = false;
+                            QrCode.queryCode(code)
+//                            alert("Код успешно принят");
                             console.log(code);
-                            setTimeout(function() { QRScanner.scan(displayContents) }, 2100);
+//                            setTimeout(function() { QRScanner.scan(displayContents) }, 2100);
                         }else{
                         //                                QrCode.acceptCode = null;
                             setTimeout(function() { QRScanner.scan(displayContents) }, 2100);
                         }
-
-
-
-                      // The scan completed, display the contents of the QR code:
                   }
               }
 
@@ -108,7 +111,7 @@ function onDeviceReady() {
         }
     }
 
-    qrScanJ();
+//    qrScanJ();
 
 }
 

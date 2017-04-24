@@ -1,6 +1,8 @@
 <?php
     require('connectDB.php');
     header('Access-Control-Allow-Origin: *');
+
+
         $query = "SELECT * FROM `Menu_table`";
         $result = $pdo->query($query); 
 

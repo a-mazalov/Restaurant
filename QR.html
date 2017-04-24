@@ -16,9 +16,9 @@
 -->
 
     <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <link rel="stylesheet" href="vue-material/vue-material.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/qr.css">
-    <link rel="stylesheet" href="vue-material/vue-material.css">
 <!--    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">-->
 
     <link rel="shortcut icon" href="img/icon/banner-news-icon-knife.png" type="image/x-icon">
@@ -29,36 +29,77 @@
 </head>
 
 <body>
-    <!--    <div id="header">-->
+
 
 <!--------------------------------------------------------------------->
 
-<div id="qr-code" class="qr-code" >
+<div id="qr-code" class="qr-code" v-bind:class="{ 'brick-wall': !scaning }">
+<!--   v-bind:class="{ brick-wall: true }"-->
     <!--<button onclick="qrScanJ()">Сканировать</button>&ndash;&gt;-->
-    <div class="qr-mark">
+<!--    <div v-else class="check">-->
+    <div v-if="scaning" class="qr-mark"></div>
+    <div v-else class="check vertical-align text-center ">
+        <md-card class="">
+            <md-card-header>
+            <div class="md-title-18 text-center">
+                Проверка кода
+                <br>
+                <md-icon>swap_vertical_circle</md-icon>
+            </div>
+            </md-card-header>
 
+            <md-card-content>
+
+            
+            <div class="spinner" v-show="completeCheck"></div>
+            
+<!--            <md-spinner md-indeterminate v-show="completeCheck"></md-spinner>-->
+
+            <p class="md-primary account-info text-center" v-show="true">Создайте свое меню из списка избранного!</p>
+            </md-card-content>
+
+        </md-card>     
     </div>
 
-    <md-button class="md-warn md-raised text-trans-none" @click.native="openDialog('qr-accept');">
-        Синхронизация
-    </md-button>
-    
-
-    <md-dialog md-open-from="#custom" md-close-to="#custom" ref="qr-accept" class="qr-dialog text-center">
-        <md-dialog-title >Использовать код?</md-dialog-title>
-
-        <md-card-header class="vertical-align qr-content">
-            <div class="md-subhead text-trans-none text-center"><br>Код может быть использнован один раз. <br>Бонусы будут начислены на текущий аккаунт.<br><br></div>
-        </md-card-header>
-
-        <md-dialog-actions>
-            <md-button class="md-primary md-raised text-trans-none" @click.native="acceptCode = false; closeDialog('qr-accept')" >Отмена</md-button >
-            <md-button class="md-primary md-raised text-trans-none" @click.native="acceptCode = true; closeDialog('qr-accept')" >Принять</md-button >
-        </md-dialog-actions>
-
-    </md-dialog>
-
 </div>
+
+
+
+
+
+
+    <!--<md-dialog-confirm-->
+            <!--:md-title="confirm.title"-->
+            <!--:md-content-html="confirm.contentHtml"-->
+            <!--:md-ok-text="confirm.ok"-->
+            <!--:md-cancel-text="confirm.cancel"-->
+            <!--@open="onOpen"-->
+            <!--@close="onClose"-->
+            <!--ref="dialog5">-->
+    <!--</md-dialog-confirm>-->
+    <!--<md-button class="md-primary md-raised" @click.native="openDialog('dialog5')">Confirm</md-button>-->
+    <!--<md-button class="md-primary md-raised" @click.native="sc()">Confirm</md-button>-->
+
+    <!--<md-button class="md-warn md-raised text-trans-none" @click.native="openDialog('qr-accept');">-->
+        <!--Синхронизация-->
+    <!--</md-button>-->
+    <!---->
+
+    <!--<md-dialog md-open-from="#custom" md-close-to="#custom" ref="qr-accept" class="qr-dialog text-center">-->
+        <!--<md-dialog-title >Использовать код?</md-dialog-title>-->
+
+        <!--<md-card-header class="vertical-align qr-content">-->
+            <!--<div class="md-subhead text-trans-none text-center"><br>Код может быть использнован один раз. <br>Бонусы будут начислены на текущий аккаунт.<br><br></div>-->
+        <!--</md-card-header>-->
+
+        <!--<md-dialog-actions>-->
+            <!--<md-button class="md-primary md-raised text-trans-none" @click.native="acceptCode = false; closeDialog('qr-accept')" >Отмена</md-button >-->
+            <!--<md-button class="md-primary md-raised text-trans-none" @click.native="acceptCode = true; closeDialog('qr-accept')" >Принять</md-button >-->
+        <!--</md-dialog-actions>-->
+
+    <!--</md-dialog>-->
+
+
 
 <!--            <div class="row">-->
 
@@ -98,12 +139,14 @@
         html,body {
         box-sizing: border-box !important;
         background-color: rgba(0, 0, 0, 0) !important;
-        font-size: 0; 
+        font-size: 0;
+        font-size: 14px;
         letter-spacing: 0;
 
         height:100%;
         margin: 0;
     }
+
 /*
 body.md-theme-default{
     background-color: 0 !important; 
