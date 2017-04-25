@@ -389,3 +389,16 @@ html {
   font-feature-settings: 'liga';
 }
 /**************************************************/
+
+.h4-margin-b-0 {
+    margin-bottom: 0px;
+}
+
+.anim-view{
+    animation: view 1.8s ease-in-out; 
+}
+
+@keyframes view {
+    0% { opacity: 0.0 }
+    100% { opacity: 1 }
+}

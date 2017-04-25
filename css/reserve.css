@@ -51,3 +51,20 @@
 .flatpickr-calendar.hasTime.noCalendar.showTimeInput.arrowTop.open{
     width: 200px;
 }
+label {
+    font-weight:normal ; 
+}
+.md-checkbox{
+    margin: 0;
+}
+.orders-info {
+    font-size: 16px !important;
+    
+}
+.orders-info span {
+    font-weight: bold;
+    color: #fe562e;
+}
+.md-card .md-card-header+.md-card-content {
+    padding-top: 0;
+    padding-bottom: 0;

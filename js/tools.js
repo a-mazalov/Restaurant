@@ -107,6 +107,26 @@ function Sync(section, mode) {
 }
 
 
+function getAccID(){
+    let Account = Local.Get("Account");
+
+//    console.log(isEmpty(Account));
+    
+    
+    if( !isEmpty(Account) ) {
+        return Account.ID_user;
+    }else{
+        console.log("Ошибка ID Аккаунта");
+        return 
+    }
+////    
+}
+
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
+
+
 var networkStatus = false;
 document.addEventListener("online", onOnline, false);
 
@@ -125,6 +145,10 @@ function onOffline() {
 function checkConnection() {
     var networkState = navigator.connection.type;
 }
+
+
+
+
 
 function testNet(){
     alert("tools");
