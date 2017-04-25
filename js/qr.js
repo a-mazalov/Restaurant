@@ -132,7 +132,7 @@ function onDeviceReady() {
                             QrCode.queryCode(code)
 //                            alert("Код успешно принят");
                             console.log(code);
-//                            setTimeout(function() { QRScanner.scan(displayContents) }, 2100);
+                            setTimeout(function() { QRScanner.scan(displayContents) }, 2100);
                         }else{
                         //                                QrCode.acceptCode = null;
                             setTimeout(function() { QRScanner.scan(displayContents) }, 2100);
@@ -162,12 +162,17 @@ function onDeviceReady() {
     function retryScan(){
         QrCode.requestСomplete = false;
         QrCode.scaning = true;
-        QRScanner.show();
+        QrCode.title = "Проверка кода",
+        QrCode.successCode = false,
+        QrCode.errorCode = false,
+        QrCode.warningCode = false,
+//        QRScanner.destroy();
+        window.QRScanner.show();
 //        QRScanner.scan(displayContents);
     }
     
 
-    
+
 
 
 

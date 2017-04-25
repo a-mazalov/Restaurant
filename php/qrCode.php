@@ -19,10 +19,8 @@
 
     //Если код существует, тогда
     if( ( count($DataDB) > 0 ) && ($DataDB != NULL) ){
-        //echo "Record success";
         //Если код существует, проверить на доступность
         if($DataDB[0]["Amount"] > 0){
-            
             
             $chekAccount = $pdo->prepare("SELECT * FROM UsedCode_table WHERE ID_code = :id_code AND ID_user = :id_account");
             $chekAccount->execute(array('id_code' => $DataDB[0]["ID_code"], 'id_account' => $ID_Account) );
@@ -30,19 +28,26 @@
             
             if(count($chekAccount) < 1){
                 
+                //Добавить в таблицу использованых кодов
                 $UseCode = $pdo->prepare("INSERT INTO UsedCode_table (ID_UsedCode, ID_code, ID_user) VALUES (NULL, :id_code, :id_account)");
                 $UseCode->execute(array('id_code' => $DataDB[0]["ID_code"], 'id_account' => $ID_Account) );
                 
-                    $Amount = $pdo->prepare("UPDATE QRcodes_table SET Amount = Amount -1  WHERE ID_code = :ID_code");
-                    $Amount->execute(array('ID_code' => $DataDB[0]["ID_code"]) );
+                    //Начислить бонусы на аккаунт
+                    $BonusSet = $pdo->prepare("UPDATE Accounts_table SET Bonus = Bonus + :Bonus WHERE ID_user = :id_account");
+                    $BonusSet->execute(array('Bonus' => $DataDB[0]["Bonus"], 'id_account' => $ID_Account ) );
+                
+                        //Уменьшить количество кодов
+                        $Amount = $pdo->prepare("UPDATE QRcodes_table SET Amount = Amount -1  WHERE ID_code = :ID_code");
+                        $Amount->execute( array('ID_code' => $DataDB[0]["ID_code"]) );
+                
+//                    $Amount = $pdo->prepare("UPDATE QRcodes_table SET Amount = Amount -1  WHERE ID_code = :ID_code");
                     
                 echo json_encode( array('status' => true, 'data' => $DataDB[0]["Bonus"], 'message' => "Код активирован") ) ;
-                
             }else{
+                //Код уже был активирован на данном аккаунте
                 echo json_encode( array('status' => false, 'data' => true, 'message' => "Вы уже активировали код") );
             }
-            
-
+        
         }else{
             //Код был, но количество использований превышено.
             echo json_encode( array('status' => false, 'data' => null, 'message' => "Данный код более не действителен") );
