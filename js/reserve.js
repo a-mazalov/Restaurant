@@ -62,7 +62,7 @@ var ReserveCard = new Vue({
             this.$http.get(this.queryPoint,  { params: SendReserve } ).then(function(response){
             
                 console.log(response.data);
-                alert("Отправлено");
+//                alert("Отправлено");
                 
             });
                 

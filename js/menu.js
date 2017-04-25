@@ -3,9 +3,9 @@ var MenuList = new Vue({
 el: '#MenuList',
 data: {
     //            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
-//    queryPoint: 'http://workprojectmobile/www/php/menu-query.php',
+    queryPoint: 'http://workprojectmobile/php/menu-query.php',
     //            queryPoint: '/php/menu-query.php',
-                queryPoint: 'http://d0008482.atservers.net/Felix/menu-query.php',
+//                queryPoint: 'http://d0008482.atservers.net/Felix/menu-query.php',
     posts: {},
     post: {},
     error: false,

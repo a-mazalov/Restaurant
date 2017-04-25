@@ -33,7 +33,7 @@ var Account = new Vue({
             if(response.data != " " ){
                 this.dataAccount = JSON.parse(response.data);
                 Local.Set("Account",this.dataAccount);
-                this.showSnackBar("Вход успешен");
+//                this.showSnackBar("Вход успешен");
                 window.location = "index.html";
             }else{
                 this.showSnackBar("Неверный телефон или пароль!");
@@ -63,9 +63,15 @@ var Account = new Vue({
 
 //            this.windowBlock.network = networkStatus;
 //            console.log(this.windowBlock.network + "tools: "+networkStatus);
+        },
+        navigation: function(){
+            if ( !isEmpty(Local.Get("Account")) ){
+                window.location.href="index.html";
+            }
         }
     },
     created: function () {
+        this.navigation();
 //       if(this.network = checkConnection() ){
 //           this.welcom = true;
 //       }else{

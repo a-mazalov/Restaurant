@@ -33,7 +33,7 @@
 
 <!--------------------------------------------------------------------->
 
-<div id="qr-code" class="qr-code" v-bind:class="{ 'brick-wall': !scaning }">
+<div id="qr-code" class="qr-code" v-bind:class="{ 'brick-wall': !scaning }" v-cloak>
 <!--   v-bind:class="{ brick-wall: true }"-->
     <!--<button onclick="qrScanJ()">Сканировать</button>&ndash;&gt;-->
 <!--    <div v-else class="check">-->
@@ -60,7 +60,7 @@
                     <md-button class="retry md-primary text-trans-none btn-dialog" onclick="retryScan()" v-show="requestСomplete">Повторить</md-button>
     </div>
                     </md-card-content>
-                    errorCode
+<!--                    errorCode-->
                     <br><br>
                     <md-dialog-actions>
                         <md-button class="md-raised text-trans-none btn-dialog" onclick="history.back()">Назад</md-button>

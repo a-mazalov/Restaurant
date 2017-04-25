@@ -1,8 +1,3 @@
-//Vue.use(VueMaterial);
-//new Vue({
-//    el: "#loader"
-//
-//});
 
 class LocalStore{
     constructor(){
@@ -61,7 +56,7 @@ const Order = new Orders();
 //Order.orders.length;
 
 function Sync(section, mode) {
-    let queryPoint = 'http://workprojectmobile/www/php/Sync.php';
+    let queryPoint = 'http://workprojectmobile/php/Sync.php';
     
     let id_Account = Local.Get("Account");
     let dataSync = Local.Get(section);
@@ -145,15 +140,6 @@ function onOffline() {
 function checkConnection() {
     var networkState = navigator.connection.type;
 }
-
-
-
-
-
-function testNet(){
-    alert("tools");
-}
-
 
 
 class Snack{

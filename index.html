@@ -22,7 +22,7 @@
     <title>Restaurant</title>
 </head>
 
-<body>
+<body class="brick-wall">
     
 <!--
     <div id="loader">
@@ -30,9 +30,9 @@
     </div>
 -->
     
-    <div id="header" >
+    <div id="header" v-cloak>
     
-    <md-sidenav  class="md-fixed md-left" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')" md-swipeable :md-swipe-distance="30" :md-swipe-threshold="30" v-cloak>
+    <md-sidenav  class="md-fixed md-left" ref="leftSidenav" v-on:open="open('Left')" v-on:close="close('Left')" md-swipeable :md-swipe-distance="30" :md-swipe-threshold="30">
         <md-toolbar class="md-account-header slidenav-img">
         
         </md-toolbar>
@@ -54,7 +54,7 @@
             </md-list-item>
 
 
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" onclick="location.href='index.html#Head'">
+            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" onclick="location.href='reserve.html'">
                 <md-icon>access_time</md-icon> 
                 <span>Заказ столика</span>
             </md-list-item>              
@@ -128,7 +128,7 @@
     </div>
     
     <!--Инициализация vue-material-->
-    <div id="Main-app"> 
+    <div id="Main-app" v-cloak> 
     
     <div class="container-fluid banner vertical-align text-center" id="Head">
         <div class="row">
@@ -143,8 +143,6 @@
 
         </div>
     </div>
-    <button onclick="checkConnection()">inet</button>
-    <button onclick="testNet()">test</button>
 <!--------------------------------------------------------------------->
     <div class="container-fluid " data-row-decoration>
         <div class="row">
