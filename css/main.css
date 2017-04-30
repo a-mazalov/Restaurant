@@ -169,6 +169,7 @@ html {
     background: #363636;
     background-size: cover;
     -webkit-clip-path: polygon(0 5vw, 100% 0, 100% calc(100% - 5vw), 0% 100%); 
+    overflow: hidden;
 }
 .banner-gallery .md-whiteframe{
     margin: 10px 0;
@@ -294,7 +295,9 @@ html {
 /*    align-items: center;*/
     justify-content: center;
 }
-
+.brick-wall{
+    background: url(../img/brickwall.png);
+}
 
 .border {
     border: 1px solid black;
