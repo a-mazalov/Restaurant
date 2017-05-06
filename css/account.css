@@ -50,7 +50,8 @@
   transform: translateX(30px);
 }
 
-.md-card-header .md-icon{
+.md-card-header .md-title-18 .md-icon, 
+.md-card-header .md-title .md-icon {
     margin-top: 10px;
 }
 .totals{

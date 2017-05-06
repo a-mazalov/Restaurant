@@ -16,12 +16,27 @@ var OrdersList = new Vue({
         LocalOrders(){
             this.ListOrders = Order.ListOrders;
         }, 
+        Plus: function(item,index){
+            this.ListOrders[index].Count += 1;
+            Local.Set("Orders",this.ListOrders); 
+            this.totalPrice();
+        },
+        Minus: function(item,index){
+            if(this.ListOrders[index].Count > 1){   
+                this.ListOrders[index].Count -= 1;
+                Local.Set("Orders",this.ListOrders);  
+                this.totalPrice();
+            }
+        },
         totalPrice: function(){
             this.totalprice = 0;
             let price = 0;
             for (var i = 0; i < this.ListOrders.length; i++) {
-                console.log(this.ListOrders[i].Price_dish);
-                price += parseInt(this.ListOrders[i].Price_dish * 100)/100;
+//                console.log(this.ListOrders[i].Price_dish);
+                let DataDish = this.ListOrders[i];
+                
+                
+                price += parseInt( (DataDish.Price_dish * DataDish.Count) * 100)/100;
             }
             this.totalprice = price.toFixed(2);
         },

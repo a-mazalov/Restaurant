@@ -79,15 +79,24 @@
             <md-card-header-text class="vertical-align">
                 <div class="md-title-18">{{item.Title_dish}}</div>
             </md-card-header-text>
+
+
+            
+            <md-button class="md-icon-button md-list-action" v-on:click.native="Minus(item,index)">
+                <md-icon class="md-primary">remove_circle_outline</md-icon>
+            </md-button>            
+            <div class="price vertical-align">
+                <span>{{ item.Count }}</span>
+            </div>
+            <md-button class="md-icon-button md-list-action" v-on:click.native="Plus(item,index)">
+                <md-icon class="md-primary">control_point</md-icon>
+            </md-button>
+
+           
             <div class="price vertical-align">
                 <span>{{ item.Price_dish }}р</span>
             </div>
-
-            <!--
-            <md-button class="md-icon-button md-list-action">
-                <md-icon class="md-primary">control_point</md-icon>
-            </md-button>
--->
+           
             <md-button class="md-icon-button md-list-action" v-on:click.native="removeOrd(item)">
                 <md-icon class="md-primary">clear</md-icon>
             </md-button>

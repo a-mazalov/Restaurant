@@ -37,9 +37,30 @@ class Orders {
         this.ListOrders = Local.Get('Orders');
     }
     Add(item){
-        this.ListOrders.push(item); 
+
+        let SearchItem;
+        
+        //Поиск уже имеющуюся записи
+        for (let i = 0; i < this.ListOrders.length; i++) {
+            if (this.ListOrders[i].ID_dish == item.ID_dish) {
+                    //Если запись есть, записать ее индекс
+                    SearchItem = i;
+                break;
+            } else {
+                SearchItem = -1;
+            }
+        }
+        
+        if ( SearchItem > -1 ){
+            this.ListOrders[SearchItem].Count += 1;
+        }
+        else{   
+            //Если записи небыло, установить количество = 1;
+            item.Count = 1;
+            this.ListOrders.push(item); 
+        }
+        //Запись в хранилище
         Local.Set("Orders",this.ListOrders);
-        console.log(this.ListOrders);
     }
     Remove(item,index){
 //        let index = this.ListOrders.indexOf(item);

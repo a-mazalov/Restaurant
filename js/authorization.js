@@ -16,7 +16,7 @@ var Account = new Vue({
             telephone: '',
             password: ''
         },
-        queryPointRegistr: 'http://workprojectmobile/www/php/registrations.php',
+        queryPointRegistr: 'http://workprojectmobile/php/registrations.php',
 //        queryPointRegistr: 'http://d0008482.atservers.net/Felix/registrations.php',
         dataRegister: {
             name: '',
