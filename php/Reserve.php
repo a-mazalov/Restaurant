@@ -16,12 +16,20 @@
 
     
     $Order = $DataReserve["Order"];
-    
+//    var_dump($Order);
+
+
+
 //    echo $ID_Account;  
 //    echo $DataInput;
 //    var_dump($DataInput);
 //    var_dump($Order);
 //    echo $Order;
+
+
+
+
+
 
 
     if ( isset($Order) ){
@@ -46,20 +54,35 @@
 
     if ($CheckOrder){
         
-        var_dump($Order);
+//        var_dump($Order);
         
         $ID_reserve = $pdo->lastInsertId();
         
-        $ResMenu = $pdo->prepare('INSERT INTO ReserveMenu_table (ID_resMenu, ID_reserve, ID_dish) VALUES (NULL, :id_reserve, :id_dish)');
+        $ResMenu = $pdo->prepare('INSERT INTO ReserveMenu_table (ID_resMenu, ID_reserve, ID_dish, Amount_dish) VALUES (NULL, :id_reserve, :id_dish, :amount_dish)');
            
         for($i = 0, $arr_l = count($Order); $i<$arr_l; $i++){
-        
+            
+//            echo $Order[$i]["Amount"];
+            
             $ResMenu->execute(array(
                 'id_dish' => $Order[$i]["ID_dish"],
+                'amount_dish' => $Order[$i]["Amount"],
                 'id_reserve' => $ID_reserve
             ));
+//            print_r($Order[$i]["Amount"]);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 
 //            for($i = 0, $arr_l = count($Order); $i<$arr_l; $i++){
 ////                echo $ArrayDish[$i];

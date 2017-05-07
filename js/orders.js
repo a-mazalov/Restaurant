@@ -17,13 +17,13 @@ var OrdersList = new Vue({
             this.ListOrders = Order.ListOrders;
         }, 
         Plus: function(item,index){
-            this.ListOrders[index].Count += 1;
+            this.ListOrders[index].Amount += 1;
             Local.Set("Orders",this.ListOrders); 
             this.totalPrice();
         },
         Minus: function(item,index){
-            if(this.ListOrders[index].Count > 1){   
-                this.ListOrders[index].Count -= 1;
+            if(this.ListOrders[index].Amount > 1){   
+                this.ListOrders[index].Amount -= 1;
                 Local.Set("Orders",this.ListOrders);  
                 this.totalPrice();
             }
@@ -36,7 +36,7 @@ var OrdersList = new Vue({
                 let DataDish = this.ListOrders[i];
                 
                 
-                price += parseInt( (DataDish.Price_dish * DataDish.Count) * 100)/100;
+                price += parseInt( (DataDish.Price_dish * DataDish.Amount) * 100)/100;
             }
             this.totalprice = price.toFixed(2);
         },

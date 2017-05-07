@@ -84,7 +84,14 @@
     height: 128px;
     min-height: 128px;
     border-radius: 128px
+
 }
+
+.menu-cards .md-avatar.md-big img{
+
+}
+
+
 .menu-cards .md-card .md-card-header:last-child {
     margin: 0;
 }

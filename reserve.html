@@ -252,7 +252,7 @@
     </md-card-header>
     <md-card-content class="text-center">
 
-        <md-checkbox class="md-primary" id="my-test1" name="my-test1" v-model="checkbox" v-on:click.native="GetOrders(); showBlock = (showBlock != true) ? true : false">Приготовить блюда за ранее</md-checkbox>
+        <md-checkbox class="md-primary" id="my-test1" name="my-test1" v-model="checkbox" v-on:click.native="GetOrders(); showBlock = (showBlock != true) ? true : false">Приготовить блюда заранее</md-checkbox>
 
         <md-card-content v-show="showBlock" class="orders-info">
             <div v-if="countDish > 0">
@@ -278,7 +278,7 @@
         
     <md-card-actions class="vertical-align">
         
-        <br>
+<!--        <br>-->
         <md-button class="md-raised md-primary text-trans-none" onclick="location.href='orders.html'">Перейти в корзину заказов</md-button>
         
     </md-card-actions>

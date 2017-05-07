@@ -52,11 +52,11 @@ class Orders {
         }
         
         if ( SearchItem > -1 ){
-            this.ListOrders[SearchItem].Count += 1;
+            this.ListOrders[SearchItem].Amount += 1;
         }
         else{   
             //Если записи небыло, установить количество = 1;
-            item.Count = 1;
+            item.Amount = 1;
             this.ListOrders.push(item); 
         }
         //Запись в хранилище

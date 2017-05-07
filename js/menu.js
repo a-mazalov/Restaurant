@@ -9,7 +9,8 @@ data: {
     posts: {},
     post: {},
     error: false,
-    listFavorite: []
+    listFavorite: [],
+    imgTest: "img/food/id_12.jpg"
 },
 methods: {
     getPosts: function () {
