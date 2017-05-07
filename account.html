@@ -63,7 +63,22 @@
                             </md-card-header>
                             <md-card-content>
                                 <p class="md-primary account-info text-center" v-show="true">Создайте свое меню из списка избранного!</p>
-
+                                
+                                <md-input-container class="inp-create-menu">
+                                    <label>Название</label>
+                                    <md-input placeholder="Введите название группы" class="text-center" v-model="groupName"></md-input>
+                                </md-input-container>
+                                    <md-button v-on:click.native="customMenu[groupName] = []; groupName='' ">Create Group</md-button>
+                                    <md-button v-on:click.native="customMenu[groupName].push({dish: 456})">AddToGroup</md-button>
+                                
+                                
+<!--                                <my-component></my-component>-->
+                                <div v-for="(group, key) in customMenu">
+                                   {{key}}-{{group}}
+                                </div>
+                                
+                                
+                                
                             </md-card-content>
                             
                         </md-card>          
@@ -80,6 +95,9 @@
         </md-button> 
     </div>
         <div v-else class="md-subhead text-trans-none text-center"><br>Вы еще не добавили любимые блюда!<br><br></div>
+        
+        
+        
 </md-card-header>
     <div class="md-divider" v-show="accListFavorite.length"></div>  
 
@@ -105,22 +123,38 @@
             <div class="price">
                 <!--                <span>12р</span>-->
             </div>
+            
+ 
+            
+            
             <md-menu md-direction="bottom left" md-size="4">
-                <md-button class="md-icon-button" md-menu-trigger>
+                <md-button class="md-icon-button" md-menu-trigger >
                     <md-icon>create_new_folder</md-icon>
                 </md-button>
 
-                <md-menu-content>
-                    <md-menu-item>
-                        <span>List_1</span>
-                        <md-icon>folder</md-icon>
-                    </md-menu-item>
-
-                    <md-menu-item>
-                        <span>List_2</span>
-                        <md-icon>folder</md-icon>
-                    </md-menu-item>
-                </md-menu-content>
+<!--                    <div >-->
+<!--                        {{key}}-{{group}}-->
+                    
+    
+                        <md-menu-content >
+                           
+                            <md-menu-item v-for="(group, key) in customMenu"  v-on:click.native="customMenu[key].push(item)">
+                                <span>{{key}}</span>
+                                <md-icon>folder</md-icon>
+                            </md-menu-item>
+                            
+<!--                            v-on:click.native="customMenu[groupName] = []; groupName=''; inpCreate=true; "-->
+                <md-button v-on:click.native="inpCreate=true; " v-show="!inpCreate" class="md-primary md-raised text-trans-none">Создать группу</md-button>
+                <md-button v-on:click.native="customMenu[groupName] = []; inpCreate=false; groupName='';" v-show="inpCreate" class="md-primary md-raised text-trans-none">Подтвердить</md-button>
+                                <md-input-container class="inp-create-menu" v-if="inpCreate">
+                                    <label>Название</label>
+                                    <md-input placeholder="Введите название группы" class="text-center" v-model="groupName"></md-input>
+                                </md-input-container>
+                        
+                        </md-menu-content>
+                
+<!--                    </div>-->
+                
                 <md-button class="md-icon-button md-list-action" v-on:click.native="removeFav(item)">
                     <md-icon class="md-primary">clear</md-icon>
                 </md-button>

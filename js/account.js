@@ -1,4 +1,11 @@
 Vue.use(VueMaterial);
+
+
+
+var Child = {
+  template: '<div>Пользовательский компонент22!</div>'
+};
+
 var Account = new Vue({
     el: "#Account",
     data: {
@@ -10,7 +17,19 @@ var Account = new Vue({
         loadServer: false,
         serverFav: [],
         countServerFav: 0,
-        countLocalFav: 0
+        countLocalFav: 0,
+        groupName: '',
+        inpCreate: false,
+        customMenu: {
+            it: [
+            {
+                ID_dish: 2
+            },
+            {
+                ID_dish: 56
+            }
+            ]
+        }
     },
     methods: {        
         showSnackBar(Message,btn) {
@@ -98,6 +117,10 @@ var Account = new Vue({
             window.location = "authorization.html";
         }
     },
+    components: {
+    // <my-component> будет доступен только в шаблоне родителя
+    'my-component': Child
+    },
     created: function(){
 //        let Local = new LocalStore();
         this.accFavorite();
@@ -105,3 +128,6 @@ var Account = new Vue({
     }
 
 });
+
+
+
