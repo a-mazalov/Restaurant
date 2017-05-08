@@ -63,6 +63,7 @@
                             </md-card-header>
                             <md-card-content>
                                 <p class="md-primary account-info text-center" v-show="true">Создайте свое меню из списка избранного!</p>
+<!--
                                 
                                 <md-input-container class="inp-create-menu">
                                     <label>Название</label>
@@ -70,14 +71,30 @@
                                 </md-input-container>
                                     <md-button v-on:click.native="customMenu[groupName] = []; groupName='' ">Create Group</md-button>
                                     <md-button v-on:click.native="customMenu[groupName].push({dish: 456})">AddToGroup</md-button>
+-->
                                 
                                 
 <!--                                <my-component></my-component>-->
-                                <div v-for="(group, key) in customMenu">
-                                   {{key}}-{{group}}
-                                </div>
-                                
-                                
+<!--                               {{key}}-{{group}}-->
+                                   
+                        <md-list class="group">
+                        
+                            <md-list-item v-for="(group, key) in customMenu" class="group-item">
+                              <md-icon>whatshot</md-icon>
+                              <span>{{key}}</span>
+
+                              <md-list-expand>
+                                <md-list>
+                                  <md-list-item class="md-inset">World</md-list-item>
+                                  <md-list-item class="md-inset">Americas</md-list-item>
+                                  <md-list-item class="md-inset">Europe</md-list-item>
+                                </md-list>
+                              </md-list-expand>
+                            </md-list-item>
+
+                        </md-list>
+                            
+
                                 
                             </md-card-content>
                             
@@ -136,22 +153,34 @@
 <!--                        {{key}}-{{group}}-->
                     
     
-                        <md-menu-content >
-                           
-                            <md-menu-item v-for="(group, key) in customMenu"  v-on:click.native="customMenu[key].push(item)">
-                                <span>{{key}}</span>
-                                <md-icon>folder</md-icon>
-                            </md-menu-item>
-                            
+        <md-menu-content >
+
+            <md-menu-item v-for="(group, key) in customMenu"  v-on:click.native="addToGroup(key,item)">
+                <span>{{key}}</span>
+                <md-icon>folder</md-icon>
+            </md-menu-item>
+
 <!--                            v-on:click.native="customMenu[groupName] = []; groupName=''; inpCreate=true; "-->
-                <md-button v-on:click.native="inpCreate=true; " v-show="!inpCreate" class="md-primary md-raised text-trans-none">Создать группу</md-button>
-                <md-button v-on:click.native="customMenu[groupName] = []; inpCreate=false; groupName='';" v-show="inpCreate" class="md-primary md-raised text-trans-none">Подтвердить</md-button>
-                                <md-input-container class="inp-create-menu" v-if="inpCreate">
-                                    <label>Название</label>
-                                    <md-input placeholder="Введите название группы" class="text-center" v-model="groupName"></md-input>
-                                </md-input-container>
-                        
-                        </md-menu-content>
+<md-button 
+    v-on:click.native="inpCreate=true; " 
+    v-show="!inpCreate" 
+    class="md-primary md-raised text-trans-none">
+    Создать группу
+</md-button>
+
+<md-button 
+    v-on:click.native="createGroup()" 
+    v-show="inpCreate" 
+    class="md-primary md-raised text-trans-none">
+    Подтвердить
+</md-button>
+                
+    <md-input-container class="inp-create-menu" v-if="inpCreate">
+        <label>Название</label>
+        <md-input placeholder="Введите название группы" class="text-center" v-model="groupName"></md-input>
+    </md-input-container>
+
+        </md-menu-content>
                 
 <!--                    </div>-->
                 

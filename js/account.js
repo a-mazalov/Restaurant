@@ -21,14 +21,10 @@ var Account = new Vue({
         groupName: '',
         inpCreate: false,
         customMenu: {
-            it: [
-            {
-                ID_dish: 2
-            },
-            {
-                ID_dish: 56
-            }
-            ]
+            Dishes: [],
+            Fruit: [],
+            Fruit2: [],
+            Fruit3: []
         }
     },
     methods: {        
@@ -115,6 +111,20 @@ var Account = new Vue({
 //            window.localStorage.setItem("Account", null);
 //            window.location = "authorization.html";
             window.location = "authorization.html";
+        },
+        createGroup: function(){
+            this.customMenu[this.groupName] = new Array(); 
+            this.inpCreate = false; 
+            this.groupName = '';
+        },
+        addToGroup: function(key,item){
+            this.customMenu[key].push(item);
+            this.$forceUpdate();
+//            this.customMenu.splice(key, 1, "valueSet")
+//            Vue.set(this.customMenu, key, item)
+//            this.inpCreate = true; 
+//            this.groupName = 'sfdf';
+//            return;
         }
     },
     components: {
