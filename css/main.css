@@ -336,15 +336,7 @@ html {
 .border {
     border: 1px solid black;
 }
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .6);
-}
-::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .6);
-}
+
 .text-center {
     text-align: center;
 }
@@ -362,6 +354,24 @@ html {
 .margin-top {
     margin-top: 65px;
 }
+
+.lowerText{
+    text-transform: lowercase;
+}
+.lowerText:first-letter{
+    text-transform: uppercase;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .6);
+}
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .6);
+}
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;

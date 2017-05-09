@@ -27,6 +27,7 @@ methods: {
         this.$http.get(this.queryPoint, options).then(function (response) {
             // Запрос на сервер, получение всех блюд
             this.posts = JSON.parse(response.data);
+            console.log(JSON.parse(response.data));
             Local.Set("Menu",this.posts);
             console.log(this.posts);
 
