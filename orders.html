@@ -56,7 +56,7 @@
             <md-icon class="md-primary">clear</md-icon>
         </md-button> 
     </div>
-        <div v-else class="md-subhead text-trans-none text-center"><br>Вы еще ничего не добавили!<br><br></div>
+        <div v-else class="md-subhead text-trans-none text-center"><br><br>Вы еще ничего не добавили!<br><br><br></div>
 </md-card-header>
     <div class="md-divider" v-show="ListOrders.length"></div>  
 
@@ -109,7 +109,7 @@
 
 </md-card>
 <!----------------------------------------------------------------------------->             
-<md-card>
+<md-card v-if="ListOrders.length">
         <md-card-header>
             <div class="md-title-18 text-center">Итого
                 <br>

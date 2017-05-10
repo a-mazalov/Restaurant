@@ -15,20 +15,14 @@ var Account = new Vue({
         removedItem: {},
         remItmsCheck: "",
         snackMessage: "",
+        DelayDel: true,
         loadServer: false,
         serverFav: [],
         countServerFav: 0,
         countLocalFav: 0,
         groupName: '',
         inpCreate: false,
-        customMenu: {
-            DISHES: [{
-                Title_dish: "asd"
-            }],
-            DISHES2: [{
-                Title_dish: "asd"
-            }]
-        }
+        customMenu: {}
     },
     methods: {
         showSnackBar(Message, btn) {
@@ -106,18 +100,46 @@ var Account = new Vue({
                 Local.Remove("Account");
                 window.location = "authorization.html";
             },
+            localCustomGroup: function(){
+                if (window.localStorage.CustomGroup) {
+                    this.customMenu = Local.Get("CustomGroup");
+                } else {
+                    return
+                }
+                
+            },
             createGroup: function () {
                 this.customMenu[this.groupName] = new Array();
                 this.inpCreate = false;
                 this.groupName = '';
+                Local.Set("CustomGroup", this.customMenu);
             },
             deleteGroup: function(key){
                 delete this.customMenu[key];
+//                this.checkValues()
                 this.$forceUpdate();
+                Local.Set("CustomGroup", this.customMenu);
+            },
+            TimerDelete: function(){
+                
+//                $refs.menu.open
+//                alert("asd");
+//                this.$refs.menuGroup.open();
+                this.DelayDel = true;
+                setTimeout(function(){
+                    Account.DelayDel = false; 
+                },2000);
+//                this.$forceUpdate();
+            },
+            checkValues: function(key){
+                let status = isEmpty(this.customMenu[key]);  
+                return status;
+                
             },
             addToGroup: function (key, item) {
                 this.customMenu[key].push(item);
                 this.$forceUpdate();
+                Local.Set("CustomGroup", this.customMenu);
             },
             removeItemGroup: function (index, key) {
                 this.remItmsCheck = "group";
@@ -129,12 +151,15 @@ var Account = new Vue({
                 //Перезапись списка избранного
                 //            Local.Set("Orders",this.ListOrders);
                 this.showSnackBar("Запись удалена"); //Оповещение
+                Local.Set("CustomGroup", this.customMenu);
             },
             returnItemGroup: function () { //Возвращает последний удаленный элемент
 
                 this.customMenu[this.lastkey].splice(this.indexLastItem, -1, this.removedItem);
 //                Local.Set("Orders", this.ListOrders);
                 this.$refs.snackbar.close();
+                this.$forceUpdate();
+                Local.Set("CustomGroup", this.customMenu);
 
             },
             removedItems: function () {
@@ -147,16 +172,23 @@ var Account = new Vue({
                         this.returnRemoveFav();
                         break;
                 }
+            },
+            addGroupToOrder: function(key){
+                
+                for(item in this.customMenu[key]){
+                    Order.Add(this.customMenu[key][item]);
+                }
+                
+                
+//                console.log(this.customMenu[key]);
+//                Order.Add(this.customMenu[key]);
             }
 
-    },
-    components: {
-        // <my-component> будет доступен только в шаблоне родителя
-        'my-component': Child
     },
     created: function () {
         //        let Local = new LocalStore();
         this.accFavorite();
+        this.localCustomGroup();
         this.getInfAccount();
     }
 

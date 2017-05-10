@@ -356,12 +356,21 @@ html {
 }
 
 .lowerText{
-    text-transform: lowercase;
+    text-transform: lowercase !important;
 }
 .lowerText:first-letter{
-    text-transform: uppercase;
+    text-transform: uppercase !important;
 }
-
+.md-card .md-card-expand .md-card-content {
+    position: relative; 
+    z-index: 1;
+    transform: translate3D(0); 
+    will-change: margin-bottom; 
+/*    height: */
+    transition: margin .2s cubic-bezier(.35, 0, .25, 1); 
+    transition: margin .2s linear; 
+/*    transition: none !important;*/
+}
 ::-webkit-scrollbar {
     width: 6px;
 }

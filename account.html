@@ -30,258 +30,251 @@
 
     <!--------------------------------------------------------------------->
 
-    <div id="Account" class="Account" v-cloak>
-        <div class="container-fluid">
-            <div class="row">
-                <md-toolbar class="md-dense shadow navbar-fixed-top">
-                    <md-button class="md-icon-button" onclick="history.back()">
-                        <md-icon>arrow_back</md-icon>
-                    </md-button>
-<!--                    <h2 class="md-title" style="flex: 1">Аккаунт</h2>-->
-                </md-toolbar>
-                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-                    <form novalidate @submit.stop.prevent="submit">
-                       
-                    <div class="vertical-align">
-<!--------------------------------------------------------------------------------------------------->
-                        <md-card>
-                            <md-card-header>
-                                <div class="md-title text-center">Личный кабинет
-                                    <br>
-                                    <md-icon>restaurant_menu</md-icon>
+<div id="Account" class="Account" v-cloak>
+<div class="container-fluid">
+    <div class="row">
+        <md-toolbar class="md-dense shadow navbar-fixed-top">
+            <md-button class="md-icon-button" onclick="history.back()">
+                <md-icon>arrow_back</md-icon>
+            </md-button>
+            <!--                    <h2 class="md-title" style="flex: 1">Аккаунт</h2>-->
+        </md-toolbar>
+        <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+            <form novalidate @submit.stop.prevent="submit">
+
+                <div class="vertical-align">
+                    <!--------------------------------------------------------------------------------------------------->
+                    <md-card>
+                        <md-card-header>
+                            <div class="md-title text-center">Личный кабинет
+                                <br>
+                                <md-icon>restaurant_menu</md-icon>
+                            </div>
+                        </md-card-header>
+                    </md-card>
+                    <!--------------------------------------------------------------------------------------------------->
+                    <md-card>
+                        <md-card-header>
+                            <div class="md-title-18 text-center">Свое меню
+                                <br>
+                                <md-icon>restaurant_menu</md-icon>
+                            </div>
+
+                        </md-card-header>
+                        <md-card-content>
+                            <p class="md-primary account-info text-center" v-show="true">Создайте свое меню из списка избранного!</p>
+                            <md-list class="group">
+
+                                <md-list-item v-for="(group, key) in customMenu" class="group-item">
+                                    <md-icon>whatshot</md-icon>
+                                    <span class="lowerText">{{key}}</span>
+
+
+                                    <md-list-expand>
+                                        <md-list>
+                                            <div v-if="checkValues(key)" class="md-list-item-container md-subhead" style="margin: auto">Вы ничего не добавили</div>
+                                            <md-list-item v-else class="md-inset" v-for="(item,index) in customMenu[key]">
+
+                                                <span class="lowerText">{{item.Title_dish}}</span>
+                                                <md-button class="md-icon-button md-list-action" v-on:click.native="removeItemGroup(index,key)">
+                                                    <md-icon class="md-color-btn">clear</md-icon>
+                                                </md-button>
+                                                
+                                            </md-list-item>
+                                        </md-list>
+                                    </md-list-expand>
+
+
+
+                                    <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuGroup">
+                                        <md-button class="md-icon-button action-group" v-on:click.native="TimerDelete()" md-menu-trigger>
+                                            <md-icon>more_vert</md-icon>
+                                        </md-button>
+                                        <!--                md-menu-trigger-->
+
+                                        <md-menu-content class="lowerText">
+                                            <md-button class="lowerText" v-on:click.native="addGroupToOrder(key)">
+                                                Заказать
+                                            </md-button>
+                                            <!--                    <md-menu-item>Заказать</md-menu-item>-->
+                                            <div class="md-divider"></div>
+                                            <md-button class="md-warn lowerText" v-on:click.native="deleteGroup(key)" v-bind:disabled="DelayDel">Удалить</md-button>
+                                            <!--        <div class="md-button  md-warn" v-on:click.native="deleteGroup(key)" v-bind:disabled="DelayDel">Удалить</div>-->
+                                        </md-menu-content>
+                                    </md-menu>
+                                </md-list-item>
+
+                            </md-list>
+
+
+
+                        </md-card-content>
+
+                    </md-card>
+                    <!--------------------------------------------------------------------------------------------------->
+                    <md-card>
+                        <md-card-header class="padding-bottom-0">
+                            <div class="md-title-18 text-center">Избранное
+                                <br>
+                                <md-icon>restaurant_menu</md-icon>
+                            </div>
+                            <div class="vertical-align-right" v-if="accListFavorite.length">
+                                <md-button class="md-icon-button" v-on:click.native="deleteFav()">
+                                    <md-icon class="md-primary">clear</md-icon>
+                                </md-button>
+                            </div>
+                            <div v-else class="md-subhead text-trans-none text-center">
+                                <br>Вы еще не добавили любимые блюда!
+                                <br>
+                                <br>
+                            </div>
+
+
+
+                        </md-card-header>
+                        <div class="md-divider" v-show="accListFavorite.length"></div>
+
+                        <!--<md-card-header class="vertical-align-right">-->
+
+                        <!--</md-card-header>-->
+
+
+
+
+                        <transition-group name="list" tag="p">
+
+                            <div v-for="(item,index) in accListFavorite" v-bind:key="item">
+
+                                <md-card-header class="list-item">
+                                    <md-avatar class="md-big">
+<!--                                        <img src="img/376447.jpg" class="md-title-18">-->
+                                        <img v-bind:src="item.ImagePath+'.jpg'">
+                                    </md-avatar>
+
+                                    <md-card-header-text class="vertical-align">
+                                        <div class="md-title-18">{{item.Title_dish}}</div>
+                                    </md-card-header-text>
+                                    <div class="price">
+                                        <!--                <span>12р</span>-->
+                                    </div>
+
+
+
+
+                                    <md-menu md-direction="bottom left" md-size="4">
+                                        <md-button class="md-icon-button" md-menu-trigger>
+                                            <md-icon>create_new_folder</md-icon>
+                                        </md-button>
+
+                                        <!--                    <div >-->
+                                        <!--                        {{key}}-{{group}}-->
+
+
+                                        <md-menu-content>
+
+                                            <md-menu-item v-for="(group, key) in customMenu" v-on:click.native="addToGroup(key,item)">
+                                                <span class="lowerText">{{key}}</span>
+                                                <md-icon>folder</md-icon>
+                                            </md-menu-item>
+
+                                            <!--                            v-on:click.native="customMenu[groupName] = []; groupName=''; inpCreate=true; "-->
+                                            <md-button v-on:click.native="inpCreate=true; " v-show="!inpCreate" class="md-primary md-raised text-trans-none">
+                                                Создать группу
+                                            </md-button>
+
+                                            <md-button v-on:click.native="createGroup()" v-show="inpCreate" class="md-primary md-raised text-trans-none">
+                                                Подтвердить
+                                            </md-button>
+
+                                            <md-input-container class="inp-create-menu" v-if="inpCreate">
+                                                <label>Название</label>
+                                                <md-input placeholder="Введите название группы" class="text-center" v-model="groupName"></md-input>
+                                            </md-input-container>
+
+                                        </md-menu-content>
+
+                                        <!--                    </div>-->
+
+                                        <md-button class="md-icon-button md-list-action" v-on:click.native="removeFav(item)">
+                                            <md-icon class="md-primary">clear</md-icon>
+                                        </md-button>
+                                    </md-menu>
+
+                                </md-card-header>
+                                <div class="md-divider"></div>
+                            </div>
+                        </transition-group>
+
+
+                    </md-card>
+                    <!--------------------------------------------------------------------------------------------------->
+                    <md-card>
+                        <md-card-content class="vertical-align">
+                            <p class="md-primary account-info">{{infoAccount.Name}} {{infoAccount.LastName}}</p>
+                            <p class="md-primary account-info">{{infoAccount.Telephone}}</p>
+                            <!--                                <p class="md-primary account-info">{{infoAccount.Telephone}}</p>-->
+                            <!--                                <p class="md-primary account-info text-center">Синхронизация</p>-->
+
+
+
+                            <md-button class="md-warn md-raised text-trans-none" @click.native="openDialog('dialog5'); CheckFavServ()">
+                                Синхронизация
+                                <md-icon class="">cloud</md-icon>
+                            </md-button>
+                        </md-card-content>
+
+                        <md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog5" class="text-center">
+                            <md-dialog-title>Синхронизация записей</md-dialog-title>
+
+                            <div class="row sync-info">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-6 border-sync ">
+                                        <md-icon class="md-primary">cloud_off</md-icon>
+                                        <p>
+                                            Количество локальных
+                                            <br> записей
+                                            <br>
+                                            <span class="vertical-align col-fav">{{countLocalFav}}</span>
+                                        </p>
+                                        <md-button class="md-primary md-raised text-trans-none" @click.native="SyncFavWrite()">Загрузить на сервер</md-button>
+                                    </div>
+                                    <div class="col-xs-6 border-sync">
+                                        <md-icon class="md-primary">cloud_done</md-icon>
+                                        <p>
+                                            Количество записей
+                                            <br> на сервере
+                                            <br>
+                                            <span class="vertical-align col-fav">{{countServerFav}}</span>
+                                        </p>
+                                        <md-button class="md-primary md-raised text-trans-none" @click.native="SyncFavRead()" v-cloak>Выгрузить с сервера</md-button>
+                                    </div>
+
+                                    <!--            :disabled="countServerFav"-->
                                 </div>
-                            </md-card-header>
-                        </md-card>  
-<!--------------------------------------------------------------------------------------------------->                                              
-                        <md-card>
-                            <md-card-header>
-                                <div class="md-title-18 text-center">Свое меню
-                                    <br>
-                                    <md-icon>restaurant_menu</md-icon>
-                                </div>
-                                
-                            </md-card-header>
-                            <md-card-content>
-                                <p class="md-primary account-info text-center" v-show="true">Создайте свое меню из списка избранного!</p>
-                                
-                                <md-input-container class="inp-create-menu">
-                                    <label>Название</label>
-                                    <md-input placeholder="Введите название группы" class="text-center" v-model="groupName"></md-input>
-                                </md-input-container>
-                                    <md-button v-on:click.native="customMenu[groupName] = []; groupName='' ">Create Group</md-button>
-                                    <md-button v-on:click.native="customMenu[groupName].push({dish: 456})">AddToGroup</md-button>
-                                
-                                
-<!--                                <my-component></my-component>-->
-<!--                               {{key}}-{{group}}-->
-                                   
-                        <md-list class="group">
-                        
-                            <md-list-item v-for="(group, key) in customMenu" class="group-item">
-                              <md-icon>whatshot</md-icon>
-                              <span class="lowerText">{{key}}</span>
+                            </div>
+                            <md-dialog-actions>
+                                <md-button class="md-raised text-trans-none btn-dialog" @click.native="closeDialog('dialog5')">Закрыть</md-button>
+                            </md-dialog-actions>
 
-
-                              <md-list-expand>
-                                <md-list>
-                                  <md-list-item class="md-inset" v-for="(item,index) in customMenu[key]">
-
-<span class="lowerText">{{item.Title_dish}}</span>
-<md-button class="md-icon-button md-list-action" v-on:click.native="removeItemGroup(index,key)">
-    <md-icon class="md-color-btn">clear</md-icon>
-</md-button>
-                                  </md-list-item>
-                                </md-list>
-                              
-                              </md-list-expand>
-                                                            
-
-                
-            <md-menu md-size="2" md-direction="bottom left" style="order: 50;">
-                <md-button class="md-icon-button action-group border" md-menu-trigger>
-                    <md-icon>more_vert</md-icon>
-                </md-button>
-                
-
-                <md-menu-content>
-                    <md-menu-item>My Item 1</md-menu-item>
-                    <md-menu-item>My Item 2</md-menu-item>
-                    <md-menu-item v-on:click.native="deleteGroup(key)">Delete</md-menu-item>
-                </md-menu-content>
-                
-            </md-menu>  
-                            </md-list-item>
-
-                        </md-list>
-                            
-
-                                
-                            </md-card-content>
-                            
-                        </md-card>          
-<!--------------------------------------------------------------------------------------------------->                                                 
-<md-card>
-<md-card-header class="padding-bottom-0">
-    <div class="md-title-18 text-center">Избранное
-        <br>
-        <md-icon>restaurant_menu</md-icon>
-    </div>
-    <div class="vertical-align-right" v-if="accListFavorite.length">
-        <md-button class="md-icon-button" v-on:click.native="deleteFav()">
-            <md-icon class="md-primary">clear</md-icon>
-        </md-button> 
-    </div>
-        <div v-else class="md-subhead text-trans-none text-center"><br>Вы еще не добавили любимые блюда!<br><br></div>
-        
-        
-        
-</md-card-header>
-    <div class="md-divider" v-show="accListFavorite.length"></div>  
-
-<!--<md-card-header class="vertical-align-right">-->
-
-<!--</md-card-header>-->
-
-
-
-
-<transition-group name="list" tag="p">
-   
-    <div v-for="(item,index) in accListFavorite" v-bind:key="item">
-       
-        <md-card-header class="list-item">
-            <md-avatar class="md-big">
-                <img src="img/376447.jpg" class="md-title-18">
-            </md-avatar>
-
-            <md-card-header-text class="vertical-align">
-                <div class="md-title-18">{{item.Title_dish}}</div>
-            </md-card-header-text>
-            <div class="price">
-                <!--                <span>12р</span>-->
-            </div>
-            
- 
-            
-            
-            <md-menu md-direction="bottom left" md-size="4">
-                <md-button class="md-icon-button" md-menu-trigger >
-                    <md-icon>create_new_folder</md-icon>
-                </md-button>
-
-<!--                    <div >-->
-<!--                        {{key}}-{{group}}-->
-                    
-    
-        <md-menu-content >
-
-            <md-menu-item v-for="(group, key) in customMenu"  v-on:click.native="addToGroup(key,item)">
-                <span>{{key}}</span>
-                <md-icon>folder</md-icon>
-            </md-menu-item>
-
-<!--                            v-on:click.native="customMenu[groupName] = []; groupName=''; inpCreate=true; "-->
-<md-button 
-    v-on:click.native="inpCreate=true; " 
-    v-show="!inpCreate" 
-    class="md-primary md-raised text-trans-none">
-    Создать группу
-</md-button>
-
-<md-button 
-    v-on:click.native="createGroup()" 
-    v-show="inpCreate" 
-    class="md-primary md-raised text-trans-none">
-    Подтвердить
-</md-button>
-                
-    <md-input-container class="inp-create-menu" v-if="inpCreate">
-        <label>Название</label>
-        <md-input placeholder="Введите название группы" class="text-center" v-model="groupName"></md-input>
-    </md-input-container>
-
-        </md-menu-content>
-                
-<!--                    </div>-->
-                
-                <md-button class="md-icon-button md-list-action" v-on:click.native="removeFav(item)">
-                    <md-icon class="md-primary">clear</md-icon>
-                </md-button>
-            </md-menu>
-
-        </md-card-header>
-        <div class="md-divider"></div>
-    </div>
-</transition-group>
-        
-
-</md-card>
-<!--------------------------------------------------------------------------------------------------->                       
-                        <md-card>
-                            <md-card-content class="vertical-align">
-                                <p class="md-primary account-info">{{infoAccount.Name}} {{infoAccount.LastName}}</p>
-                                <p class="md-primary account-info">{{infoAccount.Telephone}}</p>
-<!--                                <p class="md-primary account-info">{{infoAccount.Telephone}}</p>-->
-<!--                                <p class="md-primary account-info text-center">Синхронизация</p>-->
-                      
-
-                  
-<md-button class="md-warn md-raised text-trans-none" @click.native="openDialog('dialog5'); CheckFavServ()">
-   Синхронизация
-   <md-icon class="">cloud</md-icon>
-   </md-button>                                                                       
-</md-card-content>
-
-<md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog5" class="text-center">
-    <md-dialog-title>Синхронизация записей</md-dialog-title>
-
-    <div class="row sync-info">
-        <div class="col-xs-12">
-            <div class="col-xs-6 border-sync ">
-                <md-icon class="md-primary">cloud_off</md-icon>
-                <p>
-                    Количество локальных <br> записей
-                    <br> 
-                    <span class="vertical-align col-fav">{{countLocalFav}}</span>
-                </p>
-                <md-button class="md-primary md-raised text-trans-none" @click.native="SyncFavWrite()">Загрузить на сервер</md-button>
-            </div>
-            <div class="col-xs-6 border-sync">
-                <md-icon class="md-primary">cloud_done</md-icon>
-                <p>
-                    Количество записей <br> на сервере
-                    <br> 
-                    <span class="vertical-align col-fav">{{countServerFav}}</span>
-                </p>
-                <md-button class="md-primary md-raised text-trans-none" @click.native="SyncFavRead()"  v-cloak>Выгрузить с сервера</md-button >
-            </div>
-            
-<!--            :disabled="countServerFav"-->
-        </div>
-    </div>
-    <md-dialog-actions>
-        <md-button class="md-raised text-trans-none btn-dialog" @click.native="closeDialog('dialog5')">Закрыть</md-button>
-    </md-dialog-actions>
-    
-    <div class="clearfix"></div>
-</md-dialog>
-                            <div class="md-divider"></div>
-                            <br>
-                            <div class="md-subhead text-trans-none text-center">Выйти из аккаунта</div>
-                            <md-card-actions class="">
-                                <md-button class="md-raised text-trans-none" v-on:click.native="LoginOut()">Выйти</md-button>
-                            </md-card-actions>
-                        </md-card>
-                    </div>
-                    </form>
+                            <div class="clearfix"></div>
+                        </md-dialog>
+                        <div class="md-divider"></div>
+                        <br>
+                        <div class="md-subhead text-trans-none text-center">Выйти из аккаунта</div>
+                        <md-card-actions class="">
+                            <md-button class="md-raised text-trans-none" v-on:click.native="LoginOut()">Выйти</md-button>
+                        </md-card-actions>
+                    </md-card>
                 </div>
-            </div>
+            </form>
         </div>
-          <md-snackbar ref="snackbar">
-            <span>{{snackMessage}}</span>
-            <md-button class="md-accent" md-theme="light-blue" v-on:click.native="removedItems()">Вернуть</md-button>
-          </md-snackbar>
     </div>
+</div>
+<md-snackbar ref="snackbar">
+    <span>{{snackMessage}}</span>
+    <md-button class="md-accent" md-theme="light-blue" v-on:click.native="removedItems()">Вернуть</md-button>
+</md-snackbar>
+</div>
 
 
     <!--------------------------------------------------------------------->
@@ -297,7 +290,7 @@
     <script type="text/javascript" src="js/tools.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/account.js"></script>
-<!--    <script type="text/javascript" src="js/authorization.js"></script>-->
+    <!--    <script type="text/javascript" src="js/authorization.js"></script>-->
 
 
 
