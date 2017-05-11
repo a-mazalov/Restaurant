@@ -263,6 +263,9 @@
                         <div class="md-subhead text-trans-none text-center">Выйти из аккаунта</div>
                         <md-card-actions class="">
                             <md-button class="md-raised text-trans-none" v-on:click.native="LoginOut()">Выйти</md-button>
+                        </md-card-actions>                        
+                        <md-card-actions class="">
+                            <md-button class="md-raised text-trans-none" v-on:click.native="showSnackBar('custSnack', getInfAccount)">Snack</md-button>
                         </md-card-actions>
                     </md-card>
                 </div>
@@ -270,9 +273,17 @@
         </div>
     </div>
 </div>
+<!--
 <md-snackbar ref="snackbar">
     <span>{{snackMessage}}</span>
     <md-button class="md-accent" md-theme="light-blue" v-on:click.native="removedItems()">Вернуть</md-button>
+</md-snackbar>
+-->
+   
+   
+<md-snackbar ref="snackbar">
+    <span>{{snackMessage}}</span>
+    <md-button class="md-accent" md-theme="light-blue" v-on:click.native="$refs.snackbar.options">Вернуть</md-button>
 </md-snackbar>
 </div>
 

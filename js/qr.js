@@ -2,7 +2,7 @@ Vue.use(VueMaterial);
 var QrCode = new Vue({
     el: "#qr-code",
     data: {
-        queryPointQR: 'http://workprojectmobile/php/qrCode.php',
+        queryPointQR: 'http://restaurant.atservers.net/php/qrCode.php',
 //        queryPointQR: 'http://workprojectmobile/www/php/qrCode.php',
         scaning: true,
 //        scaning: false,

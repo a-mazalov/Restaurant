@@ -4,6 +4,7 @@ Vue.material.registerTheme({
 
 });
 
+//Vue.config.performance = true;
 
 var Account = new Vue({
     el: "#Account",
@@ -22,16 +23,19 @@ var Account = new Vue({
         groupName: '',
         inpCreate: false,
         customMenu: {},
-        deferDisabled: true
+        deferDisabled: true,
+        opt: function(){ alert("dfg") }
     },
     methods: {
-        showSnackBar(Message, btn) {
+        showSnackBar(Message, funcBtn) {
                 this.snackMessage = Message;
                 this.$refs.snackbar.open();
+                this.$refs.snackbar.options = funcBtn;
             },
             getInfAccount: function () {
                 this.infoAccount = Local.Get("Account");
                 console.log(this.infoAccount);
+                console.log("PI#DA top");
             },
             accFavorite() {
                 if (window.localStorage.Favorite) {
@@ -51,7 +55,7 @@ var Account = new Vue({
 
                 //Перезапись списка избранного
                 Local.Set("Favorite", this.accListFavorite);
-                this.showSnackBar("Запись удалена"); //Оповещение
+                this.showSnackBar("Запись удалена", this.returnRemoveFav); //Оповещение
             },
             returnRemoveFav: function () { //Возвращает последний удаленный элемент
 
@@ -97,7 +101,8 @@ var Account = new Vue({
                 console.log('Closed', type);
             },
             LoginOut: function () {
-                Local.Remove("Account");
+//                Local.Remove("Account");
+                Local.Clear();
                 window.location = "authorization.html";
             },
             localCustomGroup: function(){
@@ -109,16 +114,21 @@ var Account = new Vue({
                 
             },
             createGroup: function () {
-                this.customMenu[this.groupName] = new Array();
-                this.inpCreate = false;
-                this.groupName = '';
-                Local.Set("CustomGroup", this.customMenu);
+                if(Object.keys(this.customMenu).length < 4){
+                    this.customMenu[this.groupName] = new Array();
+                    this.inpCreate = false;
+                    this.groupName = '';
+                    Local.Set("CustomGroup", this.customMenu);
+                }else{
+                    this.showSnackBar("Max");
+                }
             },
             deleteGroup: function(key){
-                delete this.customMenu[key];
-//                this.checkValues()
-                this.$forceUpdate();
-                Local.Set("CustomGroup", this.customMenu);
+                Account.$delete(this.customMenu,key)
+//                delete this.customMenu[key];
+////                this.checkValues()
+//                this.$forceUpdate();
+//                Local.Set("CustomGroup", this.customMenu);
             },
             TimerDelete: function(){
                 
@@ -128,7 +138,7 @@ var Account = new Vue({
                 this.DelayDel = true;
                 setTimeout(function(){
                     Account.DelayDel = false; 
-                },2000);
+                },0000);
 //                this.$forceUpdate();
             },
             checkValues: function(key){
@@ -137,6 +147,7 @@ var Account = new Vue({
                 
             },
             addToGroup: function (key, item) {
+//                Account.$set(this.customMenu,key,[item]);
                 this.customMenu[key].push(item);
                 this.$forceUpdate();
                 Local.Set("CustomGroup", this.customMenu);
@@ -150,7 +161,7 @@ var Account = new Vue({
                 this.customMenu[key].splice(index, 1); //Удаление элемента
                 //Перезапись списка избранного
                 //            Local.Set("Orders",this.ListOrders);
-                this.showSnackBar("Запись удалена"); //Оповещение
+                this.showSnackBar("Запись удалена", this.returnItemGroup); //Оповещение
                 Local.Set("CustomGroup", this.customMenu);
             },
             returnItemGroup: function () { //Возвращает последний удаленный элемент
@@ -193,6 +204,9 @@ var Account = new Vue({
     },
     mounted(){        
         this.$material.inkRipple = false;
+    },
+    beforeCreate(){
+//        alert("before");
     }
 
 });

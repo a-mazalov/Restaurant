@@ -6,8 +6,7 @@ class LocalStore{
     Set(section,data){
         this.storage.setItem(section, JSON.stringify(data));
     } 
-    Get(section){
-        
+    Get(section){  
         if(this.Check(section)){
             let data = this.storage.getItem(section);
             return JSON.parse(data);
@@ -18,7 +17,7 @@ class LocalStore{
     Remove(section){
         this.storage.removeItem(section);
     }
-    Clear(section){
+    Clear(){
         this.storage.clear();
     }
     Check(section){
@@ -77,7 +76,7 @@ const Order = new Orders();
 //Order.orders.length;
 
 function Sync(section, mode) {
-    let queryPoint = 'http://workprojectmobile/php/Sync.php';
+    let queryPoint = 'http://restaurant.atservers.net/php/Sync.php';
     
     let id_Account = Local.Get("Account");
     let dataSync = Local.Get(section);

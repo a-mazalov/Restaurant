@@ -10,13 +10,13 @@ var Account = new Vue({
             logim: false
         },
 //        queryPointLogin: 'http://workprojectmobile/www/php/loginIn.php',
-        queryPointLogin: 'http://workprojectmobile/php/loginIn.php',
+        queryPointLogin: 'http://restaurant.atservers.net/php/loginIn.php',
 //        queryPointLogin: 'http://d0008482.atservers.net/Felix/loginIn.php',
         dataLogin: {
             telephone: '',
             password: ''
         },
-        queryPointRegistr: 'http://workprojectmobile/php/registrations.php',
+        queryPointRegistr: 'http://restaurant.atservers.net/php/registrations.php',
 //        queryPointRegistr: 'http://d0008482.atservers.net/Felix/registrations.php',
         dataRegister: {
             name: '',
