@@ -1,10 +1,9 @@
 Vue.use(VueMaterial);
 
+Vue.material.registerTheme({
 
+});
 
-var Child = {
-    template: '<div>Пользовательский компонент22!</div>'
-};
 
 var Account = new Vue({
     el: "#Account",
@@ -22,7 +21,8 @@ var Account = new Vue({
         countLocalFav: 0,
         groupName: '',
         inpCreate: false,
-        customMenu: {}
+        customMenu: {},
+        deferDisabled: true
     },
     methods: {
         showSnackBar(Message, btn) {
@@ -190,6 +190,9 @@ var Account = new Vue({
         this.accFavorite();
         this.localCustomGroup();
         this.getInfAccount();
+    },
+    mounted(){        
+        this.$material.inkRipple = false;
     }
 
 });

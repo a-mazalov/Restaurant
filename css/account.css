@@ -143,7 +143,7 @@
 }
 .group .group-item:nth-child(4){
     border: 3px solid #e91e63;
-    border: 3px solid #795548;
+    border: 3px solid 0x795649;
     border: 3px solid #ff9800;
     border: 3px solid #2196f3;
     border: 3px solid #785548;
@@ -169,4 +169,7 @@
 
 div.md-menu-content.md-size-2.md-direction-bottom-left.md-active .md-list{
     padding-bottom: 0;
+}
+.md-list-item-expand .md-list-expand {
+    transition: none !important;
 }

@@ -41,7 +41,8 @@ module.exports.metadata =
     "cordova-plugin-network-information": "1.3.2",
     "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-qrscanner": "2.5.0",
-    "cordova-plugin-splashscreen": "4.0.2"
+    "cordova-plugin-splashscreen": "4.0.2",
+    "cordova-plugin-crosswalk-webview": "2.3.0"
 };
 // BOTTOM OF METADATA
 });
