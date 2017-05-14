@@ -1,8 +1,10 @@
 <?php
-    header('Access-Control-Allow-Origin: *');
     require('connectDB.php');
+    header('Access-Control-Allow-Origin: *');
+
+
         $query = "SELECT * FROM `Menu_table`";
-        $result = $DB->query($query); 
+        $result = $pdo->query($query); 
 
     $data = array();
     $i = 0;
@@ -21,7 +23,6 @@
   
     }
         echo json_encode($data);
-
 
 ?>     
 

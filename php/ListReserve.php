@@ -2,7 +2,7 @@
     header('Access-Control-Allow-Origin: *');
     require('connectDB.php');
         $query = "SELECT * FROM `Reserve_table`";
-        $result = $DB->query($query); 
+        $result = $pdo->query($query); 
 
     $data = array();
     $i = 0;

@@ -302,6 +302,11 @@ html {
 .border {
     border: 1px solid black;
 }
+
+.shadow {
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -325,7 +330,18 @@ html {
 .margin-100 {
     margin: 100px 0;
 }
+.h4-margin-b-0 {
+    margin-bottom: 0px;
+}
 
+.anim-view{
+    animation: view 1.8s ease-in-out; 
+}
+
+@keyframes view {
+    0% { opacity: 0.0 }
+    100% { opacity: 1 }
+}
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;

@@ -143,7 +143,7 @@
 <!--                   FORM                  -->
                     <form novalidate @submit.stop.prevent="submit">
                     
-                    <md-card class="reserve-card">
+                    <md-card class="reserve-card" v-if="!submitted">
                         <md-card-area md-inset>
                             <md-card-media></md-card-media>
                             <br>
@@ -219,15 +219,43 @@
                             
                             
                         </md-card-content>
-
+                        <md-card-content>
+                            <div class="md-subhead text-trans-none text-center">
+                                Заявка будет подтверждена после проверки администратором
+                            </div>
+                        </md-card-content>        
+                        
                         <md-card-actions>
                             <md-button class="md-raised md-primary" v-on:click.native="ReserveInfo">Забронировать</md-button>
+<!--                            <md-button class="md-raised md-primary" v-on:click.native="ReserveInfo">Забронировать</md-button>-->
                         </md-card-actions>
                     </md-card>
+                    
+<md-card v-else class="anim-view">   
+    <md-card-header>
+        <div class="text-center">
+            <br>
+            <h4 class="">Заявка отправлена</h4>
+            <md-icon>check</md-icon>
+            <br>
+            <br>
+            <div class="md-subhead text-trans-none text-center">
+                Заявка будет подтверждена после проверки администратором
+            </div>
+
+        </div>
+    </md-card-header>
+</md-card>
                     </form>
                 </div>
             </div>
         </div>
+        
+        <md-snackbar ref="snackbar" >
+            <span>{{snackMessage}}</span>
+            <md-button class="md-accent" md-theme="light-blue" @click.native="$refs.snackbar.close()">Закрыть</md-button>
+        </md-snackbar>
+   
     </div>
     
     

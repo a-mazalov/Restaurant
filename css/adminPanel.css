@@ -1,0 +1,139 @@
+
+.left-bar {
+    height: 94%;
+/*    margin-top: -45px;*/
+}
+
+.admin-body {
+    height: 100%;
+}
+
+.admin-header {
+    height: 45px;
+}
+
+.app-sidebar {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    padding: 20px 0 50px;
+    width: 180px;
+    min-width: 45px;
+    max-height: 100vh;
+    height: calc(100% - 50px);
+    z-index: 1023;
+    background: #fff;
+    box-shadow: 0 2px 3px hsla(0,0%,7%,.1), 0 0 0 1px hsla(0,0%,7%,.1);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    animation: slideInRight 1s cubic-bezier(0.1,0.25,0.1,1);
+/*    animation-delay: 2s;*/
+}
+
+.app-navbar {
+    position: fixed;
+    height: 50px;
+    min-width: 100%;
+    z-index: 1024;
+    padding-left: 140px;
+    box-shadow: 0 2px 3px hsla(0,0%,7%,.1), 0 0 0 1px hsla(0,0%,7%,.1);
+    background-color: #fff;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    animation: slideInDown .3s ease-in-out; 
+    will-change: transform;
+}
+
+
+/*
+.slideInDown {
+    animation-name: slideInDown
+}
+*/
+
+@keyframes slideInDown {
+    from {
+        transform: translate3d(0, -100%, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0)
+    }
+}
+@keyframes slideInRight {
+    0% {
+        transform: translate3d(-500%, 0, 0);
+        
+    }
+    100% {
+        transform: translate3d(0, 0, 0)
+    }
+}
+.navbar-title {
+    margin-left: 10px;
+}
+
+.img-navbar {
+    height: 32px;
+    width: 32px;
+    color: red;
+}
+
+.admin-container {
+    position: absolute;
+    top: 50px;
+    left: 180px;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification {
+    width: 30%;
+}
+.md-switch-label{
+    font-weight: normal;
+}
+.md-button{
+    text-transform: none !important;
+}
+.md-card{
+    min-width: 320px;
+    margin: 15px;
+}
+.md-card .md-card-content:last-child {
+    padding-bottom: 16px; 
+}
+
+.md-success {
+    background-color: #27ae60 !important;
+    color: rgba(255, 255, 255, .87);
+}
+.md-error{
+    background-color: #e74c3c !important;
+    color: rgba(255, 255, 255, .87);
+}
+
+.anim-fadeIn{
+    animation: fadeIn 1s ease-in-out; 
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.md-list .md-divider.md-inset{
+    margin: 0 15px;
+}

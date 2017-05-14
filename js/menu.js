@@ -3,7 +3,7 @@ var MenuList = new Vue({
         data: {
             //            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
             //            queryPoint : '//d0008482.atservers.net/Felix/menu-query.php',
-            queryPoint: 'http://workprojectmobile/php/menu-query.php',
+            queryPoint: 'http://restaurant.atservers.net/php/menu-query.php',
             posts: {},
             post: {},
             error: false
@@ -24,8 +24,10 @@ var MenuList = new Vue({
                 this.$http.get(this.queryPoint, options).then(function (response) {
 
                     this.posts = JSON.parse(response.data);
+//                    this.posts = response.data;
                     //alert(this.posts);
                     console.log(this.posts);
+//                    console.log(response.data);
 
                 }, function (error) {
                     this.error = true;

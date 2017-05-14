@@ -1,5 +1,3 @@
-var getdata = {a:1111};
-
 var ReserveCard = new Vue({
     el: "#Reserve",
     data: {
@@ -12,18 +10,38 @@ var ReserveCard = new Vue({
             numguest: 1,
             notes: ''
         },
-        queryPoint: 'http://workproject/www/php/Reserve.php',
-        test: 'Menu_table',
+        queryPoint: 'http://restaurant.atservers.net/php/siteReserve.php',
+        snackMessage: '',
+        submitted: false,
+        errorSend: true
         
   },
     methods: {
+        showSnackBar(Message) {
+            this.snackMessage = Message;
+            this.$refs.snackbar.open();
+        },
         ReserveInfo: function(){
-            console.log(this.reserveObj);
-this.$http.get(this.queryPoint,  { params: this.reserveObj } ).then(function(response){
             
-            console.log(response.data);
+//            console.log(this.reserveObj);
+            this.$http.get(this.queryPoint,  { params: this.reserveObj } ).then(function(response){
+                console.log("Выполнено");
+                this.errorSend = false;
+                console.log(response.data);
                 
+                    this.submitted = true;
+                    this.reserveObj = {date: '', time: '', name: '', lastName: '', telephone: '', numguest: 1, notes: ''};
+                
+                
+                
+            }, function (error) {
+//                    this.errorSend = ;
+                    this.showSnackBar("Нет соединения с сервером");
+                    this.errorSend = true;
+                    console.log("Ошибка запроса: " + error.data);
             });
+            
+          
         },
         submit: function(){
         
