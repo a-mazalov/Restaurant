@@ -24,49 +24,49 @@
 </head>
 
 <body class="brick-wall admin-body">
-    <div id="adminPanel" v-cloak>
-        <div class="app-navbar slideInDown">
-            <img src="img/logoNav.png" alt="" class="img-navbar">
-            <span class="navbar-title">Admin Panel</span>
-        </div>
-        <div class="app-sidebar shadow">
-<md-list>
-        <md-list-item v-on:click.native="сhangeLayer('main')">
-            <md-icon>dashboard</md-icon> 
-            <span>Главная</span>
-            <md-divider class="md-inset"></md-divider>     
-        </md-list-item>        
-        <md-list-item v-on:click.native="сhangeLayer('news')">
-            <md-icon>new_releases</md-icon> 
-            <span>Новости</span>
-            <md-divider class="md-inset"></md-divider>     
-        </md-list-item> 
-        <md-list-item v-on:click.native="сhangeLayer('editor')">
-            <md-icon>mode_edit</md-icon> 
-            <span>Редактор</span>
-            <md-divider class="md-inset"></md-divider>     
-        </md-list-item>         
-        <md-list-item v-on:click.native="сhangeLayer('reserve')">
-            <md-icon>mode_edit</md-icon> 
-            <span>Бронирование</span>
-            <md-divider class="md-inset"></md-divider>     
-        </md-list-item>         
-        <md-list-item v-on:click.native="сhangeLayer('notificat')">
-            <md-icon>notifications_active</md-icon> 
-            <span>Рассылка</span> 
-        </md-list-item> 
-        
-        
+<div id="adminPanel" v-cloak>
+    <div class="app-navbar slideInDown">
+        <img src="img/logoNav.png" alt="" class="img-navbar">
+        <span class="navbar-title">Admin Panel</span>
+    </div>
+    <div class="app-sidebar shadow">
+        <md-list>
+                <md-list-item v-on:click.native="сhangeLayer('main')">
+                    <md-icon>dashboard</md-icon> 
+                    <span>Главная</span>
+                    <md-divider class="md-inset"></md-divider>     
+                </md-list-item>        
+                <md-list-item v-on:click.native="сhangeLayer('news')">
+                    <md-icon>new_releases</md-icon> 
+                    <span>Новости</span>
+                    <md-divider class="md-inset"></md-divider>     
+                </md-list-item> 
+                <md-list-item v-on:click.native="сhangeLayer('editor')">
+                    <md-icon>mode_edit</md-icon> 
+                    <span>Редактор</span>
+                    <md-divider class="md-inset"></md-divider>     
+                </md-list-item>         
+                <md-list-item v-on:click.native="сhangeLayer('reserve')">
+                    <md-icon>date_range</md-icon> 
+                    <span>Заявки</span>
+                    <md-divider class="md-inset"></md-divider>     
+                </md-list-item>         
+                <md-list-item v-on:click.native="сhangeLayer('notificat')">
+                    <md-icon>notifications_active</md-icon> 
+                    <span>Рассылка</span> 
+                </md-list-item> 
 
-</md-list>
-        </div>
+
+
+        </md-list>
+    </div>
         
 <!--------------------------------------------------------------->
        
-        <div class="admin-container border">
+<div class="admin-container">
      
         
-<div class="mainLayer anim-fadeIn" v-show="layers.main">
+    <div class="mainLayer anim-fadeIn" v-show="layers.main">
         <md-card md-with-hover>
         <md-card-header class="text-center">
             <div class="md-title">Главная</div>
@@ -84,57 +84,144 @@
 
         </md-card-actions>
     </md-card>
-</div>           
-              
-                 
-                       
-<div class="notification anim-fadeIn" v-show="layers.notificat">
+    </div>           
 
-    <md-card class="md-error text-center anim-fadeIn" v-show="notification.errorSend">
-        <md-card-content>
-            Ошибка отправки!
-        </md-card-content>
-    </md-card>
-    <md-card class="md-success text-center anim-fadeIn" v-show="notification.successSend">
-        <md-card-content>
-            Успешно отправлено!
-        </md-card-content>
-    </md-card>
+    <div class="notification anim-fadeIn" v-show="layers.notificat">
 
-    <md-card md-with-hover>
-        <md-card-header class="text-center">
-            <div class="md-title">Рассылка уведомлений</div>
-            <md-icon class="md-warn">sms_failed</md-icon>
-        </md-card-header>
+        <md-card class="md-error text-center anim-fadeIn" v-show="notification.errorSend">
+            <md-card-content>
+                Ошибка отправки!
+            </md-card-content>
+        </md-card>
+        <md-card class="md-success text-center anim-fadeIn" v-show="notification.successSend">
+            <md-card-content>
+                Успешно отправлено!
+            </md-card-content>
+        </md-card>
 
-        <md-card-content>
+        <md-card md-with-hover>
+            <md-card-header class="text-center">
+                <div class="md-title">Рассылка уведомлений</div>
+                <md-icon class="md-warn">sms_failed</md-icon>
+            </md-card-header>
 
-            <md-input-container>
-                <label>Заголовок</label>
-                <md-input placeholder="Введите заголовок уведомления" maxlength="25" v-model="notification.dataSend.title">
-                </md-input>
-            </md-input-container>
-            <md-input-container>
-                <label>Сообщение</label>
-                <md-input placeholder="Введите сообщение" maxlength="30" v-model="notification.dataSend.body">
-                </md-input>
-            </md-input-container>
+            <md-card-content>
 
-            <md-switch v-model="notification.saveMessage" class="md-primary">Сохранить форму ввода</md-switch>
+                <md-input-container>
+                    <label>Заголовок</label>
+                    <md-input placeholder="Введите заголовок уведомления" maxlength="25" v-model="notification.dataSend.title">
+                    </md-input>
+                </md-input-container>
+                <md-input-container>
+                    <label>Сообщение</label>
+                    <md-input placeholder="Введите сообщение" maxlength="30" v-model="notification.dataSend.body">
+                    </md-input>
+                </md-input-container>
+
+                <md-switch v-model="notification.saveMessage" class="md-primary">Сохранить форму ввода</md-switch>
 
 
-        </md-card-content>
+            </md-card-content>
 
-        <md-card-actions>
-            <md-button class="md-raised md-warn" v-on:click.native="sendPush">Отправить</md-button>
-<!--            <md-button class="md-raised md-warn" v-on:click.native="">Отправить</md-button>-->
-        </md-card-actions>
-    </md-card>
+            <md-card-actions>
+                <md-button class="md-raised md-warn" v-on:click.native="sendPush">Отправить</md-button>
+    <!--            <md-button class="md-raised md-warn" v-on:click.native="">Отправить</md-button>-->
+            </md-card-actions>
+        </md-card>
 
 </div>
 
-        
+    <div class="reserveLayer anim-fadeIn" v-show="layers.reserve">
+        <md-button v-on:click.native="GetReserve">Reserve</md-button>
+        <md-card md-with-hover>
+            <div class="md-subhead num-reserve">№352, Получено: 20.05.2017 <b>17:15</b></div>
+            
+<!--            <div class="row">-->
+                <md-card-content class="reserve-item">
+                    <md-avatar class="md-large">
+                        <img src="img/test-icon/website.png">
+                    </md-avatar>
+                    <md-card-content>
+                        <div class="">Дата: 24.05.2017</div>
+                        <div class="">Время: <span class="custom-text-14">21:00</span></div>
+                        <div class="">Кол-гостей: <span class="custom-text-14">2</span></div>
+                    </md-card-content>                
+                    <md-card-content>
+                        <div class="">Телефон: +371035931312</div>
+                        <div class="">Имя: Федор Кузякин</div>
+                        <div class="reserve-note">Заметка: хочу большой бассейн и лобстеров</div>
+                    </md-card-content>
+    <!--                    <md-icon class="md-warn">sms_failed</md-icon>-->
+                </md-card-content>
+<!--            </div>-->
+        </md-card>
+        <md-card md-with-hover>
+    <div class="md-subhead num-reserve">№352, Получено: 20.05.2017 <b>17:15</b></div>
+    <div class="button-action">
+        <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuGroup">
+            <md-button class="md-icon-button action-group" md-menu-trigger>
+                <md-icon style="opacity: .51">more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-button class="md-warn">Удалить</md-button>
+            </md-menu-content>
+        </md-menu>
+    </div>
+
+    <md-card-content class="reserve-item">
+        <md-avatar class="md-large">
+            <img src="img/test-icon/mobile.png">
+        </md-avatar>
+        <md-card-content>
+            <div class="">Дата: 24.05.2017</div>
+            <div class="">Время: <span class="custom-text-14">21:00</span></div>
+            <div class="">Кол-гостей: <span class="custom-text-14">2</span></div>
+        </md-card-content>
+        <md-card-content>
+            <div class="">Телефон: +371035931312</div>
+            <div class="">Имя: Федор Кузякин</div>
+            <div class="reserve-note">Заметка: хочу большой бассейн и лобстеров</div>
+        </md-card-content>
+    </md-card-content>
+
+    <md-card-content class="footer-card" v-if="false">
+        <md-list>
+            <md-list-item>
+                <md-icon>whatshot</md-icon>
+                <span>Заказанные блюда</span>
+
+                <md-list-expand>
+                    <md-list>
+                        <md-list-item class="md-inset">
+                            World
+                            <span style="float: right; margin-right: 6px">2</span>
+                        </md-list-item>
+                        <md-list-item class="md-inset">Americas</md-list-item>
+                        <md-list-item class="md-inset">Europe</md-list-item>
+                    </md-list>
+                </md-list-expand>
+            </md-list-item>
+        </md-list>
+        <md-divider class="md-inset"></md-divider>
+        <div class="info-reserve">
+            <table>
+                <tr>
+                    <td>Кол-во блюд:</td>
+                    <td class="custom-text">3</td>
+                </tr>
+                <tr>
+                    <td>Общая сумма:</td>
+                    <td class="custom-text">43,54р</td>
+                </tr>
+            </table>
         </div>
+
+    </md-card-content>
+
+</md-card>
+    </div>
+    
+</div>
            
 <!-- Конец adminPanel -->
     </div>     

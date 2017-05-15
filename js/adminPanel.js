@@ -9,10 +9,10 @@ var adminPanel = new Vue({
     el: "#adminPanel",
     data: {
         layers: {
-            main: true,    
+            main: false,    
             news: false,
             editor: false,
-            reserve: false,
+            reserve: true,
             notificat: false
 
         },
@@ -43,48 +43,41 @@ var adminPanel = new Vue({
         },
         
         sendPush: function(){
-            
-        this.notification.successSend = false;
-        this.notification.errorSend = false;
+            this.notification.successSend = false;
+            this.notification.errorSend = false;
 
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4) {
-                if (xhttp.status == 200) {
-                    var response = JSON.parse(xhttp.responseText);
-                    console.log(response);
-                    if (response.result == 1){
-                        adminPanel.notification.errorSend = true;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4) {
+                    if (xhttp.status == 200) {
+                        var response = JSON.parse(xhttp.responseText);
+                        console.log(response);
+                        if (response.result == 1){
+                            adminPanel.notification.errorSend = true;
+                        }
+                        else{
+                            adminPanel.notification.successSend = true;
+                        }
                     }
                     else{
-                        adminPanel.notification.successSend = true;
+                        adminPanel.notification.errorSend = true;
                     }
                 }
-                else{
-                    adminPanel.notification.errorSend = true;
+            };
+            xhttp.open("POST", this.notification.url, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.setRequestHeader("Authorization", "key=" + this.notification.key);
+            var dataS = JSON.stringify({
+                "to": "/topics/all",
+                "data": {
+                    "title": this.notification.dataSend.title,
+                    "body": this.notification.dataSend.body
                 }
-            }
-        };
-        xhttp.open("POST", this.notification.url, true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.setRequestHeader("Authorization", "key=" + this.notification.key);
-        var dataS = JSON.stringify({
-            "to": "/topics/all",
-            "data": {
-                "title": this.notification.dataSend.title,
-                "body": this.notification.dataSend.body
-            }
-        });
-//        var data = JSON.stringify({"to":"/topics/all","data": {"title": "GGSDf", "body": "sfs@!3"}});
-        if(xhttp.send(dataS)){
-            adminPanel.notification.errorSend = true;
-        }
-            
-        }    
+            });
+    //        var data = JSON.stringify({"to":"/topics/all","data": {"title": "GGSDf", "body": "sfs@!3"}});
+            xhttp.send(dataS);
+
     }
-//    created: {
-//        
-//    }
 
 });
 

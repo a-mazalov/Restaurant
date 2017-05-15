@@ -87,12 +87,16 @@
     position: absolute;
     top: 50px;
     left: 180px;
+/*    left: 0;*/
     right: 0;
     bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+/*    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);*/
+    
 }
 
 .notification {
@@ -136,4 +140,76 @@
 
 .md-list .md-divider.md-inset{
     margin: 0 15px;
+} 
+.md-divider.md-inset{
+    margin: 0;
+}
+.md-list-item .md-list-item-container>.md-icon:first-child {
+    margin-right: 24px;
+}
+.reserveLayer .reserve-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 0;
+/*    margin-bottom: -10px;*/
+}
+
+.reserveLayer .md-card .num-reserve {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: -10px;
+}
+.reserveLayer .md-card .md-avatar {
+    margin: 0;
+}
+.reserveLayer .md-card .footer-card {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.reserveLayer .reserve-note {
+    max-width: 400px;
+}
+
+.reserveLayer .reserve-block {
+    max-width: 590px;
+}
+.reserveLayer .info-reserve{
+    margin-top: 5px;
+}
+.reserveLayer .info-reserve td{
+    text-align: left;
+}
+.reserveLayer .info-reserve td:nth-child(2){
+    text-align: center;
+}
+
+
+.reserveLayer .info-reserve {
+    float: right;
+}
+.custom-text-16{
+    padding: 0 5px;
+    font-weight: 700;
+    color: #fe562e;
+    font-size: 16px;
+}
+.custom-text-14{
+    padding: 0 5px;
+    font-weight: 700;
+    color: #fe562e;
+    font-size: 14px;
+}
+
+.reserveLayer ul.md-list{
+/*    margin-top: -10px;*/
+    padding-top: 0 !important;
+}
+.reserveLayer .button-action {
+    position: absolute;
+    top: 6px;
+    right: 0;
+/*    float: left;*/
 }

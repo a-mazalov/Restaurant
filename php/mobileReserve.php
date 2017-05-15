@@ -38,7 +38,7 @@
         $CheckOrder = false;
     }
 
-    $query = $pdo->prepare('INSERT INTO Reserve_table (ID_reserve, ID_user, CheckOrdMenu, Num_desk, Date, Time, Count_guest, Name, LastName, Telephone, Notes) VALUES (NULL, :id_account, :checkOrdMenu, NULL, :date, :time, :numguest, :name, :lastName, :telephone, :notes)');
+    $query = $pdo->prepare('INSERT INTO Reserve_table (ID_reserve, TypeOrder, ID_user, CheckOrdMenu, Num_desk, Date, Time, Count_guest, Name, LastName, Telephone, Notes) VALUES (NULL, "mobile", :id_account, :checkOrdMenu, NULL, :date, :time, :numguest, :name, :lastName, :telephone, :notes)');
     
     $query->execute(array(
         'id_account' => $ID_Account,

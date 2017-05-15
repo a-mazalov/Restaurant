@@ -6,9 +6,12 @@
         $query = "SELECT * FROM `Menu_table`";
         $result = $pdo->query($query); 
 
+    //var_dump($result);
+
     $data = array();
     $i = 0;
     foreach ($result as $row){
+          //var_dump($row);
 //        if($row["Category_dish"] == "Десерт"){
 //            $data["Dessert"][++$i] = $row;
 //            
@@ -22,7 +25,10 @@
         $data[$category][++$i] = $row;
   
     }
+        //var_dump($data);
         echo json_encode($data);
+//echo json_last_error();
+        //echo $data;
 
 ?>     
 

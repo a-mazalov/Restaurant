@@ -3,8 +3,8 @@ var ListReserve = new Vue({
         data: {
             //            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
             //            queryPoint : '//d0008482.atservers.net/Felix/menu-query.php',
-            queryPoint: 'http://workproject/www/php/ListReserve.php',
-            ListReserve: {},
+            queryPoint: 'http://restaurant.atservers.net/php/ListReserve.php',
+            ListReserve: [],
             post: {},
             error: false
         },
@@ -23,7 +23,7 @@ var ListReserve = new Vue({
                 }
                 this.$http.get(this.queryPoint, options).then(function (response) {
 
-                    this.ListReserve = JSON.parse(response.data);
+                    this.ListReserve = response.data;
                     //alert(this.posts);
                     console.log(this.ListReserve);
 
