@@ -24,7 +24,7 @@ var adminPanel = new Vue({
             saveMessage: false,
             successSend: false,
             errorSend: false,
-            url: "https://fcm.googleapis.com/fcm/send",
+            url: "https://fcm.1googleapis.com/fcm/send",
             key: "AAAAq97W7_w:APA91bE_LUOoPRmnMcxsKqGQKowG0Lmnsk9LjyKzBVBQoCLf1A6tGfZoKw3VjNyL5xQbEqGtWUJ5_lYjTcKA6W0npkbEOAInyoCgiikVoiVucX3UFSKt83WX1nyXWwDb_wtCJqpmXxCU"
             
         }
