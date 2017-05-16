@@ -3,7 +3,7 @@ var ListReserve = new Vue({
         data: {
             //            queryPoint : 'https://jsonplaceholder.typicode.com/posts',
             //            queryPoint : '//d0008482.atservers.net/Felix/menu-query.php',
-            queryPoint: 'http://restaurant.atservers.net/php/ListReserve.php',
+            queryPoint: 'http://restaurant.atservers.net/php/siteReserve.php',
             ListReserve: [],
             post: {},
             error: false

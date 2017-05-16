@@ -8,6 +8,7 @@ Vue.use(VueMaterial);
 var adminPanel = new Vue({
     el: "#adminPanel",
     data: {
+        loader: true,
         layers: {
             main: false,    
             news: false,
@@ -16,6 +17,13 @@ var adminPanel = new Vue({
             notificat: false
 
         },
+        servers:{
+            reserveURL: "http://restaurant.atservers.net/php/ListReserve.php",
+            reserveURL: "http://workproject/www/php/ListReserve.php",
+            actionsURL: "http://restaurant.atservers.net/php/actionDB.php",
+            actionsURL: "http://workproject/www/php/actionDB.php",
+        },
+        listReserve: [],
         notification: {
             dataSend: {
                 title: "asd",
@@ -24,7 +32,7 @@ var adminPanel = new Vue({
             saveMessage: false,
             successSend: false,
             errorSend: false,
-            url: "https://fcm.1googleapis.com/fcm/send",
+            url: "https://fcm.googleapis.com/fcm/send",
             key: "AAAAq97W7_w:APA91bE_LUOoPRmnMcxsKqGQKowG0Lmnsk9LjyKzBVBQoCLf1A6tGfZoKw3VjNyL5xQbEqGtWUJ5_lYjTcKA6W0npkbEOAInyoCgiikVoiVucX3UFSKt83WX1nyXWwDb_wtCJqpmXxCU"
             
         }
@@ -40,8 +48,56 @@ var adminPanel = new Vue({
                 }
             }
             console.log(this.layers);
+        },     
+        actions: function(item,index,action){
+//            this.closeDialog("menuAction");
+//            alert("sdasdasd");
+            
+//            console.log(this.listReserve.indexOf(item));
+            this.listReserve.splice(index, 1);
+            console.log(this.listReserve);
+            
+//            let infoSend = {"item":item, "action": action};
+//            
+//            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+//                console.log("Выполнено");
+////                console.log(response.data);
+//                
+//                this.remItmsCheck = "favorite";
+//
+//                this.indexLastItem = this.listReserve.indexOf(item);
+//                //            console.log(this.indexLastItem);
+//                this.removedItem = item; //Копия удаляемого элемента 
+//
+//                this.accListFavorite.splice(this.indexLastItem, 1); //Удаление элемента
+//        
+//                
+//            }, function (error) {
+//                console.log("Ошибка запроса: " + error.data);
+//            });
+//            
         },
-        
+        getReserve: function () {
+                this.$http.get(this.servers.reserveURL).then(function (response) {
+                
+                    this.loader = false;
+                    this.listReserve = JSON.parse(response.data);
+                    console.log( JSON.parse(response.data) );
+                }, function (error) {
+                    this.error = true;
+                    console.log("Ошибка запроса: " + error.data);
+                });
+        },
+        priceInReserve: function(dishes){
+//            console.log(dishes);
+            
+            let price = 0;
+            for (let i = 0; i < dishes.length; i++) {
+                price += parseInt( (dishes[i].Price_dish * dishes[i].Amount_dish) * 100)/100;
+            }
+            return price.toFixed(2);
+            
+        },
         sendPush: function(){
             this.notification.successSend = false;
             this.notification.errorSend = false;
@@ -77,10 +133,18 @@ var adminPanel = new Vue({
     //        var data = JSON.stringify({"to":"/topics/all","data": {"title": "GGSDf", "body": "sfs@!3"}});
             xhttp.send(dataS);
 
+        },
+        openDialog(ref) {
+            this.$refs[ref].open();
+        },
+        closeDialog(ref) {
+            this.$refs[ref].close();
+        }
+    },
+    created: function(){
+        this.getReserve();
     }
-
 });
-
 //----------------//----//------------------//
 
 //

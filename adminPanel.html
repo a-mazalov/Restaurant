@@ -24,7 +24,7 @@
 </head>
 
 <body class="brick-wall admin-body">
-<div id="adminPanel" v-cloak>
+    <div id="adminPanel">
     <div class="app-navbar slideInDown">
         <img src="img/logoNav.png" alt="" class="img-navbar">
         <span class="navbar-title">Admin Panel</span>
@@ -63,8 +63,8 @@
         
 <!--------------------------------------------------------------->
        
-<div class="admin-container">
-     
+<div class="admin-container" v-cloak>
+    <md-spinner md-indeterminate class="md-warn loader" v-if="loader"></md-spinner>
         
     <div class="mainLayer anim-fadeIn" v-show="layers.main">
         <md-card md-with-hover>
@@ -74,7 +74,6 @@
         </md-card-header>
 
         <md-card-content>
-
 
 
 
@@ -130,74 +129,61 @@
         </md-card>
 
 </div>
+    
 
     <div class="reserveLayer anim-fadeIn" v-show="layers.reserve">
-        <md-button v-on:click.native="GetReserve">Reserve</md-button>
-        <md-card md-with-hover>
-            <div class="md-subhead num-reserve">№352, Получено: 20.05.2017 <b>17:15</b></div>
-            
-<!--            <div class="row">-->
-                <md-card-content class="reserve-item">
-                    <md-avatar class="md-large">
-                        <img src="img/test-icon/website.png">
-                    </md-avatar>
-                    <md-card-content>
-                        <div class="">Дата: 24.05.2017</div>
-                        <div class="">Время: <span class="custom-text-14">21:00</span></div>
-                        <div class="">Кол-гостей: <span class="custom-text-14">2</span></div>
-                    </md-card-content>                
-                    <md-card-content>
-                        <div class="">Телефон: +371035931312</div>
-                        <div class="">Имя: Федор Кузякин</div>
-                        <div class="reserve-note">Заметка: хочу большой бассейн и лобстеров</div>
-                    </md-card-content>
-    <!--                    <md-icon class="md-warn">sms_failed</md-icon>-->
-                </md-card-content>
-<!--            </div>-->
-        </md-card>
-        <md-card md-with-hover>
-    <div class="md-subhead num-reserve">№352, Получено: 20.05.2017 <b>17:15</b></div>
+<!--
+    <md-card md-with-hover v-if="!listReserve.length">
+        <md-card-header class="text-center">
+            <div class="md-subhead">Заявок нет</div>
+        </md-card-header>
+    </md-card>
+-->
+    <md-card md-with-hover v-for="(reserve,index) in listReserve" class="anim-fadeIn ">
+    <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: 20.05.2017 <b>17:15</b></div>
     <div class="button-action">
-        <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuGroup">
+        <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuAction">
             <md-button class="md-icon-button action-group" md-menu-trigger>
                 <md-icon style="opacity: .51">more_vert</md-icon>
             </md-button>
             <md-menu-content>
-                <md-button class="md-warn">Удалить</md-button>
+                <md-button 
+                    class="md-warn" v-on:click.native="actions(reserve.ID_reserve,index,'delete'); $refs['menuAction'][index].close()">
+                    Удалить
+                </md-button>
             </md-menu-content>
         </md-menu>
     </div>
 
     <md-card-content class="reserve-item">
         <md-avatar class="md-large">
-            <img src="img/test-icon/mobile.png">
+            <img src="img/test-icon/website.png" v-if="reserve.TypeOrder == 'site'">
+            <img src="img/test-icon/mobile.png" v-else>
         </md-avatar>
         <md-card-content>
-            <div class="">Дата: 24.05.2017</div>
-            <div class="">Время: <span class="custom-text-14">21:00</span></div>
-            <div class="">Кол-гостей: <span class="custom-text-14">2</span></div>
+            <div class="">Дата: {{reserve.Date}}</div>
+            <div class="">Время: <span class="custom-text-14">{{reserve.Time}}</span></div>
+            <div class="">Кол-гостей: <span class="custom-text-14">{{reserve.Count_guest}}</span></div>
         </md-card-content>
         <md-card-content>
-            <div class="">Телефон: +371035931312</div>
-            <div class="">Имя: Федор Кузякин</div>
-            <div class="reserve-note">Заметка: хочу большой бассейн и лобстеров</div>
+            <div class="">Телефон: {{reserve.Telephone}}</div>
+            <div class="">Имя: {{reserve.Name}} {{reserve.LastName}}</div>
+            <div class="reserve-note">Заметка: {{reserve.Notes}}</div>
         </md-card-content>
     </md-card-content>
 
-    <md-card-content class="footer-card" v-if="false">
+    <md-card-content class="footer-card" v-if="reserve.CheckOrdMenu">
         <md-list>
             <md-list-item>
                 <md-icon>whatshot</md-icon>
-                <span>Заказанные блюда</span>
+                <span class="button-list">Заказанные блюда</span>
 
                 <md-list-expand>
                     <md-list>
-                        <md-list-item class="md-inset">
-                            World
-                            <span style="float: right; margin-right: 6px">2</span>
+                        <md-list-item class="md-inset" v-for="dish in reserve.dishes">
+                            <span  class="lowerText">{{dish.Title_dish}}</span>
+                            <span style="float: right; margin-right: 6px">{{dish.Amount_dish}}</span>
                         </md-list-item>
-                        <md-list-item class="md-inset">Americas</md-list-item>
-                        <md-list-item class="md-inset">Europe</md-list-item>
                     </md-list>
                 </md-list-expand>
             </md-list-item>
@@ -207,11 +193,11 @@
             <table>
                 <tr>
                     <td>Кол-во блюд:</td>
-                    <td class="custom-text">3</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>
                 </tr>
                 <tr>
                     <td>Общая сумма:</td>
-                    <td class="custom-text">43,54р</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="priceInReserve(reserve.dishes)+'р'"></td>
                 </tr>
             </table>
         </div>
@@ -227,6 +213,7 @@
     </div>     
     <script type="text/javascript" src="vue/vue.js"></script>
     <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
+    <script type="text/javascript" src="vue/vue-resource.js"></script>
     <script type="text/javascript" src="js/adminPanel.js"></script>
 </body>
 </html>

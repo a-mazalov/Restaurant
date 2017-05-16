@@ -289,6 +289,9 @@ html {
 [v-cloak] {
   display: none;
 }
+
+
+
 .vertical-align {
     display: flex;
     flex-direction: column;
@@ -306,7 +309,12 @@ html {
 .shadow {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
-
+.lowerText{
+    text-transform: lowercase !important;
+}
+.lowerText:first-letter{
+    text-transform: uppercase !important;
+}
 ::-webkit-scrollbar {
     width: 6px;
 }
