@@ -210,7 +210,7 @@
 /*    margin-top: -10px;*/
     padding-top: 0 !important;
 }
-.reserveLayer .button-action {
+.button-action {
     position: absolute;
     top: 6px;
     right: 0;
@@ -252,4 +252,64 @@
     position: absolute;
     left: 47%;
     top: 50%;
+}
+
+.editLayer {
+    height: 100%;
+    width: 100%;
+}
+
+
+.menu-cards .md-card .price {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding-right: 0;
+    justify-content: flex-end;
+    padding: auto;
+    font-weight: 800;
+    color: #fe562e;
+    font-size: 18px;
+    text-align: center;
+    width: 90px;
+}
+
+/*---------------Menu--------------*/
+@media (min-width: 992px){
+    .menu-cards .md-avatar.md-big {
+        width: 72px; 
+        min-width: 72px; 
+        height: 72px; 
+        min-height: 72px; 
+        border-radius: 72px;
+    }
+}
+
+
+
+.edit-inp {
+    white-space: nowrap;
+    margin: 0;
+    width: 100%;
+    background: none;
+    border: none;
+    display: block;
+    text-transform: lowercase; 
+}
+.edit-inp:first-letter{
+    text-transform: uppercase !important;
+}
+input:first-letter{
+    text-transform: uppercase;
+}
+input{
+    white-space: nowrap;
+}
+.price input{
+    border: 0;
+    background: none;
+}
+
+.md-title-18 {
+    font-size: 18px;
 }

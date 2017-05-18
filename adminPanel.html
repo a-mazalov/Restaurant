@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="vue-material/vue-material.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
     <link rel="stylesheet" type="text/css" href="css/adminPanel.css">
     <link rel="shortcut icon" href="img/icon/banner-news-icon-knife.png" type="image/x-icon">
     <title>Restaurant</title>
@@ -61,7 +62,7 @@
         </md-list>
     </div>
         
-<!--------------------------------------------------------------->
+
        
 <div class="admin-container" v-cloak>
     <md-spinner md-indeterminate class="md-warn loader" v-if="loader"></md-spinner>
@@ -83,8 +84,109 @@
 
         </md-card-actions>
     </md-card>
-    </div>           
+    </div>    
+    <div class="newsLayer anim-fadeIn" v-show="layers.news">
+        <md-card md-with-hover>
+        <md-card-header class="text-center">
+            <div class="md-title">Новости</div>
+            <md-icon class="md-warn">sms_failed</md-icon>
+        </md-card-header>
 
+        <md-card-content>
+
+
+
+        </md-card-content>
+
+        <md-card-actions>
+
+        </md-card-actions>
+    </md-card>
+    </div> 
+    <div class="editLayer anim-fadeIn" v-show="layers.editor">
+    
+    <md-card md-with-hover>
+        <md-card-header class="text-center">
+            <div class="md-title-18">Редактирование блюд</div>
+            <md-icon class="md-warn">sms_failed</md-icon>
+        </md-card-header>
+
+        <md-card-content>
+            <md-switch v-model="editMode" class="md-primary">Включить режим редактирования</md-switch>
+   <md-list>
+    <md-list-item>
+      <md-icon>whatshot</md-icon>
+      <span>News</span>
+
+      <md-list-expand>
+        <md-list>
+          <md-list-item class="md-inset">World</md-list-item>
+          <md-list-item class="md-inset">Americas</md-list-item>
+          <md-list-item class="md-inset">Europe</md-list-item>
+        </md-list>
+      </md-list-expand>
+    </md-list-item>
+    </md-list>
+
+        </md-card-content>
+
+    </md-card>
+    
+    
+    <md-tabs class="menu-cards md-warn" md-centered md-fixed v-cloak>
+       
+        <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="false">
+                    <md-card>
+                        <h4>Что-то пошло не так..</h4>
+                    </md-card>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="(post,index) in listMenu.Hot_dishes">
+                
+                <md-card>
+    <div class="button-action">
+            <md-button class="md-icon-button action-group">
+                <md-icon style="opacity: .51" v-show="editMode">clear</md-icon>
+            </md-button>
+    </div>
+<!--                    v-on:click.native="$refs['menuActionE'][index].close()" onclick="adminPanel.listMenu.Hot_dishes[2]['edit'] = true; ">-->
+                    <md-card-header>
+                        <md-avatar class="md-big">
+                           
+                            <img v-bind:src="post.ImagePath+'.jpg'">
+                        </md-avatar>
+                        <md-card-header-text>
+                    <div class="md-title">
+<!--                        <br>-->
+                        <input type="text" class="edit-inp" v-model="post.Title_dish" :disabled="!editMode">
+                    </div>
+                    <div class="md-subhead">
+<!--                        {{ post.Caption_dish }} <br>-->
+                        <input type="text" class="edit-inp" v-model="post.Caption_dish" :disabled="!editMode">
+                    </div>
+
+                        </md-card-header-text>
+                        <div class="price">
+                           <input type="number" class="text-center" v-model="post.Price_dish" :disabled="!editMode">
+<!--                            <{{ post.Price_dish }}р</span>-->
+                        </div>
+                    </md-card-header>
+
+                <md-ink-ripple />
+                </md-card>
+                 <div class="clearfix"></div>
+                </div>
+            </div>
+      </md-tab>
+
+
+
+</md-tabs>
+    
+    </div>           
+    
     <div class="notification anim-fadeIn" v-show="layers.notificat">
 
         <md-card class="md-error text-center anim-fadeIn" v-show="notification.errorSend">
@@ -130,7 +232,7 @@
 
 </div>
     
-
+    
     <div class="reserveLayer anim-fadeIn" v-show="layers.reserve">
 <!--
     <md-card md-with-hover v-if="!listReserve.length">
@@ -140,7 +242,7 @@
     </md-card>
 -->
     <md-card md-with-hover v-for="(reserve,index) in listReserve" class="anim-fadeIn ">
-    <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: 20.05.2017 <b>17:15</b></div>
+    <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: {{reserve.Data_create}}</div>
     <div class="button-action">
         <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuAction">
             <md-button class="md-icon-button action-group" md-menu-trigger>
@@ -148,7 +250,7 @@
             </md-button>
             <md-menu-content>
                 <md-button 
-                    class="md-warn" v-on:click.native="actions(reserve.ID_reserve,index,'delete'); $refs['menuAction'][index].close()">
+                    class="md-warn" v-on:click.native="actions(reserve,index,'delete'); $refs['menuAction'][index].close()">
                     Удалить
                 </md-button>
             </md-menu-content>
@@ -172,6 +274,10 @@
         </md-card-content>
     </md-card-content>
 
+   
+   
+   
+
     <md-card-content class="footer-card" v-if="reserve.CheckOrdMenu">
         <md-list>
             <md-list-item>
@@ -188,12 +294,13 @@
                 </md-list-expand>
             </md-list-item>
         </md-list>
+        
         <md-divider class="md-inset"></md-divider>
         <div class="info-reserve">
             <table>
                 <tr>
                     <td>Кол-во блюд:</td>
-                    <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>
+<!--                    <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>-->
                 </tr>
                 <tr>
                     <td>Общая сумма:</td>
@@ -205,8 +312,12 @@
     </md-card-content>
 
 </md-card>
+   
     </div>
-    
+    <md-snackbar ref="snackbar">
+        <span>{{snackMessage}}</span>
+<!--        <md-button class="md-accent" md-theme="light-blue" v-on:click.native="$refs.snackbar.options">Вернуть</md-button>-->
+    </md-snackbar>
 </div>
            
 <!-- Конец adminPanel -->

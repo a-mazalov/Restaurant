@@ -9,25 +9,30 @@ var adminPanel = new Vue({
     el: "#adminPanel",
     data: {
         loader: true,
+        snackMessage: '',
+        editMode: false,
         layers: {
             main: false,    
             news: false,
             editor: false,
-            reserve: true,
+            reserve: false,
             notificat: false
 
         },
         servers:{
+            menuURL: 'http://restaurant.atservers.net/php/menu-query.php',
+            menuURL: 'http://workproject/www/php/menu-query.php',
             reserveURL: "http://restaurant.atservers.net/php/ListReserve.php",
             reserveURL: "http://workproject/www/php/ListReserve.php",
             actionsURL: "http://restaurant.atservers.net/php/actionDB.php",
             actionsURL: "http://workproject/www/php/actionDB.php",
         },
+        listMenu: [],
         listReserve: [],
         notification: {
             dataSend: {
-                title: "asd",
-                body: "asddsfsdf"
+                title: "Уведомление от ресторана",
+                body: "Добрный день, я тюлень"
             },
             saveMessage: false,
             successSend: false,
@@ -38,45 +43,46 @@ var adminPanel = new Vue({
         }
     },
     methods: {
-        сhangeLayer: function(section){
-            for(var layer in this.layers){
-                if(section == layer){
-                    this.layers[layer] = true;
-                }
-                else{
-                    this.layers[layer] = false;
-                }
-            }
-            console.log(this.layers);
-        },     
+//-------------------Работа с меню---------------------------
+        getMenu: function () {
+            this.$http.get(this.servers.menuURL).then(function (response) {
+
+//                console.log(response.data);
+                this.listMenu = JSON.parse(response.data);
+//                this.listMenu = response.data;
+                console.log(this.listMenu);
+
+            }, function (error) {
+                console.log("Ошибка запроса: " + error.data);
+            });
+        },
+        actionE: function(index){
+            this.listMenu["Hot_dishes"][index]['edit'] = true;
+            alert('asd');
+            return true;
+//            alert('sdffd');    
+        },
         actions: function(item,index,action){
-//            this.closeDialog("menuAction");
-//            alert("sdasdasd");
             
-//            console.log(this.listReserve.indexOf(item));
-            this.listReserve.splice(index, 1);
-            console.log(this.listReserve);
+            let deletedItem = {
+                "index": index,
+                "item": item
+            };
             
-//            let infoSend = {"item":item, "action": action};
-//            
-//            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
-//                console.log("Выполнено");
-////                console.log(response.data);
-//                
-//                this.remItmsCheck = "favorite";
-//
-//                this.indexLastItem = this.listReserve.indexOf(item);
-//                //            console.log(this.indexLastItem);
-//                this.removedItem = item; //Копия удаляемого элемента 
-//
-//                this.accListFavorite.splice(this.indexLastItem, 1); //Удаление элемента
-//        
-//                
-//            }, function (error) {
-//                console.log("Ошибка запроса: " + error.data);
-//            });
+            let infoSend = {"item":item, "action": action};
+            
+            this.listReserve.splice(deletedItem.index, 1);
+            
+            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+                console.log("Выполнено"); 
+            }, function (error) {
+                console.log("Ошибка запроса: " + error.data);
+                this.showSnackBar("Ошибка при выполнении операции");
+                this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
+            });
 //            
         },
+//-------------------Работа с бронированием---------------------------
         getReserve: function () {
                 this.$http.get(this.servers.reserveURL).then(function (response) {
                 
@@ -92,12 +98,13 @@ var adminPanel = new Vue({
 //            console.log(dishes);
             
             let price = 0;
-            for (let i = 0; i < dishes.length; i++) {
+            for (let i = 0;  dishes && i < dishes.length; i++) {
                 price += parseInt( (dishes[i].Price_dish * dishes[i].Amount_dish) * 100)/100;
             }
             return price.toFixed(2);
             
         },
+//-------------------Работа с рассылкой уведомлений-----------------------
         sendPush: function(){
             this.notification.successSend = false;
             this.notification.errorSend = false;
@@ -134,6 +141,23 @@ var adminPanel = new Vue({
             xhttp.send(dataS);
 
         },
+//-------------------Вспомогательные функции----------------
+        сhangeLayer: function(section){
+            for(var layer in this.layers){
+                if(section == layer){
+                    this.layers[layer] = true;
+                }
+                else{
+                    this.layers[layer] = false;
+                }
+            }
+            console.log(this.layers);
+        },
+        showSnackBar(Message) {
+            this.snackMessage = Message;
+            this.$refs.snackbar.open();
+//            this.$refs.snackbar.options = funcBtn;
+        },
         openDialog(ref) {
             this.$refs[ref].open();
         },
@@ -141,7 +165,9 @@ var adminPanel = new Vue({
             this.$refs[ref].close();
         }
     },
+//-------------------При создании---------------------------            
     created: function(){
+        this.getMenu();
         this.getReserve();
     }
 });

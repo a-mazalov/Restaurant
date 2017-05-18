@@ -47,7 +47,7 @@
 .menu-cards .md-card .md-card-header-text .md-title,
 .menu-cards .md-card .md-card-header-text .md-subhead{
     line-height: normal;
-    text-transform: lowercase;
+    text-transform: lowercase !important;
 }
 .menu-cards .md-card .md-card-header-text .md-title:first-letter,
 .menu-cards .md-card .md-card-header-text .md-subhead:first-letter{

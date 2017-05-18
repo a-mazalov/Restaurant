@@ -28,7 +28,7 @@
         //var_dump($data);
         echo json_encode($data);
 //echo json_last_error();
-        //echo $data;
+//        echo $data;
 
 ?>     
 

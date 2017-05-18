@@ -1,7 +1,27 @@
 <?php
     header('Access-Control-Allow-Origin: *');
     require('connectDB.php');
-        $query = "SELECT * FROM `Reserve_table`";
+        $query = "SELECT * FROM `Reserve_table` ORDER BY `Reserve_table`.`ID_reserve` DESC";
+
+
+$query = "SELECT 
+	`ID_reserve`, 
+	`TypeOrder`, 
+	`ID_user`, 
+	`CheckOrdMenu`, 
+	`Num_desk`, 
+	`Date`, 
+	`Time`, 
+	`Count_guest`, 
+	`Name`, 
+	`LastName`, 
+	`Telephone`, 
+	`Notes`, 
+	DATE_FORMAT(`Data_create`, '%Y-%m-%d %H:%i') as `Data_create` 
+FROM 
+	`Reserve_table` 
+ORDER BY 
+	`Reserve_table`.`ID_reserve` DESC";
         $result = $pdo->query($query); 
 
     $data = array();
@@ -30,6 +50,7 @@
   
     }
         echo json_encode($data);
+//var_dump($data);
 
 
 ?>     
