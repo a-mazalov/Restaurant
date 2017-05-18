@@ -324,7 +324,7 @@
             </md-button>
             <md-menu-content>
                 <md-button 
-                    class="md-warn" v-on:click.native="actionsDelRes(reserve,index,'delete'); $refs['menuAction'][index].close()">
+                    class="md-warn" v-on:click.native="actionsDelRes(reserve.ID_reserve,index); $refs['menuAction'][index].close()">
                     Удалить
                 </md-button>
             </md-menu-content>

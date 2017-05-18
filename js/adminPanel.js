@@ -14,8 +14,8 @@ var adminPanel = new Vue({
         layers: {
             main: false,    
             news: false,
-            editor: true,
-            reserve: false,
+            editor: false,
+            reserve: true,
             notificat: false
 
         },
@@ -168,19 +168,20 @@ var adminPanel = new Vue({
             return price.toFixed(2);
             
         },
-        actionsDelRes: function(item,index,action){
-            
+        actionsDelRes: function(item,index){
+            console.log("delRes");
             let deletedItem = {
                 "index": index,
                 "item": item
             };
             
-            let infoSend = {"item":item, "action": action};
-            
+            let infoSend = {"item":item, "action": "delete"};
+            console.log(infoSend)
             this.listReserve.splice(deletedItem.index, 1);
             
             this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
-                console.log("Выполнено"); 
+                console.log("Выполнено");
+                console.log(response.data)
             }, function (error) {
                 console.log("Ошибка запроса: " + error.data);
                 this.showSnackBar("Ошибка при выполнении операции");

@@ -21,6 +21,7 @@ switch($DataGET["action"]){
         $queryDelete->execute(array(
             'id_reserve' => $DataGET["item"],
         ));
+        var_dump($DataGET["item"]);
             echo "switch delete"; 
             break;
         
