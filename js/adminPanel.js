@@ -2,7 +2,7 @@
 
 Vue.use(VueMaterial);
 
-
+var Copyied;
 //----------------Инициализация основного контента------------------//
 
 var adminPanel = new Vue({
@@ -14,7 +14,7 @@ var adminPanel = new Vue({
         layers: {
             main: false,    
             news: false,
-            editor: false,
+            editor: true,
             reserve: false,
             notificat: false
 
@@ -28,6 +28,18 @@ var adminPanel = new Vue({
             actionsURL: "http://workproject/www/php/actionDB.php",
         },
         listMenu: [],
+        newDish: {
+            Title_dish: '',
+            Caption_dish: '',
+            Category_dish: '',
+            Price_dish: '',
+            ImagePath: ''
+        },
+        actionMenu: {
+            preEdit: [],
+            acceptEdit: false,
+            cancelEdit: false
+        },
         listReserve: [],
         notification: {
             dataSend: {
@@ -56,13 +68,107 @@ var adminPanel = new Vue({
                 console.log("Ошибка запроса: " + error.data);
             });
         },
+        SwithEditMode: function(){
+            
+            if(!this.editMode){
+                this.actionMenu.preEdit = copyObj(this.listMenu);
+            }else{
+                this.listMenu = this.actionMenu.preEdit;
+            }
+
+        },
+        cancelEdit: function(){
+            this.listMenu = this.actionMenu.preEdit;
+        },
+        sendUpadeMenu: function(){
+
+            let arrUpdate = [];
+
+            for(let category in this.listMenu){
+
+                for(let dish in this.listMenu[category])
+
+                    if( this.listMenu[category][dish].hasOwnProperty('edit') ){
+
+                        delete this.listMenu[category][dish].edit;
+                        arrUpdate.push(this.listMenu[category][dish]);
+                    }    
+            }   
+            console.log(arrUpdate);
+            
+            if(arrUpdate.length){
+               
+                let infoSend = {"item": arrUpdate, "action": "update"};
+            
+                this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+                    console.log("Выполнено"); 
+                    console.log(response.data);
+                }, function (error) {
+                    console.log("Ошибка запроса: " + error.data);
+                    this.showSnackBar("Ошибка при выполнении операции");
+                    this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
+                });    
+            
+            }else{
+                this.showSnackBar("Нет изменений");
+            }
+
+            this.editMode = false;
+
+        },
+        createDish: function(){
+            alert('sdf');
+            console.log(this.newDish); 
+            
+            let infoSend = {"item":this.newDish, "action": "newDish"};
+            
+            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+                console.log("Выполнено"); 
+                console.log(response.data);
+                this.getMenu();
+            }, function (error) {
+                console.log("Ошибка запроса: " + error.data);
+                this.showSnackBar("Ошибка при выполнении операции");
+            });
+            
+            
+            
+        },
+        Tchange: function(){
+            alert("change");        
+        },
+        test: function(){
+  
+        },
         actionE: function(index){
             this.listMenu["Hot_dishes"][index]['edit'] = true;
             alert('asd');
             return true;
 //            alert('sdffd');    
         },
-        actions: function(item,index,action){
+//-------------------Работа с бронированием---------------------------
+        getReserve: function () {
+                this.$http.get(this.servers.reserveURL).then(function (response) {
+                
+                    this.loader = false;
+                    this.listReserve = JSON.parse(response.data);
+                    console.log( JSON.parse(response.data) );
+                }, function (error) {
+                    this.showSnackBar("Ошибка соединения");
+                    console.log("Ошибка запроса: " + error.data);
+                });
+        },
+        priceInReserve: function(dishes){
+//            console.log(dishes);
+            
+            let price = 0;
+            for (let i = 0;  dishes && i < dishes.length; i++) {
+                price += parseInt( (dishes[i].Price_dish * dishes[i].Amount_dish) * 100)/100;
+            }
+            return price.toFixed(2);
+            
+        },
+        actionsDelRes: function(item,index,action){
             
             let deletedItem = {
                 "index": index,
@@ -81,28 +187,6 @@ var adminPanel = new Vue({
                 this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
             });
 //            
-        },
-//-------------------Работа с бронированием---------------------------
-        getReserve: function () {
-                this.$http.get(this.servers.reserveURL).then(function (response) {
-                
-                    this.loader = false;
-                    this.listReserve = JSON.parse(response.data);
-                    console.log( JSON.parse(response.data) );
-                }, function (error) {
-                    this.error = true;
-                    console.log("Ошибка запроса: " + error.data);
-                });
-        },
-        priceInReserve: function(dishes){
-//            console.log(dishes);
-            
-            let price = 0;
-            for (let i = 0;  dishes && i < dishes.length; i++) {
-                price += parseInt( (dishes[i].Price_dish * dishes[i].Amount_dish) * 100)/100;
-            }
-            return price.toFixed(2);
-            
         },
 //-------------------Работа с рассылкой уведомлений-----------------------
         sendPush: function(){
@@ -172,6 +256,24 @@ var adminPanel = new Vue({
     }
 });
 //----------------//----//------------------//
+
+
+ function copyObj(obj) {
+    if (typeof obj != "object") {
+        return obj;
+    }
+    
+    var copy = obj.constructor();
+    for (var key in obj) {
+        if (typeof obj[key] == "object") {
+            copy[key] = this.copyObj(obj[key]);
+        } else {
+            copy[key] = obj[key];
+        }
+    }
+    return copy;
+};     
+
 
 //
 //

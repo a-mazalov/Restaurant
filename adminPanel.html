@@ -15,8 +15,8 @@
 
     <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
     
-    <link rel="stylesheet" href="vue-material/vue-material.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="vue-material/vue-material.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/menu.css">
     <link rel="stylesheet" type="text/css" href="css/adminPanel.css">
@@ -25,7 +25,10 @@
 </head>
 
 <body class="brick-wall admin-body">
+   
+
     <div id="adminPanel">
+    
     <div class="app-navbar slideInDown">
         <img src="img/logoNav.png" alt="" class="img-navbar">
         <span class="navbar-title">Admin Panel</span>
@@ -65,9 +68,11 @@
 
        
 <div class="admin-container" v-cloak>
+
     <md-spinner md-indeterminate class="md-warn loader" v-if="loader"></md-spinner>
-        
+    
     <div class="mainLayer anim-fadeIn" v-show="layers.main">
+
         <md-card md-with-hover>
         <md-card-header class="text-center">
             <div class="md-title">Главная</div>
@@ -108,32 +113,56 @@
     <md-card md-with-hover>
         <md-card-header class="text-center">
             <div class="md-title-18">Редактирование блюд</div>
-            <md-icon class="md-warn">sms_failed</md-icon>
+            <md-icon class="">sms_failed</md-icon>
+            <br>
+            <md-switch v-model="editMode" id="my-test2" name="my-test2" v-on:change="SwithEditMode" class="md-primary">Включить режим редактирования</md-switch>
+            <br>
+        <div v-show="editMode" class="anim-fadeIn">
+            <md-button class="md-raised" v-on:click.native="cancelEdit">Отменить</md-button>
+            <md-button class="md-raised md-primary" v-on:click.native="sendUpadeMenu">Применить</md-button>
+            
+            
+<md-dialog md-open-from="#addDish" md-close-to="#addDish" ref="addDish" class="dialog-add">
+  <md-dialog-title>Новое блюдо</md-dialog-title>
+
+        <md-dialog-content>
+            <md-avatar class="md-large md-big-newD text-center" id="av">
+            <img src="img/food/id_default.jpg" alt="People">
+        </md-avatar>
+        <md-input-container>
+            <label>Название</label>
+            <md-input v-model="newDish.Title_dish"></md-input>
+        </md-input-container>        
+        <md-input-container>
+            <label>Доп. инфо</label>
+            <md-input v-model="newDish.Caption_dish"></md-input>
+        </md-input-container>         
+        <md-input-container>
+            <label>Категория</label>
+            <md-input v-model="newDish.Category_dish"></md-input>
+        </md-input-container>        
+        <md-input-container>
+            <label>Стоимость</label>
+            <md-input type="number" v-model="newDish.Price_dish"></md-input>
+        </md-input-container>
+    </md-dialog-content>
+
+  <md-dialog-actions>
+    <md-button class="md-primary" @click.native="closeDialog('addDish')">Cancel</md-button>
+    <md-button class="md-primary" @click.native="createDish(); closeDialog('addDish'); ">Ok</md-button>
+  </md-dialog-actions>
+</md-dialog>
+   <md-button class="md-primary md-raised" id="addDish" @click.native="openDialog('addDish')">Добавить</md-button>
+    
+        </div>
         </md-card-header>
 
         <md-card-content>
-            <md-switch v-model="editMode" class="md-primary">Включить режим редактирования</md-switch>
-   <md-list>
-    <md-list-item>
-      <md-icon>whatshot</md-icon>
-      <span>News</span>
-
-      <md-list-expand>
-        <md-list>
-          <md-list-item class="md-inset">World</md-list-item>
-          <md-list-item class="md-inset">Americas</md-list-item>
-          <md-list-item class="md-inset">Europe</md-list-item>
-        </md-list>
-      </md-list-expand>
-    </md-list-item>
-    </md-list>
-
-        </md-card-content>
-
-    </md-card>
-    
-    
-    <md-tabs class="menu-cards md-warn" md-centered md-fixed v-cloak>
+        </md-card-content>  
+    </md-card>   
+        <br>
+          
+    <md-tabs class="menu-cards md-warn"  id="tabs" md-centered md-fixed v-cloak>
        
         <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
             <div class="row">
@@ -146,11 +175,12 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="(post,index) in listMenu.Hot_dishes">
                 
                 <md-card>
-    <div class="button-action">
-            <md-button class="md-icon-button action-group">
-                <md-icon style="opacity: .51" v-show="editMode">clear</md-icon>
-            </md-button>
-    </div>
+                <div class="button-action" v-show="editMode">
+                        <md-switch v-model="post.Available" v-on:change="post['edit']= true" name="available" class="md-warn"></md-switch>
+                        <md-button class="md-icon-button action-group">
+                            <md-icon style="opacity: .51">clear</md-icon>
+                        </md-button>
+                </div>
 <!--                    v-on:click.native="$refs['menuActionE'][index].close()" onclick="adminPanel.listMenu.Hot_dishes[2]['edit'] = true; ">-->
                     <md-card-header>
                         <md-avatar class="md-big">
@@ -160,7 +190,53 @@
                         <md-card-header-text>
                     <div class="md-title">
 <!--                        <br>-->
-                        <input type="text" class="edit-inp" v-model="post.Title_dish" :disabled="!editMode">
+                        <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Title_dish" :disabled="!editMode">
+                    </div>
+                    <div class="md-subhead">
+<!--                        {{ post.Caption_dish }} <br>-->
+                        <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Caption_dish" :disabled="!editMode">
+                    </div>
+
+                        </md-card-header-text>
+                        <div class="price">
+                           <input type="number" class="text-center" v-on:change="post['edit']= true" v-model="post.Price_dish" :disabled="!editMode">
+<!--                            <{{ post.Price_dish }}р</span>-->
+                        </div>
+                    </md-card-header>
+
+                <md-ink-ripple />
+                </md-card>
+                 <div class="clearfix"></div>
+                </div>
+            </div>
+      </md-tab>
+      <md-tab md-label="Дессерты" md-icon="receipt" class="icon-hot">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="false">
+                    <md-card>
+                        <h4>Что-то пошло не так..</h4>
+                    </md-card>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="(post,index) in listMenu.Dessert">
+                
+                <md-card>
+                <div class="button-action" v-show="editMode">
+                        <md-switch v-model="post.Available" name="available" class="md-warn"></md-switch>
+                        <md-button class="md-icon-button action-group">
+                            <md-icon style="opacity: .51">clear</md-icon>
+                        </md-button>
+                </div>
+<!--                    v-on:click.native="$refs['menuActionE'][index].close()" onclick="adminPanel.listMenu.Hot_dishes[2]['edit'] = true; ">-->
+                    <md-card-header>
+                        <md-avatar class="md-big">
+                           
+                            <img v-bind:src="post.ImagePath+'.jpg'">
+                        </md-avatar>
+                        <md-card-header-text>
+                    <div class="md-title">
+<!--                        <br>-->
+                        <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Title_dish" :disabled="!editMode">
                     </div>
                     <div class="md-subhead">
 <!--                        {{ post.Caption_dish }} <br>-->
@@ -181,9 +257,7 @@
             </div>
       </md-tab>
 
-
-
-</md-tabs>
+    </md-tabs>
     
     </div>           
     
@@ -241,7 +315,7 @@
         </md-card-header>
     </md-card>
 -->
-    <md-card md-with-hover v-for="(reserve,index) in listReserve" class="anim-fadeIn ">
+    <md-card md-with-hover v-for="(reserve,index) in listReserve" class="anim-fadeIn">
     <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: {{reserve.Data_create}}</div>
     <div class="button-action">
         <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuAction">
@@ -250,7 +324,7 @@
             </md-button>
             <md-menu-content>
                 <md-button 
-                    class="md-warn" v-on:click.native="actions(reserve,index,'delete'); $refs['menuAction'][index].close()">
+                    class="md-warn" v-on:click.native="actionsDelRes(reserve,index,'delete'); $refs['menuAction'][index].close()">
                     Удалить
                 </md-button>
             </md-menu-content>
@@ -300,7 +374,7 @@
             <table>
                 <tr>
                     <td>Кол-во блюд:</td>
-<!--                    <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>-->
+                    <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>
                 </tr>
                 <tr>
                     <td>Общая сумма:</td>
@@ -325,6 +399,8 @@
     <script type="text/javascript" src="vue/vue.js"></script>
     <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
     <script type="text/javascript" src="vue/vue-resource.js"></script>
+    <script type="text/javascript" src="js/too.js"></script>
+    
     <script type="text/javascript" src="js/adminPanel.js"></script>
 </body>
 </html>

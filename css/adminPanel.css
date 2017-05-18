@@ -313,3 +313,32 @@ input{
 .md-title-18 {
     font-size: 18px;
 }
+
+.dialog-add {
+/*    width: 250px;*/
+}
+.editLayer .md-dialog {
+    min-width: none !important; 
+    max-width: none !important; 
+/*    padding: 22343px;*/
+/*    height: 290px;*/
+/*    width: 430px;*/
+/*    padding: 0px 20px 20px 20px;*/
+/*    #3f51b5*/
+}
+.md-dialog{
+/*    height: 40px;*/
+    margin-left: 180px;
+    width: 30%;
+    max-width: 40%;
+/*    min-width: 40%;*/
+}
+.md-avatar.md-big-newD {
+    display: flex;
+    margin: 0 auto;
+    width: 92px; 
+    min-width: 92px; 
+    height: 92px; 
+    min-height: 92px; 
+    border-radius: 92px;
+}

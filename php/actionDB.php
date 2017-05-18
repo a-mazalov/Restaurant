@@ -12,22 +12,54 @@
     $DataGET = $_GET;
 
 
-    var_dump($DataGET);
+//    var_dump($DataGET);
 
 
 switch($DataGET["action"]){
     case "delete":    
-    $queryDelete = $pdo->prepare('DELETE FROM `Reserve_table` WHERE `ID_reserve` = :id_reserve');  
-    $queryDelete->execute(array(
-        'id_reserve' => $DataGET["item"],
-    ));
-        echo "switch delete"; 
-        break;
+        $queryDelete = $pdo->prepare('DELETE FROM `Reserve_table` WHERE `ID_reserve` = :id_reserve');  
+        $queryDelete->execute(array(
+            'id_reserve' => $DataGET["item"],
+        ));
+            echo "switch delete"; 
+            break;
         
     case "update":
+        $ArrayDish = $DataGET["item"];
+        $queryUpdate = $pdo->prepare('UPDATE `Restaurant`.`Menu_table` SET `Title_dish` = :title_dish, `Caption_dish` = :caption_dish, `Price_dish` = :price_dish, `Available` = :available WHERE `ID_dish` = :id_dish');    
+            for($i = 0, $arr_l = count($ArrayDish); $i<$arr_l; $i++){
+                $queryUpdate->execute(array(
+                    'title_dish' => $ArrayDish[$i]["Title_dish"],
+                    'caption_dish' => $ArrayDish[$i]["Caption_dish"],
+                    'price_dish' => $ArrayDish[$i]["Price_dish"],
+    //                    'category_dish' => $ArrayDish["Category_dish"],
+    //                    'imagePath' => $ArrayDish[$i]["ImagePath"],
+                    'available' => $ArrayDish[$i]["Available"],
+                    'id_dish' => $ArrayDish[$i]["ID_dish"],
+                ));
+
+            }  
         echo "switch update"; 
         break;
+    case "newDish":
         
+        $ArrayNewDish = $DataGET["item"];
+//        var_dump();
+        $queryNewDish = $pdo->prepare('INSERT INTO Restaurant.Menu_table (ID_dish, Title_dish, Caption_dish, Price_dish, Category_dish, ImagePath, Available) VALUES (NULL,:title_dish, :caption_dish, :price_dish, :category_dish, "img/food/id_default", "1")');
+                
+        $queryNewDish->execute(array(
+            'title_dish' => $ArrayNewDish["Title_dish"],
+            'caption_dish' => $ArrayNewDish["Caption_dish"],
+            'price_dish' => $ArrayNewDish["Price_dish"],
+            'category_dish' => $ArrayNewDish["Category_dish"]
+//                    'imagePath' => $ArrayDish[$i]["ImagePath"],
+//            'available' => $ArrayDish["Available"],
+        ));
+
+        
+        
+        echo "switch newDish"; 
+        break;
 
 }
 
