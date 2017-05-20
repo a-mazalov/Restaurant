@@ -11,7 +11,7 @@
 
     $DataGET = $_GET;
 
-
+//    echo $pdo->lastInsertId();
 //    var_dump($DataGET);
 
 
@@ -45,21 +45,45 @@ switch($DataGET["action"]){
     case "newDish":
         
         $ArrayNewDish = $DataGET["item"];
-//        var_dump();
-        $queryNewDish = $pdo->prepare('INSERT INTO Restaurant.Menu_table (ID_dish, Title_dish, Caption_dish, Price_dish, Category_dish, ImagePath, Available) VALUES (NULL,:title_dish, :caption_dish, :price_dish, :category_dish, "img/food/id_default", "1")');
+        if($ArrayNewDish["Image"]){
+//            $querylastID = $pdo->query('SELECT max(`ID_dish`) as ID FROM Menu_table');
+            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'Restaurant' AND TABLE_NAME = 'Menu_table'");
+            $querylastID = $querylastID->fetch();
+//            $lastID = $querylastID["ID"]+1;
+            $lastID = $querylastID["AUTO_INCREMENT"];
+//            var_dump($lastID);
+            $imgPath = 'img/food/id_'.$lastID.'.jpg';
+//            var_dump($imgPath);
+        }else{
+            $imgPath= "img/food/id_default.jpg";
+        }
+//            $ArrayDish["ImagePath"] = "img/food/id_default.jpg";
+//        var_dump($ArrayNewDish);
+        
+        $queryNewDish = $pdo->prepare('INSERT INTO Restaurant.Menu_table (ID_dish, Title_dish, Caption_dish, Price_dish, Category_dish, ImagePath, Available) VALUES (NULL,:title_dish, :caption_dish, :price_dish, :category_dish, :imgPath, "1")');
                 
         $queryNewDish->execute(array(
             'title_dish' => $ArrayNewDish["Title_dish"],
             'caption_dish' => $ArrayNewDish["Caption_dish"],
             'price_dish' => $ArrayNewDish["Price_dish"],
-            'category_dish' => $ArrayNewDish["Category_dish"]
-//                    'imagePath' => $ArrayDish[$i]["ImagePath"],
+            'category_dish' => $ArrayNewDish["Category_dish"],
+            'imgPath' => $imgPath
 //            'available' => $ArrayDish["Available"],
         ));
-
+        echo $pdo->lastInsertId();
         
+//        echo "switch newDish"; 
+        break;
+    
+    case "deleteDish":
         
-        echo "switch newDish"; 
+        $ArrayDelDish = $DataGET["item"];
+        
+        $queryDelDish = $pdo->prepare('DELETE FROM `Restaurant`.`Menu_table` WHERE `menu_table`.`ID_dish` = id_dish');  
+        $queryDelDish->execute(array(
+            'id_dish' => $ArrayDelDish
+        ));
+        
         break;
 
 }

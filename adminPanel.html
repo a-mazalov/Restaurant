@@ -99,8 +99,12 @@
 
         <md-card-content>
 
-
-
+<md-input-container>
+  <label>Single</label>
+  <md-file v-model="newDish.ImagePath"></md-file>
+</md-input-container>
+        <br><br><br>
+        
         </md-card-content>
 
         <md-card-actions>
@@ -129,6 +133,8 @@
             <md-avatar class="md-large md-big-newD text-center" id="av">
             <img src="img/food/id_default.jpg" alt="People">
         </md-avatar>
+        <input type="file" name="upload"  id="loadpicture">
+<!--        @change="onFileChange1()"-->
         <md-input-container>
             <label>Название</label>
             <md-input v-model="newDish.Title_dish"></md-input>
@@ -177,7 +183,7 @@
                 <md-card>
                 <div class="button-action" v-show="editMode">
                         <md-switch v-model="post.Available" v-on:change="post['edit']= true" name="available" class="md-warn"></md-switch>
-                        <md-button class="md-icon-button action-group">
+                        <md-button class="md-icon-button action-group" v-on:click.native="deleteDish(post,index)">
                             <md-icon style="opacity: .51">clear</md-icon>
                         </md-button>
                 </div>
@@ -185,7 +191,7 @@
                     <md-card-header>
                         <md-avatar class="md-big">
                            
-                            <img v-bind:src="post.ImagePath+'.jpg'">
+                            <img v-bind:src="post.ImagePath">
                         </md-avatar>
                         <md-card-header-text>
                     <div class="md-title">
@@ -399,7 +405,7 @@
     <script type="text/javascript" src="vue/vue.js"></script>
     <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
     <script type="text/javascript" src="vue/vue-resource.js"></script>
-    <script type="text/javascript" src="js/too.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     
     <script type="text/javascript" src="js/adminPanel.js"></script>
 </body>

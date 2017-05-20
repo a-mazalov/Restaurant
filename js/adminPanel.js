@@ -13,9 +13,9 @@ var adminPanel = new Vue({
         editMode: false,
         layers: {
             main: false,    
-            news: false,
+            news: true,
             editor: false,
-            reserve: true,
+            reserve: false,
             notificat: false
 
         },
@@ -26,14 +26,15 @@ var adminPanel = new Vue({
             reserveURL: "http://workproject/www/php/ListReserve.php",
             actionsURL: "http://restaurant.atservers.net/php/actionDB.php",
             actionsURL: "http://workproject/www/php/actionDB.php",
+            loadImgURL: "http://workproject/www/php/loadPicture.php",
         },
         listMenu: [],
         newDish: {
             Title_dish: '',
             Caption_dish: '',
-            Category_dish: '',
+            Category_dish: 'Hot_dishes',
             Price_dish: '',
-            ImagePath: ''
+            Image: false
         },
         actionMenu: {
             preEdit: [],
@@ -114,25 +115,74 @@ var adminPanel = new Vue({
             }
 
             this.editMode = false;
-
+    
         },
         createDish: function(){
-            alert('sdf');
-            console.log(this.newDish); 
+//            console.log(this.newDish); 
+            var file = document.getElementById('loadpicture').files[0];
+            if (file == undefined) {
+                this.newDish.Image = false;
+            } else {
+                this.newDish.Image = true;
+            }
+            console.log(file);
             
             let infoSend = {"item":this.newDish, "action": "newDish"};
-            
+                      
             this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
                 console.log("Выполнено"); 
                 console.log(response.data);
+                setImg(response.data);
                 this.getMenu();
+                
             }, function (error) {
                 console.log("Ошибка запроса: " + error.data);
                 this.showSnackBar("Ошибка при выполнении операции");
             });
+//            
+            function setImg(id_dish){
+//            
+                var newFileName;
+                if (file != undefined) {
+                    newFileName = "id_"+id_dish.trim()+".jpg";
+                }
+                
+                var formData = new FormData();
+                formData.append('file', file, newFileName);
+ 
+                $.ajax({
+                    url: "http://workproject/www/php/loadPicture.php",
+                    type: 'post',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (result) { 
+                        console.log(result); 
+                    }
+                });
+            }
             
             
+        },
+        deleteDish: function(item,index){
+            console.log("delDish");
+            let deletedItem = {
+                "index": index,
+                "item": item
+            };
             
+            let infoSend = {"item":item.ID_dish, "action": "deleteDish"};
+            console.log(infoSend)
+            this.listMenu.splice(deletedItem.index, 1);
+            
+            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+                console.log("Выполнено");
+                console.log(response.data)
+            }, function (error) {
+                console.log("Ошибка запроса: " + error.data);
+                this.showSnackBar("Ошибка при выполнении операции");
+                this.listMenu.splice(deletedItem.index, -1, deletedItem.item);
+            });    
         },
         Tchange: function(){
             alert("change");        

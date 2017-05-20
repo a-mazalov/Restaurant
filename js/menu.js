@@ -19,6 +19,8 @@ var MenuList = new Vue({
                         //_limit: 1
                     },
                     headers: {
+
+//                        'Content-Type': 'multipart/form-data'
                         //'Content-Type': 'application/json'
                     }
                 }
