@@ -74,11 +74,11 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6); 
 }
 .menu-cards .md-avatar.md-big {
-    width: 128px;
-    min-width: 128px;
-    height: 128px;
-    min-height: 128px;
-    border-radius: 128px
+    width: 98px;
+    min-width: 98px;
+    height: 98px;
+    min-height: 98px;
+    border-radius: 98x
 }
 .menu-cards .md-card .md-card-header:last-child {
     margin: 0;
@@ -137,11 +137,11 @@
         padding-left: 35px;
     }
     .menu-cards .md-avatar.md-big {
-        width: 128px;
-        min-width: 128px;
-        height: 128px;
-        min-height: 128px;
-        border-radius: 128px
+        width: 98px;
+        min-width: 98px;
+        height: 98px;
+        min-height: 98px;
+        border-radius: 98px
     }
 }
 

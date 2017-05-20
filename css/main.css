@@ -294,7 +294,17 @@ html {
   display: none;
 }
 
-
+.disabledDish {
+    pointer-events: none;
+    opacity: .7;
+}
+.disabledDish:after{
+    content: "Временно недоступно";
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    display: block;
+}
 
 .vertical-align {
     display: flex;

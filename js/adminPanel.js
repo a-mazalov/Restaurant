@@ -17,7 +17,6 @@ var adminPanel = new Vue({
             editor: false,
             reserve: false,
             notificat: false
-
         },
         servers:{
             menuURL: 'http://restaurant.atservers.net/php/menu-query.php',
@@ -29,6 +28,7 @@ var adminPanel = new Vue({
             loadImgURL: "http://workproject/www/php/loadPicture.php",
         },
         listMenu: [],
+        errorMenu: false,
         newDish: {
             Title_dish: '',
             Caption_dish: '',
@@ -36,6 +36,8 @@ var adminPanel = new Vue({
             Price_dish: '',
             Image: false
         },
+        viewImg: 'img/food/id_default.jpg',
+        deletedItem: '',
         actionMenu: {
             preEdit: [],
             acceptEdit: false,
@@ -66,6 +68,7 @@ var adminPanel = new Vue({
                 console.log(this.listMenu);
 
             }, function (error) {
+                this.errorMenu = true;
                 console.log("Ошибка запроса: " + error.data);
             });
         },
@@ -107,15 +110,29 @@ var adminPanel = new Vue({
                 }, function (error) {
                     console.log("Ошибка запроса: " + error.data);
                     this.showSnackBar("Ошибка при выполнении операции");
-                    this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
+//                    this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
                 });    
             
             }else{
-                this.showSnackBar("Нет изменений");
+//                this.showSnackBar("Нет изменений");
             }
 
             this.editMode = false;
     
+        },
+        previewImg: function(){
+            
+            var input = document.getElementById("loadpicture");
+//            var input = inpValue;
+            oFReader = new FileReader();
+            oFReader.onload = function (oFREvent) {
+                adminPanel.viewImg = oFREvent.target.result || window.URL.createObjectURL(fl[0]);
+//                $('.cover-preview').attr('src', oFREvent.target.result || window.URL.createObjectURL(fl[0]));
+            };
+            if (input.files.length === 0) { return; }
+            var oFile = input.files[0];
+            oFReader.readAsDataURL(oFile);
+//            this.src = formData;
         },
         createDish: function(){
 //            console.log(this.newDish); 
@@ -166,14 +183,19 @@ var adminPanel = new Vue({
         },
         deleteDish: function(item,index){
             console.log("delDish");
-            let deletedItem = {
+            this.deletedItem = {
                 "index": index,
                 "item": item
             };
+
+            delete this.listMenu[item.Category_dish][index];
+            this.$forceUpdate();
+            
+//            console.log(deletedItem);
             
             let infoSend = {"item":item.ID_dish, "action": "deleteDish"};
             console.log(infoSend)
-            this.listMenu.splice(deletedItem.index, 1);
+//            this.listMenu.splice(deletedItemю.item.index, 1);
             
             this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
                 console.log("Выполнено");
@@ -181,14 +203,12 @@ var adminPanel = new Vue({
             }, function (error) {
                 console.log("Ошибка запроса: " + error.data);
                 this.showSnackBar("Ошибка при выполнении операции");
-                this.listMenu.splice(deletedItem.index, -1, deletedItem.item);
+                this.listMenu[item.Category_dish][index] = item;
+                this.$forceUpdate();
             });    
         },
         Tchange: function(){
             alert("change");        
-        },
-        test: function(){
-  
         },
         actionE: function(index){
             this.listMenu["Hot_dishes"][index]['edit'] = true;
@@ -281,6 +301,7 @@ var adminPanel = new Vue({
             for(var layer in this.layers){
                 if(section == layer){
                     this.layers[layer] = true;
+                    this.$forceUpdate();
                 }
                 else{
                     this.layers[layer] = false;
@@ -298,6 +319,13 @@ var adminPanel = new Vue({
         },
         closeDialog(ref) {
             this.$refs[ref].close();
+        },
+        strBool(value){
+            return !!value;
+//            switch(type){
+//                   case "str": return value === 1 ? "true" : "false";
+//                   case "num": return value === "true" ? "1" : "0";
+//            }
         }
     },
 //-------------------При создании---------------------------            

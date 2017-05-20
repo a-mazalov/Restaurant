@@ -27,7 +27,10 @@ switch($DataGET["action"]){
         
     case "update":
         $ArrayDish = $DataGET["item"];
-        $queryUpdate = $pdo->prepare('UPDATE `Restaurant`.`Menu_table` SET `Title_dish` = :title_dish, `Caption_dish` = :caption_dish, `Price_dish` = :price_dish, `Available` = :available WHERE `ID_dish` = :id_dish');    
+        
+        var_dump($ArrayDish);
+        
+$queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` = :title_dish, `Caption_dish` = :caption_dish, `Price_dish` = :price_dish, `Available` = IF(:available = 'true', 1, 0) WHERE `ID_dish` = :id_dish");    
             for($i = 0, $arr_l = count($ArrayDish); $i<$arr_l; $i++){
                 $queryUpdate->execute(array(
                     'title_dish' => $ArrayDish[$i]["Title_dish"],
@@ -35,8 +38,9 @@ switch($DataGET["action"]){
                     'price_dish' => $ArrayDish[$i]["Price_dish"],
     //                    'category_dish' => $ArrayDish["Category_dish"],
     //                    'imagePath' => $ArrayDish[$i]["ImagePath"],
+//                    'available' => $ArrayDish[$i]["Available"],
                     'available' => $ArrayDish[$i]["Available"],
-                    'id_dish' => $ArrayDish[$i]["ID_dish"],
+                    'id_dish' => $ArrayDish[$i]["ID_dish"]
                 ));
 
             }  
@@ -79,7 +83,7 @@ switch($DataGET["action"]){
         
         $ArrayDelDish = $DataGET["item"];
         
-        $queryDelDish = $pdo->prepare('DELETE FROM `Restaurant`.`Menu_table` WHERE `menu_table`.`ID_dish` = id_dish');  
+        $queryDelDish = $pdo->prepare('DELETE FROM `Restaurant`.`Menu_table` WHERE `Menu_table`.`ID_dish` = :id_dish');  
         $queryDelDish->execute(array(
             'id_dish' => $ArrayDelDish
         ));

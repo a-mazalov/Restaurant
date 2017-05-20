@@ -69,9 +69,9 @@
        
 <div class="admin-container" v-cloak>
 
-    <md-spinner md-indeterminate class="md-warn loader" v-if="loader"></md-spinner>
+    <md-spinner md-indeterminate class="md-warn loader" v-show="loader"></md-spinner>
     
-    <div class="mainLayer anim-fadeIn" v-show="layers.main">
+    <div class="mainLayer anim-fadeIn" v-if="layers.main">
 
         <md-card md-with-hover>
         <md-card-header class="text-center">
@@ -90,29 +90,23 @@
         </md-card-actions>
     </md-card>
     </div>    
-    <div class="newsLayer anim-fadeIn" v-show="layers.news">
+    <div class="newsLayer anim-fadeIn" v-if="layers.news">
         <md-card md-with-hover>
-        <md-card-header class="text-center">
-            <div class="md-title">Новости</div>
-            <md-icon class="md-warn">sms_failed</md-icon>
-        </md-card-header>
+            <md-card-header class="text-center">
+                <div class="md-title">Новости</div>
+                <md-icon class="md-warn">sms_failed</md-icon>
+            </md-card-header>
 
-        <md-card-content>
+            <md-card-content>
 
-<md-input-container>
-  <label>Single</label>
-  <md-file v-model="newDish.ImagePath"></md-file>
-</md-input-container>
-        <br><br><br>
-        
-        </md-card-content>
+            </md-card-content>
 
-        <md-card-actions>
+            <md-card-actions>
 
-        </md-card-actions>
-    </md-card>
+            </md-card-actions>
+        </md-card>
     </div> 
-    <div class="editLayer anim-fadeIn" v-show="layers.editor">
+    <div class="editLayer anim-fadeIn" v-if="layers.editor">
     
     <md-card md-with-hover>
         <md-card-header class="text-center">
@@ -129,11 +123,17 @@
 <md-dialog md-open-from="#addDish" md-close-to="#addDish" ref="addDish" class="dialog-add">
   <md-dialog-title>Новое блюдо</md-dialog-title>
 
-        <md-dialog-content>
-            <md-avatar class="md-large md-big-newD text-center" id="av">
-            <img src="img/food/id_default.jpg" alt="People">
-        </md-avatar>
-        <input type="file" name="upload"  id="loadpicture">
+    <md-dialog-content>
+        <div class="block-ava-inp">
+            <input type="file"  name="upload" id="loadpicture" v-on:change="previewImg()" style="display: none;">
+            <label for="loadpicture" class="inp-imgload">
+                <md-avatar class="md-large md-big-newD text-center" id="av">
+        <!--            <img src="img/food/id_default.jpg" alt="People">-->
+        <!--            <img :md-src="viewImg" alt="People" >-->
+                    <md-image :md-src="viewImg"></md-image>
+                </md-avatar>
+            </label>
+        </div>
 <!--        @change="onFileChange1()"-->
         <md-input-container>
             <label>Название</label>
@@ -172,17 +172,17 @@
        
         <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="false">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="errorMenu">
                     <md-card>
                         <h4>Что-то пошло не так..</h4>
                     </md-card>
                 </div>
                 
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="(post,index) in listMenu.Hot_dishes">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" v-for="(post,index) in listMenu.Hot_dishes">
                 
-                <md-card>
+                <md-card v-bind:class="{ disabledDishAdmin: !post.Available }">
                 <div class="button-action" v-show="editMode">
-                        <md-switch v-model="post.Available" v-on:change="post['edit']= true" name="available" class="md-warn"></md-switch>
+                        <md-switch v-model="post.Available" v-on:change="post['edit']= true" name="available" class="md-warn" ></md-switch>
                         <md-button class="md-icon-button action-group" v-on:click.native="deleteDish(post,index)">
                             <md-icon style="opacity: .51">clear</md-icon>
                         </md-button>
@@ -218,7 +218,7 @@
       </md-tab>
       <md-tab md-label="Дессерты" md-icon="receipt" class="icon-hot">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="false">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="errorMenu">
                     <md-card>
                         <h4>Что-то пошло не так..</h4>
                     </md-card>
@@ -226,9 +226,9 @@
                 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="(post,index) in listMenu.Dessert">
                 
-                <md-card>
+                <md-card v-bind:class="{ disabledDishAdmin: !post.Available }">
                 <div class="button-action" v-show="editMode">
-                        <md-switch v-model="post.Available" name="available" class="md-warn"></md-switch>
+                        <md-switch v-model="post.Available" v-on:change="post['edit']= true" class="md-warn" ></md-switch>
                         <md-button class="md-icon-button action-group">
                             <md-icon style="opacity: .51">clear</md-icon>
                         </md-button>
@@ -237,7 +237,7 @@
                     <md-card-header>
                         <md-avatar class="md-big">
                            
-                            <img v-bind:src="post.ImagePath+'.jpg'">
+                            <img v-bind:src="post.ImagePath">
                         </md-avatar>
                         <md-card-header-text>
                     <div class="md-title">
@@ -261,59 +261,58 @@
                  <div class="clearfix"></div>
                 </div>
             </div>
-      </md-tab>
+        </md-tab>
+        <md-tab md-label="Суп" md-icon="receipt">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="errorMenu">
+                    <md-card>
+                        <h4>Что-то пошло не так..</h4>
+                    </md-card>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in listMenu.Soup">
+                
+                <md-card v-bind:class="{ disabledDishAdmin: !post.Available }">
+                    <md-card-header>
+                        <md-avatar class="md-big">
+                           
+                            <img v-bind:src="post.ImagePath">
+                        </md-avatar>
+                        <md-card-header-text>
+                    <div class="md-title ">{{ post.Title_dish }}</div>
+                    <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
+<!--                            <div class="md-subhead">{{ post.id }}</div>-->
+<!--                            <div class="md-title">{{ post.title }}</div>-->
+
+                        </md-card-header-text>
+                        <div class=" price">
+                            <span>{{ post.Price_dish }}р</span>
+                        </div>
+<!--
+                        <md-card-header-text>
+                            <div class="md-subhead">{{ post.id }}</div>
+                        </md-card-header-text>
+-->
+                    </md-card-header>
+<!--
+                    <md-card-actions>
+                        <md-button>Action</md-button>
+                        <md-button>Action</md-button>
+                    </md-card-actions>
+-->
+              <md-ink-ripple />
+                </md-card>
+                 <div class="clearfix"></div>
+                </div>
+                
+            </div>
+        </md-tab>
+    
 
     </md-tabs>
     
     </div>           
-    
-    <div class="notification anim-fadeIn" v-show="layers.notificat">
-
-        <md-card class="md-error text-center anim-fadeIn" v-show="notification.errorSend">
-            <md-card-content>
-                Ошибка отправки!
-            </md-card-content>
-        </md-card>
-        <md-card class="md-success text-center anim-fadeIn" v-show="notification.successSend">
-            <md-card-content>
-                Успешно отправлено!
-            </md-card-content>
-        </md-card>
-
-        <md-card md-with-hover>
-            <md-card-header class="text-center">
-                <div class="md-title">Рассылка уведомлений</div>
-                <md-icon class="md-warn">sms_failed</md-icon>
-            </md-card-header>
-
-            <md-card-content>
-
-                <md-input-container>
-                    <label>Заголовок</label>
-                    <md-input placeholder="Введите заголовок уведомления" maxlength="25" v-model="notification.dataSend.title">
-                    </md-input>
-                </md-input-container>
-                <md-input-container>
-                    <label>Сообщение</label>
-                    <md-input placeholder="Введите сообщение" maxlength="30" v-model="notification.dataSend.body">
-                    </md-input>
-                </md-input-container>
-
-                <md-switch v-model="notification.saveMessage" class="md-primary">Сохранить форму ввода</md-switch>
-
-
-            </md-card-content>
-
-            <md-card-actions>
-                <md-button class="md-raised md-warn" v-on:click.native="sendPush">Отправить</md-button>
-    <!--            <md-button class="md-raised md-warn" v-on:click.native="">Отправить</md-button>-->
-            </md-card-actions>
-        </md-card>
-
-</div>
-    
-    
-    <div class="reserveLayer anim-fadeIn" v-show="layers.reserve">
+    <div class="reserveLayer anim-fadeIn" v-if="layers.reserve">
 <!--
     <md-card md-with-hover v-if="!listReserve.length">
         <md-card-header class="text-center">
@@ -394,6 +393,53 @@
 </md-card>
    
     </div>
+    <div class="notification anim-fadeIn" v-if="layers.notificat">
+
+        <md-card class="md-error text-center anim-fadeIn" v-show="notification.errorSend">
+            <md-card-content>
+                Ошибка отправки!
+            </md-card-content>
+        </md-card>
+        <md-card class="md-success text-center anim-fadeIn" v-show="notification.successSend">
+            <md-card-content>
+                Успешно отправлено!
+            </md-card-content>
+        </md-card>
+
+        <md-card md-with-hover>
+            <md-card-header class="text-center">
+                <div class="md-title">Рассылка уведомлений</div>
+                <md-icon class="md-warn">sms_failed</md-icon>
+            </md-card-header>
+
+            <md-card-content>
+
+                <md-input-container>
+                    <label>Заголовок</label>
+                    <md-input placeholder="Введите заголовок уведомления" maxlength="25" v-model="notification.dataSend.title">
+                    </md-input>
+                </md-input-container>
+                <md-input-container>
+                    <label>Сообщение</label>
+                    <md-input placeholder="Введите сообщение" maxlength="30" v-model="notification.dataSend.body">
+                    </md-input>
+                </md-input-container>
+
+                <md-switch v-model="notification.saveMessage" class="md-primary">Сохранить форму ввода</md-switch>
+
+
+            </md-card-content>
+
+            <md-card-actions>
+                <md-button class="md-raised md-warn" v-on:click.native="sendPush">Отправить</md-button>
+    <!--            <md-button class="md-raised md-warn" v-on:click.native="">Отправить</md-button>-->
+            </md-card-actions>
+        </md-card>
+
+</div>
+    
+    
+    
     <md-snackbar ref="snackbar">
         <span>{{snackMessage}}</span>
 <!--        <md-button class="md-accent" md-theme="light-blue" v-on:click.native="$refs.snackbar.options">Вернуть</md-button>-->
@@ -403,10 +449,10 @@
 <!-- Конец adminPanel -->
     </div>     
     <script type="text/javascript" src="vue/vue.js"></script>
-    <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
+<!--    <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>-->
+    <script type="text/javascript" src="vue-material/vue-material.js"></script>
     <script type="text/javascript" src="vue/vue-resource.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    
     <script type="text/javascript" src="js/adminPanel.js"></script>
 </body>
 </html>

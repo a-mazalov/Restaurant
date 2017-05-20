@@ -136,9 +136,8 @@
     </div>
    
     <div id="MenuList" v-cloak>
-
    
-    <md-tabs class=" md-warn" md-centered md-fixed v-cloak>
+    <md-tabs class="menu-cards md-warn" md-centered md-fixed v-cloak>
         <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="error">
@@ -149,14 +148,14 @@
                 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Hot_dishes">
                 
-                <md-card>
+                <md-card v-bind:class="{ disabledDish: !post.Available }">
                     <md-card-header>
                         <md-avatar class="md-big">
                            
-                            <img v-bind:src="post.ImagePath+'.jpg'">
+                            <img v-bind:src="post.ImagePath">
                         </md-avatar>
-                        <md-card-header-text class="lowerText">
-                    <div class="md-title">{{ post.Title_dish }}</div>
+                        <md-card-header-text>
+                    <div class="md-title ">{{ post.Title_dish }}</div>
                     <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
 <!--                            <div class="md-subhead">{{ post.id }}</div>-->
 <!--                            <div class="md-title">{{ post.title }}</div>-->
@@ -193,11 +192,11 @@
                 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Dessert">
                 
-                <md-card>
+                <md-card v-bind:class="{ disabledDish: !post.Available }">
                     <md-card-header>
                         <md-avatar class="md-big">
                            
-                            <img v-bind:src="post.ImagePath+'.jpg'">
+                            <img v-bind:src="post.ImagePath">
                         </md-avatar>
                         <md-card-header-text>
                     <div class="md-title ">{{ post.Title_dish }}</div>
@@ -238,11 +237,11 @@
                 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Soup">
                 
-                <md-card>
+                <md-card v-bind:class="{ disabledDish: !post.Available }">
                     <md-card-header>
                         <md-avatar class="md-big">
                            
-                            <img v-bind:src="post.ImagePath+'.jpg'">
+                            <img v-bind:src="post.ImagePath">
                         </md-avatar>
                         <md-card-header-text>
                     <div class="md-title ">{{ post.Title_dish }}</div>
@@ -280,7 +279,6 @@
     
     </div>
 <!--------------------------------------------------------------------->
-
 <!--
     <md-button class="md-raised" onclick = "AddToLocal()">Записать в корзину</md-button>
     <md-button class="md-raised" onclick = "">Получить заказы</md-button>
@@ -289,7 +287,7 @@
     <md-button class="md-raised" id="order">Открыть</md-button>
 -->
     
-<!--    <script type="text/javascript" src="cordova.js"></script>-->
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="vue/vue.js"></script>
     <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>

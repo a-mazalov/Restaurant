@@ -342,3 +342,53 @@ input{
     min-height: 92px; 
     border-radius: 92px;
 }
+
+.disabledDishAdmin {
+/*    pointer-events: none;*/
+    opacity: .7;
+}
+
+.disabledDishAdmin:after{
+    content: "Временно недоступно";
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    display: block;
+}
+
+.inp-imgload{
+/*    position: ;*/
+
+/*  left: 0;*/
+/*  right: 0;*/
+  margin: auto;
+
+/*    letter-spacing: 10em;      IE 9 fix */
+/*    -ms-transform: scale(1);  IE 9 fix */
+/*    opacity: 0;*/
+    cursor: pointer;
+    z-index: 5;
+    
+    width: 94px; 
+    min-width: 94px; 
+    height: 94px; 
+    min-height: 94px; 
+    border-radius: 94px;
+    box-shadow: 0px 0px 10px 2px rgba(106, 106, 106, 0.4);
+    transition: all 1s;
+    border: 1px dashed rgba(106, 106, 106, 0.4);
+}
+
+.block-ava-inp {
+    display: flex;
+    padding: 12px;
+    overflow: hidden;
+/*    border: 1px solid black;*/
+}
+
+.inp-imgload:hover {
+    transition: all 1s;
+    transform: scale(1.1);
+/*    border: 1px solid red;*/
+    opacity: 1;
+}
