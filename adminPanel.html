@@ -329,7 +329,12 @@
             </md-button>
             <md-menu-content>
                 <md-button 
-                    class="md-warn" v-on:click.native="actionsDelRes(reserve.ID_reserve,index); $refs['menuAction'][index].close()">
+                    v-if="reserve.TypeOrder == 'mobile'"
+                    class="md-primary" v-on:click.native="sendAcceptNotif(reserve, 'Подтверждена!'); $refs['menuAction'][index].close()">
+                    ОК
+                </md-button>
+                <md-button 
+                    class="md-warn" v-on:click.native="actionsDelRes(reserve.ID_reserve,index); sendAcceptNotif(reserve, 'Отклонена!'); $refs['menuAction'][index].close()">
                     Удалить
                 </md-button>
             </md-menu-content>

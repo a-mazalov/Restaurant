@@ -13,6 +13,7 @@
 
     $ID_Account = $DataReserve["ID_account"];
     $DataInput = $DataReserve["InfoReserve"];
+    $Token = $DataReserve["Token"];
 
     
     $Order = $DataReserve["Order"];
@@ -37,7 +38,7 @@
         $CheckOrder = false;
     }
 
-    $query = $pdo->prepare('INSERT INTO Reserve_table (ID_reserve, TypeOrder, ID_user, CheckOrdMenu, Num_desk, Date, Time, Count_guest, Name, LastName, Telephone, Notes, Data_create) VALUES (NULL, "mobile", :id_account, :checkOrdMenu, NULL, :date, :time, :numguest, :name, :lastName, :telephone, :notes, :data_create)');
+    $query = $pdo->prepare('INSERT INTO Reserve_table (ID_reserve, TypeOrder, ID_user, CheckOrdMenu, Date, Time, Count_guest, Name, LastName, Telephone, Notes, Data_create, TokenMessage) VALUES (NULL, "mobile", :id_account, :checkOrdMenu, :date, :time, :numguest, :name, :lastName, :telephone, :notes, :data_create, :token)');
     
     $query->execute(array(
         'id_account' => $ID_Account,
@@ -49,7 +50,8 @@
         'lastName' => $DataInput["lastName"], 
         'telephone' => $DataInput["telephone"], 
         'notes' => $DataInput["notes"],
-        'data_create' => date('Y-m-d H:i')
+        'data_create' => date('Y-m-d H:i'),
+        'token' => $Token
     ));
 
     if ($CheckOrder){

@@ -287,6 +287,7 @@ var adminPanel = new Vue({
             xhttp.setRequestHeader("Authorization", "key=" + this.notification.key);
             var dataS = JSON.stringify({
                 "to": "/topics/all",
+//                "to": "clCIyjDp7hM:APA91bFbwGNKjpeiJjq-H1nTHkv8YXwS2WsaUArL2uwUahGLTKOHWFPKT1gj5T9EkgC0KIlIoMnCLn1TCJXAr82wcKwpbahCOnNFcGmHF_vDJM2zoKAaFnLCxZy-hFwz-DRw1HUTtRVX",
                 "data": {
                     "title": this.notification.dataSend.title,
                     "body": this.notification.dataSend.body
@@ -295,6 +296,36 @@ var adminPanel = new Vue({
     //        var data = JSON.stringify({"to":"/topics/all","data": {"title": "GGSDf", "body": "sfs@!3"}});
             xhttp.send(dataS);
 
+        },
+        sendAcceptNotif: function(reserve,answer){
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4) {
+                    if (xhttp.status == 200) {
+                        var response = JSON.parse(xhttp.responseText);
+                        console.log(response);
+                        if (response.result == 1) {
+//                            adminPanel.notification.errorSend = true;
+                        } else {
+//                            adminPanel.notification.successSend = true;
+                        }
+                    } else {
+//                        adminPanel.notification.errorSend = true;
+                    }
+                }
+            };
+            xhttp.open("POST", this.notification.url, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.setRequestHeader("Authorization", "key=" + this.notification.key);
+            var dataS = JSON.stringify({
+                "to": reserve.TokenMessage,
+                "data": {
+                    "title": 'Заявка на '+ reserve.Date + ' ' + reserve.Time,
+                    "body": answer
+                }
+            });
+            //        var data = JSON.stringify({"to":"/topics/all","data": {"title": "GGSDf", "body": "sfs@!3"}});
+            xhttp.send(dataS); 
         },
 //-------------------Вспомогательные функции----------------
         сhangeLayer: function(section){

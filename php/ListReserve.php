@@ -9,7 +9,6 @@ $query = "SELECT
 	`TypeOrder`, 
 	`ID_user`, 
 	`CheckOrdMenu`, 
-	`Num_desk`, 
 	`Date`, 
 	`Time`, 
 	`Count_guest`, 
@@ -17,7 +16,8 @@ $query = "SELECT
 	`LastName`, 
 	`Telephone`, 
 	`Notes`, 
-	DATE_FORMAT(`Data_create`, '%Y-%m-%d %H:%i') as `Data_create` 
+	DATE_FORMAT(`Data_create`, '%Y-%m-%d %H:%i') as `Data_create`,
+    TokenMessage
 FROM 
 	`Reserve_table` 
 ORDER BY 
