@@ -246,7 +246,8 @@
     </div>
 
 <!--------------------------------------------------------------------->
-       
+        Your GCM ID : <br/>
+        <p id="gcm_id"></p>
     <!--Закрытие #app -->
     </div>
     
@@ -276,8 +277,32 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/tools.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-<!--    <script type="text/javascript" src="js/account.js"></script>-->
+<!--
+<script type="text/javascript">
+document.addEventListener("deviceready",onDeviceReady,false);
+var push;
+function onDeviceReady(){
+ push = PushNotification.init({ "android": {"senderID": "546819335473"}});
+ push.on('registration', function(data) {
+ console.log(data.registrationId);
+ document.getElementById("gcm_id").innerHTML = data.registrationId;
+ });
 
+ push.on('notification', function(data) {
+    alert(data.title+" Message: " +data.message);
+ });
+
+ push.on('error', function(e) {
+ alert(e);
+ });
+}
+</script>
+-->
+
+
+
+
+</script>
 
 </body>
 

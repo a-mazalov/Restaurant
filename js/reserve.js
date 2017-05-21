@@ -4,7 +4,8 @@ var ReserveCard = new Vue({
     el: "#Reserve",
     data: {
 //        queryPoint: 'http://d0008482.atservers.net/Felix/reserve.php',
-        queryPoint: 'http://restaurant.atservers.net/php/reserve.php',
+//        queryPoint: 'http://restaurant.atservers.net/php/reserve.php',
+        queryPoint: 'http://workproject/www/php/mobileReserve.php',
         reserveObj: {
             date: '',
             time: '',
@@ -20,6 +21,7 @@ var ReserveCard = new Vue({
         totalPrice: 0,
         messageOrder: "",
         showBlock: false,
+        tokenMessage: '',
         snackMessage: "",
         submitted: false
         
@@ -45,11 +47,11 @@ var ReserveCard = new Vue({
 //            console.log(Account["ID_user"]);
             if( this.CheckInp() ){
                
-        
-            var SendReserve = {"ID_account": getAccID(), "InfoReserve" : this.reserveObj };
-            
+
+            var SendReserve = {"ID_account": getAccID(), "InfoReserve" : this.reserveObj, "Token": this.tokenMessage };
+
             if( (this.checkbox) && (this.countDish > 0) ){
-                
+
                 SendReserve["Order"] = this.ListOrders;
                 console.log(SendReserve);
 //                alert("Галочка нажата и количество блюд больше 0")
@@ -125,6 +127,13 @@ var ReserveCard = new Vue({
     }
 })
 
+document.addEventListener("deviceready",getTokenC,false);
+function getTokenC(){
+    FCMPlugin.getToken(function(token){
+        window.ReserveCard.tokenMessage = token;
+        console.log("Token CL:" + ReserveCard.tokenMessage);
+    });
+}
 
 
 $(".inp-date").flatpickr({
