@@ -32,19 +32,37 @@ var App = new Vue({
     });
 
 //----------------//----//------------------//
-$(document).ready(function () {
 
-    if ($(this).scrollTop() != 0) {
-        $('.nav-custom').addClass("sticky");
+document.addEventListener('DOMContentLoaded', function(e) {
+    
+//    var nav_custom = document.getElementsByClassName("nav-custom")[0];
+    var nav_custom = document.querySelector(".nav-custom");
+    if (document.body.scrollTop != 0) {
+        nav_custom.classList.add("sticky");
     }
 
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 50) {
-            $('.nav-custom').addClass("sticky");
+    window.addEventListener('scroll', function() {
+        if (document.body.scrollTop > 50) {
+            nav_custom.classList.add("sticky");
         } else {
-            $('.nav-custom').removeClass("sticky");
+            nav_custom.classList.remove("sticky");
         }
     });
-
-    //close document-ready
+    
+    
 });
+
+//
+//$(document).ready(function () {
+//
+////    document.getElementById("custom");
+////    document.getElementsByClassName();
+//
+//
+//    
+//    $(window).scroll(function () {
+//
+//    });
+//
+//    //close document-ready
+//});
