@@ -16,13 +16,20 @@
 
 
 switch($DataGET["action"]){
-    case "delete":    
+    
+           
+    case "acceptReserve":    
+        $queryDelete = $pdo->prepare('UPDATE `Restaurant`.`Reserve_table` SET `Status` = "accept" WHERE `reserve_table`.`ID_reserve` = :id_reserve');  
+        $queryDelete->execute(array(
+            'id_reserve' => $DataGET["item"]["ID_reserve"],
+        ));
+            break;    
+    
+    case "deleteReserve":    
         $queryDelete = $pdo->prepare('DELETE FROM `Reserve_table` WHERE `ID_reserve` = :id_reserve');  
         $queryDelete->execute(array(
-            'id_reserve' => $DataGET["item"],
+            'id_reserve' => $DataGET["item"]["ID_reserve"],
         ));
-        var_dump($DataGET["item"]);
-            echo "switch delete"; 
             break;
         
     case "update":

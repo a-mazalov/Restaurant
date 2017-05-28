@@ -69,9 +69,10 @@
        
 <div class="admin-container" v-cloak>
 
-    <md-spinner md-indeterminate class="md-warn loader" v-show="loader"></md-spinner>
+<!--    <md-spinner md-indeterminate class="md-warn loader" v-show="loader"></md-spinner>-->
     
-    <div class="mainLayer anim-fadeIn" v-if="layers.main">
+    <div class="mainLayer anim-fadeIn" v-show="layers.main">
+<canvas id="myChart" width="400" height="400"></canvas>
 
         <md-card md-with-hover>
         <md-card-header class="text-center">
@@ -81,7 +82,6 @@
 
         <md-card-content>
 
-<!--<canvas id="myChart" width="400" height="400"></canvas>-->
 
         </md-card-content>
 
@@ -313,14 +313,177 @@
     
     </div>           
     <div class="reserveLayer anim-fadeIn" v-if="layers.reserve">
+    
+    <div class="container-fluid border" style="">
+    
+        
+        <div class="new-reserve border col-sm-12 col-md-6">
+            <span class="label-new-res">Новые заявки</span>
+            <md-card md-with-hover v-for="(reserve,index) in listReserveNew" class="anim-fadeIn">
+    
+    <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: {{reserve.Data_create}}</div>
+    <div class="button-action">
+        <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuAction">
+            <md-button class="md-icon-button action-group" md-menu-trigger>
+                <md-icon style="opacity: .51">more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-button 
+                    v-if="reserve.TypeOrder == 'mobile'"
+                    class="md-primary" v-on:click.native="sendAcceptNotif(reserve, 'Подтверждена!'); actionAcceptRes(item,index); $refs['menuAction'][index].close()">
+                    ОК
+                </md-button>                
+                <md-button 
+                    v-if="reserve.TypeOrder == 'site'"
+                    class="md-primary" v-on:click.native="actionAcceptRes(reserve,index); $refs['menuAction'][index].close()">
+                    OK
+                </md-button>
+                <md-button 
+                    class="md-warn" v-on:click.native="actionsDelRes(reserve,index,'new'); sendAcceptNotif(reserve, 'Отклонена!'); $refs['menuAction'][index].close()">
+                    Отклонить
+                </md-button>
+            </md-menu-content>
+        </md-menu>
+    </div>
+
+    <md-card-content class="reserve-item">
+        <md-avatar class="md-large">
+            <img src="img/test-icon/website.png" v-if="reserve.TypeOrder == 'site'">
+            <img src="img/test-icon/mobile.png" v-else>
+        </md-avatar>
+        <md-card-content>
+            <div class="">Дата: {{reserve.Date}}</div>
+            <div class="">Время: <span class="custom-text-14">{{reserve.Time}}</span></div>
+            <div class="">Кол-гостей: <span class="custom-text-14">{{reserve.Count_guest}}</span></div>
+        </md-card-content>
+        <md-card-content>
+            <div class="">Телефон: {{reserve.Telephone}}</div>
+            <div class="">Имя: {{reserve.Name}} {{reserve.LastName}}</div>
+            <div class="reserve-note">Заметка: {{reserve.Notes}}</div>
+        </md-card-content>
+    </md-card-content>
+
+   
+   
+   
+
+    <md-card-content class="footer-card" v-if="reserve.CheckOrdMenu">
+        <md-list>
+            <md-list-item>
+                <md-icon>whatshot</md-icon>
+                <span class="button-list">Заказанные блюда</span>
+
+                <md-list-expand>
+                    <md-list>
+                        <md-list-item class="md-inset" v-for="dish in reserve.dishes">
+                            <span  class="lowerText">{{dish.Title_dish}}</span>
+                            <span style="float: right; margin-right: 6px">{{dish.Amount_dish}}</span>
+                        </md-list-item>
+                    </md-list>
+                </md-list-expand>
+            </md-list-item>
+        </md-list>
+        
+        <md-divider class="md-inset"></md-divider>
+        <div class="info-reserve">
+            <table>
+                <tr>
+                    <td>Кол-во блюд:</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>
+                </tr>
+                <tr>
+                    <td>Общая сумма:</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="priceInReserve(reserve.dishes)+'р'"></td>
+                </tr>
+            </table>
+        </div>
+
+    </md-card-content>
+
+</md-card>
+        </div>
+        <div class="accept-reserve border col-sm-12 col-md-6">
+            <span class="label-new-res">Подтвержденные</span>
+            <md-card md-with-hover v-for="(reserve,index) in listReserveAccept" class="anim-fadeIn">
+    
+    <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: {{reserve.Data_create}}</div>
+    <div class="button-action">
+        <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuAction">
+            <md-button class="md-icon-button action-group" md-menu-trigger>
+                <md-icon style="opacity: .51">more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-button 
+                    class="md-warn" v-on:click.native="actionsDelRes(reserve,index,'accept'); $refs['menuAction'][index].close()">
+                    Удалить
+                </md-button>
+            </md-menu-content>
+        </md-menu>
+    </div>
+
+    <md-card-content class="reserve-item">
+        <md-avatar class="md-large">
+            <img src="img/test-icon/website.png" v-if="reserve.TypeOrder == 'site'">
+            <img src="img/test-icon/mobile.png" v-else>
+        </md-avatar>
+        <md-card-content>
+            <div class="">Дата: {{reserve.Date}}</div>
+            <div class="">Время: <span class="custom-text-14">{{reserve.Time}}</span></div>
+            <div class="">Кол-гостей: <span class="custom-text-14">{{reserve.Count_guest}}</span></div>
+        </md-card-content>
+        <md-card-content>
+            <div class="">Телефон: {{reserve.Telephone}}</div>
+            <div class="">Имя: {{reserve.Name}} {{reserve.LastName}}</div>
+            <div class="reserve-note">Заметка: {{reserve.Notes}}</div>
+        </md-card-content>
+    </md-card-content>
+    
+    <md-card-content class="footer-card" v-if="reserve.CheckOrdMenu">
+        <md-list>
+            <md-list-item>
+                <md-icon>whatshot</md-icon>
+                <span class="button-list">Заказанные блюда</span>
+
+                <md-list-expand>
+                    <md-list>
+                        <md-list-item class="md-inset" v-for="dish in reserve.dishes">
+                            <span  class="lowerText">{{dish.Title_dish}}</span>
+                            <span style="float: right; margin-right: 6px">{{dish.Amount_dish}}</span>
+                        </md-list-item>
+                    </md-list>
+                </md-list-expand>
+            </md-list-item>
+        </md-list>
+        
+        <md-divider class="md-inset"></md-divider>
+        <div class="info-reserve">
+            <table>
+                <tr>
+                    <td>Кол-во блюд:</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>
+                </tr>
+                <tr>
+                    <td>Общая сумма:</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="priceInReserve(reserve.dishes)+'р'"></td>
+                </tr>
+            </table>
+        </div>
+
+    </md-card-content>
+
+</md-card>
+        </div>        
+                
+                    
+                            
+    </div>
+
+
+
+
 <!--
-    <md-card md-with-hover v-if="!listReserve.length">
-        <md-card-header class="text-center">
-            <div class="md-subhead">Заявок нет</div>
-        </md-card-header>
-    </md-card>
--->
-    <md-card md-with-hover v-for="(reserve,index) in listReserve" class="anim-fadeIn">
+    <md-card md-with-hover v-for="(reserve,index) in listReserve" class="anim-fadeIn col-md-6">
+    
     <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: {{reserve.Data_create}}</div>
     <div class="button-action">
         <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuAction">
@@ -396,8 +559,87 @@
     </md-card-content>
 
 </md-card>
+    <md-card md-with-hover v-for="(reserve,index) in listReserve" class="anim-fadeIn col-md-6">
+    
+    <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: {{reserve.Data_create}}</div>
+    <div class="button-action">
+        <md-menu md-size="2" md-direction="bottom left" style="order: 50;" class="action-list" ref="menuAction">
+            <md-button class="md-icon-button action-group" md-menu-trigger>
+                <md-icon style="opacity: .51">more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-button 
+                    v-if="reserve.TypeOrder == 'mobile'"
+                    class="md-primary" v-on:click.native="sendAcceptNotif(reserve, 'Подтверждена!'); $refs['menuAction'][index].close()">
+                    ОК
+                </md-button>
+                <md-button 
+                    class="md-warn" v-on:click.native="actionsDelRes(reserve.ID_reserve,index); sendAcceptNotif(reserve, 'Отклонена!'); $refs['menuAction'][index].close()">
+                    Удалить
+                </md-button>
+            </md-menu-content>
+        </md-menu>
+    </div>
+
+    <md-card-content class="reserve-item">
+        <md-avatar class="md-large">
+            <img src="img/test-icon/website.png" v-if="reserve.TypeOrder == 'site'">
+            <img src="img/test-icon/mobile.png" v-else>
+        </md-avatar>
+        <md-card-content>
+            <div class="">Дата: {{reserve.Date}}</div>
+            <div class="">Время: <span class="custom-text-14">{{reserve.Time}}</span></div>
+            <div class="">Кол-гостей: <span class="custom-text-14">{{reserve.Count_guest}}</span></div>
+        </md-card-content>
+        <md-card-content>
+            <div class="">Телефон: {{reserve.Telephone}}</div>
+            <div class="">Имя: {{reserve.Name}} {{reserve.LastName}}</div>
+            <div class="reserve-note">Заметка: {{reserve.Notes}}</div>
+        </md-card-content>
+    </md-card-content>
+
+   
+   
+   
+
+    <md-card-content class="footer-card" v-if="reserve.CheckOrdMenu">
+        <md-list>
+            <md-list-item>
+                <md-icon>whatshot</md-icon>
+                <span class="button-list">Заказанные блюда</span>
+
+                <md-list-expand>
+                    <md-list>
+                        <md-list-item class="md-inset" v-for="dish in reserve.dishes">
+                            <span  class="lowerText">{{dish.Title_dish}}</span>
+                            <span style="float: right; margin-right: 6px">{{dish.Amount_dish}}</span>
+                        </md-list-item>
+                    </md-list>
+                </md-list-expand>
+            </md-list-item>
+        </md-list>
+        
+        <md-divider class="md-inset"></md-divider>
+        <div class="info-reserve">
+            <table>
+                <tr>
+                    <td>Кол-во блюд:</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>
+                </tr>
+                <tr>
+                    <td>Общая сумма:</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="priceInReserve(reserve.dishes)+'р'"></td>
+                </tr>
+            </table>
+        </div>
+
+    </md-card-content>
+
+</md-card>
+-->
    
     </div>
+    
     <div class="notification anim-fadeIn" v-if="layers.notificat">
 
         <md-card class="md-error text-center anim-fadeIn" v-show="notification.errorSend">
@@ -453,15 +695,78 @@
            
 <!-- Конец adminPanel -->
     </div>     
+
+    
     <script type="text/javascript" src="vue/vue.js"></script>
-<!--    <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>-->
+
     <script type="text/javascript" src="vue-material/vue-material.js"></script>
     <script type="text/javascript" src="vue/vue-resource.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-<!--    <script type="text/javascript" src="js/Chart.js"></script>-->
-   
-    
-<!--    <script type="text/javascript" src="js/Chart.min.js"></script>-->
+
     <script type="text/javascript" src="js/adminPanel.js"></script>
+    <script type="text/javascript" src="js/Chart.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(event) { 
+  //do work
+
+    var ctx10 = document.getElementById("myChart");
+        new Chart(ctx10, {
+    type: 'line',
+     data:  {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fill: true,
+            lineTension: 0.3,
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "rgba(75,192,192,1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [65, 59, 80, 81, 56, 55, 40],
+            spanGaps: false,
+        },
+        {
+            label: "My Second dataset",
+            fill: false,
+            lineTension: 0.3,
+            backgroundColor: "rgba(169,68,66,0.98)",
+            borderColor: "rgba(169,68,66,0.98)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(169,68,66,0.98)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(169,68,66,0.98)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [60, 79, 90, 61, 76, 56, 80],
+            spanGaps: false,
+        }
+    ]
+}
+    });
+        
+        
+});
+        
+    </script>
+    
 </body>
 </html>

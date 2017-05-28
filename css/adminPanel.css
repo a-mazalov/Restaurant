@@ -167,6 +167,21 @@
 .reserveLayer .md-card .md-avatar {
     margin: 0;
 }
+
+/*
+.reserveLayer .md-card{
+    width: 45%;
+}
+*/
+.reserveLayer .label-new-res,
+.reserveLayer .label-accept-res{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+
 .reserveLayer .md-card .footer-card {
     padding-top: 0;
     margin-top: 0;
@@ -246,6 +261,7 @@
 .reserveLayer {
 /*    overflow: auto;*/
     height: 100%;
+    width: 100%;
 }
 
 .admin-container .loader {
@@ -391,4 +407,10 @@ input{
     transform: scale(1.1);
 /*    border: 1px solid red;*/
     opacity: 1;
+}
+
+.reserveLayer .new-reserve,
+.reserveLayer .accept-reserve{
+    padding: 5px;
+    margin-top: 15px;
 }

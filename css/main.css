@@ -349,6 +349,10 @@ html {
     text-transform: none !important;    
 }
 
+.margin-a{
+    margin: auto;
+}
+
 .margin-100 {
     margin: 100px 0;
 }

@@ -12,8 +12,8 @@ var adminPanel = new Vue({
         snackMessage: '',
         editMode: false,
         layers: {
-            main: false,    
-            news: true,
+            main: true,    
+            news: false,
             editor: false,
             reserve: false,
             notificat: false
@@ -44,6 +44,8 @@ var adminPanel = new Vue({
             cancelEdit: false
         },
         listReserve: [],
+        listReserveNew: [],
+        listReserveAccept: [],
         notification: {
             dataSend: {
                 title: "Уведомление от ресторана",
@@ -221,8 +223,23 @@ var adminPanel = new Vue({
                 this.$http.get(this.servers.reserveURL).then(function (response) {
                 
                     this.loader = false;
-                    this.listReserve = JSON.parse(response.data);
-                    console.log( JSON.parse(response.data) );
+//                    this.listReserve = JSON.parse(response.data);
+                let dataReserve = JSON.parse(response.data);
+                for (prop in dataReserve) {
+                    if (dataReserve[prop].Status === "new") {
+                        this.listReserveNew.push(dataReserve[prop]);
+                    }else if(dataReserve[prop].Status === "accept"){
+                        this.listReserveAccept.push(dataReserve[prop]);       
+                    }
+                }
+                    console.log(this.listReserveNew);
+                    console.log(this.listReserveAccept);
+                    
+                    
+                    
+                    
+                    
+//                    console.log( JSON.parse(response.data) );
                 }, function (error) {
                     this.showSnackBar("Ошибка соединения");
                     console.log("Ошибка запроса: " + error.data);
@@ -238,16 +255,23 @@ var adminPanel = new Vue({
             return price.toFixed(2);
             
         },
-        actionsDelRes: function(item,index){
-            console.log("delRes");
+        actionsDelRes: function(item,index,status){
+            console.log("index"+index);
+            
             let deletedItem = {
                 "index": index,
                 "item": item
             };
             
-            let infoSend = {"item":item, "action": "delete"};
-            console.log(infoSend)
-            this.listReserve.splice(deletedItem.index, 1);
+            switch(status){
+                case "new": this.listReserveNew.splice(index, 1); break;
+                case "accept": this.listReserveAccept.splice(index, 1); break;
+            }
+            
+            let infoSend = {"item":item, "action": "deleteReserve"};
+            console.log(infoSend);
+            
+//            this.listReserve.splice(deletedItem.index, 1);
             
             this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
                 console.log("Выполнено");
@@ -255,9 +279,28 @@ var adminPanel = new Vue({
             }, function (error) {
                 console.log("Ошибка запроса: " + error.data);
                 this.showSnackBar("Ошибка при выполнении операции");
-                this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
+                
+                switch(status){
+                    case "new": this.listReserveNew.splice(deletedItem.index, -1, deletedItem.item); break;
+                    case "accept": this.listReserveAccept.splice(deletedItem.index, -1, deletedItem.item); break;
+                }
             });
 //            
+        },
+        actionAcceptRes: function(item,index){
+            this.listReserveNew.splice(index, 1);  
+            this.listReserveAccept.splice(0, -1, item);
+            
+            let infoSend = {"item":item, "action": "acceptReserve"};
+
+            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+                console.log("Выполнено");
+//                console.log(response.data)
+            }, function (error) {
+                console.log("Ошибка запроса: " + error.data);
+                this.showSnackBar("Ошибка при выполнении операции");
+                this.listReserveNew.splice(index, -1, item);
+            });
         },
 //-------------------Работа с рассылкой уведомлений-----------------------
         sendPush: function(){
@@ -384,48 +427,7 @@ var adminPanel = new Vue({
     return copy;
 };     
 
-document.addEventListener("deviceready",charCans(),false);
 
-function charCans(){
-    var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-    
-}
 //
 //
 //    function send2(){

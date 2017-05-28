@@ -1,7 +1,7 @@
 <?php
     header('Access-Control-Allow-Origin: *');
     require('connectDB.php');
-        $query = "SELECT * FROM `Reserve_table` ORDER BY `Reserve_table`.`ID_reserve` DESC";
+//        $query = "SELECT * FROM `Reserve_table` ORDER BY `Reserve_table`.`ID_reserve` DESC";
 
 
 $query = "SELECT 
@@ -17,12 +17,13 @@ $query = "SELECT
 	`Telephone`, 
 	`Notes`, 
 	DATE_FORMAT(`Data_create`, '%Y-%m-%d %H:%i') as `Data_create`,
+    Status,
     TokenMessage
 FROM 
 	`Reserve_table` 
 ORDER BY 
 	`Reserve_table`.`ID_reserve` DESC";
-        $result = $pdo->query($query); 
+    $result = $pdo->query($query); 
 
     $data = array();
     $i = 0;
