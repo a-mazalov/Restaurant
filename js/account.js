@@ -23,8 +23,7 @@ var Account = new Vue({
         groupName: '',
         inpCreate: false,
         customMenu: {},
-        deferDisabled: true,
-        opt: function(){ alert("dfg") }
+        deferDisabled: true
     },
     methods: {
         showSnackBar(Message, funcBtn) {
@@ -35,7 +34,6 @@ var Account = new Vue({
             getInfAccount: function () {
                 this.infoAccount = Local.Get("Account");
                 console.log(this.infoAccount);
-                console.log("PI#DA top");
             },
             accFavorite() {
                 if (window.localStorage.Favorite) {
@@ -190,7 +188,7 @@ var Account = new Vue({
                     Order.Add(this.customMenu[key][item]);
                 }
                 
-                
+                location.href='orders.html';
 //                console.log(this.customMenu[key]);
 //                Order.Add(this.customMenu[key]);
             }

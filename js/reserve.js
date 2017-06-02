@@ -13,12 +13,19 @@ var ReserveCard = new Vue({
             lastName: '',
             telephone: '',
             numguest: 1,
-            notes: ''
+            notes: '',
+            useBonus: 0,
+            bonus: 0
+        },
+        copyVar: {
+            price: 0,
+            bonus: 0
         },
         checkbox: false,
         ListOrders: [],
         countDish: 0,
         totalPrice: 0,
+        modeBonus: 0,
         messageOrder: "",
         showBlock: false,
         tokenMessage: '',
@@ -34,8 +41,12 @@ var ReserveCard = new Vue({
             this.reserveObj.name = Account.Name;
             this.reserveObj.lastName = Account.LastName;
             this.reserveObj.telephone = Account.Telephone;
-            
-            
+//            this.reserveObj.bonus = checkBonus(Account.ID_user);
+            checkBonus(Account.ID_user,function(output){
+                ReserveCard.reserveObj.bonus = output;
+                Account.Bonus = output;
+                Local.Set("Account", Account);
+            });
         },
         ReserveInfo: function(){
 //            console.log(this.reserveObj);
@@ -45,9 +56,19 @@ var ReserveCard = new Vue({
 //            
 //            console.log(Account);
 //            console.log(Account["ID_user"]);
-            if( this.CheckInp() ){
+//            if( this.CheckInp() ){
+            if( true ){
                
-
+                if(this.reserveObj.useBonus){
+                    
+                    if(this.modeBonus){
+                        this.reserveObj.bonus = this.copyVar.price;
+                    }else{
+                        this.reserveObj.bonus = this.copyVar.bonus;
+                    }
+                    
+                }
+                
             var SendReserve = {"ID_account": getAccID(), "InfoReserve" : this.reserveObj, "Token": this.tokenMessage };
 
             if( (this.checkbox) && (this.countDish > 0) ){
@@ -65,11 +86,28 @@ var ReserveCard = new Vue({
             
                 console.log(response.data);
 //                alert("Отправлено");
+                this.reserveObj = {
+                    date: '',
+                    time: '',
+                    name: '',
+                    lastName: '',
+                    telephone: '',
+                    numguest: 1,
+                    notes: '',
+                    useBonus: false,
+                    bonus: 0
+                }
                 
+//                let Account = Local.Get("Account");
+//                Account.Bonus = 0;
+//                Local.Set("Account", Account);
+            },
+                function (error) {
+                console.log("Ошибка запроса: " + error.data);
+                this.showSnackBar("Ошибка при выполнении операции");
             });
                 
-//                this.submitted = true;
-                
+                this.submitted = true;
             }    
         },
         GetOrders: function(){
@@ -79,14 +117,14 @@ var ReserveCard = new Vue({
 //            console.log(!this.checkbox);
 
             if (this.ListOrders.length > 0) {
-                    this.totalprice = 0;
+                    this.totalPrice = 0;
                     let price = 0;
                     for (var i = 0; i < this.ListOrders.length; i++) {
                         let DataDish = this.ListOrders[i];
                         price += parseInt( (DataDish.Price_dish * DataDish.Amount) * 100)/100;
                     }
                     
-                    this.totalprice = price.toFixed(2);
+                    this.totalPrice = price.toFixed(2);
                     this.countDish = this.ListOrders.length;
                     this.messageOrder = "Блюда из вашей корзины заказов";
 //                console.log("Количество блюд" + this.ListOrders.length);
@@ -97,7 +135,44 @@ var ReserveCard = new Vue({
             
             
             console.log(this.ListOrders);
-            console.log(this.totalprice,this.countDish, this.messageOrder);
+            console.log(this.totalPrice,this.countDish, this.messageOrder);
+        },
+        useBonusFunc: function(){
+            this.totalPrice = parseFloat(this.totalPrice);
+//           
+//            alert(!this.reserveObj.useBonus);
+//            
+            if(!this.reserveObj.useBonus){
+                this.copyVar.price = this.totalPrice;
+                this.copyVar.bonus = this.reserveObj.bonus;
+                console.log(this.copyVar);
+                
+                
+                if(this.totalPrice >= this.reserveObj.bonus){
+                    this.totalPrice -= this.reserveObj.bonus;
+                    this.reserveObj.bonus -= this.reserveObj.bonus;
+                    this.modeBonus = 0;
+                }
+                if(this.totalPrice <= this.reserveObj.bonus){
+                    this.reserveObj.bonus = (this.reserveObj.bonus - this.totalPrice);
+                    this.totalPrice -= this.totalPrice;
+                    this.modeBonus = 1;
+                }
+                
+            }else{
+                if(this.totalPrice >= this.reserveObj.bonus){
+                    console.log(this.copyVar);
+                    this.totalPrice = this.copyVar.price;
+                    this.reserveObj.bonus = this.copyVar.bonus;
+                }
+                if(this.totalPrice <= this.reserveObj.bonus){
+                   this.reserveObj.bonus = this.copyVar.bonus;
+                   this.totalPrice = this.copyVar.price;
+                }
+            }
+            this.reserveObj.bonus = parseFloat(this.reserveObj.bonus).toFixed(2);
+            this.totalPrice = parseFloat(this.totalPrice).toFixed(2);
+
         },
         CheckInp: function(){
             let input = this.reserveObj;

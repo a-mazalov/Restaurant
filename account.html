@@ -148,7 +148,7 @@
                                 <md-card-header class="list-item">
                                     <md-avatar class="md-big">
 <!--                                        <img src="img/376447.jpg" class="md-title-18">-->
-                                        <img v-bind:src="item.ImagePath+'.jpg'">
+                                        <img v-bind:src="item.ImagePath">
                                     </md-avatar>
 
                                     <md-card-header-text class="vertical-align">
@@ -157,11 +157,7 @@
                                     <div class="price">
                                         <!--                <span>12р</span>-->
                                     </div>
-
-
-
-
-                                    <md-menu md-direction="bottom left" md-size="4">
+                                   <md-menu md-direction="bottom left" md-size="4">
                                         <md-button class="md-icon-button" md-menu-trigger>
                                             <md-icon>create_new_folder</md-icon>
                                         </md-button>
@@ -212,6 +208,7 @@
                         <md-card-content class="vertical-align">
                             <p class="md-primary account-info">{{infoAccount.Name}} {{infoAccount.LastName}}</p>
                             <p class="md-primary account-info">{{infoAccount.Telephone}}</p>
+                            <p class="md-primary account-info">Бонус: {{infoAccount.Bonus}}</p>
                             <!--                                <p class="md-primary account-info">{{infoAccount.Telephone}}</p>-->
                             <!--                                <p class="md-primary account-info text-center">Синхронизация</p>-->
 
@@ -264,9 +261,6 @@
                         <md-card-actions class="">
                             <md-button class="md-raised text-trans-none" v-on:click.native="LoginOut()">Выйти</md-button>
                         </md-card-actions>                        
-                        <md-card-actions class="">
-                            <md-button class="md-raised text-trans-none" v-on:click.native="showSnackBar('custSnack', getInfAccount)">Snack</md-button>
-                        </md-card-actions>
                     </md-card>
                 </div>
             </form>

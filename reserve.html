@@ -252,7 +252,7 @@
     </md-card-header>
     <md-card-content class="text-center">
 
-        <md-checkbox class="md-primary" id="my-test1" name="my-test1" v-model="checkbox" v-on:click.native="GetOrders(); showBlock = (showBlock != true) ? true : false">Приготовить блюда заранее</md-checkbox>
+        <md-checkbox class="md-primary" id="my-test1" name="my-test1" v-model="checkbox" v-on:change="GetOrders(); showBlock = (showBlock != true) ? true : false">Приготовить блюда заранее</md-checkbox>
 
         <md-card-content v-show="showBlock" class="orders-info">
             <div v-if="countDish > 0">
@@ -261,8 +261,20 @@
                 </div>
                 <div class="md-divider"></div>
                 <br>
-                Количество блюд: <span>{{countDish}}</span> <br>
-                Итоговая цена <span>{{totalprice}}р</span>
+                Количество блюд: <span>{{countDish}}</span> 
+                <br>
+                <br>
+                <md-checkbox 
+                    id="my-test3" 
+                    name="my-test3" 
+                    v-model="reserveObj.useBonus" 
+                    v-on:change="useBonusFunc()" 
+                    class="md-warn"
+                    v-bind:disabled="!reserveObj.bonus">
+                    Использовать бонусы: {{reserveObj.bonus}}
+                </md-checkbox >
+                <br>
+                Итоговая цена <span>{{totalPrice}}р</span>
             </div>
             <div v-else>
                 <div class="text-center">

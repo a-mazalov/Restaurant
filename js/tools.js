@@ -76,7 +76,8 @@ const Order = new Orders();
 //Order.orders.length;
 
 function Sync(section, mode) {
-    let queryPoint = 'http://restaurant.atservers.net/php/Sync.php';
+//    let queryPoint = 'http://restaurant.atservers.net/php/Sync.php';
+    let queryPoint = 'http://workproject/www/php/Sync.php';
     
     let id_Account = Local.Get("Account");
     let dataSync = Local.Get(section);
@@ -95,7 +96,7 @@ function Sync(section, mode) {
     
     Vue.http.get(queryPoint, {params: SectionData }).then(function (response) {
         
-
+    
         switch(response.data[0]){
             case "Count": 
                 console.log("Count" + response.data[1] + "Local" + dataSync.length); 
@@ -137,6 +138,26 @@ function getAccID(){
 ////    
 }
 
+function checkBonus(account_id,handldata){
+    
+//    let actionsURL = "http://restaurant.atservers.net/php/actionDB.php";
+    let actionsURL = "http://workproject/www/php/actionDB.php";
+    
+    let infoSend = {"item": account_id, "action": "checkBonus"};
+
+    Vue.http.get(actionsURL,  { params: infoSend } ).then(function(response){
+        console.log("Выполнено"); 
+        let responseData = JSON.parse(response.data);
+        responseData = responseData > 0 ? responseData : 0;
+        handldata(responseData);
+    }, function (error) {
+        console.log("Ошибка запроса: " + error.data);
+//        this.showSnackBar("Ошибка при выполнении операции");
+//                    this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
+    });   
+}
+
+
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
@@ -172,6 +193,10 @@ class Snack{
     }
 }
 
+function TestF(){
+    alert('Test function');
+    console.log('Test function');
+}
 //let store = new Store()
 //
 //store.set()

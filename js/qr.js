@@ -2,8 +2,9 @@ Vue.use(VueMaterial);
 var QrCode = new Vue({
     el: "#qr-code",
     data: {
-        queryPointQR: 'http://restaurant.atservers.net/php/qrCode.php',
-//        queryPointQR: 'http://workprojectmobile/www/php/qrCode.php',
+//        queryPointQR: 'http://workprojectmobile/php/qrCode.php',
+//        queryPoint: 'http://restaurant.atservers.net/php/qrCode.php',
+        queryPointQR: 'http://workproject/www/php/qrCode.php',
         scaning: true,
 //        scaning: false,
         
@@ -52,6 +53,8 @@ var QrCode = new Vue({
                     if(dataResponse.status){
                         QrCode.successCode = true;
                         QrCode.title = dataResponse.message;
+                        Account.Bonus += dataResponse.data;
+                        Local.Set("Account",Account);
                     }else{
                         
                         if(dataResponse.data){
