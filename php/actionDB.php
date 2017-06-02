@@ -96,6 +96,19 @@ $queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` 
         ));
         
         break;
+    case "checkBonus":
+        
+            $ID_Account = $DataGET["item"];
+        
+        
+            $BonusSet = $pdo->prepare("SELECT `Bonus` FROM `Accounts_table` WHERE `ID_user` = :id_account");
+            $BonusSet->execute(array('id_account' => $ID_Account ) );
+            
+            $infoOutput = $BonusSet->fetchAll();
+            echo json_encode($infoOutput[0]["Bonus"]);
+//            echo  $infoOutput ;   
+        
+        break;
 
 }
 

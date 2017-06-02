@@ -17,7 +17,7 @@
 
     
     $Order = $DataReserve["Order"];
-//    var_dump($Order);
+//    var_dump($DataInput);
 
 
 
@@ -28,17 +28,13 @@
 //    echo $Order;
 
 
-
-
-
-
     if ( isset($Order) ){
         $CheckOrder = true;
     }else{
         $CheckOrder = false;
     }
 
-    $query = $pdo->prepare('INSERT INTO Reserve_table (ID_reserve, TypeOrder, ID_user, CheckOrdMenu, Date, Time, Count_guest, Name, LastName, Telephone, Notes, Data_create, TokenMessage) VALUES (NULL, "mobile", :id_account, :checkOrdMenu, :date, :time, :numguest, :name, :lastName, :telephone, :notes, :data_create, :token)');
+    $query = $pdo->prepare('INSERT INTO Reserve_table (ID_reserve, TypeOrder, ID_user, CheckOrdMenu, Date, Time, Count_guest, Name, LastName, Telephone, Notes, Data_create, Status, UseBonus, Bonus, TokenMessage) VALUES (NULL, "mobile", :id_account, :checkOrdMenu, :date, :time, :numguest, :name, :lastName, :telephone, :notes, :data_create, "new", IF(:useBonus = "true", 1, 0), :bonus, :token)');
     
     $query->execute(array(
         'id_account' => $ID_Account,
@@ -51,6 +47,8 @@
         'telephone' => $DataInput["telephone"], 
         'notes' => $DataInput["notes"],
         'data_create' => date('Y-m-d H:i'),
+        'useBonus' => $DataInput["useBonus"],
+        'bonus' => $DataInput["bonus"],
         'token' => $Token
     ));
 
@@ -73,6 +71,11 @@
             ));
 //            print_r($Order[$i]["Amount"]);
         }
+    }
+
+    if($DataInput["useBonus"]){
+        $BonusSet = $pdo->prepare("UPDATE Accounts_table SET Bonus = Bonus - :bonus WHERE ID_user = :id_account");
+        $BonusSet->execute(array('bonus' => $DataInput["bonus"], 'id_account' => $ID_Account ) );
     }
 
 

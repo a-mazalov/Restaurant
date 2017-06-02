@@ -178,6 +178,14 @@
     display: block;
     margin: 0 auto;
     text-align: center;
+    font-size: 14px;
+/*    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 0 0 5em rgba(0, 0, 0, 0.2);  Параметры тени */
+}
+.reserveLayer .label-accept-res{
+    color: #27ae60;
+}
+.reserveLayer .label-new-res{
+    color: #2960b9;
 }
 
 

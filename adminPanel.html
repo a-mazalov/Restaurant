@@ -69,7 +69,7 @@
        
 <div class="admin-container" v-cloak>
 
-<!--    <md-spinner md-indeterminate class="md-warn loader" v-show="loader"></md-spinner>-->
+    <md-spinner md-indeterminate class="md-warn loader" v-show="loader"></md-spinner>
     
     <div class="mainLayer anim-fadeIn" v-show="layers.main">
 <canvas id="myChart" width="400" height="400"></canvas>
@@ -314,10 +314,10 @@
     </div>           
     <div class="reserveLayer anim-fadeIn" v-if="layers.reserve">
     
-    <div class="container-fluid border" style="">
+    <div class="container-fluid" style="">
     
         
-        <div class="new-reserve border col-sm-12 col-md-6">
+        <div class="new-reserve col-sm-12 col-md-6">
             <span class="label-new-res">Новые заявки</span>
             <md-card md-with-hover v-for="(reserve,index) in listReserveNew" class="anim-fadeIn">
     
@@ -330,7 +330,7 @@
             <md-menu-content>
                 <md-button 
                     v-if="reserve.TypeOrder == 'mobile'"
-                    class="md-primary" v-on:click.native="sendAcceptNotif(reserve, 'Подтверждена!'); actionAcceptRes(item,index); $refs['menuAction'][index].close()">
+                    class="md-primary" v-on:click.native="sendAcceptNotif(reserve, 'Подтверждена!'); actionAcceptRes(reserve,index); $refs['menuAction'][index].close()">
                     ОК
                 </md-button>                
                 <md-button 
@@ -391,9 +391,13 @@
                     <td>Кол-во блюд:</td>
                     <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>
                 </tr>
+                <tr v-if="reserve.UseBonus">
+                    <td>Бонус-код:</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="reserve.Bonus+'р'"></td>
+                </tr>                              
                 <tr>
                     <td>Общая сумма:</td>
-                    <td class="custom-text-14" v-bind:text-content.prop="priceInReserve(reserve.dishes)+'р'"></td>
+                    <td class="custom-text-14" v-bind:text-content.prop="priceInReserve(reserve.dishes, reserve.Bonus)+'р'"></td>
                 </tr>
             </table>
         </div>
@@ -402,8 +406,8 @@
 
 </md-card>
         </div>
-        <div class="accept-reserve border col-sm-12 col-md-6">
-            <span class="label-new-res">Подтвержденные</span>
+        <div class="accept-reserve  col-sm-12 col-md-6">
+            <span class="label-accept-res">Подтвержденные</span>
             <md-card md-with-hover v-for="(reserve,index) in listReserveAccept" class="anim-fadeIn">
     
     <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: {{reserve.Data_create}}</div>
@@ -414,7 +418,7 @@
             </md-button>
             <md-menu-content>
                 <md-button 
-                    class="md-warn" v-on:click.native="actionsDelRes(reserve,index,'accept'); $refs['menuAction'][index].close()">
+                    class="md-warn" v-on:click.native="$refs['menuAction'][index].close(); actionsDelRes(reserve,index,'accept');" >
                     Удалить
                 </md-button>
             </md-menu-content>
@@ -462,9 +466,13 @@
                     <td>Кол-во блюд:</td>
                     <td class="custom-text-14" v-bind:text-content.prop="reserve.dishes.length"></td>
                 </tr>
+                <tr v-if="reserve.UseBonus">
+                    <td>Бонус-код:</td>
+                    <td class="custom-text-14" v-bind:text-content.prop="reserve.Bonus+'р'"></td>
+                </tr>                
                 <tr>
                     <td>Общая сумма:</td>
-                    <td class="custom-text-14" v-bind:text-content.prop="priceInReserve(reserve.dishes)+'р'"></td>
+                    <td class="custom-text-14" v-bind:text-content.prop="priceInReserve(reserve.dishes, reserve.Bonus)+'р'"></td>
                 </tr>
             </table>
         </div>

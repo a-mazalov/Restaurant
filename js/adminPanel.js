@@ -245,13 +245,18 @@ var adminPanel = new Vue({
                     console.log("Ошибка запроса: " + error.data);
                 });
         },
-        priceInReserve: function(dishes){
+        priceInReserve: function(dishes, bonusCode){
 //            console.log(dishes);
             
             let price = 0;
             for (let i = 0;  dishes && i < dishes.length; i++) {
                 price += parseInt( (dishes[i].Price_dish * dishes[i].Amount_dish) * 100)/100;
             }
+            if(bonusCode > 0){
+                price -= bonusCode;
+            }
+//            console.log("bo" + bonusCode);
+//            console.log(price);
             return price.toFixed(2);
             
         },
@@ -404,6 +409,9 @@ var adminPanel = new Vue({
     },
 //-------------------При создании---------------------------            
     created: function(){
+
+    },
+    mounted: function(){
         this.getMenu();
         this.getReserve();
     }

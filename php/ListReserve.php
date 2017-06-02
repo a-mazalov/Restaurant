@@ -10,7 +10,7 @@ $query = "SELECT
 	`ID_user`, 
 	`CheckOrdMenu`, 
 	`Date`, 
-	`Time`, 
+    TIME_FORMAT(`Time`, '%H:%i') as `Time`,
 	`Count_guest`, 
 	`Name`, 
 	`LastName`, 
@@ -18,6 +18,8 @@ $query = "SELECT
 	`Notes`, 
 	DATE_FORMAT(`Data_create`, '%Y-%m-%d %H:%i') as `Data_create`,
     Status,
+    IF(`UseBonus` = 1, true, false) as UseBonus,
+    Bonus,
     TokenMessage
 FROM 
 	`Reserve_table` 
