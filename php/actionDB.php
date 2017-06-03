@@ -35,9 +35,11 @@ switch($DataGET["action"]){
     case "update":
         $ArrayDish = $DataGET["item"];
         
-        var_dump($ArrayDish);
+//        var_dump($ArrayDish);
+        $chgDate = date('Y-m-d H:i:s');
         
-$queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` = :title_dish, `Caption_dish` = :caption_dish, `Price_dish` = :price_dish, `Available` = IF(:available = 'true', 1, 0) WHERE `ID_dish` = :id_dish");    
+        
+$queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` = :title_dish, `Caption_dish` = :caption_dish, `Price_dish` = :price_dish, `Available` = IF(:available = 'true', 1, 0), `DateСhange` = '$chgDate' WHERE `ID_dish` = :id_dish");    
             for($i = 0, $arr_l = count($ArrayDish); $i<$arr_l; $i++){
                 $queryUpdate->execute(array(
                     'title_dish' => $ArrayDish[$i]["Title_dish"],
@@ -109,7 +111,18 @@ $queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` 
 //            echo  $infoOutput ;   
         
         break;
-
+    case "checkMenu":
+            
+//            var_dump($numDish);
+        $numDish = $DataGET["item"];
+        
+        $queryLine = implode("," , $numDish);
+$MenuCheck = $pdo->prepare("SELECT `ID_dish`, `Title_dish`, `Caption_dish`, `Price_dish`, `Category_dish`, `ImagePath`, IF(`Available` = 1, true, false) as `Available`, `DateСhange` FROM `Menu_table` WHERE `ID_dish` IN ($queryLine)");
+$MenuCheck->execute();
+        $infoOutput = $MenuCheck->fetchAll();
+        echo json_encode($infoOutput);    
+            
+        break;
 }
 
 

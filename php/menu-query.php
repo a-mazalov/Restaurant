@@ -3,7 +3,7 @@
     header('Access-Control-Allow-Origin: *');
 
 
-$query = "SELECT `ID_dish`, `Title_dish`, `Caption_dish`, `Price_dish`, `Category_dish`, `ImagePath`, IF(`Available` = 1, true, false) as `Available` FROM `Menu_table`";
+$query = "SELECT `ID_dish`, `Title_dish`, `Caption_dish`, `Price_dish`, `Category_dish`, `ImagePath`, IF(`Available` = 1, true, false) as `Available`, `DateСhange` FROM `Menu_table`";
         $result = $pdo->query($query); 
 
     //var_dump($result);
