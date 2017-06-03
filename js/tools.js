@@ -184,8 +184,8 @@ function checkConnection() {
 
 
 class Snack{
-    constructor(){
-      this.message = "";
+    constructor(msg){
+      this.message = msg;
     }
     Show(){
         this.$refs.snackbar.open();

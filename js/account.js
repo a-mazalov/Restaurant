@@ -23,13 +23,16 @@ var Account = new Vue({
         groupName: '',
         inpCreate: false,
         customMenu: {},
+        btnSnack: false,
         deferDisabled: true
     },
     methods: {
-        showSnackBar(Message, funcBtn) {
+        showSnackBar(Message, funcBtn, vs) {
+                this.btnSnack = false;
                 this.snackMessage = Message;
                 this.$refs.snackbar.open();
                 this.$refs.snackbar.options = funcBtn;
+                this.btnSnack = vs;
             },
             getInfAccount: function () {
                 this.infoAccount = Local.Get("Account");
@@ -53,7 +56,7 @@ var Account = new Vue({
 
                 //Перезапись списка избранного
                 Local.Set("Favorite", this.accListFavorite);
-                this.showSnackBar("Запись удалена", this.returnRemoveFav); //Оповещение
+                this.showSnackBar("Запись удалена", this.returnRemoveFav, true); //Оповещение
             },
             returnRemoveFav: function () { //Возвращает последний удаленный элемент
 
@@ -118,7 +121,7 @@ var Account = new Vue({
                     this.groupName = '';
                     Local.Set("CustomGroup", this.customMenu);
                 }else{
-                    this.showSnackBar("Max");
+                    this.showSnackBar("Достигнуто максимальное кол-во групп", null, false);
                 }
             },
             deleteGroup: function(key){
@@ -159,7 +162,7 @@ var Account = new Vue({
                 this.customMenu[key].splice(index, 1); //Удаление элемента
                 //Перезапись списка избранного
                 //            Local.Set("Orders",this.ListOrders);
-                this.showSnackBar("Запись удалена", this.returnItemGroup); //Оповещение
+                this.showSnackBar("Запись удалена", this.returnItemGroup, true); //Оповещение
                 Local.Set("CustomGroup", this.customMenu);
             },
             returnItemGroup: function () { //Возвращает последний удаленный элемент

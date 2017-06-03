@@ -6,16 +6,84 @@ var OrdersList = new Vue({
         totalprice: 0,
         indexLastItem: "",
         removedItem: {},
-        snackMessage: ""
+        snackMessage: "",
+        btnSnack: false
     },
-    methods: {        
-        showSnackBar(Message,btn) {
-            this.snackMessage = Message;    
+    methods: {
+        showSnackBar(Message, funcBtn, vs) {
+            this.btnSnack = false;
+            this.snackMessage = Message;
             this.$refs.snackbar.open();
+            this.$refs.snackbar.options = funcBtn;
+            this.btnSnack = vs;
         },
         LocalOrders(){
             this.ListOrders = Order.ListOrders;
+            console.log(this.ListOrders);
         }, 
+        checkAvailableDish: function(){
+            this.showSnackBar("Проверка блюд..",null,false);
+//            location.href='reserve.html';
+             //Оповещение
+//            this.ListOrders
+//            let actionsURL = "http://restaurant.atservers.net/php/actionDB.php";
+            let actionsURL = "http://workproject/www/php/actionDB.php";
+
+            //Номера блюд в корзине
+            let numDish = [];
+            for(ordItem in this.ListOrders){
+                numDish.push(this.ListOrders[ordItem]["ID_dish"]);
+            }
+//            console.log(numDish);
+            
+                let infoSend = {"item": numDish, "action": "checkMenu"};
+            
+            let chgDish = false;
+                this.$http.get(actionsURL,  { params: infoSend } ).then(function(response){
+                    console.log("Выполнено"); 
+//                    console.log(response.data); 
+                    console.log(JSON.parse(response.data));
+//                    console.log(OrdersList.ListOrders);
+//                    
+                    let checkMenu = JSON.parse(response.data);
+                    
+                    
+                    
+                    for(ordItem in OrdersList.ListOrders){
+                        
+                        if(OrdersList.ListOrders[ordItem]["DateСhange"] < checkMenu[ordItem]["DateСhange"] ){
+                            
+                            
+                            let amountDish = OrdersList.ListOrders[ordItem]["Amount"];
+                            checkMenu[ordItem]["Amount"] = amountDish;
+                            this.ListOrders.splice(ordItem,1,checkMenu[ordItem]);
+//                            OrdersList.showSnackBar("Некоторые блюда изменились, обновите меню",null, false);
+//                            this.ListOrders.splice(ordItem, 1); //Удаление элемента
+                            this.totalPrice();
+                            Local.Set("Orders",this.ListOrders); 
+                            this.openDialog('dialog5');
+
+                            
+                        }else{
+                            console.log(checkMenu[ordItem]["ID_dish"] + "Not changes");
+                            location.href='reserve.html';
+//                            location.href='reserve.html';
+                        }
+
+                    }
+ 
+                }, function (error) {
+                    console.log("Ошибка запроса: " + error.data);
+                    
+                    this.showSnackBar("Ошибка при выполнении операции",null, false);
+//                    this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
+                }); 
+            
+            if(chgDish){
+               
+            }
+    
+        },
         Plus: function(item,index){
             this.ListOrders[index].Amount += 1;
             Local.Set("Orders",this.ListOrders); 
@@ -44,7 +112,7 @@ var OrdersList = new Vue({
             this.ListOrders.splice(this.indexLastItem, 1); //Удаление элемента
             //Перезапись списка избранного
             Local.Set("Orders",this.ListOrders); 
-            this.showSnackBar("Запись удалена"); //Оповещение
+            this.showSnackBar("Запись удалена",this.returnRemoveOrd,true); //Оповещение
             this.totalPrice();
         },
         returnRemoveOrd: function(){ //Возвращает последний удаленный элемент
@@ -58,10 +126,17 @@ var OrdersList = new Vue({
             this.ListOrders = [];
             Local.Remove("Orders");
             this.totalprice = 0;
-        }
+        },            
+        openDialog(ref) {
+            this.$refs[ref].open();
+        },
+        closeDialog(ref) {
+            this.$refs[ref].close();
+        },
     },
     created: function(){
         this.LocalOrders();
         this.totalPrice();
+        
     }
 });

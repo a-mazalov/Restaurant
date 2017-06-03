@@ -210,16 +210,26 @@ function getTokenC(){
     });
 }
 
-
-$(".inp-date").flatpickr({
-    enableTime: false
+flatpickr(".inp-date", {
+    enableTime: false,
+    minDate: "today",
+    maxDate: new Date().fp_incr(14)
 });
-
-$(".inp-time").flatpickr({
+flatpickr(".inp-time", {
     noCalendar: true,
     enableTime: true,
     time_24hr: true,
 });
+
+//$(".inp-date").flatpickr({
+//    enableTime: false
+//});
+//
+//$(".inp-time").flatpickr({
+//    noCalendar: true,
+//    enableTime: true,
+//    time_24hr: true,
+//});
 
 var app = new Vue({
   el: '#app',

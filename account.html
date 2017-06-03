@@ -277,7 +277,7 @@
    
 <md-snackbar ref="snackbar">
     <span>{{snackMessage}}</span>
-    <md-button class="md-accent" md-theme="light-blue" v-on:click.native="$refs.snackbar.options">Вернуть</md-button>
+    <md-button class="md-accent" md-theme="light-blue" v-on:click.native="$refs.snackbar.options()" v-if="btnSnack" md-duration="8000">Вернуть</md-button>
 </md-snackbar>
 </div>
 

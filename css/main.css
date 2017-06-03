@@ -1,4 +1,3 @@
-/*
 * {
 text-shadow: none !important;
 -webkit-box-shadow: none !important;
@@ -7,8 +6,10 @@ text-shadow: none !important;
 -webkit-border-bottom-left-radius:0 !important;
 -webkit-border-bottom-right-radius:0 !important;
 -webkit-border-top-right-radius:0 !important;
+transition: all .2s linear !important;   
+font-smoothing: antialiased;    
+    
 }
-*/
 html {
     overflow-x: hidden;
 }
@@ -288,20 +289,25 @@ html {
 
 
 [v-cloak] {
-/*
-    position: absolute;
-    z-index: 99999;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: black !important;
-*/
     display: none;
 }
 .brick-wall {
     background: url(../img/brickwall.png) ;
 }
+
+.disabledDish {
+    pointer-events: none;
+    opacity: .7;
+}
+.disabledDish:after{
+    content: "Временно недоступно";
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    display: block;
+}
+
+
 #loader {
     position: absolute;
     z-index: 99999;

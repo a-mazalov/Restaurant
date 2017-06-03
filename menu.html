@@ -63,23 +63,12 @@
                onclick="location.href='index.html#News'">
                 <md-icon>new_releases</md-icon> 
                 <span>Новости</span>
-            </md-list-item>
-
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" 
-               onclick="location.href='index.html#Gallery'">
-                <md-icon>collections</md-icon> 
-                <span>Галерея</span>
-            </md-list-item>                
+            </md-list-item>            
             <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
                onclick="location.href='index.html#Contacts'">
                 <md-icon>room</md-icon> 
                 <span>Контакты</span>
-            </md-list-item>                
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
-               onclick="location.href='index.html#About'">
-                <md-icon>info</md-icon> 
-                <span>О нас</span>
-            </md-list-item>             
+            </md-list-item>                            
             <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
                onclick="location.href='account.html'">
                 <md-icon>account_circle</md-icon> 
@@ -162,7 +151,7 @@
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Hot_dishes">
 
-                    <md-card>
+                    <md-card v-bind:class="{ disabledDish: !post.Available }">
                         <md-card-header>
                             <md-avatar class="md-big">
 <!--                                <img src="img/food/id_2.jpg">-->
@@ -225,7 +214,7 @@
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Dessert">
 
-                    <md-card>
+                    <md-card v-bind:class="{ disabledDish: !post.Available }">
                         <md-card-header>
                             <md-avatar class="md-big">
 
@@ -288,7 +277,7 @@
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in posts.Soup">
 
-                    <md-card>
+                    <md-card v-bind:class="{ disabledDish: !post.Available }">
                         <md-card-header>
                             <md-avatar class="md-big">
                                 <img v-bind:src="post.ImagePath+'.jpg'">

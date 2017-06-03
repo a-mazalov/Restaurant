@@ -70,8 +70,8 @@
 <transition-group name="list" tag="p">
    
     <div v-for="(item,index) in ListOrders" v-bind:key="item">
-       
-        <md-card-header class="list-item">
+<!--        <md-card-header class="list-item" v-bind:class="{ disabledDish: !item.Available }">-->
+        <md-card-header class="list-item" v-bind:class="{ disabledDish: !true }">
             <md-avatar class="md-big">
                 <img v-bind:src="item.ImagePath">
             </md-avatar>
@@ -124,7 +124,7 @@
             
             <div class="md-divider"></div>
             <br>
-            <md-button class="md-raised md-primary text-trans-none" onclick="location.href='reserve.html'">Перейти к заказу столика</md-button>
+            <md-button class="md-raised md-primary text-trans-none" v-on:click.native="checkAvailableDish()">Перейти к заказу столика</md-button>
         </md-card-content>
 </md-card> 
         </div>
@@ -132,10 +132,24 @@
                 </div>
             </div>
         </div>
-          <md-snackbar ref="snackbar">
-            <span>{{snackMessage}}</span>
-            <md-button class="md-accent" md-theme="light-blue" v-on:click.native="returnRemoveOrd()">Вернуть</md-button>
-          </md-snackbar>
+<md-snackbar ref="snackbar">
+    <span>{{snackMessage}}</span>
+    <md-button class="md-accent" md-theme="light-blue" v-on:click.native="$refs.snackbar.options()" v-if="btnSnack" md-duration="8000">Вернуть</md-button>
+</md-snackbar>      
+<md-dialog ref="dialog5">
+  <md-dialog-title>Обновление меню</md-dialog-title>
+
+  <md-dialog-content>
+    Похоже блюда обновились
+      <br>
+    Продолжить оформление заказа?
+</md-dialog-content>
+
+  <md-dialog-actions>
+    <md-button class="md-primary" @click.native="closeDialog('dialog5')">Cancel</md-button>
+    <md-button class="md-primary" @click.native="closeDialog('dialog5')" onclick="location.href='reserve.html'">Ok</md-button>
+  </md-dialog-actions>
+</md-dialog>
     </div>
 
 
