@@ -117,16 +117,16 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-    <div class="container-fluid menu-banner vertical-align text-center">
+    <div class="container-fluid menu-banner vertical-align text-center" v-cloak>
         <div class="row">
             <div class="banner-title">
                 <h1 class="">MAKING DELICIOUS <br>PREMIUM FOOD</h1>
             </div>
             <div>
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
                     <md-button class="md-raised md-accent btn-cutom-menu" onclick="location.href='index.html' ">Главная</md-button>
                         <br class="visible-xs"> 
-                    <md-button class="md-raised btn-custom-order" onclick="location.href='reserve.html' ">Заказ столика</md-button>
+                    <md-button class="md-raised btn-custom-order" onclick="location.href='reserve.html' ">Забронировать</md-button>
                 </div>                
             </div>
         </div>
@@ -169,13 +169,13 @@
                             <md-card-header>
                                 <div class="col-md-6 col-sm-6 text-center">
                                     <md-icon class="col-sm-pull-1">date_range</md-icon>
-                                    <input class="reserve-inp inp-date" type="date" placeholder="Выберите дату" v-model="reserveObj.date" required>
+                                    <input class="reserve-inp inp-date" type="date" placeholder="Выберите дату" v-model.trim="reserveObj.date" required>
                                 </div>
 
                                 <br class="visible-xs">
                                 <div class="col-md-6 col-sm-6 text-center">
                                     <md-icon>access_time</md-icon>
-                                    <input class="reserve-inp inp-time" type="datetime" placeholder="Время" v-model="reserveObj.time" required>
+                                    <input class="reserve-inp inp-time" type="datetime" placeholder="Время" v-model.trim="reserveObj.time" required>
                                 </div>
                             </md-card-header>
                             <br>
@@ -206,14 +206,14 @@
                                     <md-input-container>
                                         <md-icon>account_circle</md-icon>
                                         <label>Имя</label>
-                                        <md-input type="text" placeholder="Имя" v-model="reserveObj.name" required></md-input>
+                                        <md-input type="text" placeholder="Имя" v-model.trim="reserveObj.name" required></md-input>
                                     </md-input-container> 
                             </div>
                             <div class="col-lg-6 col-md-6 ">
                                     <md-input-container>
                                         <md-icon>account_circle</md-icon>
                                         <label>Фамилия</label>
-                                        <md-input type="text" placeholder="Фамилия" v-model="reserveObj.lastName" required></md-input>
+                                        <md-input type="text" placeholder="Фамилия" v-model.trim="reserveObj.lastName" required></md-input>
                                     </md-input-container> 
                             </div>                           
                             
@@ -221,13 +221,13 @@
                                 <md-input-container>
                                     <md-icon>phone</md-icon>
                                     <label>Phone</label>
-                                    <md-input type="text" placeholder="Введите свой номер телефона" v-model="reserveObj.telephone" required></md-input>
+                                    <md-input type="text" placeholder="Введите свой номер телефона" v-model.trim="reserveObj.telephone" required></md-input>
                                 </md-input-container>
                                 
                             <md-input-container>
                                 <md-icon>speaker_notes</md-icon>
                                 <label>Пожелания</label>
-                                <md-textarea placeholder="Пожелания (не обязательно)" v-model="reserveObj.notes" maxlength="60"></md-textarea>
+                                <md-textarea placeholder="Пожелания (не обязательно)" v-model.trim="reserveObj.notes" maxlength="60"></md-textarea>
                             </md-input-container>
                             </div>
                             

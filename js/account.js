@@ -37,6 +37,13 @@ var Account = new Vue({
             getInfAccount: function () {
                 this.infoAccount = Local.Get("Account");
                 console.log(this.infoAccount);
+                
+                
+                checkBonus(this.infoAccount.ID_user,function(output){
+                    this.infoAccount.Bonus = output;
+                    this.$forceUpdate;
+                    Local.Set("Account", this.infoAccount);
+                });
             },
             accFavorite() {
                 if (window.localStorage.Favorite) {

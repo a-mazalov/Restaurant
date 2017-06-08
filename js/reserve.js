@@ -56,8 +56,9 @@ var ReserveCard = new Vue({
 //            
 //            console.log(Account);
 //            console.log(Account["ID_user"]);
-//            if( this.CheckInp() ){
-            if( true ){
+            let validInp = validate(ReserveCard.reserveObj);
+            console.log(validInp);
+            if(validInp["Valid"]){
                
                 if(this.reserveObj.useBonus){
                     
@@ -82,33 +83,35 @@ var ReserveCard = new Vue({
 //                alert("что-то не выполнено");
             }
             
-            this.$http.get(this.queryPoint,  { params: SendReserve } ).then(function(response){
-            
-                console.log(response.data);
-//                alert("Отправлено");
-                this.reserveObj = {
-                    date: '',
-                    time: '',
-                    name: '',
-                    lastName: '',
-                    telephone: '',
-                    numguest: 1,
-                    notes: '',
-                    useBonus: false,
-                    bonus: 0
-                }
-                
-//                let Account = Local.Get("Account");
-//                Account.Bonus = 0;
-//                Local.Set("Account", Account);
-            },
-                function (error) {
-                console.log("Ошибка запроса: " + error.data);
-                this.showSnackBar("Ошибка при выполнении операции");
-            });
-                
+                this.$http.get(this.queryPoint,  { params: SendReserve } ).then(function(response){
+
+                    console.log(response.data);
+    //                alert("Отправлено");
+                    this.reserveObj = {
+                        date: '',
+                        time: '',
+                        name: '',
+                        lastName: '',
+                        telephone: '',
+                        numguest: 1,
+                        notes: '',
+                        useBonus: false,
+                        bonus: 0
+                    }
+
+    //                let Account = Local.Get("Account");
+    //                Account.Bonus = 0;
+    //                Local.Set("Account", Account);
+                },
+                    function (error) {
+                    console.log("Ошибка запроса: " + error.data);
+                    this.showSnackBar("Ошибка при выполнении операции");
+                });
                 this.submitted = true;
-            }    
+                
+            }else{
+                this.showSnackBar("Неверное поле: "+validInp[0]); 
+            }
         },
         GetOrders: function(){
 //            this.ListOrders = Local.Get("Orders"); 

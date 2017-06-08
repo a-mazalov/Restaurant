@@ -30,24 +30,36 @@ var Account = new Vue({
     },
     methods: {
         loginIn: function(){
-            this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
-            if(response.data != " " ){
-                this.dataAccount = JSON.parse(response.data);
-                Local.Set("Account",this.dataAccount);
-//                this.showSnackBar("Вход успешен");
-                window.location = "index.html";
+            
+            let validInp = validate(Account.dataLogin);
+            
+            
+            if(validInp["Valid"]){
+
+                this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
+                if(response.data != " " ){
+                    this.dataAccount = JSON.parse(response.data);
+                    Local.Set("Account",this.dataAccount);
+        //                this.showSnackBar("Вход успешен");
+                    window.location = "index.html";
+                }else{
+                    this.showSnackBar("Неверный телефон или пароль!");
+                }    
+                }, function (error) {
+                    this.showSnackBar("Нет соединения");
+                    console.log("Ошибка запроса: ");
+                });
             }else{
-                this.showSnackBar("Неверный телефон или пароль!");
-            }    
-            }, function (error) {
-                this.showSnackBar("Нет соединения");
-                console.log("Ошибка запроса: ");
-            });
+                this.showSnackBar("Неверное поле: "+validInp[0]); 
+            }
         },        
         registr: function(){
-            this.$http.get(this.queryPointRegistr,  { params: this.dataRegister } ).then(function(response){
-            
-            });
+            let validInp = validate(Account.dataRegister);
+            if(validInp["Valid"]){
+                this.$http.get(this.queryPointRegistr,  { params: this.dataRegister } ).then(function(response){ });
+            }else{
+                this.showSnackBar("Неверное поле: "+validInp[0]); 
+            }
         },
         showSnackBar(Message) {
           this.snackMessage = Message;    

@@ -32,8 +32,7 @@ methods: {
             console.log(this.posts);
 
         }, function (error) {
-            this.error = false;
-            this.OfflineMenu();
+            this.error = this.OfflineMenu();
             //                    alert(error.date);
             console.log("Ошибка запроса: " + error.data);
         });
@@ -44,7 +43,11 @@ methods: {
         let status;
         let localMenu = Local.Get("Menu");
         this.posts = localMenu;
-
+        if(isEmpty(localMenu)){
+            return true;
+        }else{
+            return false;
+        }
 //        let status;
 //        let localMenu = Local.Get("Menu");
 //        if(localMenu > 0 ){
