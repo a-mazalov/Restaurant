@@ -201,7 +201,7 @@ var ReserveCard = new Vue({
         }
     },
     created: function () {
-        this.InitForm();
+//        this.InitForm();
     }
 })
 

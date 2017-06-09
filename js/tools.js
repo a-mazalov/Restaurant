@@ -201,8 +201,8 @@ function validate(obj){
     for (var key in input) {
 
         switch(key){
-            case      "name":  VRegExp = /([А-я\S]{3,20}$)|(^[A-z]{3,20}$)/;            break;         
-            case  "lastName":  VRegExp = /([А-я\S]{3,20}$)|(^[A-z]{3,20}$)/;            break;        
+            case      "name":  VRegExp = /([А-я]{3,16}$)|(^[A-z]{3,16}$)/;            break;         
+            case  "lastName":  VRegExp = /([А-я]{3,22}$)|(^[A-z]{3,22}$)/;            break;        
             case "telephone":  VRegExp = /(^[+]{1}[0-9]{12}$)|(^[0-9]{12}$)|(^[0-9]{9}$)|(^[0-9]{7}$)/;break;        
             case  "password":  VRegExp = /^[0-9А-яA-z-!@#$%^&*]{6,16}$/; break;        
             case      "date":  VRegExp = /(20)([1-9])\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)/; break;        
@@ -210,7 +210,7 @@ function validate(obj){
             case  "numguest":  VRegExp = /[1-8]/; break;        
             case  "useBonus":  VRegExp = /0|1|true|false/; break;        
             case     "bonus":  VRegExp = /^[0-9]{1,2}([,0-9]{0,3})?([0-9]{0,2})?$/; break;        
-            case     "notes":  VRegExp = /([A-zА-я0-9!@.,\s]{0,60})/; break;        
+            case     "notes":  VRegExp = /^(?!.*#\^&.*\(\)\{\}\\\/.*$)([A-zА-я0-9!@.,\s]{0,60})$/; break;        
         }
 
         console.log(key);
@@ -220,7 +220,7 @@ function validate(obj){
         let valid = VRegExp.test(input[key]);
         
         if(!valid){
-            Verror.push(key);
+            Verror.push(outMsg(key));
             
         }
     }
@@ -236,6 +236,25 @@ function validate(obj){
     
     return Verror;
 }
+
+
+function outMsg(key){
+    switch(key){
+        case      "name":  return "Имени";       break;         
+        case  "lastName":  return "Фамилии";     break;
+        case "telephone":  return "Телефона";    break;
+        case  "password":  return "Пароля";      break;
+        case      "date":  return "Даты";        break;
+        case      "time":  return "Времени";     break;
+        case  "numguest":  return "Количества гостей"; break;
+        case  "useBonus":  return "Бонуса";      break;
+        case     "bonus":  return "Бонуса";      break;
+        case     "notes":  return "Заметки";     break;
+    }
+}
+
+
+
 
 function TestF(){
     alert('Test function');
