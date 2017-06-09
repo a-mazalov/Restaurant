@@ -176,7 +176,13 @@ var adminPanel = new Vue({
                     contentType: false,
                     processData: false,
                     success: function (result) { 
-                        console.log(result); 
+//                        console.log(JSON.parse(result)); 
+                        let statusImg = JSON.parse(result);
+                        if(!statusImg["Status"]){
+                            adminPanel.showSnackBar(statusImg["Message"]+" Пересоздайте блюдо");
+//                            adminPanel.deleteDish(adminPanel.newDish,id_dish);
+                        }
+//                        console.log(result); 
                     }
                 });
             }

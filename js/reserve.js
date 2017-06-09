@@ -24,25 +24,33 @@ var ReserveCard = new Vue({
         },
         ReserveInfo: function(){
             
-//            console.log(this.reserveObj);
-            this.$http.get(this.queryPoint,  { params: this.reserveObj } ).then(function(response){
-                console.log("Выполнено");
-                this.errorSend = false;
-                console.log(response.data);
-                
-                    this.submitted = true;
-                    this.reserveObj = {date: '', time: '', name: '', lastName: '', telephone: '', numguest: 1, notes: ''};
-                
-                
-                
-            }, function (error) {
-//                    this.errorSend = ;
-                    this.showSnackBar("Нет соединения с сервером");
-                    this.errorSend = true;
-                    console.log("Ошибка запроса: " + error.data);
-            });
             
-          
+            let validInp = validate(ReserveCard.reserveObj);
+            
+            if(validInp["Valid"]){
+            
+            
+    //            console.log(this.reserveObj);
+                this.$http.get(this.queryPoint,  { params: this.reserveObj } ).then(function(response){
+                    this.submitted = true;
+//                    console.log("Выполнено");
+                    this.errorSend = false;
+//                    console.log(response.data);
+
+                        this.reserveObj = {date: '', time: '', name: '', lastName: '', telephone: '', numguest: 1, notes: ''};
+
+
+
+                }, function (error) {
+    //                    this.errorSend = ;
+                        this.showSnackBar("Нет соединения с сервером");
+                        this.errorSend = true;
+                        console.log("Ошибка запроса: " + error.data);
+                });
+            
+            }else{
+                this.showSnackBar("Неверное поле: "+validInp[0]); 
+            }
         },
         submit: function(){
         
@@ -72,20 +80,14 @@ var ReserveCard = new Vue({
 
 
 
-$(".inp-date").flatpickr({
-    enableTime: false
-});
 
-$(".inp-time").flatpickr({
+flatpickr(".inp-date", {
+    enableTime: false,
+    minDate: "today",
+    maxDate: new Date().fp_incr(14)
+});
+flatpickr(".inp-time", {
     noCalendar: true,
     enableTime: true,
     time_24hr: true,
 });
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
-
