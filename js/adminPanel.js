@@ -1,5 +1,3 @@
-
-
 Vue.use(VueMaterial);
 
 var Copyied;
@@ -12,13 +10,13 @@ var adminPanel = new Vue({
         snackMessage: '',
         editMode: false,
         layers: {
-            main: false,    
+            main: false,
             qr: true,
             editor: false,
             reserve: false,
             notificat: false
         },
-        servers:{
+        servers: {
             menuURL: 'http://restaurant.atservers.net/php/menu-query.php',
             menuURL: 'http://workproject/www/php/menu-query.php',
             reserveURL: "http://restaurant.atservers.net/php/ListReserve.php",
@@ -56,23 +54,23 @@ var adminPanel = new Vue({
             errorSend: false,
             url: "https://fcm.googleapis.com/fcm/send",
             key: "AAAAq97W7_w:APA91bE_LUOoPRmnMcxsKqGQKowG0Lmnsk9LjyKzBVBQoCLf1A6tGfZoKw3VjNyL5xQbEqGtWUJ5_lYjTcKA6W0npkbEOAInyoCgiikVoiVucX3UFSKt83WX1nyXWwDb_wtCJqpmXxCU"
-            
+
         },
         listQRcode: [],
-        newQRcode:{
+        newQRcode: {
             inpQR: '',
-            bonus: '',
-            amount: ''
+            bonusQR: '',
+            amountQR: ''
         }
     },
     methods: {
-//-------------------Работа с меню---------------------------
+        //-------------------Работа с меню---------------------------
         getMenu: function () {
             this.$http.get(this.servers.menuURL).then(function (response) {
 
-//                console.log(response.data);
+                //                console.log(response.data);
                 this.listMenu = JSON.parse(response.data);
-//                this.listMenu = response.data;
+                //                this.listMenu = response.data;
                 console.log(this.listMenu);
 
             }, function (error) {
@@ -80,132 +78,144 @@ var adminPanel = new Vue({
                 console.log("Ошибка запроса: " + error.data);
             });
         },
-        SwithEditMode: function(){
-            
-            if(!this.editMode){
+        SwithEditMode: function () {
+
+            if (!this.editMode) {
                 this.actionMenu.preEdit = copyObj(this.listMenu);
-            }else{
+            } else {
                 this.listMenu = this.actionMenu.preEdit;
             }
 
         },
-        cancelEdit: function(){
+        cancelEdit: function () {
             this.listMenu = this.actionMenu.preEdit;
         },
-        sendUpadeMenu: function(){
+        sendUpadeMenu: function () {
 
             let arrUpdate = [];
 
-            for(let category in this.listMenu){
+            for (let category in this.listMenu) {
 
-                for(let dish in this.listMenu[category])
+                for (let dish in this.listMenu[category])
 
-                    if( this.listMenu[category][dish].hasOwnProperty('edit') ){
+                    if (this.listMenu[category][dish].hasOwnProperty('edit')) {
 
-                        delete this.listMenu[category][dish].edit;
-                        arrUpdate.push(this.listMenu[category][dish]);
-                    }    
-            }   
+                    delete this.listMenu[category][dish].edit;
+                    arrUpdate.push(this.listMenu[category][dish]);
+                }
+            }
             console.log(arrUpdate);
-            
-            if(arrUpdate.length){
-               
-                let infoSend = {"item": arrUpdate, "action": "update"};
-            
-                this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
-                    console.log("Выполнено"); 
+
+            if (arrUpdate.length) {
+
+                let infoSend = {
+                    "item": arrUpdate,
+                    "action": "update"
+                };
+
+                this.$http.get(this.servers.actionsURL, {
+                    params: infoSend
+                }).then(function (response) {
+                    console.log("Выполнено");
                     console.log(response.data);
                 }, function (error) {
                     console.log("Ошибка запроса: " + error.data);
                     this.showSnackBar("Ошибка при выполнении операции");
-//                    this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
-                });    
-            
-            }else{
-//                this.showSnackBar("Нет изменений");
+                    //                    this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
+                });
+
+            } else {
+                //                this.showSnackBar("Нет изменений");
             }
 
             this.editMode = false;
-    
+
         },
-        previewImg: function(){
-            
+        previewImg: function () {
+
             var input = document.getElementById("loadpicture");
-            
-            if( (input.files[0]["type"] === "image/jpeg") || (input.files[0]["type"] === "image/png") || (input.files[0]["type"] === "image/bmp") ){
+
+            if ((input.files[0]["type"] === "image/jpeg") || (input.files[0]["type"] === "image/png") || (input.files[0]["type"] === "image/bmp")) {
                 oFReader = new FileReader();
                 oFReader.onload = function (oFREvent) {
                     adminPanel.viewImg = oFREvent.target.result || window.URL.createObjectURL(fl[0]);
-    //                $('.cover-preview').attr('src', oFREvent.target.result || window.URL.createObjectURL(fl[0]));
+                    //                $('.cover-preview').attr('src', oFREvent.target.result || window.URL.createObjectURL(fl[0]));
                 }
-                if (input.files.length === 0) { return; }
+                if (input.files.length === 0) {
+                    return;
+                }
                 var oFile = input.files[0];
                 oFReader.readAsDataURL(oFile);
-            }else{
+            } else {
                 this.showSnackBar("Неверный тип изображения");
-                document.getElementById("avImg").src='img/food/id_default.jpg';
+                document.getElementById("avImg").src = 'img/food/id_default.jpg';
                 this.viewImg = 'img/food/id_default.jpg';
                 document.forms.formImg.reset();
-//            var input = inpValue;
+                //            var input = inpValue;
 
             }
-//            this.src = formData;
+            //            this.src = formData;
         },
-        createDish: function(){
-//            console.log(this.newDish); 
+        createDish: function () {
+            //            console.log(this.newDish); 
             var file = document.getElementById('loadpicture').files[0];
 
-            if ( file && (file["type"] === "image/jpeg") || (file["type"] === "image/png") || (file["type"] === "image/bmp") ) {
+            if (file && (file["type"] === "image/jpeg") || (file["type"] === "image/png") || (file["type"] === "image/bmp")) {
                 this.newDish.Image = true;
             } else {
                 this.newDish.Image = false;
             }
             console.log(file);
-            
-            let infoSend = {"item":this.newDish, "action": "newDish"};
-                      
-            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
-                console.log("Выполнено"); 
+
+            let infoSend = {
+                "item": this.newDish,
+                "action": "newDish"
+            };
+
+            this.$http.get(this.servers.actionsURL, {
+                params: infoSend
+            }).then(function (response) {
+                console.log("Выполнено");
                 console.log(response.data);
                 setImg(response.data);
                 this.getMenu();
-                
+
             }, function (error) {
                 console.log("Ошибка запроса: " + error.data);
                 this.showSnackBar("Ошибка при выполнении операции");
             });
-//            
-            function setImg(id_dish){
-//            
+            //            
+            function setImg(id_dish) {
+                //            
                 var newFileName;
                 if (file != undefined) {
-                    newFileName = "id_"+id_dish.trim()+".jpg";
+                    newFileName = "id_" + id_dish.trim() + ".jpg";
                 }
-                
+
                 var formData = new FormData();
                 formData.append('file', file, newFileName);
- 
+
                 $.ajax({
                     url: "http://workproject/www/php/loadPicture.php",
                     type: 'post',
                     data: formData,
                     contentType: false,
                     processData: false,
-                    success: function (result) { 
-//                        console.log(JSON.parse(result)); 
+                    success: function (result) {
+                        //                        console.log(JSON.parse(result)); 
                         let statusImg = JSON.parse(result);
-                        if(!statusImg["Status"]){
-                            adminPanel.showSnackBar(statusImg["Message"]+" Пересоздайте блюдо");
-//                            adminPanel.deleteDish(adminPanel.newDish,id_dish);
+                        if (!statusImg["Status"]) {
+                            adminPanel.showSnackBar(statusImg["Message"] + " Пересоздайте блюдо");
+                            //                            adminPanel.deleteDish(adminPanel.newDish,id_dish);
                         }
-//                        console.log(result); 
+                        //                        console.log(result); 
                     }
                 });
             }
-            
-            
+
+
         },
-        deleteDish: function(item,index){
+        deleteDish: function (item, index) {
             console.log("delDish");
             this.deletedItem = {
                 "index": index,
@@ -214,14 +224,19 @@ var adminPanel = new Vue({
 
             delete this.listMenu[item.Category_dish][index];
             this.$forceUpdate();
-            
-//            console.log(deletedItem);
-            
-            let infoSend = {"item":item.ID_dish, "action": "deleteDish"};
+
+            //            console.log(deletedItem);
+
+            let infoSend = {
+                "item": item.ID_dish,
+                "action": "deleteDish"
+            };
             console.log(infoSend)
-//            this.listMenu.splice(deletedItemю.item.index, 1);
-            
-            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+                //            this.listMenu.splice(deletedItemю.item.index, 1);
+
+            this.$http.get(this.servers.actionsURL, {
+                params: infoSend
+            }).then(function (response) {
                 console.log("Выполнено");
                 console.log(response.data)
             }, function (error) {
@@ -229,108 +244,126 @@ var adminPanel = new Vue({
                 this.showSnackBar("Ошибка при выполнении операции");
                 this.listMenu[item.Category_dish][index] = item;
                 this.$forceUpdate();
-            });    
+            });
         },
-        Tchange: function(){
-            alert("change");        
+        Tchange: function () {
+            alert("change");
         },
-        actionE: function(index){
+        actionE: function (index) {
             this.listMenu["Hot_dishes"][index]['edit'] = true;
             alert('asd');
             return true;
-//            alert('sdffd');    
+            //            alert('sdffd');    
         },
-//-------------------Работа с бронированием---------------------------
+        //-------------------Работа с бронированием---------------------------
         getReserve: function () {
-                this.$http.get(this.servers.reserveURL).then(function (response) {
-                
-                    this.loader = false;
-//                    this.listReserve = JSON.parse(response.data);
+            this.$http.get(this.servers.reserveURL).then(function (response) {
+
+                this.loader = false;
+                //                    this.listReserve = JSON.parse(response.data);
                 let dataReserve = JSON.parse(response.data);
                 for (prop in dataReserve) {
                     if (dataReserve[prop].Status === "new") {
                         this.listReserveNew.push(dataReserve[prop]);
-                    }else if(dataReserve[prop].Status === "accept"){
-                        this.listReserveAccept.push(dataReserve[prop]);       
+                    } else if (dataReserve[prop].Status === "accept") {
+                        this.listReserveAccept.push(dataReserve[prop]);
                     }
                 }
-                    console.log(this.listReserveNew);
-                    console.log(this.listReserveAccept);
-                    
-                    
-                    
-                    
-                    
-//                    console.log( JSON.parse(response.data) );
-                }, function (error) {
-                    this.showSnackBar("Ошибка соединения");
-                    console.log("Ошибка запроса: " + error.data);
-                });
+                console.log(this.listReserveNew);
+                console.log(this.listReserveAccept);
+
+
+
+
+
+                //                    console.log( JSON.parse(response.data) );
+            }, function (error) {
+                this.showSnackBar("Ошибка соединения");
+                console.log("Ошибка запроса: " + error.data);
+            });
         },
-        priceInReserve: function(dishes, bonusCode){
-//            console.log(dishes);
-            
+        priceInReserve: function (dishes, bonusCode) {
+            //            console.log(dishes);
+
             let price = 0;
-            for (let i = 0;  dishes && i < dishes.length; i++) {
-                price += parseInt( (dishes[i].Price_dish * dishes[i].Amount_dish) * 100)/100;
+            for (let i = 0; dishes && i < dishes.length; i++) {
+                price += parseInt((dishes[i].Price_dish * dishes[i].Amount_dish) * 100) / 100;
             }
-            if(bonusCode > 0){
+            if (bonusCode > 0) {
                 price -= bonusCode;
             }
-//            console.log("bo" + bonusCode);
-//            console.log(price);
+            //            console.log("bo" + bonusCode);
+            //            console.log(price);
             return price.toFixed(2);
-            
+
         },
-        actionsDelRes: function(item,index,status){
-            console.log("index"+index);
-            
+        actionsDelRes: function (item, index, status) {
+            console.log("index" + index);
+
             let deletedItem = {
                 "index": index,
                 "item": item
             };
-            
-            switch(status){
-                case "new": this.listReserveNew.splice(index, 1); break;
-                case "accept": this.listReserveAccept.splice(index, 1); break;
+
+            switch (status) {
+                case "new":
+                    this.listReserveNew.splice(index, 1);
+                    break;
+                case "accept":
+                    this.listReserveAccept.splice(index, 1);
+                    break;
             }
-            
-            let infoSend = {"item":item, "action": "deleteReserve"};
+
+            let infoSend = {
+                "item": item,
+                "action": "deleteReserve"
+            };
             console.log(infoSend);
-            
-//            this.listReserve.splice(deletedItem.index, 1);
-            
-            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+
+            //            this.listReserve.splice(deletedItem.index, 1);
+
+            this.$http.get(this.servers.actionsURL, {
+                params: infoSend
+            }).then(function (response) {
                 console.log("Выполнено");
                 console.log(response.data)
             }, function (error) {
                 console.log("Ошибка запроса: " + error.data);
                 this.showSnackBar("Ошибка при выполнении операции");
-                
-                switch(status){
-                    case "new": this.listReserveNew.splice(deletedItem.index, -1, deletedItem.item); break;
-                    case "accept": this.listReserveAccept.splice(deletedItem.index, -1, deletedItem.item); break;
+
+                switch (status) {
+                    case "new":
+                        this.listReserveNew.splice(deletedItem.index, -1, deletedItem.item);
+                        break;
+                    case "accept":
+                        this.listReserveAccept.splice(deletedItem.index, -1, deletedItem.item);
+                        break;
                 }
             });
-//            
+            //            
         },
-        actionAcceptRes: function(item,index){
-            this.listReserveNew.splice(index, 1);  
+        actionAcceptRes: function (item, index) {
+            this.listReserveNew.splice(index, 1);
             this.listReserveAccept.splice(0, -1, item);
-            
-            let infoSend = {"item":item, "action": "acceptReserve"};
 
-            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+            let infoSend = {
+                "item": item,
+                "action": "acceptReserve"
+            };
+
+            this.$http.get(this.servers.actionsURL, {
+                params: infoSend
+            }).then(function (response) {
                 console.log("Выполнено");
-//                console.log(response.data)
+                //                console.log(response.data)
             }, function (error) {
                 console.log("Ошибка запроса: " + error.data);
                 this.showSnackBar("Ошибка при выполнении операции");
                 this.listReserveNew.splice(index, -1, item);
             });
         },
-//-------------------Работа с рассылкой уведомлений-----------------------
-        sendPush: function(){
+        //-------------------Работа с рассылкой уведомлений-----------------------
+        sendPush: function () {
             this.notification.successSend = false;
             this.notification.errorSend = false;
 
@@ -340,14 +373,12 @@ var adminPanel = new Vue({
                     if (xhttp.status == 200) {
                         var response = JSON.parse(xhttp.responseText);
                         console.log(response);
-                        if (response.result == 1){
+                        if (response.result == 1) {
                             adminPanel.notification.errorSend = true;
-                        }
-                        else{
+                        } else {
                             adminPanel.notification.successSend = true;
                         }
-                    }
-                    else{
+                    } else {
                         adminPanel.notification.errorSend = true;
                     }
                 }
@@ -357,17 +388,17 @@ var adminPanel = new Vue({
             xhttp.setRequestHeader("Authorization", "key=" + this.notification.key);
             var dataS = JSON.stringify({
                 "to": "/topics/all",
-//                "to": "clCIyjDp7hM:APA91bFbwGNKjpeiJjq-H1nTHkv8YXwS2WsaUArL2uwUahGLTKOHWFPKT1gj5T9EkgC0KIlIoMnCLn1TCJXAr82wcKwpbahCOnNFcGmHF_vDJM2zoKAaFnLCxZy-hFwz-DRw1HUTtRVX",
+                //                "to": "clCIyjDp7hM:APA91bFbwGNKjpeiJjq-H1nTHkv8YXwS2WsaUArL2uwUahGLTKOHWFPKT1gj5T9EkgC0KIlIoMnCLn1TCJXAr82wcKwpbahCOnNFcGmHF_vDJM2zoKAaFnLCxZy-hFwz-DRw1HUTtRVX",
                 "data": {
                     "title": this.notification.dataSend.title,
                     "body": this.notification.dataSend.body
                 }
             });
-    //        var data = JSON.stringify({"to":"/topics/all","data": {"title": "GGSDf", "body": "sfs@!3"}});
+            //        var data = JSON.stringify({"to":"/topics/all","data": {"title": "GGSDf", "body": "sfs@!3"}});
             xhttp.send(dataS);
 
         },
-        sendAcceptNotif: function(reserve,answer){
+        sendAcceptNotif: function (reserve, answer) {
             xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4) {
@@ -375,12 +406,12 @@ var adminPanel = new Vue({
                         var response = JSON.parse(xhttp.responseText);
                         console.log(response);
                         if (response.result == 1) {
-//                            adminPanel.notification.errorSend = true;
+                            //                            adminPanel.notification.errorSend = true;
                         } else {
-//                            adminPanel.notification.successSend = true;
+                            //                            adminPanel.notification.successSend = true;
                         }
                     } else {
-//                        adminPanel.notification.errorSend = true;
+                        //                        adminPanel.notification.errorSend = true;
                     }
                 }
             };
@@ -390,30 +421,35 @@ var adminPanel = new Vue({
             var dataS = JSON.stringify({
                 "to": reserve.TokenMessage,
                 "data": {
-                    "title": 'Заявка на '+ reserve.Date + ' ' + reserve.Time,
+                    "title": 'Заявка на ' + reserve.Date + ' ' + reserve.Time,
                     "body": answer
                 }
             });
             //        var data = JSON.stringify({"to":"/topics/all","data": {"title": "GGSDf", "body": "sfs@!3"}});
-            xhttp.send(dataS); 
+            xhttp.send(dataS);
         },
-        
-//-------------------Бонус-коды-------------------------------------------
-        getListQR: function(){
-            let infoSend = {"item": null, "action": "checkListBonus"};
 
-            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+        //-------------------Бонус-коды-------------------------------------------
+        getListQR: function () {
+            let infoSend = {
+                "item": null,
+                "action": "checkListBonus"
+            };
+
+            this.$http.get(this.servers.actionsURL, {
+                params: infoSend
+            }).then(function (response) {
                 this.listQRcode = JSON.parse(response.data);
             }, function (error) {
                 console.log("Ошибка запроса: " + error.data);
                 this.showSnackBar("Ошибка при загрузке списка кодов");
-            });     
+            });
         },
-        generateCode: function(codeStr,newBonus){
-//            var text = adminPanel.inpQR;
-//            var text = "Повелся, ты не оч";
-  //do work
-            
+        generateCode: function (codeStr, newBonus) {
+            //            var text = adminPanel.inpQR;
+            //            var text = "Повелся, ты не оч";
+            //do work
+
             var text = codeStr;
             var rst = "";
 
@@ -455,51 +491,88 @@ var adminPanel = new Vue({
                 for (j = 0; j < code.length; j++) addPoint(false);
                 newLine();
             }
-//            console.log(rst);
-            
-            if(newBonus == true){
+            //            console.log(rst);
+
+            if (newBonus == true) {
                 document.getElementById("newQR").innerHTML = " ";
                 document.getElementById("newQR").innerHTML = rst;
-            }else{
+            } else {
                 return rst;
             }
-            
-//                $("#pictureQRCode").html(rst);
-            
-            
+
+            //                $("#pictureQRCode").html(rst);
+
+
         },
-        createCodeDB: function(){
-            let infoSend = {"item":this.newQRcode, "action": "createBonusCode"};
-                      
-            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
-                console.log(response.data);
-            }, function (error) {
-                console.log("Ошибка запроса: " + error.data);
-                this.showSnackBar("Ошибка при выполнении операции");
-            });    
+        createCodeDB: function () {
+
+            let validInp = validate(adminPanel.newQRcode);
+
+            if (validInp["Valid"]) {
+
+                if ((adminPanel.newQRcode.bonusQR < 50) && (adminPanel.newQRcode.bonusQR != 0)) {
+
+                    this.closeDialog('addBonusCode');
+                    let infoSend = {
+                        "item": this.newQRcode,
+                        "action": "createBonusCode"
+                    };
+
+                    this.$http.get(this.servers.actionsURL, {
+                        params: infoSend
+                    }).then(function (response) {
+                        console.log(response.data);
+                    }, function (error) {
+                        console.log("Ошибка запроса: " + error.data);
+                        this.showSnackBar("Ошибка при выполнении операции");
+                    });
+
+                } else {
+                    this.showSnackBar("Недопустимый размер бонуса (макс. 50)");
+                }
+
+            } else {
+                this.showSnackBar("Неверное поле: " + validInp[0]);
+            }
+
+
+
+
         },
-        deleteCode: function(ID_code,index){
-            
-            let infoSend = {"item":ID_code, "action": "deleteBonusCode"};
-            
-            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
-//                console.log("Выполнено");
+        deleteCode: function (ID_code, index) {
+
+            let infoSend = {
+                "item": ID_code,
+                "action": "deleteBonusCode"
+            };
+
+            this.$http.get(this.servers.actionsURL, {
+                params: infoSend
+            }).then(function (response) {
+                //                console.log("Выполнено");
                 console.log(response.data);
                 this.listQRcode.splice(index, 1);
             }, function (error) {
-//                console.log("Ошибка запроса: " + error.data);
+                //                console.log("Ошибка запроса: " + error.data);
                 this.showSnackBar("Ошибка при выполнении операции");
 
             });
         },
-//-------------------Вспомогательные функции------------------------------
-        сhangeLayer: function(section){
-            for(var layer in this.layers){
-                if(section == layer){
+        inputQt: function (item, len) {
+            console.log(item.value);
+            itemL = item;
+            if (itemL > len) {
+                console.log(itemL);
+                itemL = "";
+            }
+        },
+        //-------------------Вспомогательные функции------------------------------
+        сhangeLayer: function (section) {
+            for (var layer in this.layers) {
+                if (section == layer) {
                     this.layers[layer] = true;
                     this.$forceUpdate();
-                }
-                else{
+                } else {
                     this.layers[layer] = false;
                 }
             }
@@ -508,7 +581,7 @@ var adminPanel = new Vue({
         showSnackBar(Message) {
             this.snackMessage = Message;
             this.$refs.snackbar.open();
-//            this.$refs.snackbar.options = funcBtn;
+            //            this.$refs.snackbar.options = funcBtn;
         },
         openDialog(ref) {
             this.$refs[ref].open();
@@ -516,12 +589,12 @@ var adminPanel = new Vue({
         closeDialog(ref) {
             this.$refs[ref].close();
         },
-        strBool(value){
+        strBool(value) {
             return !!value;
-//            switch(type){
-//                   case "str": return value === 1 ? "true" : "false";
-//                   case "num": return value === "true" ? "1" : "0";
-//            }
+            //            switch(type){
+            //                   case "str": return value === 1 ? "true" : "false";
+            //                   case "num": return value === "true" ? "1" : "0";
+            //            }
         },
         str_rand() {
             var result = '';
@@ -532,13 +605,27 @@ var adminPanel = new Vue({
                 result = result + words.substring(position, position + 1);
             }
             return result;
-        }
+        },
+        CallPrint(code) {
+//            var prtContent = document.getElementById(strid);
+            var WinPrint = window.open('printQR.html?'+code, '', 'left=50,top=50,width=800,height=640,toolbar=0,scrollbars=1,location=no,status=0');
+//            WinPrint.document.write(prtCSS);
+//            WinPrint.document.write("<b>asdas</b>");
+//            WinPrint.document.write('<div id="print2" class="contentpane">');
+//            WinPrint.document.write(prtContent.innerHTML);
+//            WinPrint.document.write('</div>');
+//            WinPrint.document.close();
+//            WinPrint.focus();
+//            WinPrint.print(); 
+//            WinPrint.close();
+//            prtContent.innerHTML = strOldOne;
+            }
     },
-//-------------------При создании---------------------------            
-    created: function(){
+    //-------------------При создании---------------------------            
+    created: function () {
 
     },
-    mounted: function(){
+    mounted: function () {
         this.getMenu();
         this.getReserve();
         this.getListQR();
@@ -548,11 +635,11 @@ var adminPanel = new Vue({
 //----------------//----//------------------//
 
 
- function copyObj(obj) {
+function copyObj(obj) {
     if (typeof obj != "object") {
         return obj;
     }
-    
+
     var copy = obj.constructor();
     for (var key in obj) {
         if (typeof obj[key] == "object") {
@@ -562,25 +649,10 @@ var adminPanel = new Vue({
         }
     }
     return copy;
-};     
+};
 
 
-function CallPrint(strid) {
-var prtContent = document.getElementById(strid);
-var prtCSS = '';
-var WinPrint = window.open('','','left=50,top=50,width=800,height =640,toolbar=0,scrollbars=1,status=0');
 
-var print = document.createElement("div");
-print.className = "contentpane";
-print.setAttribute("id", "print");
-print.appendChild(prtContent.cloneNode(true));
-
-WinPrint.document.body.appendChild(print); 
-
-WinPrint.focus();
-WinPrint.print();
-WinPrint.close();
-}
 //
 //
 //    function send2(){

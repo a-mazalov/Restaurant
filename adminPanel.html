@@ -91,12 +91,13 @@
     </md-card>
     </div>    
     <div class="QRLayer anim-fadeIn" v-if="layers.qr">
-    <md-button class="md-fab md-fab-bottom-right" id="addBonus" @click.native="openDialog('addBonusCode')">
+    <md-button class="md-fab md-fab-bottom-right md-warn" id="addBonus" @click.native="openDialog('addBonusCode')">
         <md-icon>add</md-icon>
     </md-button>
-    <div class="container-fluid qr-fluid border" style="" >
+    <div class="container-fluid qr-fluid " style="" >
         <div class="row">
-            <div class="col-md-4 border" style="margin: 15px auto;" v-for="(item,index) in listQRcode">
+            <div class="col-md-4" style="margin: 15px auto;" v-for="(item,index) in listQRcode">
+
                 <md-card md-with-hover >
                    
                    
@@ -114,10 +115,12 @@
                         <md-icon class="md-warn">sms_failed</md-icon>
                     </md-card-header>
     -->
-
+<!---->
                     <md-card-content class="text-center">
-<!--                        <input type="text" v-model="inpQR">-->
-                        <div class="pictureQRCode" :id="'QR'+item.ID_code" v-html="generateCode(item.QRcode,false)" style="margin: auto;"></div>
+
+                       
+                    <div class="pictureQRCode" :id="'QR'+item.ID_code" v-html="generateCode(item.QRcode,false)" style="margin: auto;" class="anim-fadeIn"></div>    
+                        
                         {{item.QRcode}}
                     </md-card-content>
 
@@ -130,7 +133,7 @@
                             Бонус: 
                             <span class="custom-text-14">{{item.Bonus}}</span>
                         </div>
-                        <md-button class="md-icon-button" v-on:click.native="">
+                        <md-button class="md-icon-button" v-on:click.native="CallPrint(item.QRcode)">
                             <md-icon style="opacity: .51">print</md-icon>
                         </md-button>
 <!--                        <md-button class="md-raised md-primary" v-on:click.native="generateCode">Применить</md-button>-->
@@ -145,7 +148,11 @@
           <md-dialog-title>Новый бонус-код</md-dialog-title>
 
             <md-dialog-content>
-                <div id="newQR"></div>
+                <div id="newQR" class="anim-fadeIn">
+                   <div class="vertical-align qr-icon-block">
+                       <div class="qr-icon"></div>
+                   </div>
+                </div>
                
                
                 <md-input-container>
@@ -157,20 +164,20 @@
                 </md-input-container>  
                 <md-input-container>
                     <label>Размер бонуса</label>
-                    <md-input type="number" v-model="newQRcode.bonus"></md-input>
+                    <md-input type="number" v-model="newQRcode.bonusQR" min="0" max="50"></md-input>
                 </md-input-container>                    
                 <md-input-container>
                     <label>Количество кодов</label>
-                    <md-input type="number" v-model="newQRcode.amount"></md-input>
+                    <md-input type="number" v-model="newQRcode.amountQR"></md-input>
                 </md-input-container>    
             </md-dialog-content>
             
-        <md-button class="md-raised md-primary" v-on:click.native="generateCode(newQRcode.inpQR,true)">Создать</md-button>
+        <md-button class="md-raised md-primary" v-on:click.native="generateCode(newQRcode.inpQR,true)">Сгенерировать код</md-button>
          
          
           <md-dialog-actions>
-            <md-button class="md-primary" @click.native="closeDialog('addBonusCode')">Cancel</md-button>
-            <md-button class="md-primary" @click.native="createCodeDB(); closeDialog('addBonusCode'); ">Ok</md-button>
+            <md-button class="md-primary" @click.native="closeDialog('addBonusCode')">Отменить</md-button>
+            <md-button class="md-primary" @click.native="createCodeDB();">Создать</md-button>
           </md-dialog-actions>
         </md-dialog>   
 <!--
@@ -237,7 +244,7 @@
         </md-input-container>        
         <md-input-container>
             <label>Стоимость</label>
-            <md-input type="number" v-model="newDish.Price_dish"></md-input>
+            <md-input type="number" v-model="newDish.Price_dish" min="0"></md-input>
         </md-input-container>
     </md-dialog-content>
 
@@ -799,6 +806,7 @@
     <script type="text/javascript" src="vue/vue-resource.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/GenerateQR.js"></script>
+    <script type="text/javascript" src="js/tools.js"></script>
 
     <script type="text/javascript" src="js/adminPanel.js"></script>
 

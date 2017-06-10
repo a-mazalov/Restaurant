@@ -125,7 +125,7 @@ $MenuCheck->execute();
         
     case "checkListBonus":
 
-    $ListQR= $pdo->query("SELECT * FROM `QRcodes_table`");
+    $ListQR= $pdo->query("SELECT * FROM `QRcodes_table` ORDER BY `QRcodes_table`.`ID_code` DESC");
     $infoOutput = $ListQR->fetchAll();
         echo json_encode($infoOutput);  
         break;
@@ -138,8 +138,8 @@ $MenuCheck->execute();
                 
         $queryCreateBonus->execute(array(
             'inpQR' => $DataCode["inpQR"],
-            'bonus' => $DataCode["bonus"],
-            'amount' => $DataCode["amount"]
+            'bonus' => $DataCode["bonusQR"],
+            'amount' => $DataCode["amountQR"]
 //            'available' => $ArrayDish["Available"],
         ));
         

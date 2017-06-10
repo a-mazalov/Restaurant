@@ -412,3 +412,9 @@ html {
     justify-content: space-between;
     margin: 10px;
 }
+.qr-icon {
+    background: url(../img/qr-code.svg) no-repeat 50% 50%;
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+}

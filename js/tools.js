@@ -7,16 +7,24 @@ function validate(obj){
     for (var key in input) {
 
         switch(key){
-            case      "name":  VRegExp = /([А-я]{3,16}$)|(^[A-z]{3,16}$)/;            break;         
-            case  "lastName":  VRegExp = /([А-я]{3,22}$)|(^[A-z]{3,22}$)/;            break;        
-            case "telephone":  VRegExp = /(^[+]{1}[0-9]{12}$)|(^[0-9]{12}$)|(^[0-9]{9}$)|(^[0-9]{7}$)/;break;        
-            case  "password":  VRegExp = /^[0-9А-яA-z-!@#$%^&*]{6,16}$/; break;        
-            case      "date":  VRegExp = /(20)([1-9])\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)/; break;        
-            case      "time":  VRegExp = /(2[0-3]|[0-1]\d):[0-5]\d/; break;        
-            case  "numguest":  VRegExp = /[1-8]/; break;        
-            case  "useBonus":  VRegExp = /0|1|true|false/; break;        
-            case     "bonus":  VRegExp = /^[0-9]{1,2}([,0-9]{0,3})?([0-9]{0,2})?$/; break;        
-            case     "notes":  VRegExp = /^(?!.*#\^&.*\(\)\{\}\\\/.*$)([A-zА-я0-9!@.,\s]{0,60})$/; break;        
+            case         "name":    VRegExp = /([А-я]{3,16}$)|(^[A-z]{3,16}$)/;            break;         
+            case     "lastName":    VRegExp = /([А-я]{3,22}$)|(^[A-z]{3,22}$)/;            break;        
+            case    "telephone":    VRegExp = /(^[+]{1}[0-9]{12}$)|(^[0-9]{12}$)|(^[0-9]{9}$)|(^[0-9]{7}$)/;break;        
+            case     "password":    VRegExp = /^[0-9А-яA-z-!@#$%^&*]{6,16}$/; break;        
+            case         "date":    VRegExp = /(20)([1-9])\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)/; break;        
+            case         "time":    VRegExp = /(2[0-3]|[0-1]\d):[0-5]\d/; break;        
+            case     "numguest":    VRegExp = /[1-8]/; break;        
+            case     "useBonus":    VRegExp = /0|1|true|false/; break;        
+            case        "bonus":    VRegExp = /^[0-9]{1,2}([,0-9]{0,3})?([0-9]{0,2})?$/; break;        
+            case        "notes":    VRegExp = /^(?!.*#\^&.*\(\)\{\}\\\/.*$)([A-zА-я0-9!@.,\s]{0,60})$/; break;        
+            case   "Title_dish":    VRegExp = /([А-я]{3,16}$)|(^[A-z]{3,16}$)/;         break;         
+            case "Caption_dish":    VRegExp = /([А-я]{3,16}$)|(^[A-z]{3,16}$)/;         break;         
+            case   "Price_dish":    VRegExp = /(^[0-9]*[.]?)([0-9]{1,2})+$/;            break;         
+            case        "inpQR":    VRegExp = /^[^<>,.;:/]{4,10}$/;                     break;      
+            case      "bonusQR":    VRegExp = /(^[0-9]{0,1})([.]?[0-9]){1,3}$/;            break;         
+//            case      "bonusQR":    VRegExp = /(^[0-9]*[.]?)([0-9]{1,2})+$/;            break;         
+            case     "amountQR":    VRegExp = /^[1-9]\d{0,2}$/;                         break;         
+                default:            VRegExp = / /;                                      break;
         }
 
         console.log(key);
@@ -56,6 +64,10 @@ function outMsg(key){
         case  "useBonus":  return "Бонуса";      break;
         case     "bonus":  return "Бонуса";      break;
         case     "notes":  return "Заметки";     break;
+        case     "inpQR":  return "Код (не допустимые символы)";     break;
+        case   "bonusQR":  return "Размер бонуса";     break;
+        case  "amountQR":  return "Количество кодов";     break;
+        
     }
 }
 

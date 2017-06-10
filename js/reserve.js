@@ -29,7 +29,6 @@ var ReserveCard = new Vue({
             
             if(validInp["Valid"]){
             
-            
     //            console.log(this.reserveObj);
                 this.$http.get(this.queryPoint,  { params: this.reserveObj } ).then(function(response){
                     this.submitted = true;
