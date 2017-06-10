@@ -405,3 +405,10 @@ html {
   font-feature-settings: 'liga';
 }
 /**************************************************/
+.md-card-actions-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+}

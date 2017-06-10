@@ -121,7 +121,39 @@ $MenuCheck = $pdo->prepare("SELECT `ID_dish`, `Title_dish`, `Caption_dish`, `Pri
 $MenuCheck->execute();
         $infoOutput = $MenuCheck->fetchAll();
         echo json_encode($infoOutput);    
-            
+        break;
+        
+    case "checkListBonus":
+
+    $ListQR= $pdo->query("SELECT * FROM `QRcodes_table`");
+    $infoOutput = $ListQR->fetchAll();
+        echo json_encode($infoOutput);  
+        break;
+        
+    case "createBonusCode":    
+                
+        $DataCode = $DataGET["item"];
+        
+        $queryCreateBonus = $pdo->prepare("INSERT INTO `Restaurant`.`QRcodes_table` (`ID_code`, `QRcode`, `Bonus`, `Type`, `Amount`) VALUES (NULL, 'ваыфв', '1.55', NULL, '10')");
+                
+        $queryCreateBonus->execute(array(
+            'title_dish' => $DataCode["Title_dish"],
+            'caption_dish' => $DataCode["Caption_dish"],
+            'price_dish' => $DataCode["Price_dish"],
+            'category_dish' => $DataCode["Category_dish"]
+//            'available' => $ArrayDish["Available"],
+        ));
+        
+        break;
+    case "deleteBonusCode":
+        
+        $ID_BonusCode = $DataGET["item"];
+        var_dump($ID_BonusCode);
+        $queryDelBonus = $pdo->prepare("DELETE FROM `Restaurant`.`QRcodes_table` WHERE `qrcodes_table`.`ID_code` = :id_code");  
+        $queryDelBonus->execute(array(
+            'id_code' => $ID_BonusCode
+        ));
+        
         break;
 }
 

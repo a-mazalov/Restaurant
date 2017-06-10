@@ -12,8 +12,8 @@ var adminPanel = new Vue({
         snackMessage: '',
         editMode: false,
         layers: {
-            main: true,    
-            news: false,
+            main: false,    
+            qr: true,
             editor: false,
             reserve: false,
             notificat: false
@@ -57,6 +57,12 @@ var adminPanel = new Vue({
             url: "https://fcm.googleapis.com/fcm/send",
             key: "AAAAq97W7_w:APA91bE_LUOoPRmnMcxsKqGQKowG0Lmnsk9LjyKzBVBQoCLf1A6tGfZoKw3VjNyL5xQbEqGtWUJ5_lYjTcKA6W0npkbEOAInyoCgiikVoiVucX3UFSKt83WX1nyXWwDb_wtCJqpmXxCU"
             
+        },
+        listQRcode: [],
+        newQRcode:{
+            inpQR: '',
+            bonus: '',
+            amount: ''
         }
     },
     methods: {
@@ -125,24 +131,34 @@ var adminPanel = new Vue({
         previewImg: function(){
             
             var input = document.getElementById("loadpicture");
+            
+            if( (input.files[0]["type"] === "image/jpeg") || (input.files[0]["type"] === "image/png") || (input.files[0]["type"] === "image/bmp") ){
+                oFReader = new FileReader();
+                oFReader.onload = function (oFREvent) {
+                    adminPanel.viewImg = oFREvent.target.result || window.URL.createObjectURL(fl[0]);
+    //                $('.cover-preview').attr('src', oFREvent.target.result || window.URL.createObjectURL(fl[0]));
+                }
+                if (input.files.length === 0) { return; }
+                var oFile = input.files[0];
+                oFReader.readAsDataURL(oFile);
+            }else{
+                this.showSnackBar("Неверный тип изображения");
+                document.getElementById("avImg").src='img/food/id_default.jpg';
+                this.viewImg = 'img/food/id_default.jpg';
+                document.forms.formImg.reset();
 //            var input = inpValue;
-            oFReader = new FileReader();
-            oFReader.onload = function (oFREvent) {
-                adminPanel.viewImg = oFREvent.target.result || window.URL.createObjectURL(fl[0]);
-//                $('.cover-preview').attr('src', oFREvent.target.result || window.URL.createObjectURL(fl[0]));
-            };
-            if (input.files.length === 0) { return; }
-            var oFile = input.files[0];
-            oFReader.readAsDataURL(oFile);
+
+            }
 //            this.src = formData;
         },
         createDish: function(){
 //            console.log(this.newDish); 
             var file = document.getElementById('loadpicture').files[0];
-            if (file == undefined) {
-                this.newDish.Image = false;
-            } else {
+
+            if ( file && (file["type"] === "image/jpeg") || (file["type"] === "image/png") || (file["type"] === "image/bmp") ) {
                 this.newDish.Image = true;
+            } else {
+                this.newDish.Image = false;
             }
             console.log(file);
             
@@ -381,7 +397,92 @@ var adminPanel = new Vue({
             //        var data = JSON.stringify({"to":"/topics/all","data": {"title": "GGSDf", "body": "sfs@!3"}});
             xhttp.send(dataS); 
         },
-//-------------------Вспомогательные функции----------------
+        
+//-------------------Бонус-коды-------------------------------------------
+        getListQR: function(){
+            let infoSend = {"item": null, "action": "checkListBonus"};
+
+            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+                this.listQRcode = JSON.parse(response.data);
+            }, function (error) {
+                console.log("Ошибка запроса: " + error.data);
+                this.showSnackBar("Ошибка при загрузке списка кодов");
+            });     
+        },
+        createCode: function(codeStr,newBonus){
+//            var text = adminPanel.inpQR;
+//            var text = "Повелся, ты не оч";
+  //do work
+            
+            var text = codeStr;
+            var rst = "";
+
+            var addPoint = function (t) {
+                rst +=
+                    "<div class='" +
+                    (t ? "qrTrue" : "qrFalse") +
+                    "'> </div>";
+            };
+
+            var newLine = function () {
+                rst += "<br/>";
+            }
+            var code = qrencode.encodeString(text, 0,
+                qrencode.QR_ECLEVEL_L,
+                qrencode.QR_MODE_8, true);
+
+            var i;
+            var j;
+
+            for (i = 0; i < 2; i++) {
+                for (j = 0; j < code.length; j++) addPoint(false);
+                newLine();
+            }
+
+            for (j = 0; j < code.length; j++) {
+                addPoint(false);
+                addPoint(false);
+
+                for (i = 0; i < code.length; i++)
+                    addPoint(code[i][j]);
+
+                addPoint(false);
+                addPoint(false);
+                newLine();
+            }
+
+            for (i = 0; i < 2; i++) {
+                for (j = 0; j < code.length; j++) addPoint(false);
+                newLine();
+            }
+//            console.log(rst);
+            
+            if(newBonus == true){
+                document.getElementById("newQR").innerHTML = " ";
+                document.getElementById("newQR").innerHTML = rst;
+            }else{
+                return rst;
+            }
+            
+//                $("#pictureQRCode").html(rst);
+            
+            
+        },
+        deleteCode: function(ID_code,index){
+            
+            let infoSend = {"item":ID_code, "action": "deleteBonusCode"};
+            
+            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+//                console.log("Выполнено");
+                console.log(response.data);
+                this.listQRcode.splice(index, 1);
+            }, function (error) {
+//                console.log("Ошибка запроса: " + error.data);
+                this.showSnackBar("Ошибка при выполнении операции");
+
+            });
+        },
+//-------------------Вспомогательные функции------------------------------
         сhangeLayer: function(section){
             for(var layer in this.layers){
                 if(section == layer){
@@ -411,6 +512,16 @@ var adminPanel = new Vue({
 //                   case "str": return value === 1 ? "true" : "false";
 //                   case "num": return value === "true" ? "1" : "0";
 //            }
+        },
+        str_rand() {
+            var result = '';
+            var words = '0123456789QWERTYUIOPASDFGHJKLZXCVBNM';
+            var max_position = words.length - 1;
+            for (i = 0; i < 6; ++i) {
+                position = Math.floor(Math.random() * max_position);
+                result = result + words.substring(position, position + 1);
+            }
+            return result;
         }
     },
 //-------------------При создании---------------------------            
@@ -420,6 +531,8 @@ var adminPanel = new Vue({
     mounted: function(){
         this.getMenu();
         this.getReserve();
+        this.getListQR();
+        Vue.config.devtools = false;
     }
 });
 //----------------//----//------------------//
@@ -442,6 +555,22 @@ var adminPanel = new Vue({
 };     
 
 
+function CallPrint(strid) {
+var prtContent = document.getElementById(strid);
+var prtCSS = '';
+var WinPrint = window.open('','','left=50,top=50,width=800,height =640,toolbar=0,scrollbars=1,status=0');
+
+var print = document.createElement("div");
+print.className = "contentpane";
+print.setAttribute("id", "print");
+print.appendChild(prtContent.cloneNode(true));
+
+WinPrint.document.body.appendChild(print); 
+
+WinPrint.focus();
+WinPrint.print();
+WinPrint.close();
+}
 //
 //
 //    function send2(){

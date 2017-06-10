@@ -40,9 +40,9 @@
                     <span>Главная</span>
                     <md-divider class="md-inset"></md-divider>     
                 </md-list-item>        
-                <md-list-item v-on:click.native="сhangeLayer('news')">
+                <md-list-item v-on:click.native="сhangeLayer('qr')">
                     <md-icon>new_releases</md-icon> 
-                    <span>Новости</span>
+                    <span>Бонус-коды</span>
                     <md-divider class="md-inset"></md-divider>     
                 </md-list-item> 
                 <md-list-item v-on:click.native="сhangeLayer('editor')">
@@ -90,21 +90,107 @@
         </md-card-actions>
     </md-card>
     </div>    
-    <div class="newsLayer anim-fadeIn" v-if="layers.news">
-        <md-card md-with-hover>
-            <md-card-header class="text-center">
-                <div class="md-title">Новости</div>
-                <md-icon class="md-warn">sms_failed</md-icon>
-            </md-card-header>
+    <div class="QRLayer anim-fadeIn" v-if="layers.qr">
+   
+    <div class="container-fluid qr-fluid border" style="" >
+        <div class="row">
+            <div class="col-md-4 border" style="margin: 15px auto;" v-for="(item,index) in listQRcode">
+                <md-card md-with-hover >
+                   
+                   
+                    <div class="md-subhead num-reserve">#{{item.ID_code}}</div>
+                   
+                    <div class="button-action">
+                            <md-button class="md-icon-button" v-on:click.native="deleteCode(item.ID_code,index)">
+                                <md-icon style="opacity: .51">clear</md-icon>
+                            </md-button>
+                    </div>
+                    
+    <!--
+                    <md-card-header class="text-center">
+                        <div class="md-title">Бонус-коды</div>
+                        <md-icon class="md-warn">sms_failed</md-icon>
+                    </md-card-header>
+    -->
 
-            <md-card-content>
+                    <md-card-content class="text-center">
+<!--                        <input type="text" v-model="inpQR">-->
+                        <div class="pictureQRCode" :id="'QR'+item.ID_code" v-html="createCode(item.QRcode,false)" style="margin: auto;"></div>
+                        {{item.QRcode}}
+                    </md-card-content>
 
-            </md-card-content>
+                    <div class="md-card-actions-flex"> 
+                        <div>
+                            Кол-во: 
+                            <span v-bind:class="{ AmountMore: item.Amount >= 10, Amount10: item.Amount <= 10 && item.Amount != 0, Amount0: item.Amount == 0}">{{item.Amount}}</span> 
+                        </div>
+                        <div>
+                            Бонус: 
+                            <span class="custom-text-14">{{item.Bonus}}</span>
+                        </div>
+                        <md-button class="md-icon-button" v-on:click.native="">
+                            <md-icon style="opacity: .51">print</md-icon>
+                        </md-button>
+<!--                        <md-button class="md-raised md-primary" v-on:click.native="createCode">Применить</md-button>-->
+                    </div>
+                </md-card>
+            </div>
+        </div>
+    </div>  
+        
+    <md-button class="md-fab md-fab-bottom-right" id="addBonus" @click.native="openDialog('addBonusCode')">
+        <md-icon>add</md-icon>
+    </md-button>  
+        <md-dialog md-open-from="#addBonus" md-close-to="#addBonus" ref="addBonusCode" class="dialog-add">
+          <md-dialog-title>Новый бонус-код</md-dialog-title>
 
-            <md-card-actions>
+            <md-dialog-content>
+                <div id="newQR"></div>
+               
+               
+                <md-input-container>
+                    <label>Код</label>
+                    <md-input v-model="newQRcode.inpQR"></md-input>
+                    <md-button class="md-icon-button" v-on:click.native="newQRcode.inpQR = str_rand()">
+                        <md-icon style="opacity: .51">autorenew</md-icon>
+                    </md-button>
+                </md-input-container>  
+                <md-input-container>
+                    <label>Размер бонуса</label>
+                    <md-input type="number" v-model="newQRcode.bonus"></md-input>
+                </md-input-container>                    
+                <md-input-container>
+                    <label>Количество кодов</label>
+                    <md-input type="number" v-model="newQRcode.amount"></md-input>
+                </md-input-container>    
+            </md-dialog-content>
+            
+        <md-button class="md-raised md-primary" v-on:click.native="createCode(newQRcode.inpQR,true)">Создать</md-button>
+         
+         
+          <md-dialog-actions>
+            <md-button class="md-primary" @click.native="closeDialog('addBonusCode')">Cancel</md-button>
+            <md-button class="md-primary" @click.native="createDish(); closeDialog('addBonusCode'); ">Ok</md-button>
+          </md-dialog-actions>
+        </md-dialog>   
+<!--
+            <md-card md-with-hover>
+                <md-card-header class="text-center">
+                    <div class="md-title">Бонус-коды</div>
+                    <md-icon class="md-warn">sms_failed</md-icon>
+                </md-card-header>
 
-            </md-card-actions>
-        </md-card>
+                <md-card-content>
+                    <input type="text" v-model="inpQR">
+                    
+                    <div id="picQRCode"></div>
+                </md-card-content>
+
+                <md-card-actions>
+                    <md-button class="md-raised md-primary" v-on:click.native="createCode">Применить</md-button>
+                </md-card-actions>
+            </md-card>
+-->
     </div> 
     <div class="editLayer anim-fadeIn" v-if="layers.editor">
     
@@ -125,7 +211,9 @@
 
     <md-dialog-content>
         <div class="block-ava-inp">
-            <input type="file" accept="image/jpeg,image/png,image/bmp" name="upload" id="loadpicture" v-on:change="previewImg()" style="display: none;">
+            <form action="" id="formImg">
+                <input type="file" accept="image/jpeg,image/png,image/bmp" name="upload" id="loadpicture" v-on:change="previewImg()" style="display: none;">
+            </form>
             <label for="loadpicture" class="inp-imgload">
                 <md-avatar class="md-large md-big-newD text-center" id="av">
         <!--            <img src="img/food/id_default.jpg" alt="People">-->
@@ -710,6 +798,7 @@
     <script type="text/javascript" src="vue-material/vue-material.js"></script>
     <script type="text/javascript" src="vue/vue-resource.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/GenerateQR.js"></script>
 
     <script type="text/javascript" src="js/adminPanel.js"></script>
 

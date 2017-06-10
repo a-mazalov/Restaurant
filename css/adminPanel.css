@@ -114,6 +114,13 @@
     min-width: 320px;
     margin: 15px;
 }
+.QRLayer .md-card {
+    width: 300px;
+    min-width: 260px; 
+    margin: auto; 
+}
+
+
 .md-card .md-card-content:last-child {
     padding-bottom: 16px; 
 }
@@ -164,6 +171,7 @@
     margin-left: 15px;
     margin-bottom: -10px;
 }
+
 .reserveLayer .md-card .md-avatar {
     margin: 0;
 }
@@ -267,6 +275,11 @@
 }
 
 .reserveLayer {
+/*    overflow: auto;*/
+    height: 100%;
+    width: 100%;
+}
+.QRLayer {
 /*    overflow: auto;*/
     height: 100%;
     width: 100%;
@@ -421,4 +434,80 @@ input{
 .reserveLayer .accept-reserve{
     padding: 5px;
     margin-top: 15px;
+}
+
+.qrTrue, .qrFalse {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin: 0;
+}
+
+.qrTrue {
+    background-color: black;
+}
+
+.pictureQRCode {
+    line-height: 0px;
+    font-size: 0px;
+    text-align: center;
+}
+.qr-fluid {
+/*
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+*/
+}
+.QRLayer .md-card {
+    max-width: 300px;
+    min-width: 260px; 
+    max-height: inherit;
+    margin: auto; 
+}
+/*
+.row {
+
+    column-count: 3;
+    column-width: 200px;
+    column-gap: normal;
+}*/
+.equal, .equal > div[class*='col-'] {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 0 auto;
+}
+
+.Amount0 {
+    color: #ff1800;
+    font-weight: 700;
+    font-size: 14px;
+}
+.Amount10 {
+    color: #e3af00;
+    font-weight: 700;
+    font-size: 14px;
+}
+.AmountMore {
+    color: #2ecc71;
+    font-weight: 700;
+    font-size: 14px;
+}
+.QRLayer .md-card .num-reserve {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: -10px;
+}
+#newQR{
+    line-height: 0px;
+    font-size: 0px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid black;
+    width: 200px;
+    height: 190px;
+    margin: auto;
 }
