@@ -48,10 +48,12 @@
                                         При первом входе в приложение требуется интернет соединение, а также при оформлении заказов.
                                     </div>
                                 </md-card-header>
+<!--
                                 <md-button class="md-raised md-primary text-trans-none" v-on:click.native="netcheck();">
                                 Обновить
                                 <md-icon>autorenew</md-icon>
                                 </md-button>
+-->
                             </md-card>
                         </div>
                         <div class="welcom-block vertical-align" v-show="windowBlock.welcom">
@@ -128,7 +130,7 @@
                                     <md-input-container>
                                         <md-icon>account_circle</md-icon>
                                         <label>Фамилия</label>
-                                        <md-input type="text" placeholder="Фамилия" v-model.trim="dataRegister.lastName" required></md-input>
+                                        <md-input type="text" placeholder="Фамилия" v-model="dataRegister.lastName" required></md-input>
                                     </md-input-container>
                                     <md-input-container>
                                         <md-icon>phone</md-icon>
@@ -138,12 +140,12 @@
                                     <md-input-container md-has-password>
                                         <md-icon>lock</md-icon>
                                         <label>Пароль</label>
-                                        <md-input type="password" placeholder="Придумайте пароль" ></md-input>
+                                        <md-input type="password" placeholder="Придумайте пароль" v-model.trim="dataRegister.password1"></md-input>
                                     </md-input-container>
                                     <md-input-container>
                                         <md-icon>lock</md-icon>
                                         <label>Пароль</label>
-                                        <md-input type="password" placeholder="Подтвердите пароль" v-model.trim="dataRegister.password" required></md-input>
+                                        <md-input type="password" placeholder="Подтвердите пароль" v-model.trim="dataRegister.password2" required></md-input>
                                     </md-input-container>
                                 </md-card-content>
 

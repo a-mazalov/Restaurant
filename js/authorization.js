@@ -5,7 +5,6 @@ var Account = new Vue({
         windowBlock: {
             network: false,
             welcom: false,
-            welcom: true,
             register: false,
             logim: false
         },
@@ -23,7 +22,8 @@ var Account = new Vue({
             name: '',
             lastName: '',
             telephone: '',
-            password: ''
+            password1: '',
+            password2: ''
         },    
         dataAccount: {},
         snackMessage: ""
@@ -31,35 +31,70 @@ var Account = new Vue({
     methods: {
         loginIn: function(){
             
-            let validInp = validate(Account.dataLogin);
+            if(checkConnection()){
             
-            
-            if(validInp["Valid"]){
+                let validInp = validate(Account.dataLogin);
 
-                this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
-                if(response.data != " " ){
-                    this.dataAccount = JSON.parse(response.data);
-                    Local.Set("Account",this.dataAccount);
-        //                this.showSnackBar("Вход успешен");
-                    window.location = "index.html";
+
+                if(validInp["Valid"]){
+
+                    this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
+                    if(response.data != " " ){
+                        this.dataAccount = JSON.parse(response.data);
+                        Local.Set("Account",this.dataAccount);
+            //                this.showSnackBar("Вход успешен");
+                        window.location = "index.html";
+                    }else{
+                        this.showSnackBar("Неверный телефон или пароль!");
+                    }    
+                    }, function (error) {
+                        this.showSnackBar("Нет соединения");
+                        console.log("Ошибка запроса: ");
+                    });
                 }else{
-                    this.showSnackBar("Неверный телефон или пароль!");
-                }    
-                }, function (error) {
-                    this.showSnackBar("Нет соединения");
-                    console.log("Ошибка запроса: ");
-                });
+                    this.showSnackBar("Неверное поле: "+validInp[0]); 
+                }
+                
             }else{
-                this.showSnackBar("Неверное поле: "+validInp[0]); 
-            }
+                this.showSnackBar("Нет интернет соединения!");
+            } 
         },        
         registr: function(){
-            let validInp = validate(Account.dataRegister);
-            if(validInp["Valid"]){
-                this.$http.get(this.queryPointRegistr,  { params: this.dataRegister } ).then(function(response){ });
+            
+            if(checkConnection()){
+
+                let validInp = validate(Account.dataRegister);
+                if(validInp["Valid"]){
+
+                    if(this.dataRegister.password1 == this.dataRegister.password2){
+                        this.showSnackBar("Регистрация...");
+                        this.$http.get(this.queryPointRegistr,  { params: this.dataRegister } ).then(function(response){ 
+                            let IDnewAcc = response.data;
+                            
+                Local.Set("Account",{"Telephone":Account.dataRegister.telephone,
+                                     "Name":Account.dataRegister.name,
+                                     "LastName":Account.dataRegister.lastName,
+                                     "Bonus":0,
+                                     "ID_user":IDnewAcc.trim()
+                                });
+                        
+                        
+                        window.location.href="index.html";
+                        }, function (error) {
+                            this.showSnackBar("Ошибка запроса");
+                            console.log(error);
+                        });
+                        
+                    }else{
+                        this.showSnackBar("Пароли не сопадают");
+                    }
+                }else{
+                    this.showSnackBar("Неверное поле: "+validInp[0]); 
+                }
+            
             }else{
-                this.showSnackBar("Неверное поле: "+validInp[0]); 
-            }
+                this.showSnackBar("Нет интернет соединения!");
+            }    
         },
         showSnackBar(Message) {
           this.snackMessage = Message;    
@@ -92,3 +127,19 @@ var Account = new Vue({
 //       }
     }
 });
+
+
+//var networkStatus = false;
+document.addEventListener("online", onOnline, false);
+
+function onOnline() {
+//    networkStatus = true;
+    Account.networkCheck(true);
+}
+
+document.addEventListener("offline", onOffline, false);
+
+function onOffline() {
+//    networkStatus = false;
+    Account.networkCheck(false);
+}

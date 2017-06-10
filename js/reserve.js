@@ -30,6 +30,7 @@ var ReserveCard = new Vue({
         showBlock: false,
         tokenMessage: '',
         snackMessage: "",
+        netStatus: false,
         submitted: false
         
   },
@@ -56,6 +57,9 @@ var ReserveCard = new Vue({
 //            
 //            console.log(Account);
 //            console.log(Account["ID_user"]);
+            
+        if(checkConnection()){
+
             let validInp = validate(ReserveCard.reserveObj);
             console.log(validInp);
             if(validInp["Valid"]){
@@ -87,17 +91,17 @@ var ReserveCard = new Vue({
 
                     console.log(response.data);
     //                alert("Отправлено");
-                    this.reserveObj = {
-                        date: '',
-                        time: '',
-                        name: '',
-                        lastName: '',
-                        telephone: '',
-                        numguest: 1,
-                        notes: '',
-                        useBonus: false,
-                        bonus: 0
-                    }
+//                    this.reserveObj = {
+//                        date: '',
+//                        time: '',
+//                        name: '',
+//                        lastName: '',
+//                        telephone: '',
+//                        numguest: 1,
+//                        notes: '',
+//                        useBonus: false,
+//                        bonus: 0
+//                    }
 
     //                let Account = Local.Get("Account");
     //                Account.Bonus = 0;
@@ -107,11 +111,16 @@ var ReserveCard = new Vue({
                     console.log("Ошибка запроса: " + error.data);
                     this.showSnackBar("Ошибка при выполнении операции");
                 });
-                this.submitted = true;
+//                this.submitted = true;
                 
             }else{
                 this.showSnackBar("Неверное поле: "+validInp[0]); 
             }
+            
+        }else{
+            this.showSnackBar("Нет интернет соединения!");
+        }
+            
         },
         GetOrders: function(){
 //            this.ListOrders = Local.Get("Orders"); 
@@ -201,7 +210,7 @@ var ReserveCard = new Vue({
         }
     },
     created: function () {
-//        this.InitForm();
+        this.InitForm();
     }
 })
 
@@ -213,6 +222,20 @@ function getTokenC(){
     });
 }
 
+document.addEventListener("online", onOnlineR, false);
+
+function onOnlineR() {
+    ReserveCard.netStatus = true;
+}
+
+document.addEventListener("offline", onOfflineR, false);
+
+function onOfflineR() {
+    ReserveCard.netStatus = false;
+}
+
+
+
 flatpickr(".inp-date", {
     enableTime: false,
     minDate: "today",
@@ -223,21 +246,4 @@ flatpickr(".inp-time", {
     enableTime: true,
     time_24hr: true,
 });
-
-//$(".inp-date").flatpickr({
-//    enableTime: false
-//});
-//
-//$(".inp-time").flatpickr({
-//    noCalendar: true,
-//    enableTime: true,
-//    time_24hr: true,
-//});
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
 

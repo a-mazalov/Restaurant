@@ -163,24 +163,19 @@ function isEmpty(obj) {
 }
 
 
-var networkStatus = false;
-document.addEventListener("online", onOnline, false);
 
-function onOnline() {
-    networkStatus = true;
-    Account.networkCheck(true);
-}
-
-document.addEventListener("offline", onOffline, false);
-
-function onOffline() {
-    networkStatus = false;
-    Account.networkCheck(false);
-}
 
 function checkConnection() {
     var networkState = navigator.connection.type;
+    if(networkState != "none"){
+       return true;
+    }else{
+        return false;
+    }
 }
+
+
+
 
 class Snack{
     constructor(msg){
@@ -204,7 +199,9 @@ function validate(obj){
             case      "name":  VRegExp = /([А-я]{3,16}$)|(^[A-z]{3,16}$)/;            break;         
             case  "lastName":  VRegExp = /([А-я]{3,22}$)|(^[A-z]{3,22}$)/;            break;        
             case "telephone":  VRegExp = /(^[+]{1}[0-9]{12}$)|(^[0-9]{12}$)|(^[0-9]{9}$)|(^[0-9]{7}$)/;break;        
-            case  "password":  VRegExp = /^[0-9А-яA-z-!@#$%^&*]{6,16}$/; break;        
+            case  "password":  VRegExp = /^[0-9А-яA-z-!@#$%^&*]{3,16}$/; break;        
+            case  "password1":  VRegExp = /^[0-9А-яA-z-!@#$%^&*]{3,16}$/; break;        
+            case  "password2":  VRegExp = /^[0-9А-яA-z-!@#$%^&*]{3,16}$/; break;        
             case      "date":  VRegExp = /(20)([1-9])\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)/; break;        
             case      "time":  VRegExp = /(2[0-3]|[0-1]\d):[0-5]\d/; break;        
             case  "numguest":  VRegExp = /[1-8]/; break;        
