@@ -134,13 +134,12 @@ $MenuCheck->execute();
                 
         $DataCode = $DataGET["item"];
         
-        $queryCreateBonus = $pdo->prepare("INSERT INTO `Restaurant`.`QRcodes_table` (`ID_code`, `QRcode`, `Bonus`, `Type`, `Amount`) VALUES (NULL, 'ваыфв', '1.55', NULL, '10')");
+        $queryCreateBonus = $pdo->prepare("INSERT INTO `Restaurant`.`QRcodes_table` (`ID_code`, `QRcode`, `Bonus`, `Type`, `Amount`) VALUES (NULL, :inpQR, :bonus, NULL, :amount)");
                 
         $queryCreateBonus->execute(array(
-            'title_dish' => $DataCode["Title_dish"],
-            'caption_dish' => $DataCode["Caption_dish"],
-            'price_dish' => $DataCode["Price_dish"],
-            'category_dish' => $DataCode["Category_dish"]
+            'inpQR' => $DataCode["inpQR"],
+            'bonus' => $DataCode["bonus"],
+            'amount' => $DataCode["amount"]
 //            'available' => $ArrayDish["Available"],
         ));
         

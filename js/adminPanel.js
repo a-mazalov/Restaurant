@@ -409,7 +409,7 @@ var adminPanel = new Vue({
                 this.showSnackBar("Ошибка при загрузке списка кодов");
             });     
         },
-        createCode: function(codeStr,newBonus){
+        generateCode: function(codeStr,newBonus){
 //            var text = adminPanel.inpQR;
 //            var text = "Повелся, ты не оч";
   //do work
@@ -467,6 +467,16 @@ var adminPanel = new Vue({
 //                $("#pictureQRCode").html(rst);
             
             
+        },
+        createCodeDB: function(){
+            let infoSend = {"item":this.newQRcode, "action": "createBonusCode"};
+                      
+            this.$http.get(this.servers.actionsURL,  { params: infoSend } ).then(function(response){
+                console.log(response.data);
+            }, function (error) {
+                console.log("Ошибка запроса: " + error.data);
+                this.showSnackBar("Ошибка при выполнении операции");
+            });    
         },
         deleteCode: function(ID_code,index){
             

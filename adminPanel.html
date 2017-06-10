@@ -91,7 +91,9 @@
     </md-card>
     </div>    
     <div class="QRLayer anim-fadeIn" v-if="layers.qr">
-   
+    <md-button class="md-fab md-fab-bottom-right" id="addBonus" @click.native="openDialog('addBonusCode')">
+        <md-icon>add</md-icon>
+    </md-button>
     <div class="container-fluid qr-fluid border" style="" >
         <div class="row">
             <div class="col-md-4 border" style="margin: 15px auto;" v-for="(item,index) in listQRcode">
@@ -115,7 +117,7 @@
 
                     <md-card-content class="text-center">
 <!--                        <input type="text" v-model="inpQR">-->
-                        <div class="pictureQRCode" :id="'QR'+item.ID_code" v-html="createCode(item.QRcode,false)" style="margin: auto;"></div>
+                        <div class="pictureQRCode" :id="'QR'+item.ID_code" v-html="generateCode(item.QRcode,false)" style="margin: auto;"></div>
                         {{item.QRcode}}
                     </md-card-content>
 
@@ -131,16 +133,14 @@
                         <md-button class="md-icon-button" v-on:click.native="">
                             <md-icon style="opacity: .51">print</md-icon>
                         </md-button>
-<!--                        <md-button class="md-raised md-primary" v-on:click.native="createCode">Применить</md-button>-->
+<!--                        <md-button class="md-raised md-primary" v-on:click.native="generateCode">Применить</md-button>-->
                     </div>
                 </md-card>
             </div>
         </div>
     </div>  
         
-    <md-button class="md-fab md-fab-bottom-right" id="addBonus" @click.native="openDialog('addBonusCode')">
-        <md-icon>add</md-icon>
-    </md-button>  
+  
         <md-dialog md-open-from="#addBonus" md-close-to="#addBonus" ref="addBonusCode" class="dialog-add">
           <md-dialog-title>Новый бонус-код</md-dialog-title>
 
@@ -165,12 +165,12 @@
                 </md-input-container>    
             </md-dialog-content>
             
-        <md-button class="md-raised md-primary" v-on:click.native="createCode(newQRcode.inpQR,true)">Создать</md-button>
+        <md-button class="md-raised md-primary" v-on:click.native="generateCode(newQRcode.inpQR,true)">Создать</md-button>
          
          
           <md-dialog-actions>
             <md-button class="md-primary" @click.native="closeDialog('addBonusCode')">Cancel</md-button>
-            <md-button class="md-primary" @click.native="createDish(); closeDialog('addBonusCode'); ">Ok</md-button>
+            <md-button class="md-primary" @click.native="createCodeDB(); closeDialog('addBonusCode'); ">Ok</md-button>
           </md-dialog-actions>
         </md-dialog>   
 <!--
@@ -187,7 +187,7 @@
                 </md-card-content>
 
                 <md-card-actions>
-                    <md-button class="md-raised md-primary" v-on:click.native="createCode">Применить</md-button>
+                    <md-button class="md-raised md-primary" v-on:click.native="generateCode">Применить</md-button>
                 </md-card-actions>
             </md-card>
 -->
