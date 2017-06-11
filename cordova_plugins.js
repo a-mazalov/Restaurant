@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "id": "cordova-plugin-qrscanner.QRScanner",
-        "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
-        "pluginId": "cordova-plugin-qrscanner",
-        "clobbers": [
-            "QRScanner"
-        ]
-    },
-    {
         "id": "cordova-plugin-splashscreen.SplashScreen",
         "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
         "pluginId": "cordova-plugin-splashscreen",
@@ -75,21 +67,29 @@ module.exports = [
         "clobbers": [
             "Connection"
         ]
+    },
+    {
+        "id": "cordova-plugin-qrscanner.QRScanner",
+        "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
+        "pluginId": "cordova-plugin-qrscanner",
+        "clobbers": [
+            "QRScanner"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "cordova-plugin-whitelist": "1.3.1",
-    "cordova-plugin-compat": "1.1.0",
-    "cordova-plugin-qrscanner": "2.5.0",
     "cordova-plugin-splashscreen": "4.0.2",
     "cordova-plugin-crosswalk-webview": "2.3.0",
     "cordova-plugin-fcm": "2.1.1",
     "cordova-plugin-device": "1.1.6",
     "cordova-plugin-app-event": "1.2.0",
     "cordova-plugin-local-notifications-mm": "1.0.5",
-    "cordova-plugin-network-information": "1.3.3"
+    "cordova-plugin-network-information": "1.3.3",
+    "cordova-plugin-compat": "1.1.0",
+    "cordova-plugin-qrscanner": "2.5.0"
 };
 // BOTTOM OF METADATA
 });

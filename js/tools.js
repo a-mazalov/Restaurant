@@ -147,6 +147,7 @@ function checkBonus(account_id,handldata){
 
     Vue.http.get(actionsURL,  { params: infoSend } ).then(function(response){
         console.log("Выполнено"); 
+        console.log(response.data); 
         let responseData = JSON.parse(response.data);
         responseData = responseData > 0 ? responseData : 0;
         handldata(responseData);
@@ -206,7 +207,7 @@ function validate(obj){
             case      "time":  VRegExp = /(2[0-3]|[0-1]\d):[0-5]\d/; break;        
             case  "numguest":  VRegExp = /[1-8]/; break;        
             case  "useBonus":  VRegExp = /0|1|true|false/; break;        
-            case     "bonus":  VRegExp = /^[0-9]{1,2}([,0-9]{0,3})?([0-9]{0,2})?$/; break;        
+            case     "bonus":  VRegExp = /[.,0-9]/; break;        
             case     "notes":  VRegExp = /^(?!.*#\^&.*\(\)\{\}\\\/.*$)([A-zА-я0-9!@.,\s]{0,60})$/; break;        
         }
 
@@ -218,7 +219,6 @@ function validate(obj){
         
         if(!valid){
             Verror.push(outMsg(key));
-            
         }
     }
     if(Verror && Verror.length == 0){

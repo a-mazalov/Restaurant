@@ -27,7 +27,7 @@ var Account = new Vue({
         deferDisabled: true
     },
     methods: {
-        showSnackBar(Message, funcBtn, vs) {
+            showSnackBar(Message, funcBtn, vs) {
                 this.btnSnack = false;
                 this.snackMessage = Message;
                 this.$refs.snackbar.open();
@@ -35,14 +35,17 @@ var Account = new Vue({
                 this.btnSnack = vs;
             },
             getInfAccount: function () {
-                this.infoAccount = Local.Get("Account");
-                console.log(this.infoAccount);
-                
-                
-                checkBonus(this.infoAccount.ID_user,function(output){
-                    this.infoAccount.Bonus = output;
+                let infAcc = Local.Get("Account");
+                console.log(infAcc);
+//                
+//                
+                checkBonus(infAcc.ID_user,function(output){
+                    output = output != undefined ? output : 0;
+                    infAcc.Bonus = output;
+                    
+                    Account.infoAccount = infAcc;
                     this.$forceUpdate;
-                    Local.Set("Account", this.infoAccount);
+                    Local.Set("Account", infAcc);
                 });
             },
             accFavorite() {

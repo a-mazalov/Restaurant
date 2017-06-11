@@ -37,7 +37,7 @@ var Account = new Vue({
 
 
                 if(validInp["Valid"]){
-
+                    this.showSnackBar("Вход...");
                     this.$http.get(this.queryPointLogin,  { params: this.dataLogin } ).then(function(response){
                     if(response.data != " " ){
                         this.dataAccount = JSON.parse(response.data);
@@ -79,7 +79,7 @@ var Account = new Vue({
                                 });
                         
                         
-                        window.location.href="index.html";
+                            window.location.href="index.html";
                         }, function (error) {
                             this.showSnackBar("Ошибка запроса");
                             console.log(error);

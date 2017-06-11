@@ -91,17 +91,17 @@ var ReserveCard = new Vue({
 
                     console.log(response.data);
     //                alert("Отправлено");
-//                    this.reserveObj = {
-//                        date: '',
-//                        time: '',
-//                        name: '',
-//                        lastName: '',
-//                        telephone: '',
-//                        numguest: 1,
-//                        notes: '',
-//                        useBonus: false,
-//                        bonus: 0
-//                    }
+                    this.reserveObj = {
+                        date: '',
+                        time: '',
+                        name: '',
+                        lastName: '',
+                        telephone: '',
+                        numguest: 1,
+                        notes: '',
+                        useBonus: false,
+                        bonus: 0
+                    }
 
     //                let Account = Local.Get("Account");
     //                Account.Bonus = 0;
@@ -111,7 +111,7 @@ var ReserveCard = new Vue({
                     console.log("Ошибка запроса: " + error.data);
                     this.showSnackBar("Ошибка при выполнении операции");
                 });
-//                this.submitted = true;
+                this.submitted = true;
                 
             }else{
                 this.showSnackBar("Неверное поле: "+validInp[0]); 
