@@ -19,7 +19,7 @@ switch($DataGET["action"]){
     
            
     case "acceptReserve":    
-        $queryDelete = $pdo->prepare('UPDATE `Restaurant`.`Reserve_table` SET `Status` = "accept" WHERE `reserve_table`.`ID_reserve` = :id_reserve');  
+        $queryDelete = $pdo->prepare('UPDATE `Reserve_table` SET `Status` = "accept" WHERE `reserve_table`.`ID_reserve` = :id_reserve');  
         $queryDelete->execute(array(
             'id_reserve' => $DataGET["item"]["ID_reserve"],
         ));
@@ -39,7 +39,7 @@ switch($DataGET["action"]){
         $chgDate = date('Y-m-d H:i:s');
         
         
-$queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` = :title_dish, `Caption_dish` = :caption_dish, `Price_dish` = :price_dish, `Available` = IF(:available = 'true', 1, 0), `DateСhange` = '$chgDate' WHERE `ID_dish` = :id_dish");    
+$queryUpdate = $pdo->prepare("UPDATE `Menu_table` SET `Title_dish` = :title_dish, `Caption_dish` = :caption_dish, `Price_dish` = :price_dish, `Available` = IF(:available = 'true', 1, 0), `DateСhange` = '$chgDate' WHERE `ID_dish` = :id_dish");    
             for($i = 0, $arr_l = count($ArrayDish); $i<$arr_l; $i++){
                 $queryUpdate->execute(array(
                     'title_dish' => $ArrayDish[$i]["Title_dish"],
@@ -63,7 +63,15 @@ $queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` 
         $imgSwitch = json_decode($imgSwitch);
         if($imgSwitch){
 //            $querylastID = $pdo->query('SELECT max(`ID_dish`) as ID FROM Menu_table');
-            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'Restaurant' AND TABLE_NAME = 'Menu_table'");
+            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'user2027666_RestDB' AND TABLE_NAME = 'Menu_table'");
+            
+            ///////////////
+            
+                //ИЗ-ЗА СМЕНЫ СЕРВЕРА НЕОБХОДИМО ИЗМЕНИТЬ БД ДЛЯ ПОЛУЧЕНИЯ ПОСЛЕДНЕГО АВТОИНКРЕМЕНТА
+            
+            ///////////////
+            
+//            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'Restaurant' AND TABLE_NAME = 'Menu_table'");
             $querylastID = $querylastID->fetch();
 //            $lastID = $querylastID["ID"]+1;
             $lastID = $querylastID["AUTO_INCREMENT"];
@@ -76,7 +84,7 @@ $queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` 
 //            $ArrayDish["ImagePath"] = "img/food/id_default.jpg";
 //        var_dump($ArrayNewDish);
         
-        $queryNewDish = $pdo->prepare('INSERT INTO Restaurant.Menu_table (ID_dish, Title_dish, Caption_dish, Price_dish, Category_dish, ImagePath, Available) VALUES (NULL,:title_dish, :caption_dish, :price_dish, :category_dish, :imgPath, "1")');
+        $queryNewDish = $pdo->prepare('INSERT INTO Menu_table (ID_dish, Title_dish, Caption_dish, Price_dish, Category_dish, ImagePath, Available) VALUES (NULL,:title_dish, :caption_dish, :price_dish, :category_dish, :imgPath, "1")');
                 
         $queryNewDish->execute(array(
             'title_dish' => $ArrayNewDish["Title_dish"],
@@ -95,7 +103,7 @@ $queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` 
         
         $ArrayDelDish = $DataGET["item"];
         
-        $queryDelDish = $pdo->prepare('DELETE FROM `Restaurant`.`Menu_table` WHERE `Menu_table`.`ID_dish` = :id_dish');  
+        $queryDelDish = $pdo->prepare('DELETE FROM `Menu_table` WHERE `Menu_table`.`ID_dish` = :id_dish');  
         $queryDelDish->execute(array(
             'id_dish' => $ArrayDelDish
         ));
@@ -137,7 +145,7 @@ $MenuCheck->execute();
                 
         $DataCode = $DataGET["item"];
         
-        $queryCreateBonus = $pdo->prepare("INSERT INTO `Restaurant`.`QRcodes_table` (`ID_code`, `QRcode`, `Bonus`, `Type`, `Amount`) VALUES (NULL, :inpQR, :bonus, NULL, :amount)");
+        $queryCreateBonus = $pdo->prepare("INSERT INTO `QRcodes_table` (`ID_code`, `QRcode`, `Bonus`, `Type`, `Amount`) VALUES (NULL, :inpQR, :bonus, NULL, :amount)");
                 
         $queryCreateBonus->execute(array(
             'inpQR' => $DataCode["inpQR"],
@@ -151,7 +159,7 @@ $MenuCheck->execute();
         
         $ID_BonusCode = $DataGET["item"];
         var_dump($ID_BonusCode);
-        $queryDelBonus = $pdo->prepare("DELETE FROM `Restaurant`.`QRcodes_table` WHERE `qrcodes_table`.`ID_code` = :id_code");  
+        $queryDelBonus = $pdo->prepare("DELETE FROM `QRcodes_table` WHERE `qrcodes_table`.`ID_code` = :id_code");  
         $queryDelBonus->execute(array(
             'id_code' => $ID_BonusCode
         ));

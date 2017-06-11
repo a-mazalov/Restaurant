@@ -121,7 +121,12 @@ function can_upload($file){
 
     function uploadImg(){
         global $messages;
-        $path = 'C:/OpenServer/domains/WorkProject/www/img/food/';
+//        $path = 'C:/OpenServer/domains/WorkProject/www/img/food/';
+        
+        //СЕРВЕР
+        $path = 'http://home/user2027666/www/restaurant.atservers.net/companyLogo/img/food/';
+        
+        
         if(is_uploaded_file($_FILES["file"]["tmp_name"]))
         {
             move_uploaded_file($_FILES["file"]["tmp_name"], $path.$_FILES["file"]["name"]);
