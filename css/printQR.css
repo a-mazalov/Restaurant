@@ -39,7 +39,7 @@ body{
 .Logo {
     height: 100px;
     width: 100%;
-    background: url(/img/logo-head-black.png) no-repeat 50% 50%;
+    background: url(../img/logo-head-black.png) no-repeat 50% 50%;
     background-size: contain;
     margin-bottom: 200px;
 }

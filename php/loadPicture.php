@@ -100,9 +100,8 @@ function can_upload($file){
 
     // разбиваем имя файла по точке и получаем массив
     $getMime = explode('.', $file['name']);
-    // нас интересует последний элемент массива - расширение
     $mime = strtolower(end($getMime));
-    // объявим массив допустимых расширений
+    // массив допустимых расширений
     $types = array('jpg', 'png', 'bmp', 'jpeg');
     $file_mime_types = array('image/png', 'image/jpeg', 'image/bmp');    
     

@@ -238,10 +238,20 @@
             <label>Доп. инфо</label>
             <md-input v-model="newDish.Caption_dish"></md-input>
         </md-input-container>         
+<!--
         <md-input-container>
             <label>Категория</label>
             <md-input v-model="newDish.Category_dish"></md-input>
         </md-input-container>        
+-->
+<md-input-container>
+    <label for="country">Country</label>
+    <md-select name="category" id="caregory" v-model="newDish.Category_dish">
+        <md-option value="Hot_dishes">Горячее</md-option>
+        <md-option value="Dessert">Дессерты</md-option>
+        <md-option value="Soup">Суп</md-option>
+    </md-select>
+</md-input-container>
         <md-input-container>
             <label>Стоимость</label>
             <md-input type="number" v-model="newDish.Price_dish" min="0"></md-input>
@@ -266,143 +276,143 @@
     <md-tabs class="menu-cards md-warn"  id="tabs" md-centered md-fixed v-cloak>
        
         <md-tab md-label="Горячее" md-icon="receipt" class="icon-hot">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="errorMenu">
-                    <md-card>
-                        <h4>Что-то пошло не так..</h4>
-                    </md-card>
-                </div>
-                
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" v-for="(post,index) in listMenu.Hot_dishes">
-                
-                <md-card v-bind:class="{ disabledDishAdmin: !post.Available }">
-                <div class="button-action" v-show="editMode">
-                        <md-switch v-model="post.Available" v-on:change="post['edit']= true" name="available" class="md-warn" ></md-switch>
-                        <md-button class="md-icon-button action-group" v-on:click.native="deleteDish(post,index)">
-                            <md-icon style="opacity: .51">clear</md-icon>
-                        </md-button>
-                </div>
-<!--                    v-on:click.native="$refs['menuActionE'][index].close()" onclick="adminPanel.listMenu.Hot_dishes[2]['edit'] = true; ">-->
-                    <md-card-header>
-                        <md-avatar class="md-big">
-                           
-                            <img v-bind:src="post.ImagePath">
-                        </md-avatar>
-                        <md-card-header-text>
-                    <div class="md-title">
-<!--                        <br>-->
-                        <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Title_dish" :disabled="!editMode">
-                    </div>
-                    <div class="md-subhead">
-<!--                        {{ post.Caption_dish }} <br>-->
-                        <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Caption_dish" :disabled="!editMode">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="errorMenu">
+                        <md-card>
+                            <h4>Что-то пошло не так..</h4>
+                        </md-card>
                     </div>
 
-                        </md-card-header-text>
-                        <div class="price">
-                           <input type="number" class="text-center" v-on:change="post['edit']= true" v-model="post.Price_dish" :disabled="!editMode">
-<!--                            <{{ post.Price_dish }}р</span>-->
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" v-for="(post,index) in listMenu.Hot_dishes">
+
+                    <md-card v-bind:class="{ disabledDishAdmin: !post.Available }">
+                    <div class="button-action" v-show="editMode">
+                            <md-switch v-model="post.Available" v-on:change="post['edit']= true" name="available" class="md-warn" ></md-switch>
+                            <md-button class="md-icon-button action-group" v-on:click.native="deleteDish(post,index)">
+                                <md-icon style="opacity: .51">clear</md-icon>
+                            </md-button>
+                    </div>
+    <!--                    v-on:click.native="$refs['menuActionE'][index].close()" onclick="adminPanel.listMenu.Hot_dishes[2]['edit'] = true; ">-->
+                        <md-card-header>
+                            <md-avatar class="md-big">
+
+                                <img v-bind:src="post.ImagePath">
+                            </md-avatar>
+                            <md-card-header-text>
+                        <div class="md-title">
+    <!--                        <br>-->
+                            <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Title_dish" :disabled="!editMode">
                         </div>
-                    </md-card-header>
-
-                <md-ink-ripple />
-                </md-card>
-                 <div class="clearfix"></div>
-                </div>
-            </div>
-      </md-tab>
-      <md-tab md-label="Дессерты" md-icon="receipt" class="icon-hot">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="errorMenu">
-                    <md-card>
-                        <h4>Что-то пошло не так..</h4>
-                    </md-card>
-                </div>
-                
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="(post,index) in listMenu.Dessert">
-                
-                <md-card v-bind:class="{ disabledDishAdmin: !post.Available }">
-                <div class="button-action" v-show="editMode">
-                        <md-switch v-model="post.Available" v-on:change="post['edit']= true" class="md-warn" ></md-switch>
-                        <md-button class="md-icon-button action-group">
-                            <md-icon style="opacity: .51">clear</md-icon>
-                        </md-button>
-                </div>
-<!--                    v-on:click.native="$refs['menuActionE'][index].close()" onclick="adminPanel.listMenu.Hot_dishes[2]['edit'] = true; ">-->
-                    <md-card-header>
-                        <md-avatar class="md-big">
-                           
-                            <img v-bind:src="post.ImagePath">
-                        </md-avatar>
-                        <md-card-header-text>
-                    <div class="md-title">
-<!--                        <br>-->
-                        <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Title_dish" :disabled="!editMode">
-                    </div>
-                    <div class="md-subhead">
-<!--                        {{ post.Caption_dish }} <br>-->
-                        <input type="text" class="edit-inp" v-model="post.Caption_dish" :disabled="!editMode">
-                    </div>
-
-                        </md-card-header-text>
-                        <div class="price">
-                           <input type="number" class="text-center" v-model="post.Price_dish" :disabled="!editMode">
-<!--                            <{{ post.Price_dish }}р</span>-->
+                        <div class="md-subhead">
+    <!--                        {{ post.Caption_dish }} <br>-->
+                            <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Caption_dish" :disabled="!editMode">
                         </div>
-                    </md-card-header>
 
-                <md-ink-ripple />
-                </md-card>
-                 <div class="clearfix"></div>
+                            </md-card-header-text>
+                            <div class="price">
+                               <input type="number" class="text-center" v-on:change="post['edit']= true" v-model="post.Price_dish" :disabled="!editMode">
+    <!--                            <{{ post.Price_dish }}р</span>-->
+                            </div>
+                        </md-card-header>
+
+                    <md-ink-ripple />
+                    </md-card>
+                     <div class="clearfix"></div>
+                    </div>
                 </div>
-            </div>
         </md-tab>
-        <md-tab md-label="Суп" md-icon="receipt">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="errorMenu">
-                    <md-card>
-                        <h4>Что-то пошло не так..</h4>
-                    </md-card>
-                </div>
-                
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " v-for="post in listMenu.Soup">
-                
-                <md-card v-bind:class="{ disabledDishAdmin: !post.Available }">
-                    <md-card-header>
-                        <md-avatar class="md-big">
-                           
-                            <img v-bind:src="post.ImagePath">
-                        </md-avatar>
-                        <md-card-header-text>
-                    <div class="md-title ">{{ post.Title_dish }}</div>
-                    <div class="md-subhead text-justify">{{ post.Caption_dish }}</div>
-<!--                            <div class="md-subhead">{{ post.id }}</div>-->
-<!--                            <div class="md-title">{{ post.title }}</div>-->
+        <md-tab md-label="Дессерты" md-icon="receipt" class="icon-hot">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="errorMenu">
+                        <md-card>
+                            <h4>Что-то пошло не так..</h4>
+                        </md-card>
+                    </div>
 
-                        </md-card-header-text>
-                        <div class=" price">
-                            <span>{{ post.Price_dish }}р</span>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" v-for="(post,index) in listMenu.Dessert">
+
+                    <md-card v-bind:class="{ disabledDishAdmin: !post.Available }">
+                    <div class="button-action" v-show="editMode">
+                            <md-switch v-model="post.Available" v-on:change="post['edit']= true" name="available" class="md-warn" ></md-switch>
+                            <md-button class="md-icon-button action-group" v-on:click.native="deleteDish(post,index)">
+                                <md-icon style="opacity: .51">clear</md-icon>
+                            </md-button>
+                    </div>
+    <!--                    v-on:click.native="$refs['menuActionE'][index].close()" onclick="adminPanel.listMenu.Hot_dishes[2]['edit'] = true; ">-->
+                        <md-card-header>
+                            <md-avatar class="md-big">
+
+                                <img v-bind:src="post.ImagePath">
+                            </md-avatar>
+                            <md-card-header-text>
+                        <div class="md-title">
+    <!--                        <br>-->
+                            <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Title_dish" :disabled="!editMode">
                         </div>
-<!--
-                        <md-card-header-text>
-                            <div class="md-subhead">{{ post.id }}</div>
-                        </md-card-header-text>
--->
-                    </md-card-header>
-<!--
-                    <md-card-actions>
-                        <md-button>Action</md-button>
-                        <md-button>Action</md-button>
-                    </md-card-actions>
--->
-              <md-ink-ripple />
-                </md-card>
-                 <div class="clearfix"></div>
+                        <div class="md-subhead">
+    <!--                        {{ post.Caption_dish }} <br>-->
+                            <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Caption_dish" :disabled="!editMode">
+                        </div>
+
+                            </md-card-header-text>
+                            <div class="price">
+                               <input type="number" class="text-center" v-on:change="post['edit']= true" v-model="post.Price_dish" :disabled="!editMode">
+    <!--                            <{{ post.Price_dish }}р</span>-->
+                            </div>
+                        </md-card-header>
+
+                    <md-ink-ripple />
+                    </md-card>
+                     <div class="clearfix"></div>
+                    </div>
                 </div>
-                
-            </div>
         </md-tab>
-    
+        <md-tab md-label="Суп" md-icon="receipt" class="icon-hot">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3 col-xs-12  request-null text-center" v-if="errorMenu">
+                        <md-card>
+                            <h4>Что-то пошло не так..</h4>
+                        </md-card>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" v-for="(post,index) in listMenu.Soup">
+
+                    <md-card v-bind:class="{ disabledDishAdmin: !post.Available }">
+                    <div class="button-action" v-show="editMode">
+                            <md-switch v-model="post.Available" v-on:change="post['edit']= true" name="available" class="md-warn" ></md-switch>
+                            <md-button class="md-icon-button action-group" v-on:click.native="deleteDish(post,index)">
+                                <md-icon style="opacity: .51">clear</md-icon>
+                            </md-button>
+                    </div>
+    <!--                    v-on:click.native="$refs['menuActionE'][index].close()" onclick="adminPanel.listMenu.Hot_dishes[2]['edit'] = true; ">-->
+                        <md-card-header>
+                            <md-avatar class="md-big">
+
+                                <img v-bind:src="post.ImagePath">
+                            </md-avatar>
+                            <md-card-header-text>
+                        <div class="md-title">
+    <!--                        <br>-->
+                            <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Title_dish" :disabled="!editMode">
+                        </div>
+                        <div class="md-subhead">
+    <!--                        {{ post.Caption_dish }} <br>-->
+                            <input type="text" class="edit-inp" v-on:change="post['edit']= true" v-model="post.Caption_dish" :disabled="!editMode">
+                        </div>
+
+                            </md-card-header-text>
+                            <div class="price">
+                               <input type="number" class="text-center" v-on:change="post['edit']= true" v-model="post.Price_dish" :disabled="!editMode">
+    <!--                            <{{ post.Price_dish }}р</span>-->
+                            </div>
+                        </md-card-header>
+
+                    <md-ink-ripple />
+                    </md-card>
+                     <div class="clearfix"></div>
+                    </div>
+                </div>
+        </md-tab>
 
     </md-tabs>
     

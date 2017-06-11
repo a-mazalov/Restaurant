@@ -160,7 +160,8 @@ var adminPanel = new Vue({
             //            console.log(this.newDish); 
             var file = document.getElementById('loadpicture').files[0];
 
-            if (file && (file["type"] === "image/jpeg") || (file["type"] === "image/png") || (file["type"] === "image/bmp")) {
+//            if (file && (file["type"] === "image/jpeg") || (file["type"] === "image/png") || (file["type"] === "image/bmp")) {
+            if (file != undefined) {
                 this.newDish.Image = true;
             } else {
                 this.newDish.Image = false;
@@ -177,7 +178,12 @@ var adminPanel = new Vue({
             }).then(function (response) {
                 console.log("Выполнено");
                 console.log(response.data);
-                setImg(response.data);
+                
+                if(this.newDish.Image){
+                   setImg(response.data);
+                }
+                
+                
                 this.getMenu();
 
             }, function (error) {
@@ -615,8 +621,8 @@ var adminPanel = new Vue({
 //            WinPrint.document.write(prtContent.innerHTML);
 //            WinPrint.document.write('</div>');
 //            WinPrint.document.close();
-//            WinPrint.focus();
-//            WinPrint.print(); 
+            WinPrint.focus();
+            WinPrint.print(); 
 //            WinPrint.close();
 //            prtContent.innerHTML = strOldOne;
             }

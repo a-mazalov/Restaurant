@@ -26,7 +26,7 @@
 //    var_dump($DataInput);
 //    var_dump($Order);
 //    echo $Order;
-
+//    $pdo->query('SET FOREIGN_KEY_CHECKS=0');
 
     if ( isset($Order) ){
         $CheckOrder = true;

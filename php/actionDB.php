@@ -58,7 +58,10 @@ $queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` 
     case "newDish":
         
         $ArrayNewDish = $DataGET["item"];
-        if($ArrayNewDish["Image"]){
+//        echo $ArrayNewDish["Image"];
+        $imgSwitch = $ArrayNewDish["Image"];
+        $imgSwitch = json_decode($imgSwitch);
+        if($imgSwitch){
 //            $querylastID = $pdo->query('SELECT max(`ID_dish`) as ID FROM Menu_table');
             $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'Restaurant' AND TABLE_NAME = 'Menu_table'");
             $querylastID = $querylastID->fetch();
@@ -68,7 +71,7 @@ $queryUpdate = $pdo->prepare("UPDATE `Restaurant`.`Menu_table` SET `Title_dish` 
             $imgPath = 'img/food/id_'.$lastID.'.jpg';
 //            var_dump($imgPath);
         }else{
-            $imgPath= "img/food/id_default.jpg";
+            $imgPath = "img/food/id_default.jpg";
         }
 //            $ArrayDish["ImagePath"] = "img/food/id_default.jpg";
 //        var_dump($ArrayNewDish);

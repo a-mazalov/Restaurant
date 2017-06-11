@@ -11,9 +11,17 @@ text-shadow: none !important;
 */
 html {
     overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+    width: 100%;
 }
-
-
+body{
+    height: 100%;
+    width: 100%;
+}
+#Mob-app{
+    height: 100%;
+}
 /**********************HEADER********************/
 
 .collapse{
@@ -62,11 +70,15 @@ html {
 
 .banner {
     height: 670px;
-    background: url(../img/background/Banner.jpg) no-repeat 50% 50%;
+    background: url(../img/background/Mobile.jpg) no-repeat 50% 50%;
     background-size: cover;
-    background-attachment: fixed;
+/*    background-attachment: fixed;*/
     -webkit-clip-path: polygon(0 100%,100% calc(100% - 5vw),100% 0,0 0);
-
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+/*    margin: auto;*/
 /*    background: url(../img/39830-green-grass-1920x1080-photography-wallpaper.jpg) 50% 50%;*/
 }
 .banner-title {
@@ -76,16 +88,22 @@ html {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 .btn-custom-order {
-/*    margin-left: -50px;*/
+    width: 30%;
     background-color: rgba(255, 255, 255, 0) !important;
     border: 2px solid white;
+/*    font-weight: 700;*/
     color: white !important;
+    text-shadow: 1px 1px 2px rgba(56, 56, 56, 0.6);
 }
 .btn-cutom-menu {
-/*    width: 70%;*/
-    background: #e67e22 !important;
-    border: 2px solid #e67e22;
+/*    margin-top: 50px;*/
+    width: 30%;
+    background: rgba(230, 126, 34, 0.76) !important;
+    border: 2px solid white;
     z-index: 1;
+    text-transform: capitalize !important; 
+    letter-spacing: 1.5px;
+    font-size: 16px;
 }
 .sticky{
     transition: all 0.4s ease;
@@ -274,11 +292,12 @@ html {
 
 /**********************MEDIA*************************/
 @media (max-width: 768px) {
-    .btn-custom-order {
-/*        margin-left: 0;*/
-    }
+.btn-custom-order {
+   
+/*    margin-top: 50%;*/
+}
     body {
-    overflow-x: hidden;
+/*    overflow-x: hidden;*/
     }
 
 }
@@ -308,17 +327,21 @@ html {
 }
 
 .vertical-align {
+/*
     display: flex;
     flex-direction: column;
-/*    align-items: center;*/
+    align-items: center;
     justify-content: center;
+*/
+    
+    margin: auto;
 }
 .brick-wall{
     background: url(../img/brickwall.png);
 }
 
 .border {
-    border: 1px solid black;
+    border: 1px solid #ed0909;
 }
 
 .shadow {
@@ -419,6 +442,42 @@ html {
     height: 30px;
     width: 30px;
 }
+.img-mobile-1 {
+/*    position: absolute;*/
+/*    top: 50px;*/
+/*    right: 200px;*/
+    margin: auto;
+    margin-top: 15px;
+    height: 500px;
+    width: 250px;
+/*    border: 1px solid black;*/
+    background: url(../img/background/n6p_angled.png) no-repeat 50% 50%; 
+    background-size: 90%;
+    
+}
+
+.flex-button-img {
+/*    margin-top: 50px;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*    align-items: flex-end;*/
+}
+
+.main-btn {
+    margin-top: 5%;
+/*    margin-lef: 10%;*/
+    padding-left: 35%;
+/*
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: 10px;
+    border: 1px solid white;
+*/
+/*    vertical-align: middle;*/
+}
 .anim-fadeIn{
     animation: fadeIn 1s ease-in-out; 
 }
@@ -430,4 +489,26 @@ html {
     100% {
         opacity: 1;
     }
+}
+.dark-background{
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.7);
+/*    color: white;*/
+/*    font-size: 16px;*/
+/*    text-align: center;*/
+/*    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);*/
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+.dark-background-ab{
+    position: absolute;
+    top: 22%;
+    width: 1920px;
+    height: 220px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.7);
+/*    color: white;*/
+/*    font-size: 16px;*/
+/*    text-align: center;*/
+/*    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);*/
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
 }
