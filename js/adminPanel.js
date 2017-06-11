@@ -18,12 +18,13 @@ var adminPanel = new Vue({
         },
         servers: {
             menuURL: 'http://restaurant.atservers.net/php/menu-query.php',
-            menuURL: 'http://workproject/www/php/menu-query.php',
+//            menuURL: 'http://workproject/www/php/menu-query.php',
             reserveURL: "http://restaurant.atservers.net/php/ListReserve.php",
-            reserveURL: "http://workproject/www/php/ListReserve.php",
+//            reserveURL: "http://workproject/www/php/ListReserve.php",
             actionsURL: "http://restaurant.atservers.net/php/actionDB.php",
-            actionsURL: "http://workproject/www/php/actionDB.php",
-            loadImgURL: "http://workproject/www/php/loadPicture.php",
+//            actionsURL: "http://workproject/www/php/actionDB.php",
+            loadImgURL: "http://restaurant.atservers.net/php/loadPicture.php",
+//            loadImgURL: "http://workproject/www/php/loadPicture.php",
         },
         listMenu: [],
         errorMenu: false,
@@ -202,7 +203,8 @@ var adminPanel = new Vue({
                 formData.append('file', file, newFileName);
 
                 $.ajax({
-                    url: "http://workproject/www/php/loadPicture.php",
+//                    url: "http://workproject/www/php/loadPicture.php",
+                    url: "http://restaurant.atservers.net/php/loadPicture.php",
                     type: 'post',
                     data: formData,
                     contentType: false,

@@ -1,3 +1,4 @@
+//НЕ ИСПОЛЬЗУЕТСЯ, НО ЭТО НЕ ТОЧНО
 var ListReserve = new Vue({
         el: '#ListReserve',
         data: {

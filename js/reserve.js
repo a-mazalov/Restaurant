@@ -10,8 +10,8 @@ var ReserveCard = new Vue({
             numguest: 1,
             notes: ''
         },
+//        queryPoint: 'http://workproject/www/php/siteReserve.php',
         queryPoint: 'http://restaurant.atservers.net/php/siteReserve.php',
-        queryPoint: 'http://workproject/www/php/siteReserve.php',
         snackMessage: '',
         submitted: false,
         errorSend: true
@@ -30,11 +30,12 @@ var ReserveCard = new Vue({
             if(validInp["Valid"]){
             
     //            console.log(this.reserveObj);
+                this.showSnackBar("Обработка..."); 
                 this.$http.get(this.queryPoint,  { params: this.reserveObj } ).then(function(response){
                     this.submitted = true;
 //                    console.log("Выполнено");
                     this.errorSend = false;
-//                    console.log(response.data);
+                    console.log(response.data);
 
                         this.reserveObj = {date: '', time: '', name: '', lastName: '', telephone: '', numguest: 1, notes: ''};
 
