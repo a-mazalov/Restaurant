@@ -139,7 +139,7 @@ var Account = new Vue({
 //                delete this.customMenu[key];
 ////                this.checkValues()
 //                this.$forceUpdate();
-//                Local.Set("CustomGroup", this.customMenu);
+                Local.Set("CustomGroup", this.customMenu);
             },
             TimerDelete: function(){
                 

@@ -4,7 +4,7 @@ var ReserveCard = new Vue({
     el: "#Reserve",
     data: {
 //        queryPoint: 'http://d0008482.atservers.net/Felix/reserve.php',
-//        queryPoint: 'http://restaurant.atservers.net/php/reserve.php',
+        queryPoint: 'http://restaurant.atservers.net/php/mobileReserve.php',
         queryPoint: 'http://workproject/www/php/mobileReserve.php',
         reserveObj: {
             date: '',
@@ -58,6 +58,7 @@ var ReserveCard = new Vue({
 //            console.log(Account);
 //            console.log(Account["ID_user"]);
             
+//        if(true){
         if(checkConnection()){
 
             let validInp = validate(ReserveCard.reserveObj);
@@ -86,11 +87,13 @@ var ReserveCard = new Vue({
                 console.log(SendReserve);
 //                alert("что-то не выполнено");
             }
-            
+                this.showSnackBar("Обработка.."); 
                 this.$http.get(this.queryPoint,  { params: SendReserve } ).then(function(response){
 
                     console.log(response.data);
     //                alert("Отправлено");
+                    this.submitted = true;
+                    
                     this.reserveObj = {
                         date: '',
                         time: '',

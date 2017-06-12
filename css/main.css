@@ -1,18 +1,18 @@
 * {
-/*
 text-shadow: none !important;
 -webkit-box-shadow: none !important;
+/*
 -webkit-border-radius:0 !important;
 -webkit-border-top-left-radius:0 !important;
 -webkit-border-bottom-left-radius:0 !important;
 -webkit-border-bottom-right-radius:0 !important;
 -webkit-border-top-right-radius:0 !important;
+*/
     
 -webkit-transition: none !important; 
 -moz-transition: none !important; 
 -ms-transition: none !important; 
 -o-transition: none !important; 
-*/
     
 transition: all .0s linear !important;   
 animation: none !important;
@@ -35,9 +35,7 @@ animation: none !important;
 html {
     overflow-x: hidden;
 }
-html,body{
-    height: 100%;
-}
+
 
 /**********************HEADER********************/
 
@@ -88,11 +86,10 @@ html,body{
 }
 
 .banner {
-/*    height: 600px;*/
-    height: inherit;
+    height: 670px;
     background: url(../img/background/Banner-m.jpg) no-repeat 50% 50%;
     background-size: cover;
-/*    -webkit-clip-path: polygon(0 100%,100% calc(100% - 5vw),100% 0,0 0);*/
+    -webkit-clip-path: polygon(0 100%,100% calc(100% - 5vw),100% 0,0 0);
 /*    background: url(../img/39830-green-grass-1920x1080-photography-wallpaper.jpg) 50% 50%;*/
     
 /*
@@ -465,7 +462,4 @@ html,body{
 @keyframes view {
     0% { opacity: 0.0 }
     100% { opacity: 1 }
-}
-#Main-app {
-    height: 100%;
 }
