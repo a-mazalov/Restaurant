@@ -424,7 +424,7 @@
         
         <div class="new-reserve col-sm-12 col-md-6">
             <span class="label-new-res">Новые заявки</span>
-            <md-card md-with-hover v-for="(reserve,index) in listReserveNew" class="anim-fadeIn">
+            <md-card md-with-hover v-if="listReserveNew" v-for="(reserve,index) in listReserveNew" class="anim-fadeIn">
     
     <div class="md-subhead num-reserve">№{{reserve.ID_reserve}}, Получено: {{reserve.Data_create}}</div>
     <div class="button-action">

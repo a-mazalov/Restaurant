@@ -63,7 +63,7 @@ $queryUpdate = $pdo->prepare("UPDATE `Menu_table` SET `Title_dish` = :title_dish
         $imgSwitch = json_decode($imgSwitch);
         if($imgSwitch){
 //            $querylastID = $pdo->query('SELECT max(`ID_dish`) as ID FROM Menu_table');
-            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'user2027666_RestDB' AND TABLE_NAME = 'Menu_table'");
+//            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'user2027666_RestDB' AND TABLE_NAME = 'Menu_table'");
             
             ///////////////
             
@@ -71,7 +71,7 @@ $queryUpdate = $pdo->prepare("UPDATE `Menu_table` SET `Title_dish` = :title_dish
             
             ///////////////
             
-//            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'Restaurant' AND TABLE_NAME = 'Menu_table'");
+            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'Restaurant' AND TABLE_NAME = 'Menu_table'");
             $querylastID = $querylastID->fetch();
 //            $lastID = $querylastID["ID"]+1;
             $lastID = $querylastID["AUTO_INCREMENT"];

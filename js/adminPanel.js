@@ -11,20 +11,20 @@ var adminPanel = new Vue({
         editMode: false,
         layers: {
             main: false,
-            qr: true,
+            qr: false,
             editor: false,
-            reserve: false,
+            reserve: true,
             notificat: false
         },
         servers: {
-            menuURL: 'http://restaurant.atservers.net/php/menu-query.php',
-//            menuURL: 'http://workproject/www/php/menu-query.php',
-            reserveURL: "http://restaurant.atservers.net/php/ListReserve.php",
-//            reserveURL: "http://workproject/www/php/ListReserve.php",
-            actionsURL: "http://restaurant.atservers.net/php/actionDB.php",
-//            actionsURL: "http://workproject/www/php/actionDB.php",
-            loadImgURL: "http://restaurant.atservers.net/php/loadPicture.php",
-//            loadImgURL: "http://workproject/www/php/loadPicture.php",
+            menuURL: 'http://workproject/www/php/menu-query.php',
+//            menuURL: 'http://restaurant.atservers.net/php/menu-query.php',
+            reserveURL: "http://workproject/www/php/ListReserve.php",
+//            reserveURL: "http://restaurant.atservers.net/php/ListReserve.php",
+            actionsURL: "http://workproject/www/php/actionDB.php",
+//            actionsURL: "http://restaurant.atservers.net/php/actionDB.php",
+            loadImgURL: "http://workproject/www/php/loadPicture.php"
+//            loadImgURL: "http://restaurant.atservers.net/php/loadPicture.php"
         },
         listMenu: [],
         errorMenu: false,
@@ -203,8 +203,8 @@ var adminPanel = new Vue({
                 formData.append('file', file, newFileName);
 
                 $.ajax({
-//                    url: "http://workproject/www/php/loadPicture.php",
-                    url: "http://restaurant.atservers.net/php/loadPicture.php",
+//                    url: "http://restaurant.atservers.net/php/loadPicture.php",
+                    url: "http://workproject/www/php/loadPicture.php",
                     type: 'post',
                     data: formData,
                     contentType: false,
@@ -265,26 +265,28 @@ var adminPanel = new Vue({
         },
         //-------------------Работа с бронированием---------------------------
         getReserve: function () {
-            this.$http.get(this.servers.reserveURL).then(function (response) {
+            var reserveURL = "http://restaurant.atservers.net/php/ListReserve.php";
+            var reserveURL = "http://workproject/www/php/ListReserve.php";
+            
 
+            this.$http.get(reserveURL).then(function (response) {
+                console.log(response.data);
                 this.loader = false;
-                //                    this.listReserve = JSON.parse(response.data);
-                let dataReserve = JSON.parse(response.data);
+//                                    this.listReserve = JSON.parse(response.data);
+                var dataReserve = JSON.parse(response.data);
+                console.log(dataReserve[0]);
                 for (prop in dataReserve) {
-                    if (dataReserve[prop].Status === "new") {
-                        this.listReserveNew.push(dataReserve[prop]);
-                    } else if (dataReserve[prop].Status === "accept") {
-                        this.listReserveAccept.push(dataReserve[prop]);
+                    
+                    if(dataReserve[prop] != undefined){
+                       if (dataReserve[prop].Status === "new") {
+                           this.listReserveNew.push(dataReserve[prop]);
+                       } else if (dataReserve[prop].Status === "accept") {
+                           this.listReserveAccept.push(dataReserve[prop]);
+                       }
                     }
                 }
-                console.log(this.listReserveNew);
+//                console.log(this.listReserveNew);
                 console.log(this.listReserveAccept);
-
-
-
-
-
-                //                    console.log( JSON.parse(response.data) );
             }, function (error) {
                 this.showSnackBar("Ошибка соединения");
                 console.log("Ошибка запроса: " + error.data);
