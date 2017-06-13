@@ -11,7 +11,7 @@
     
 
     $query->execute(array('telephone' => $DataInput["telephone"],'password' => password_hash($DataInput["password1"],PASSWORD_DEFAULT), 'name' => $DataInput["name"], 'lastName' => $DataInput["lastName"]));
-    $registr = $query->fetchAll();
+    //$registr = $query->fetchAll();
 
     echo $pdo->lastInsertId();
 

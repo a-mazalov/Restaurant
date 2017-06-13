@@ -1,3 +1,6 @@
+Кодировка	
+
+
 <?php
     require('connectDB.php');
     require('tools.php');
@@ -42,25 +45,24 @@
                 
 //                    $Amount = $pdo->prepare("UPDATE QRcodes_table SET Amount = Amount -1  WHERE ID_code = :ID_code");
                     
-                echo json_encode( array('status' => true, 'data' => $DataDB[0]["Bonus"], 'message' => "Код активирован")) ;
+                //echo json_encode( array('status' => true, 'data' => $DataDB[0]["Bonus"], 'message' => "Код активирован"), JSON_NUMERIC_CHECK ) ;
             }else{
                 //Код уже был активирован на данном аккаунте
-                echo json_encode( array('status' => false, 'data' => true, 'message' => "Вы уже активировали код"));
+                //echo json_encode( array('status' => false, 'data' => true, 'message' => "Вы уже активировали код") , JSON_NUMERIC_CHECK);
             }
         
         }else{
             //Код был, но количество использований превышено.
-            echo json_encode( array('status' => false, 'data' => null, 'message' => "Данный код более не действителен"), JSON_NUMERIC_CHECK );
+            //echo json_encode( array('status' => false, 'data' => null, 'message' => "Данный код более не действителен"), JSON_NUMERIC_CHECK );
         }
         
     }else{
         //Если код не существует
-        echo json_encode( array('status' => false, 'data' => null, 'message' => "Данный код не существует"), JSON_NUMERIC_CHECK);
+        //echo json_encode( array('status' => false, 'data' => null, 'message' => "Данный код не существует"), JSON_NUMERIC_CHECK);
     }
 
     
-    
-
+    echo "Work";
 //    var_dump($DataDB);
 //    echo count($DataDB);
 //    echo $DataDB[0]["Amount"];
@@ -87,3 +89,4 @@
 //    }
 
     ?> 
+    Ok    Отмена

@@ -34,12 +34,14 @@
         <span class="navbar-title">Admin Panel</span>
     </div>
     <div class="app-sidebar shadow">
-        <md-list>
+<!--        <md-list>-->
+<!--
                 <md-list-item v-on:click.native="сhangeLayer('main')">
                     <md-icon>dashboard</md-icon> 
                     <span>Главная</span>
                     <md-divider class="md-inset"></md-divider>     
                 </md-list-item>        
+-->
                 <md-list-item v-on:click.native="сhangeLayer('qr')">
                     <md-icon>new_releases</md-icon> 
                     <span>Бонус-коды</span>
@@ -421,7 +423,7 @@
     
     <div class="container-fluid" style="">
     
-        
+        <div><span>Возможны технические неполадки связанные с хостингом</span></div>
         <div class="new-reserve col-sm-12 col-md-6">
             <span class="label-new-res">Новые заявки</span>
             <md-card md-with-hover v-if="listReserveNew" v-for="(reserve,index) in listReserveNew" class="anim-fadeIn">

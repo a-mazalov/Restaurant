@@ -19,7 +19,7 @@ switch($DataGET["action"]){
     
            
     case "acceptReserve":    
-        $queryDelete = $pdo->prepare('UPDATE `Reserve_table` SET `Status` = "accept" WHERE `reserve_table`.`ID_reserve` = :id_reserve');  
+        $queryDelete = $pdo->prepare('UPDATE `Reserve_table` SET `Status` = "accept" WHERE `ID_reserve` = :id_reserve');  
         $queryDelete->execute(array(
             'id_reserve' => $DataGET["item"]["ID_reserve"],
         ));
@@ -63,7 +63,7 @@ $queryUpdate = $pdo->prepare("UPDATE `Menu_table` SET `Title_dish` = :title_dish
         $imgSwitch = json_decode($imgSwitch);
         if($imgSwitch){
 //            $querylastID = $pdo->query('SELECT max(`ID_dish`) as ID FROM Menu_table');
-//            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'user2027666_RestDB' AND TABLE_NAME = 'Menu_table'");
+            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'user2027666_RestDB' AND TABLE_NAME = 'Menu_table'");
             
             ///////////////
             
@@ -71,7 +71,7 @@ $queryUpdate = $pdo->prepare("UPDATE `Menu_table` SET `Title_dish` = :title_dish
             
             ///////////////
             
-            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'Restaurant' AND TABLE_NAME = 'Menu_table'");
+//            $querylastID = $pdo->query("SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'Restaurant' AND TABLE_NAME = 'Menu_table'");
             $querylastID = $querylastID->fetch();
 //            $lastID = $querylastID["ID"]+1;
             $lastID = $querylastID["AUTO_INCREMENT"];
@@ -136,7 +136,7 @@ $MenuCheck->execute();
         
     case "checkListBonus":
 
-    $ListQR= $pdo->query("SELECT * FROM `QRcodes_table` ORDER BY `QRcodes_table`.`ID_code` DESC");
+    $ListQR= $pdo->query("SELECT * FROM `QRcodes_table` ORDER BY `ID_code` DESC");
     $infoOutput = $ListQR->fetchAll();
         echo json_encode($infoOutput);  
         break;
@@ -159,7 +159,7 @@ $MenuCheck->execute();
         
         $ID_BonusCode = $DataGET["item"];
         var_dump($ID_BonusCode);
-        $queryDelBonus = $pdo->prepare("DELETE FROM `QRcodes_table` WHERE `qrcodes_table`.`ID_code` = :id_code");  
+        $queryDelBonus = $pdo->prepare("DELETE FROM `QRcodes_table` WHERE `ID_code` = :id_code");  
         $queryDelBonus->execute(array(
             'id_code' => $ID_BonusCode
         ));

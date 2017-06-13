@@ -48,7 +48,7 @@ var adminPanel = new Vue({
         notification: {
             dataSend: {
                 title: "Уведомление от ресторана",
-                body: "Добрный день, я тюлень"
+                body: "Добрный день"
             },
             saveMessage: false,
             successSend: false,
@@ -265,16 +265,15 @@ var adminPanel = new Vue({
         },
         //-------------------Работа с бронированием---------------------------
         getReserve: function () {
-            var reserveURL = "http://restaurant.atservers.net/php/ListReserve.php";
             var reserveURL = "http://workproject/www/php/ListReserve.php";
-            
+            var reserveURL = "http://restaurant.atservers.net/php/ListReserve.php";
 
             this.$http.get(reserveURL).then(function (response) {
                 console.log(response.data);
                 this.loader = false;
 //                                    this.listReserve = JSON.parse(response.data);
                 var dataReserve = JSON.parse(response.data);
-                console.log(dataReserve[0]);
+//                console.log(dataReserve[0]);
                 for (prop in dataReserve) {
                     
                     if(dataReserve[prop] != undefined){
