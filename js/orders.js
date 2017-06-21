@@ -26,8 +26,8 @@ var OrdersList = new Vue({
 //            location.href='reserve.html';
              //Оповещение
 //            this.ListOrders
-//            let actionsURL = "http://restaurant.atservers.net/php/actionDB.php";
-            let actionsURL = "http://workproject/www/php/actionDB.php";
+//            let actionsURL = "http://workproject/www/php/actionDB.php";
+            let actionsURL = "http://restaurant.atservers.net/php/actionDB.php";
 
             //Номера блюд в корзине
             let numDish = [];
@@ -36,52 +36,82 @@ var OrdersList = new Vue({
             }
 //            console.log(numDish);
             
-                let infoSend = {"item": numDish, "action": "checkMenu"};
-            
-            let chgDish = false;
-                this.$http.get(actionsURL,  { params: infoSend } ).then(function(response){
-                    console.log("Выполнено"); 
-//                    console.log(response.data); 
-                    console.log(JSON.parse(response.data));
-//                    console.log(OrdersList.ListOrders);
-//                    
-                    let checkMenu = JSON.parse(response.data);
-                    
-                    
-                    
-                    for(ordItem in OrdersList.ListOrders){
-                        
-                        if(OrdersList.ListOrders[ordItem]["DateСhange"] < checkMenu[ordItem]["DateСhange"] ){
-                            
-                            
-                            let amountDish = OrdersList.ListOrders[ordItem]["Amount"];
-                            checkMenu[ordItem]["Amount"] = amountDish;
-                            this.ListOrders.splice(ordItem,1,checkMenu[ordItem]);
-//                            OrdersList.showSnackBar("Некоторые блюда изменились, обновите меню",null, false);
-//                            this.ListOrders.splice(ordItem, 1); //Удаление элемента
-                            this.totalPrice();
-                            Local.Set("Orders",this.ListOrders); 
-                            this.openDialog('dialog5');
+            let infoSend = {"item": numDish, "action": "checkMenu"};
+            var chgDish = false;
 
-                            
+                this.$http.get(actionsURL,  { params: infoSend } ).then(function(response){
+                    console.log("Выполнено");
+                    console.log(response.data);
+//                    console.log(JSON.parse(response.data));
+//                    console.log(OrdersList.ListOrders);
+//
+                    let menu = JSON.parse(response.data);
+
+                    //string to boolean. 'true' => true
+                    //number to float, 6 => 6.00
+
+
+                        for (let dish in menu) {
+                            menu[dish]["Available"] = (menu[dish]["Available"] === "true");
+                            menu[dish]["Price_dish"] = menu[dish]["Price_dish"].toFixed(2);
+                        }
+
+                    let checkMenu = menu;
+                    console.log(OrdersList.ListOrders);
+                    console.log("----------------------");
+                    console.log(checkMenu);
+                    var i = 0;
+//                    for(var ordItem = 0; ordItem<3; ordItem++){
+                    for(ordItem in OrdersList.ListOrders){
+                        console.log("i++: " + ordItem);
+
+                        if(OrdersList.ListOrders[ordItem]["DateСhange"] < checkMenu[ordItem]["DateСhange"] ){
+                            chgDish = true;
+                            var indexItem = OrdersList.ListOrders.indexOf(OrdersList.ListOrders[ordItem]);
+//                            console.log(indexItem);
+
+                            console.log(OrdersList.ListOrders[ordItem].ID_dish);
+                            console.log(checkMenu[ordItem].ID_dish);
+
+                            if(checkMenu[ordItem]["Available"] === true){
+                                let amountDish = OrdersList.ListOrders[ordItem]["Amount"];
+                                checkMenu[ordItem]["Amount"] = amountDish;
+//                                console.log(indexItem);
+                                this.ListOrders.splice(indexItem,1,checkMenu[indexItem]);
+                            }
+
                         }else{
                             console.log(checkMenu[ordItem]["ID_dish"] + "Not changes");
-                            location.href='reserve.html';
+//                            location.href='reserve.html';
 //                            location.href='reserve.html';
                         }
 
                     }
- 
+                    for(ordItem in checkMenu){
+                        if(checkMenu[ordItem]["Available"] === false){
+                            chgDish = true;
+
+                            this.ListOrders.splice(ordItem,1);
+                        }
+                    }
+
+                    if(chgDish){
+                        this.totalPrice();
+                        Local.Set("Orders",this.ListOrders);
+                        this.openDialog('dialog5');
+                    }else{
+                        location.href='reserve.html';
+                    }
+
+
                 }, function (error) {
                     console.log("Ошибка запроса: " + error.data);
-                    
+
                     this.showSnackBar("Ошибка при выполнении операции",null, false);
 //                    this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
-                }); 
-            
-            if(chgDish){
-               
-            }
+                });
+
+
     
         },
         Plus: function(item,index){

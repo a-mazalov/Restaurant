@@ -47,6 +47,7 @@ var Account = new Vue({
                     this.$forceUpdate;
                     Local.Set("Account", infAcc);
                 });
+                
             },
             accFavorite() {
                 if (window.localStorage.Favorite) {
@@ -221,3 +222,11 @@ var Account = new Vue({
     }
 
 });
+
+
+document.addEventListener("online", onOnline, false);
+
+function onOnline() {
+//    networkStatus = true;
+    Account.getInfAccount();
+}

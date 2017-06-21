@@ -3,8 +3,9 @@ var QrCode = new Vue({
     el: "#qr-code",
     data: {
 //        queryPointQR: 'http://workprojectmobile/php/qrCode.php',
-//        queryPoint: 'http://restaurant.atservers.net/php/qrCode.php',
-        queryPointQR: 'http://workproject/www/php/qrCode.php',
+//        queryPointQR: 'http://workproject/www/php/qrCode.php',
+        queryPoint: "http://restaurant.atservers.net/php/qrCode.php",
+//        queryPoint: 'http://restaurant.atservers.net/php/qr2.php',
         scaning: true,
 //        scaning: false,
         
@@ -39,10 +40,10 @@ var QrCode = new Vue({
             let Account = Local.Get("Account");
 //            console.log(Account);
 //            console.log(Account["ID_user"]);
-            let SendData = [ {"ValueCode": code, "ID_account": Account["ID_user"] }];
+            let SendData = [ {"ValueCode": code, "ID_account": Account.ID_user }];
             
-            this.$http.get(this.queryPointQR, {params: SendData }).then(function (response) {
-                console.log(response.data);
+            this.$http.get(QrCode.queryPoint, {params: SendData }).then(function (response) {
+                console.log(JSON.parse(response.data));
                 let dataResponse = JSON.parse(response.data);
                 console.log(dataResponse.status);
                 console.log(dataResponse.data);

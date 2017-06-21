@@ -4,8 +4,8 @@ var ReserveCard = new Vue({
     el: "#Reserve",
     data: {
 //        queryPoint: 'http://d0008482.atservers.net/Felix/reserve.php',
+//        queryPoint: 'http://workproject/www/php/mobileReserve.php',
         queryPoint: 'http://restaurant.atservers.net/php/mobileReserve.php',
-        queryPoint: 'http://workproject/www/php/mobileReserve.php',
         reserveObj: {
             date: '',
             time: '',

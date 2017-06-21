@@ -46,8 +46,6 @@
                 <md-icon><i class="material-icons">assignment</i></md-icon>
                 <span>Меню</span>
             </md-list-item>
-
-
             <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" onclick="location.href='reserve.html'">
                 <md-icon>access_time</md-icon> 
                 <span>Заказ столика</span>
@@ -55,14 +53,7 @@
             <md-list-item v-on:click.native="$refs.leftSidenav.toggle()" onclick="location.href='orders.html'">
                 <md-icon>access_time</md-icon> 
                 <span>Корзина</span>
-            </md-list-item>                           
-<!--
-            <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
-               onclick="location.href='contact.html'">
-                <md-icon>room</md-icon> 
-                <span>Контакты</span>
-            </md-list-item>                            
--->
+            </md-list-item>                                                     
             <md-list-item v-on:click.native="$refs.leftSidenav.toggle()"
                onclick="location.href='account.html'">
                 <md-icon>account_circle</md-icon> 
@@ -92,17 +83,33 @@
     <!--Инициализация vue-material-->
     <div id="Main-app" v-cloak> 
     
-    <div class="container-fluid banner vertical-align text-center" id="Head">
-        <div class="row">
-            <div class="banner-title">
-                <h1 class="">MAKING DELICIOUS <br>PREMIUM FOOD</h1>
-            </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-lg-offset-3 col-xs-12">
-                    <md-button class="md-raised md-accent btn-cutom-menu" onclick="location.href='menu.html' ">Меню</md-button>
-                        <br class="visible-xs"> 
-                    <md-button class="md-raised btn-custom-order" onclick="location.href='reserve.html' ">Заказ столика</md-button>
-                </div>                
+    <div class="container-fluid" id="Contacts">
+        <div class="row contacts-m">
+<!--            <div class="col-md-12 col-md-offset-0 border">-->
+                <div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 list-contact">
+                    <md-list class="md-dense">
+                        <md-list-item >
+                            <md-icon>date_range</md-icon> 
+                            <p>Пн. - Чт., Вс. - c 12:00 до 24:00</p>
 
+                        </md-list-item>
+
+                        <md-list-item>
+                            <md-icon>date_range</md-icon>
+                            <p>Пт. - Сб. - c 12:00 до 02:00</p>
+                        </md-list-item>
+
+                        <md-list-item>
+                            <md-icon>phone</md-icon> 
+                            <span>+375294425301</span>
+                        </md-list-item>
+
+                        <md-list-item>
+                            <md-icon>email</md-icon> 
+                            <span>restaurant@gmail.com</span>
+                        </md-list-item>
+                    </md-list>
+                </div>
         </div>
     </div>
 <!--------------------------------------------------------------------->

@@ -76,8 +76,8 @@ const Order = new Orders();
 //Order.orders.length;
 
 function Sync(section, mode) {
-//    let queryPoint = 'http://restaurant.atservers.net/php/Sync.php';
-    let queryPoint = 'http://workproject/www/php/Sync.php';
+//    let queryPoint = 'http://workproject/www/php/Sync.php';
+    let queryPoint = 'http://restaurant.atservers.net/php/Sync.php';
     
     let id_Account = Local.Get("Account");
     let dataSync = Local.Get(section);
@@ -140,8 +140,8 @@ function getAccID(){
 
 function checkBonus(account_id,handldata){
     
-//    let actionsURL = "http://restaurant.atservers.net/php/actionDB.php";
-    let actionsURL = "http://workproject/www/php/actionDB.php";
+//    let actionsURL = "http://workproject/www/php/actionDB.php";
+    let actionsURL = "http://restaurant.atservers.net/php/actionDB.php";
     
     let infoSend = {"item": account_id, "action": "checkBonus"};
 
@@ -153,6 +153,7 @@ function checkBonus(account_id,handldata){
         handldata(responseData);
     }, function (error) {
         console.log("Ошибка запроса: " + error.data);
+        handldata("Нет соединения");
 //        this.showSnackBar("Ошибка при выполнении операции");
 //                    this.listReserve.splice(deletedItem.index, -1, deletedItem.item);
     });   

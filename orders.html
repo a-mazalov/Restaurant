@@ -26,146 +26,147 @@
 </head>
 
 <body class="vertical-align brick-wall">
-    <!--    <div id="header">-->
+<!--    <div id="header">-->
 
-    <!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
 
-    <div id="Orders" class="Account" v-cloak>
-        <div class="container-fluid">
-            <div class="row">
-                <md-toolbar class="md-dense shadow navbar-fixed-top">
-                    <md-button class="md-icon-button" onclick="history.back()">
-                        <md-icon>arrow_back</md-icon>
-                    </md-button>
-<!--                    <h2 class="md-title" style="flex: 1">Аккаунт</h2>-->
-                </md-toolbar>
-                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-                    <form novalidate @submit.stop.prevent="submit">
-                       
+<div id="Orders" class="Account" v-cloak>
+    <div class="container-fluid">
+        <div class="row">
+            <md-toolbar class="md-dense shadow navbar-fixed-top">
+                <md-button class="md-icon-button" onclick="history.back()">
+                    <md-icon>arrow_back</md-icon>
+                </md-button>
+                <!--                    <h2 class="md-title" style="flex: 1">Аккаунт</h2>-->
+            </md-toolbar>
+            <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                <form novalidate @submit.stop.prevent="submit">
+
                     <div class="vertical-align">
-<!--------------------------------------------------------------------------------------------------->
+                        <!--------------------------------------------------------------------------------------------------->
 
-<md-card>
-<md-card-header class="padding-bottom-0">
-    <div class="md-title-18 text-center">Корзина
-        <br>
-        <md-icon>restaurant_menu</md-icon>
-    </div>
-    <div class="vertical-align-right" v-if="ListOrders.length">
-        <md-button class="md-icon-button" v-on:click.native="deleteOrd()">
-            <md-icon class="md-primary">clear</md-icon>
-        </md-button> 
-    </div>
-        <div v-else class="md-subhead text-trans-none text-center"><br><br>Вы еще ничего не добавили!<br><br><br></div>
-</md-card-header>
-    <div class="md-divider" v-show="ListOrders.length"></div>  
+                        <md-card>
+                            <md-card-header class="padding-bottom-0">
+                                <div class="md-title-18 text-center">Корзина
+                                    <br>
+                                    <md-icon>restaurant_menu</md-icon>
+                                </div>
+                                <div class="vertical-align-right" v-if="ListOrders.length">
+                                    <md-button class="md-icon-button" v-on:click.native="deleteOrd()">
+                                        <md-icon class="md-primary">clear</md-icon>
+                                    </md-button>
+                                </div>
+                                <div v-else class="md-subhead text-trans-none text-center"><br><br>Вы еще ничего не добавили!<br><br><br></div>
+                            </md-card-header>
+                            <div class="md-divider" v-show="ListOrders.length"></div>
 
-<!--<md-card-header class="vertical-align-right">-->
+                            <!--<md-card-header class="vertical-align-right">-->
 
-<!--</md-card-header>-->
-
-
+                            <!--</md-card-header>-->
 
 
-<transition-group name="list" tag="p">
-   
-    <div v-for="(item,index) in ListOrders" v-bind:key="item">
-<!--        <md-card-header class="list-item" v-bind:class="{ disabledDish: !item.Available }">-->
-        <md-card-header class="list-item" v-bind:class="{ disabledDish: !true }">
-            <md-avatar class="md-big">
-                <img v-bind:src="item.ImagePath">
-            </md-avatar>
-
-            <md-card-header-text class="vertical-align">
-                <div class="md-title-18">{{item.Title_dish}}</div>
-            </md-card-header-text>
 
 
-            
-            <md-button class="md-icon-button md-list-action" v-on:click.native="Minus(item,index)">
-                <md-icon class="md-primary">remove_circle_outline</md-icon>
-            </md-button>            
-            <div class="price vertical-align">
-                <span>{{ item.Amount }}</span>
+                            <transition-group name="list" tag="p">
+
+                                <div v-for="(item,index) in ListOrders" v-bind:key="item">
+                                    <!--        <md-card-header class="list-item" v-bind:class="{ disabledDish: !item.Available }">-->
+                                    <md-card-header class="list-item" v-bind:class="{ disabledDish: !true }">
+                                        <md-avatar class="md-big">
+                                            <img v-bind:src="item.ImagePath">
+                                        </md-avatar>
+
+                                        <md-card-header-text class="vertical-align">
+                                            <div class="md-title-18">{{item.Title_dish}}</div>
+                                        </md-card-header-text>
+
+
+
+                                        <md-button class="md-icon-button md-list-action" v-on:click.native="Minus(item,index)">
+                                            <md-icon class="md-primary">remove_circle_outline</md-icon>
+                                        </md-button>
+                                        <div class="price vertical-align">
+                                            <span>{{ item.Amount }}</span>
+                                        </div>
+                                        <md-button class="md-icon-button md-list-action" v-on:click.native="Plus(item,index)">
+                                            <md-icon class="md-primary">control_point</md-icon>
+                                        </md-button>
+
+
+                                        <div class="price vertical-align">
+                                            <span>{{ item.Price_dish }}р</span>
+                                        </div>
+
+                                        <md-button class="md-icon-button md-list-action" v-on:click.native="removeOrd(item)">
+                                            <md-icon class="md-primary">clear</md-icon>
+                                        </md-button>
+
+                                    </md-card-header>
+                                    <div class="md-divider"></div>
+                                </div>
+                            </transition-group>
+
+
+                        </md-card>
+                        <!----------------------------------------------------------------------------->
+                        <md-card v-if="ListOrders.length">
+                            <md-card-header>
+                                <div class="md-title-18 text-center">Итого
+                                    <br>
+                                    <md-icon>restaurant_menu</md-icon>
+                                </div>
+                            </md-card-header>
+                            <md-card-content class="text-center">
+                                <!--            <p class="md-primary account-info text-center" >Создайте свое меню из списка избранного!</p>-->
+                                <span>Общая сумма: </span>
+
+                                <span class="totals">{{totalprice}}</span>
+
+                                <div class="md-divider"></div>
+                                <br>
+                                <md-button class="md-raised md-primary text-trans-none" v-on:click.native="checkAvailableDish()">Перейти к заказу столика</md-button>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </form>
             </div>
-            <md-button class="md-icon-button md-list-action" v-on:click.native="Plus(item,index)">
-                <md-icon class="md-primary">control_point</md-icon>
-            </md-button>
-
-           
-            <div class="price vertical-align">
-                <span>{{ item.Price_dish }}р</span>
-            </div>
-           
-            <md-button class="md-icon-button md-list-action" v-on:click.native="removeOrd(item)">
-                <md-icon class="md-primary">clear</md-icon>
-            </md-button>
-
-        </md-card-header>
-        <div class="md-divider"></div>
+        </div>
     </div>
-        </transition-group>
-        
+    <md-snackbar ref="snackbar">
+        <span>{{snackMessage}}</span>
+        <md-button class="md-accent" md-theme="light-blue" v-on:click.native="$refs.snackbar.options()" v-if="btnSnack" md-duration="8000">Вернуть</md-button>
+    </md-snackbar>
+    <md-dialog ref="dialog5">
+        <md-dialog-title>Обновление меню</md-dialog-title>
 
-</md-card>
-<!----------------------------------------------------------------------------->             
-<md-card v-if="ListOrders.length">
-        <md-card-header>
-            <div class="md-title-18 text-center">Итого
-                <br>
-                <md-icon>restaurant_menu</md-icon>
-            </div>
-        </md-card-header>
-        <md-card-content class="text-center">
-<!--            <p class="md-primary account-info text-center" >Создайте свое меню из списка избранного!</p>-->
-            <span>Общая сумма: </span>
-            
-            <span class="totals">{{totalprice}}</span>
-            
-            <div class="md-divider"></div>
+        <md-dialog-content>
+            Похоже блюда обновились
             <br>
-            <md-button class="md-raised md-primary text-trans-none" v-on:click.native="checkAvailableDish()">Перейти к заказу столика</md-button>
-        </md-card-content>
-</md-card> 
-        </div>
-        </form>
-                </div>
-            </div>
-        </div>
-<md-snackbar ref="snackbar">
-    <span>{{snackMessage}}</span>
-    <md-button class="md-accent" md-theme="light-blue" v-on:click.native="$refs.snackbar.options()" v-if="btnSnack" md-duration="8000">Вернуть</md-button>
-</md-snackbar>      
-<md-dialog ref="dialog5">
-  <md-dialog-title>Обновление меню</md-dialog-title>
+            Проверьте блюда
+        </md-dialog-content>
 
-  <md-dialog-content>
-    Похоже блюда обновились
-      <br>
-    Продолжить оформление заказа?
-</md-dialog-content>
-
-  <md-dialog-actions>
-    <md-button class="md-primary" @click.native="closeDialog('dialog5')">Cancel</md-button>
-    <md-button class="md-primary" @click.native="closeDialog('dialog5')" onclick="location.href='reserve.html'">Ok</md-button>
-  </md-dialog-actions>
-</md-dialog>
-    </div>
+        <md-dialog-actions>
+            <!--    <md-button class="md-primary" @click.native="closeDialog('dialog5')"></md-button>-->
+            <!--    <md-button class="md-primary" @click.native="closeDialog('dialog5')" onclick="location.href='reserve.html'">Ok</md-button>-->
+            <md-button class="md-primary" @click.native="closeDialog('dialog5')">OK</md-button>
+        </md-dialog-actions>
+    </md-dialog>
+</div>
 
 
-    <!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
 
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
 
-    <script type="text/javascript" src="vue/vue.js"></script>
-    <script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
-    <script type="text/javascript" src="vue/vue-resource.js"></script>
+<script type="text/javascript" src="vue/vue.js"></script>
+<script type="text/javascript" src="vue-material/vue-material.debug.js"></script>
+<script type="text/javascript" src="vue/vue-resource.js"></script>
 
 
-    <script type="text/javascript" src="js/tools.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/orders.js"></script>
+<script type="text/javascript" src="js/tools.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/orders.js"></script>
 <!--    <script type="text/javascript" src="js/authorization.js"></script>-->
 
 
