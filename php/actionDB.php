@@ -35,12 +35,13 @@ switch($DataGET["action"]){
     case "update":
         $ArrayDish = $DataGET["item"];
         
-//        var_dump($ArrayDish);
+     var_dump($ArrayDish);
         $chgDate = date('Y-m-d H:i:s');
         
         
 $queryUpdate = $pdo->prepare("UPDATE `Menu_table` SET `Title_dish` = :title_dish, `Caption_dish` = :caption_dish, `Price_dish` = :price_dish, `Available` = IF(:available = 'true', 1, 0), `DateСhange` = '$chgDate' WHERE `ID_dish` = :id_dish");    
-            for($i = 0, $arr_l = count($ArrayDish); $i<$arr_l; $i++){
+//$queryUpdate = $pdo->prepare("UPDATE `Menu_table` SET `Title_dish` = :title_dish, `Caption_dish` = :caption_dish, `Price_dish` = :price_dish, `Available` = :available, `DateСhange` = '$chgDate' WHERE `ID_dish` = :id_dish");              
+ for($i = 0, $arr_l = count($ArrayDish); $i<$arr_l; $i++){
                 $queryUpdate->execute(array(
                     'title_dish' => $ArrayDish[$i]["Title_dish"],
                     'caption_dish' => $ArrayDish[$i]["Caption_dish"],
@@ -84,8 +85,11 @@ $queryUpdate = $pdo->prepare("UPDATE `Menu_table` SET `Title_dish` = :title_dish
 //            $ArrayDish["ImagePath"] = "img/food/id_default.jpg";
 //        var_dump($ArrayNewDish);
         
-        $queryNewDish = $pdo->prepare('INSERT INTO Menu_table (ID_dish, Title_dish, Caption_dish, Price_dish, Category_dish, ImagePath, Available) VALUES (NULL,:title_dish, :caption_dish, :price_dish, :category_dish, :imgPath, "1")');
+       // $queryNewDish = $pdo->prepare('INSERT INTO Menu_table (ID_dish, Title_dish, Caption_dish, Price_dish, Category_dish, ImagePath, Available) VALUES (NULL,:title_dish, :caption_dish, :price_dish, :category_dish, :imgPath, "1")');
                 
+        $chgDate = date('Y-m-d H:i:s');
+        $queryNewDish = $pdo->prepare("INSERT INTO Menu_table (ID_dish, Title_dish, Caption_dish, Price_dish, Category_dish, ImagePath, Available, DateСhange) VALUES (NULL,:title_dish, :caption_dish, :price_dish, :category_dish, :imgPath, '1', '$chgDate')");
+
         $queryNewDish->execute(array(
             'title_dish' => $ArrayNewDish["Title_dish"],
             'caption_dish' => $ArrayNewDish["Caption_dish"],
@@ -124,14 +128,15 @@ $queryUpdate = $pdo->prepare("UPDATE `Menu_table` SET `Title_dish` = :title_dish
         break;
     case "checkMenu":
             
-//            var_dump($numDish);
+
         $numDish = $DataGET["item"];
-        
+        //var_dump($numDish);
         $queryLine = implode("," , $numDish);
-$MenuCheck = $pdo->prepare("SELECT `ID_dish`, `Title_dish`, `Caption_dish`, `Price_dish`, `Category_dish`, `ImagePath`, IF(`Available` = 1, true, false) as `Available`, `DateСhange` FROM `Menu_table` WHERE `ID_dish` IN ($queryLine)");
+        //var_dump($queryLine);
+$MenuCheck = $pdo->prepare("SELECT  `ID_dish` ,  `Title_dish` ,  `Caption_dish` ,  `Price_dish` ,  `Category_dish` ,  `ImagePath` , IF(  `Available` =1,  'true',  'false' ) AS  `Available` ,  `DateСhange` FROM  `Menu_table` WHERE  `ID_dish` IN ( $queryLine ) ORDER BY FIELD(  `ID_dish` , $queryLine ) ");
 $MenuCheck->execute();
         $infoOutput = $MenuCheck->fetchAll();
-        echo json_encode($infoOutput);    
+        echo json_encode($infoOutput, JSON_NUMERIC_CHECK);    
         break;
         
     case "checkListBonus":

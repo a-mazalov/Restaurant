@@ -10,8 +10,8 @@ var ReserveCard = new Vue({
             numguest: 1,
             notes: ''
         },
-//        queryPoint: 'http://restaurant.atservers.net/php/siteReserve.php',
-        queryPoint: 'http://workproject/www/php/siteReserve.php',
+//        queryPoint: 'http://workproject/www/php/siteReserve.php',
+        queryPoint: 'http://restaurant.atservers.net/php/siteReserve.php',
         snackMessage: '',
         submitted: false,
         errorSend: true

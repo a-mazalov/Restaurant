@@ -1,8 +1,0 @@
-Options +FollowSymLinks
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteBase /
-RewriteRule ^(.)$ $1.html
-php_value max_file_uploads 1
-php_value upload_max_filesize 5M
