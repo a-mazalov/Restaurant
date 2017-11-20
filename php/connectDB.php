@@ -18,10 +18,10 @@
 
 
 //
-    $host = 'by111.atservers.net';
-    $database   = 'user2027666_RestDB';
-    $user = 'Rest';
-    $pass = '20031998';
+    $host = '';
+    $database   = '';
+    $user = '';
+    $pass = '';
     $charset = 'utf8';
 
     $dsn = "mysql:host=$host;dbname=$database;charset=$charset";
